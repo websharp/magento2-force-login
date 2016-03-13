@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<project name="magento2-force-login" basedir="." default="security:check">
+    <import file="vendor/bitexpert/phing-securitychecker/build.xml" />
+
+    <target name="sniff">
+        <exec executable="./vendor/bin/phpcs"
+              passthru="true"
+              checkreturn="true">
+            <arg value="--standard=PSR2"/>
+            <arg value="--ignore=vendor"/>
+            <arg path="${phing.dir}"/>
+        </exec>
+    </target>
+
+    <target name="lint">
+        <exec executable="php"
+              passthru="true"
+              checkreturn="true">
+            <arg value="-l"/>
+            <arg path="${phing.dir}"/>
+        </exec>
+    </target>
+</project>
