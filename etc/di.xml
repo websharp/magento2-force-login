@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * This file is part of the Magento2 Force Login Module package.
+ *
+ * (c) bitExpert AG
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Controllers -->
+    <type name="\bitExpert\Magento2\CustomerForceLogin\Controller\LoginCheck">
+        <arguments>
+            <argument name="ignoreUrls" xsi:type="array">
+                <item name="admin_area" xsi:type="string">^/admin/?.*$</item>
+                <item name="rest_api" xsi:type="string">^/rest/?.*$</item>
+                <item name="customer_account_login" xsi:type="string">^/customer/account/login/?$</item>
+                <item name="customer_account_logout" xsi:type="string">^/customer/account/logout/?$</item>
+                <item name="customer_account_logout_success" xsi:type="string">^/customer/account/logoutSuccess/?$</item>
+                <item name="customer_account_create" xsi:type="string">^/customer/account/create/?$</item>
+                <item name="contact_us" xsi:type="string">^/contact/?$</item>
+                <item name="help" xsi:type="string">^/help/?$</item>
+            </argument>
+            <argument name="targetUrl" xsi:type="string">customer/account/login</argument>
+        </arguments>
+    </type>
+    <preference for="\bitExpert\Magento2\CustomerForceLogin\Api\Controller\LoginCheckInterface"
+                type="\bitExpert\Magento2\CustomerForceLogin\Controller\LoginCheck" />
+
+    <!-- Observers -->
+    <preference for="\bitExpert\Magento2\CustomerForceLogin\Api\Observer\LoginRequiredObserverInterface"
+                type="\bitExpert\Magento2\CustomerForceLogin\Observer\LoginRequiredOnCustomerSessionInitObserver" />
+    <preference for="\bitExpert\Magento2\CustomerForceLogin\Api\Observer\LoginRequiredObserverInterface"
+                type="\bitExpert\Magento2\CustomerForceLogin\Observer\LoginRequiredOnVisitorInitObserver" />
+
+</config>
