@@ -18,5 +18,4 @@ use Magento\Framework\Event\ObserverInterface;
  */
 interface LoginRequiredObserverInterface extends ObserverInterface
 {
-    const REGISTRY_CUSTOMER_SESSION_KEY = 'block_customer_session_customer_id';
 }

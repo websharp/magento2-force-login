@@ -22,6 +22,7 @@
                 <item name="customer_account_logout" xsi:type="string">^/customer/account/logout/?$</item>
                 <item name="customer_account_logout_success" xsi:type="string">^/customer/account/logoutSuccess/?$</item>
                 <item name="customer_account_create" xsi:type="string">^/customer/account/create/?$</item>
+                <item name="customer_account_create_password" xsi:type="string">^/customer/account/createPassword/?$</item>
                 <item name="contact_us" xsi:type="string">^/contact/?$</item>
                 <item name="help" xsi:type="string">^/help/?$</item>
             </argument>
