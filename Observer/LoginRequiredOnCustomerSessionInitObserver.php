@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\Magento2\CustomerForceLogin\Observer;
+namespace bitExpert\CustomerForceLogin\Observer;
 
-use bitExpert\Magento2\CustomerForceLogin\Api\Controller\LoginCheckInterface;
-use bitExpert\Magento2\CustomerForceLogin\Api\Observer\LoginRequiredObserverInterface;
+use bitExpert\CustomerForceLogin\Api\Controller\LoginCheckInterface;
+use bitExpert\CustomerForceLogin\Api\Observer\LoginRequiredObserverInterface;
 use Magento\Framework\Event\Observer;
 
 /**
  * Class LoginRequiredOnCustomerSessionInitObserver
- * @package bitExpert\Magento2\CustomerForceLogin\Observer
+ * @package bitExpert\CustomerForceLogin\Observer
  */
 class LoginRequiredOnCustomerSessionInitObserver implements LoginRequiredObserverInterface
 {
@@ -26,7 +26,7 @@ class LoginRequiredOnCustomerSessionInitObserver implements LoginRequiredObserve
     protected $loginCheckController;
 
     /**
-     * Creates a new {@link \bitExpert\Magento2\CustomerForceLogin\Observer\LoginRequiredOnCustomerSessionInitObserver}.
+     * Creates a new {@link \bitExpert\CustomerForceLogin\Observer\LoginRequiredOnCustomerSessionInitObserver}.
      *
      * @param LoginCheckInterface $loginCheckController
      */

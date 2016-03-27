@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\Magento2\CustomerForceLogin\Api\Observer;
+namespace bitExpert\CustomerForceLogin\Api\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 
 /**
  * Interface LoginRequiredObserverInterface
- * @package bitExpert\Magento2\CustomerForceLogin\Api\Observer
+ * @package bitExpert\CustomerForceLogin\Api\Observer
  */
 interface LoginRequiredObserverInterface extends ObserverInterface
 {

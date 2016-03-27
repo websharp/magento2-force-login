@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\Magento2\CustomerForceLogin\Controller;
+namespace bitExpert\CustomerForceLogin\Controller;
 
-use bitExpert\Magento2\CustomerForceLogin\Api\Controller\LoginCheckInterface;
+use bitExpert\CustomerForceLogin\Api\Controller\LoginCheckInterface;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\UrlInterface;
 
 /**
  * Class LoginCheck
- * @package bitExpert\Magento2\CustomerForceLogin\Controller
+ * @package bitExpert\CustomerForceLogin\Controller
  */
 class LoginCheck extends Action implements LoginCheckInterface
 {
@@ -35,7 +35,7 @@ class LoginCheck extends Action implements LoginCheckInterface
     protected $targetUrl;
 
     /**
-     * Creates a new {@link \bitExpert\Magento2\CustomerForceLogin\Controller\LoginCheck}.
+     * Creates a new {@link \bitExpert\CustomerForceLogin\Controller\LoginCheck}.
      *
      * @param Context $context
      * @param UrlInterface $url

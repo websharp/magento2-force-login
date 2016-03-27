@@ -17,7 +17,7 @@ Example DI definition for custom definitions
 --------------------------------------------
 
 ```xml
-<type name="\bitExpert\Magento2\CustomerForceLogin\Controller\LoginCheck">
+<type name="\bitExpert\CustomerForceLogin\Controller\LoginCheck">
     <arguments>
         <argument name="ignoreUrls" xsi:type="array">
             <item name="admin_area" xsi:type="string">^/admin/?.*$</item>

@@ -13,7 +13,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
     <!-- Controllers -->
-    <type name="\bitExpert\Magento2\CustomerForceLogin\Controller\LoginCheck">
+    <type name="\bitExpert\CustomerForceLogin\Controller\LoginCheck">
         <arguments>
             <argument name="ignoreUrls" xsi:type="array">
                 <item name="admin_area" xsi:type="string">^/admin/?.*$</item>
@@ -29,13 +29,13 @@
             <argument name="targetUrl" xsi:type="string">customer/account/login</argument>
         </arguments>
     </type>
-    <preference for="\bitExpert\Magento2\CustomerForceLogin\Api\Controller\LoginCheckInterface"
-                type="\bitExpert\Magento2\CustomerForceLogin\Controller\LoginCheck" />
+    <preference for="\bitExpert\CustomerForceLogin\Api\Controller\LoginCheckInterface"
+                type="\bitExpert\CustomerForceLogin\Controller\LoginCheck" />
 
     <!-- Observers -->
-    <preference for="\bitExpert\Magento2\CustomerForceLogin\Api\Observer\LoginRequiredObserverInterface"
-                type="\bitExpert\Magento2\CustomerForceLogin\Observer\LoginRequiredOnCustomerSessionInitObserver" />
-    <preference for="\bitExpert\Magento2\CustomerForceLogin\Api\Observer\LoginRequiredObserverInterface"
-                type="\bitExpert\Magento2\CustomerForceLogin\Observer\LoginRequiredOnVisitorInitObserver" />
+    <preference for="\bitExpert\CustomerForceLogin\Api\Observer\LoginRequiredObserverInterface"
+                type="\bitExpert\CustomerForceLogin\Observer\LoginRequiredOnCustomerSessionInitObserver" />
+    <preference for="\bitExpert\CustomerForceLogin\Api\Observer\LoginRequiredObserverInterface"
+                type="\bitExpert\CustomerForceLogin\Observer\LoginRequiredOnVisitorInitObserver" />
 
 </config>
