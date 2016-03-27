@@ -1,5 +1,5 @@
 {
-  "name": "bitExpert/magento2-force-login",
+  "name": "bitexpert/magento2-force-login",
   "description": "Magento2 Module to force the login for frontend customers.",
   "type": "magento2-module",
   "minimum-stability": "stable",
@@ -23,8 +23,7 @@
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.3",
-    "phing/phing": "^2.8.0",
-    "bitexpert/phing-securitychecker": "^0.2.1"
+    "phing/phing": "^2.8.0"
   },
   "autoload": {
     "files": [
@@ -37,7 +36,7 @@
   "repositories": [
     {
       "type": "composer",
-      "url": "https://satis.bitexpert.net/"
+      "url": "https://repo.magento.com"
     }
   ]
 }

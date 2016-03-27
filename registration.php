@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of the Magento2 Force Login Module package.
  *
