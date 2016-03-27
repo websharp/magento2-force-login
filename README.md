@@ -6,11 +6,11 @@ possible to overwrite the whitelisted urls to add custom definitions.
 Installation
 ------------
 
-The preferred way of installing `bitExpert/magento2-force-login` is through Composer. Simply add `bitExpert/magento2-force-login` 
+The preferred way of installing `bitexpert/magento2-force-login` is through Composer. Simply add `bitexpert/magento2-force-login` 
 as a dependency:
 
 ```
-composer.phar require bitExpert/magento2-force-login
+composer.phar require bitexpert/magento2-force-login
 ```
 
 Example DI definition for custom definitions
