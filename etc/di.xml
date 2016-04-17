@@ -13,7 +13,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
     <!-- Controllers -->
-    <type name="\bitExpert\CustomerForceLogin\Controller\LoginCheck">
+    <type name="\bitExpert\ForceCustomerLogin\Controller\LoginCheck">
         <arguments>
             <argument name="ignoreUrls" xsi:type="array">
                 <item name="admin_area" xsi:type="string">^/admin/?.*$</item>
@@ -32,13 +32,7 @@
             <argument name="targetUrl" xsi:type="string">customer/account/login</argument>
         </arguments>
     </type>
-    <preference for="\bitExpert\CustomerForceLogin\Api\Controller\LoginCheckInterface"
-                type="\bitExpert\CustomerForceLogin\Controller\LoginCheck" />
-
-    <!-- Observers -->
-    <preference for="\bitExpert\CustomerForceLogin\Api\Observer\LoginRequiredObserverInterface"
-                type="\bitExpert\CustomerForceLogin\Observer\LoginRequiredOnCustomerSessionInitObserver" />
-    <preference for="\bitExpert\CustomerForceLogin\Api\Observer\LoginRequiredObserverInterface"
-                type="\bitExpert\CustomerForceLogin\Observer\LoginRequiredOnVisitorInitObserver" />
+    <preference for="\bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface"
+                type="\bitExpert\ForceCustomerLogin\Controller\LoginCheck" />
 
 </config>

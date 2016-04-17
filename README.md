@@ -17,18 +17,21 @@ Example DI definition for custom definitions
 --------------------------------------------
 
 ```xml
-<type name="\bitExpert\CustomerForceLogin\Controller\LoginCheck">
+<type name="\bitExpert\ForceCustomerLogin\Controller\LoginCheck">
     <arguments>
         <argument name="ignoreUrls" xsi:type="array">
-            <item name="admin_area" xsi:type="string">^/admin/?.*$</item>
-            <item name="rest_api" xsi:type="string">^/rest/?.*$</item>
-            <item name="customer_account_login" xsi:type="string">^/customer/account/login/?$</item>
-            <item name="customer_account_logout" xsi:type="string">^/customer/account/logout/?$</item>
-            <item name="customer_account_logout_success" xsi:type="string">^/customer/account/logoutSuccess/?$</item>
-            <item name="customer_account_create" xsi:type="string">^/customer/account/create/?$</item>
-            <item name="contact_us" xsi:type="string">^/contact/?$</item>
-            <item name="help" xsi:type="string">^/help/?$</item>
-            <item name="custom_url" xsi:type="string">^/foo/bar/custom/?$</item>
+                <item name="admin_area" xsi:type="string">^/admin/?.*$</item>
+                <item name="rest_api" xsi:type="string">^/rest/?.*$</item>
+                <item name="customer_account_login" xsi:type="string">^/customer/account/login/?$</item>
+                <item name="customer_account_logout" xsi:type="string">^/customer/account/logout/?$</item>
+                <item name="customer_account_logout_success" xsi:type="string">^/customer/account/logoutSuccess/?$</item>
+                <item name="customer_account_create" xsi:type="string">^/customer/account/create/?$</item>
+                <item name="customer_account_create_password" xsi:type="string">^/customer/account/createPassword/?.*$</item>
+                <item name="customer_account_forgot_password" xsi:type="string">^/customer/account/forgotpassword/?.*$</item>
+                <item name="customer_account_forgot_password_post" xsi:type="string">^/customer/account/forgotpasswordpost/?.*$</item>
+                <item name="customer_section_load" xsi:type="string">^/customer/section/load/?$</item>
+                <item name="contact_us" xsi:type="string">^/contact/?$</item>
+                <item name="help" xsi:type="string">^/help/?$</item>
         </argument>
         <argument name="targetUrl" xsi:type="string">customer/account/login</argument>
     </arguments>

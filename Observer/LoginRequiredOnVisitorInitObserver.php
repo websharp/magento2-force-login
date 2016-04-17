@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\CustomerForceLogin\Observer;
+namespace bitExpert\ForceCustomerLogin\Observer;
 
-use bitExpert\CustomerForceLogin\Api\Observer\LoginRequiredObserverInterface;
-use bitExpert\CustomerForceLogin\Observer\LoginRequiredOnCustomerSessionInitObserver;
+use bitExpert\ForceCustomerLogin\Api\Observer\LoginRequiredObserverInterface;
+use bitExpert\ForceCustomerLogin\Observer\LoginRequiredOnCustomerSessionInitObserver;
 
 /**
  * Class LoginRequiredOnVisitorInitObserver
- * @package bitExpert\CustomerForceLogin\Observer
+ * @package bitExpert\ForceCustomerLogin\Observer
  */
 class LoginRequiredOnVisitorInitObserver extends LoginRequiredOnCustomerSessionInitObserver implements
     LoginRequiredObserverInterface
