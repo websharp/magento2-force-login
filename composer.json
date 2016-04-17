@@ -1,9 +1,9 @@
 {
-  "name": "bitexpert/magento2-force-login",
+  "name": "bitexpert/magento2-force-customer-login",
   "description": "Magento2 Module to force the login for frontend customers.",
   "type": "magento2-module",
   "minimum-stability": "stable",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "Apache-2.0",
   "authors": [
     {
@@ -30,7 +30,7 @@
       "registration.php"
     ],
     "psr-4": {
-      "bitExpert\\CustomerForceLogin\\": ""
+      "bitExpert\\ForceCustomerLogin\\": ""
     }
   },
   "repositories": [

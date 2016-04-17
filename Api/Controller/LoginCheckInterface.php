@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\CustomerForceLogin\Api\Controller;
+namespace bitExpert\ForceCustomerLogin\Api\Controller;
 
 use Magento\Framework\App\ActionInterface;
 
 /**
  * Interface LoginCheckInterface
- * @package bitExpert\CustomerForceLogin\Api\Controller
+ * @package bitExpert\ForceCustomerLogin\Api\Controller
  */
 interface LoginCheckInterface extends ActionInterface
 {

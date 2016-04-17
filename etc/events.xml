@@ -14,12 +14,12 @@
 
     <event name="customer_session_init">
         <observer name="bitexpert_force_customer_login_required_on_customer_session_init"
-                  instance="\bitExpert\CustomerForceLogin\Observer\LoginRequiredOnCustomerSessionInitObserver" />
+                  instance="\bitExpert\ForceCustomerLogin\Observer\LoginRequiredOnCustomerSessionInitObserver" />
     </event>
 
     <event name="visitor_init">
         <observer name="bitexpert_force_customer_login_required_on_visitor_init"
-                  instance="\bitExpert\CustomerForceLogin\Observer\LoginRequiredOnVisitorInitObserver" />
+                  instance="\bitExpert\ForceCustomerLogin\Observer\LoginRequiredOnVisitorInitObserver" />
     </event>
 
 </config>

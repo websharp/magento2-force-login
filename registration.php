@@ -9,6 +9,6 @@
  */
 \Magento\Framework\Component\ComponentRegistrar::register(
     \Magento\Framework\Component\ComponentRegistrar::MODULE,
-    'bitExpert_CustomerForceLogin',
+    'bitExpert_ForceCustomerLogin',
     __DIR__
 );
