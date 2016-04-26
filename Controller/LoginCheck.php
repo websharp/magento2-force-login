@@ -38,13 +38,12 @@ class LoginCheck extends Action implements LoginCheckInterface
      * Creates a new {@link \bitExpert\ForceCustomerLogin\Controller\LoginCheck}.
      *
      * @param Context $context
-     * @param UrlInterface $url
      * @param string[] $ignoreUrls
      * @param string $targetUrl
      */
-    public function __construct(Context $context, UrlInterface $url, array $ignoreUrls, $targetUrl)
+    public function __construct(Context $context, array $ignoreUrls, $targetUrl)
     {
-        $this->url = $url;
+        $this->url = $context->getUrl();
         $this->ignoreUrls = $ignoreUrls;
         $this->targetUrl = $targetUrl;
         parent::__construct($context);
