@@ -37,4 +37,28 @@
     <preference for="\bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface"
                 type="\bitExpert\ForceCustomerLogin\Repository\WhitelistRepository" />
 
+
+    <!-- UI Components -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="whitelist_overview_data_source" xsi:type="string">\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="\bitExpert\ForceCustomerLogin\Model\WhitelistEntry\Config">
+        <arguments>
+            <argument name="state" xsi:type="object">Magento\Framework\App\State\Proxy</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Grid\Collection" 
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">bitexpert_forcelogin_whitelist</argument>
+            <argument name="resourceModel" xsi:type="string">\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry</argument>
+        </arguments>
+    </virtualType>
+
 </config>

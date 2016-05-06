@@ -11,6 +11,7 @@
 -->
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">whitelist_overview.whitelist_overview_data_source</item>
@@ -18,6 +19,9 @@
         </item>
         <item name="spinner" xsi:type="string">whitelist_entry_columns</item>
     </argument>
+
+
+
     <dataSource name="whitelist_overview_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
@@ -36,6 +40,9 @@
             </item>
         </argument>
     </dataSource>
+
+
+
     <container name="listing_top">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
@@ -122,6 +129,9 @@
             </argument>
         </paging>
     </container>
+
+
+
     <columns name="whitelist_entry_columns">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
