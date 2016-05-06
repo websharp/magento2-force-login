@@ -71,7 +71,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
             ->addColumn(
                 'url_rule',
                 \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                1024,
+                null,
                 ['nullable' => true]
             )
             ->addColumn(
@@ -83,11 +83,6 @@ class UpgradeSchema implements UpgradeSchemaInterface
             ->addIndex(
                 $installer->getIdxName('bitexpert_forcelogin_whitelist', ['label']),
                 ['label'],
-                ['type' => 'unique']
-            )
-            ->addIndex(
-                $installer->getIdxName('bitexpert_forcelogin_whitelist', ['url_rule']),
-                ['url_rule'],
                 ['type' => 'unique']
             )
             ->addIndex(

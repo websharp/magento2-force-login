@@ -64,7 +64,7 @@ class UpgradeData implements UpgradeDataInterface
      * @param SchemaSetupInterface $setup
      * @param ModuleContextInterface $context
      */
-    protected function runUpgrade101(SchemaSetupInterface $setup, ModuleContextInterface $context)
+    protected function runUpgrade101(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
         $whitelistEntries = [
             $this->getWhitelistEntryAsArray(0, 'Admin Area', '^/admin/?.*$'),
@@ -82,7 +82,7 @@ class UpgradeData implements UpgradeDataInterface
         ];
 
         $setup->getConnection()->insertMultiple(
-            'bitexpert_forcelogin_whitelist',
+            $setup->getTable('bitexpert_forcelogin_whitelist'),
             $whitelistEntries
         );
     }
