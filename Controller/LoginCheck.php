@@ -11,6 +11,8 @@
 namespace bitExpert\ForceCustomerLogin\Controller;
 
 use bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
+use bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
+use bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\UrlInterface;
@@ -26,9 +28,9 @@ class LoginCheck extends Action implements LoginCheckInterface
      */
     protected $url;
     /**
-     * @var string[]
+     * @var WhitelistRepositoryInterface
      */
-    protected $ignoreUrls;
+    protected $whitelistRepository;
     /**
      * @var string
      */
@@ -38,13 +40,16 @@ class LoginCheck extends Action implements LoginCheckInterface
      * Creates a new {@link \bitExpert\ForceCustomerLogin\Controller\LoginCheck}.
      *
      * @param Context $context
-     * @param string[] $ignoreUrls
+     * @param WhitelistRepositoryInterface $whitelistRepository
      * @param string $targetUrl
      */
-    public function __construct(Context $context, array $ignoreUrls, $targetUrl)
-    {
+    public function __construct(
+        Context $context,
+        WhitelistRepositoryInterface $whitelistRepository,
+        $targetUrl
+    ) {
         $this->url = $context->getUrl();
-        $this->ignoreUrls = $ignoreUrls;
+        $this->whitelistRepository = $whitelistRepository;
         $this->targetUrl = $targetUrl;
         parent::__construct($context);
     }
@@ -57,13 +62,29 @@ class LoginCheck extends Action implements LoginCheckInterface
         $url = $this->url->getCurrentUrl();
         $path = \parse_url($url, PHP_URL_PATH);
 
+        $ignoreUrls = $this->getUrlRuleSetByCollection($this->whitelistRepository->getCollection());
+
         // check if current url is a match with one of the ignored urls
-        foreach ($this->ignoreUrls as $ignoreUrl) {
+        foreach ($ignoreUrls as $ignoreUrl) {
             if (\preg_match(\sprintf('#%s#i', $ignoreUrl), $path)) {
                 return;
             }
         }
 
         $this->_redirect($this->targetUrl)->sendResponse();
+    }
+
+    /**
+     * @param Collection $collection
+     * @return string[]
+     */
+    protected function getUrlRuleSetByCollection(Collection $collection)
+    {
+        $urlRuleSet = array();
+        foreach ($collection->getItems() as $whitelistEntry) {
+            /** @var $whitelistEntry \bitExpert\ForceCustomerLogin\Model\WhitelistEntry */
+            \array_push($urlRuleSet, $whitelistEntry->getUrlRule());
+        }
+        return $urlRuleSet;
     }
 }
