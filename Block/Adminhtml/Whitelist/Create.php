@@ -34,6 +34,8 @@ class Create extends \Magento\Backend\Block\Widget\Form\Container
         $this->_mode = 'create';
 
         parent::_construct();
+
+        $this->updateButtonControls();
     }
 
     /**
@@ -55,8 +57,29 @@ class Create extends \Magento\Backend\Block\Widget\Form\Container
     /**
      * {@inheritdoc}
      */
+    public function getSaveUrl()
+    {
+        return $this->getUrl('ForceCustomerLogin/Whitelist/Save', [$this->_objectId => $this->getRequest()->getParam($this->_objectId)]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getBackUrl()
     {
         return $this->getUrl('ForceCustomerLogin/Whitelist');
+    }
+
+    /**
+     */
+    protected function updateButtonControls()
+    {
+        $this->buttonList->update(
+            'save',
+            'data_attribute',
+            [
+                'mage-init' => ['button' => ['event' => 'save', 'target' => '#' . $this->getFormIdentifier()]],
+            ]
+        );
     }
 }

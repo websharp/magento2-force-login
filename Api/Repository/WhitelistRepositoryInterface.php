@@ -30,4 +30,12 @@ interface WhitelistRepositoryInterface
      * @return \bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntrySearchResultInterface
      */
     public function getList(\Magento\Framework\Api\SearchCriteria $searchCriteria);
+
+    /**
+     * @param string $label
+     * @param string $urlRule
+     * @param int $storeId
+     * @return \bitExpert\ForceCustomerLogin\Model\WhitelistEntry
+     */
+    public function createEntry($label, $urlRule, $storeId = 0);
 }

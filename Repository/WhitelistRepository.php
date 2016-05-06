@@ -10,6 +10,7 @@
  */
 namespace bitExpert\ForceCustomerLogin\Repository;
 
+use \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
 use \bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface;
 use \bitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory as SearchResultFactory;
 
@@ -19,6 +20,10 @@ use \bitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFacto
  */
 class WhitelistRepository implements \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface
 {
+    /**
+     * @var WhitelistEntryFactoryInterface
+     */
+    protected $entityFactory;
     /**
      * @var WhitelistEntryCollectionFactoryInterface
      */
@@ -30,15 +35,32 @@ class WhitelistRepository implements \bitExpert\ForceCustomerLogin\Api\Repositor
 
     /**
      * WhitelistRepository constructor.
+     * @param WhitelistEntryFactoryInterface $entityFactory
      * @param WhitelistEntryCollectionFactoryInterface $collectionFactory
      * @param SearchResultFactory $searchResultFactory
      */
     public function __construct(
+        WhitelistEntryFactoryInterface $entityFactory,
         WhitelistEntryCollectionFactoryInterface $collectionFactory,
         SearchResultFactory $searchResultFactory
     ) {
+        $this->entityFactory = $entityFactory;
         $this->collectionFactory = $collectionFactory;
         $this->searchResultFactory = $searchResultFactory;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function createEntry($label, $urlRule, $storeId = 0)
+    {
+        $whitelist = $this->entityFactory->create()->load($label, 'label');
+        $whitelist->setLabel($label);
+        $whitelist->setUrlRule($urlRule);
+        $whitelist->setStoreId($storeId);
+        $whitelist->save();
+
+        return $whitelist;
     }
 
     /**
