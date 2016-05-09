@@ -100,7 +100,7 @@
             </argument>
         </column>
 
-        <actionsColumn name="actions" class="Banc\AssetBuilder\Ui\Component\Listing\Column\ViewAction">
+        <actionsColumn name="actions" class="\bitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\ViewAction">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="indexField" xsi:type="string">whitelist_entry_id</item>

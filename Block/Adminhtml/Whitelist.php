@@ -17,9 +17,7 @@ namespace bitExpert\ForceCustomerLogin\Block\Adminhtml;
 class Whitelist extends \Magento\Backend\Block\Widget\Container
 {
     /**
-     * Prepare button and grid
-     *
-     * @return \Banc\AssetBuilder\Block\Adminhtml\Asset
+     * {@inheritDoc}
      */
     protected function _prepareLayout()
     {

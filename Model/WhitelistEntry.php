@@ -11,8 +11,8 @@
 namespace bitExpert\ForceCustomerLogin\Model;
 
 /**
- * Class Asset
- * @package Banc\AssetProduct\Model
+ * Class WhitelistEntry
+ * @package bitExpert\ForceCustomerLogin\Model
  */
 class WhitelistEntry extends \Magento\Framework\Model\AbstractModel implements
     \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryInterface
@@ -32,7 +32,7 @@ class WhitelistEntry extends \Magento\Framework\Model\AbstractModel implements
      */
     public function getStoreId()
     {
-        return $this->getData(static::KEY_STORE_ID);
+        return (int) $this->getData(static::KEY_STORE_ID);
     }
 
     /**
@@ -80,7 +80,7 @@ class WhitelistEntry extends \Magento\Framework\Model\AbstractModel implements
      */
     public function getEditable()
     {
-        return $this->getData(static::KEY_EDITABLE);
+        return !!$this->getData(static::KEY_EDITABLE);
     }
 
     /**

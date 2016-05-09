@@ -71,6 +71,22 @@ class WhitelistRepository implements \bitExpert\ForceCustomerLogin\Api\Repositor
     /**
      * {@inheritDoc}
      */
+    public function deleteEntry($id)
+    {
+        $whitelist = $this->entityFactory->create()->load($id);
+        if (!$whitelist->getId() ||
+            !$whitelist->getEditable()) {
+            return false;
+        }
+
+        $whitelist->delete();
+
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getCollection()
     {
         return $this->collectionFactory->create()->load();

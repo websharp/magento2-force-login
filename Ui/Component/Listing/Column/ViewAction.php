@@ -53,24 +53,29 @@ class ViewAction extends Column
      */
     public function prepareDataSource(array $dataSource)
     {
-        if (isset($dataSource['data']['items'])) {
-            foreach ($dataSource['data']['items'] as & $item) {
-                if (isset($item['whitelist_entry_id']) && isset($item['editable']) && true === $item['editable']) {
-                    $viewUrlPath = $this->getData('config/viewUrlPath') ?: '#';
-                    $urlEntityParamName = $this->getData('config/urlEntityParamName') ?: 'whitelist_entry_id';
-                    $item[$this->getData('name')] = [
-                        'edit' => [
-                            'href' => $this->urlBuilder->getUrl(
-                                $viewUrlPath,
-                                [
-                                    $urlEntityParamName => $item['whitelist_entry_id']
-                                ]
-                            ),
-                            'label' => __('Delete')
-                        ]
-                    ];
-                }
+        if (!isset($dataSource['data']['items'])) {
+            return $dataSource;
+        }
+
+        foreach ($dataSource['data']['items'] as &$item) {
+            if (!isset($item['whitelist_entry_id']) ||
+                !isset($item['editable']) ||
+                '1' !== $item['editable']) {
+                continue;
             }
+
+            $viewUrlPath = $this->getData('config/viewUrlPath') ?: '#';
+            $item[$this->getData('name')] = [
+                'edit' => [
+                    'href' => $this->urlBuilder->getUrl(
+                        $viewUrlPath,
+                        [
+                            'id' => $item['whitelist_entry_id']
+                        ]
+                    ),
+                    'label' => __('Delete')
+                ]
+            ];
         }
 
         return $dataSource;

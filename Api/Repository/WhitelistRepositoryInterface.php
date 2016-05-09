@@ -38,4 +38,10 @@ interface WhitelistRepositoryInterface
      * @return \bitExpert\ForceCustomerLogin\Model\WhitelistEntry
      */
     public function createEntry($label, $urlRule, $storeId = 0);
+
+    /**
+     * @param int $id
+     * @return boolean
+     */
+    public function deleteEntry($id);
 }
