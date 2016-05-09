@@ -45,6 +45,7 @@ class Save extends \Magento\Framework\App\Action\Action
      */
     public function __construct(
         WhitelistRepositoryInterface $whitelistRepository,
+
         Context $context
     ) {
         $this->whitelistRepository = $whitelistRepository;
@@ -72,7 +73,7 @@ class Save extends \Magento\Framework\App\Action\Action
 
             if (!$whitelistEntry->getId()) {
                 throw new \RuntimeException(
-                    'Could not persist whitelist entry.'
+                    __('Could not persist whitelist entry.')
                 );
             }
             $this->messageManager->addSuccess(
@@ -84,8 +85,19 @@ class Save extends \Magento\Framework\App\Action\Action
         } catch (\Exception $e) {
             $result->setHttpResponseCode(\Magento\Framework\Webapi\Exception::HTTP_INTERNAL_ERROR);
             $this->messageManager->addError(
-                __('Could not add record: %s', $e->getMessage())
+                \sprintf(
+                    __('Could not add record: %s'),
+                    $e->getMessage()
+                )
             );
+
+            $result->setPath(
+                'ForceCustomerLogin/Whitelist/Create',
+                [
+                    'label' => \base64_encode($this->getRequest()->getParam('label')),
+                    'url_rule' => \base64_encode($this->getRequest()->getParam('url_rule')),
+                    'store_id' => \base64_encode($this->getRequest()->getParam('store_id', 0))
+            ]);
         }
 
         return $result;

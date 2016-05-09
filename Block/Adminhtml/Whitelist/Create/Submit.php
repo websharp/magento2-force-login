@@ -14,7 +14,7 @@ namespace bitExpert\ForceCustomerLogin\Block\Adminhtml\Whitelist\Create;
  * Class Submit
  * @package bitExpert\ForceCustomerLogin\Block\Adminhtml\Whitelist\Create
  */
-class Submit extends \Magento\Backend\Block\Widget\Form\Container
+class Submit extends  \Magento\Backend\Block\Template
 {
 
 }

@@ -66,7 +66,7 @@ class LoginCheck extends Action implements LoginCheckInterface
 
         // check if current url is a match with one of the ignored urls
         foreach ($ignoreUrls as $ignoreUrl) {
-            if (\preg_match(\sprintf('#%s#i', $ignoreUrl), $path)) {
+            if (\preg_match(\sprintf('#^%s/?.*$#i', $ignoreUrl), $path)) {
                 return;
             }
         }

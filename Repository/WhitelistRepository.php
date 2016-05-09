@@ -58,6 +58,11 @@ class WhitelistRepository implements \bitExpert\ForceCustomerLogin\Api\Repositor
         $whitelist->setLabel($label);
         $whitelist->setUrlRule($urlRule);
         $whitelist->setStoreId($storeId);
+        $whitelist->setEditable(true);
+
+        $validator = new \bitExpert\ForceCustomerLogin\Validator\WhitelistEntry();
+        $validator->validate($whitelist);
+
         $whitelist->save();
 
         return $whitelist;

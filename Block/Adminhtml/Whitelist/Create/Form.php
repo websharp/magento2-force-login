@@ -44,6 +44,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             'name' => 'label',
             'label' => __('Label'),
             'title' => __('Label'),
+            'value' => \base64_decode($this->_request->getParam('label')),
             'required' => true
 
         ]);
@@ -52,6 +53,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             'name' => 'url_rule',
             'label' => __('Url Rule'),
             'title' => __('Url Rule'),
+            'value' => \base64_decode($this->_request->getParam('url_rule')),
             'required' => true
         ]);
 

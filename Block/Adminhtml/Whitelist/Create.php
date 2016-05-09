@@ -59,7 +59,11 @@ class Create extends \Magento\Backend\Block\Widget\Form\Container
      */
     public function getSaveUrl()
     {
-        return $this->getUrl('ForceCustomerLogin/Whitelist/Save', [$this->_objectId => $this->getRequest()->getParam($this->_objectId)]);
+        return $this->getUrl(
+            'ForceCustomerLogin/Whitelist/Save',
+            [
+                $this->_objectId => $this->getRequest()->getParam($this->_objectId)
+        ]);
     }
 
     /**
@@ -78,7 +82,12 @@ class Create extends \Magento\Backend\Block\Widget\Form\Container
             'save',
             'data_attribute',
             [
-                'mage-init' => ['button' => ['event' => 'save', 'target' => '#' . $this->getFormIdentifier()]],
+                'mage-init' => [
+                    'button' => [
+                        'event' => 'save',
+                        'target' => '#' . $this->getFormIdentifier()
+                    ]
+                ],
             ]
         );
     }

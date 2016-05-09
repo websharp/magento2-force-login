@@ -67,18 +67,18 @@ class UpgradeData implements UpgradeDataInterface
     protected function runUpgrade101(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
         $whitelistEntries = [
-            $this->getWhitelistEntryAsArray(0, 'Admin Area', '^/admin/?.*$'),
-            $this->getWhitelistEntryAsArray(0, 'Rest API', '^/rest/?.*$'),
-            $this->getWhitelistEntryAsArray(0, 'Customer Account Login', '^/customer/account/login/?$'),
-            $this->getWhitelistEntryAsArray(0, 'Customer Account Logout', '^/customer/account/logout/?$'),
-            $this->getWhitelistEntryAsArray(0, 'Customer Account Logout Success', '^/customer/account/logoutSuccess/?$'),
-            $this->getWhitelistEntryAsArray(0, 'Customer Account Create', '^/customer/account/create/?$'),
-            $this->getWhitelistEntryAsArray(0, 'Customer Account Create Password', '^/customer/account/createPassword/?.*$'),
-            $this->getWhitelistEntryAsArray(0, 'Customer Account Forgot Password', '^/customer/account/forgotpassword/?.*$'),
-            $this->getWhitelistEntryAsArray(0, 'Customer Account Forgot Password Post', '^/customer/account/forgotpasswordpost/?.*$'),
-            $this->getWhitelistEntryAsArray(0, 'Customer Section Load', '^/customer/section/load/?$'),
-            $this->getWhitelistEntryAsArray(0, 'Contact Us', '^/contact/?$'),
-            $this->getWhitelistEntryAsArray(0, 'Help', '^/help/?$')
+            $this->getWhitelistEntryAsArray(0, 'Admin Area', '/admin'),
+            $this->getWhitelistEntryAsArray(0, 'Rest API', '/rest'),
+            $this->getWhitelistEntryAsArray(0, 'Customer Account Login', '/customer/account/login'),
+            $this->getWhitelistEntryAsArray(0, 'Customer Account Logout', '/customer/account/logout'),
+            $this->getWhitelistEntryAsArray(0, 'Customer Account Logout Success', '/customer/account/logoutSuccess'),
+            $this->getWhitelistEntryAsArray(0, 'Customer Account Create', '/customer/account/create'),
+            $this->getWhitelistEntryAsArray(0, 'Customer Account Create Password', '/customer/account/createPassword'),
+            $this->getWhitelistEntryAsArray(0, 'Customer Account Forgot Password', '/customer/account/forgotpassword'),
+            $this->getWhitelistEntryAsArray(0, 'Customer Account Forgot Password Post', '/customer/account/forgotpasswordpost'),
+            $this->getWhitelistEntryAsArray(0, 'Customer Section Load', '/customer/section/load'),
+            $this->getWhitelistEntryAsArray(0, 'Contact Us', '/contact'),
+            $this->getWhitelistEntryAsArray(0, 'Help', '/help')
         ];
 
         $setup->getConnection()->insertMultiple(
