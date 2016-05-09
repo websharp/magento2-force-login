@@ -13,6 +13,7 @@ namespace bitExpert\ForceCustomerLogin\Model;
 /**
  * Class WhitelistEntry
  * @package bitExpert\ForceCustomerLogin\Model
+ * @codingStandardsIgnoreFile
  */
 class WhitelistEntry extends \Magento\Framework\Model\AbstractModel implements
     \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryInterface
@@ -64,7 +65,7 @@ class WhitelistEntry extends \Magento\Framework\Model\AbstractModel implements
      */
     public function getUrlRule()
     {
-        return $this->getData(static::KEY_URl_RULE);
+        return $this->getData(static::KEY_URL_RULE);
     }
 
     /**
@@ -72,7 +73,7 @@ class WhitelistEntry extends \Magento\Framework\Model\AbstractModel implements
      */
     public function setUrlRule($urlRule)
     {
-        return $this->setData(static::KEY_URl_RULE, $urlRule);
+        return $this->setData(static::KEY_URL_RULE, $urlRule);
     }
 
     /**

@@ -74,7 +74,11 @@ class UpgradeData implements UpgradeDataInterface
             $this->getWhitelistEntryAsArray(0, 'Customer Account Create', '/customer/account/create'),
             $this->getWhitelistEntryAsArray(0, 'Customer Account Create Password', '/customer/account/createPassword'),
             $this->getWhitelistEntryAsArray(0, 'Customer Account Forgot Password', '/customer/account/forgotpassword'),
-            $this->getWhitelistEntryAsArray(0, 'Customer Account Forgot Password Post', '/customer/account/forgotpasswordpost'),
+            $this->getWhitelistEntryAsArray(
+                0,
+                'Customer Account Forgot Password Post',
+                '/customer/account/forgotpasswordpost'
+            ),
             $this->getWhitelistEntryAsArray(0, 'Customer Section Load', '/customer/section/load'),
             $this->getWhitelistEntryAsArray(0, 'Contact Us', '/contact', true),
             $this->getWhitelistEntryAsArray(0, 'Help', '/help', true)

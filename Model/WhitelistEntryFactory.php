@@ -13,6 +13,7 @@ namespace bitExpert\ForceCustomerLogin\Model;
 /**
  * Class WhitelistEntryFactory
  * @package bitExpert\ForceCustomerLogin\Model
+ * @codingStandardsIgnoreFile
  */
 class WhitelistEntryFactory implements \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface
 {

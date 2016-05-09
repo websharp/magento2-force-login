@@ -15,6 +15,7 @@ use \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
 /**
  * Class Form
  * @package bitExpert\ForceCustomerLogin\Block\Adminhtml\Whitelist\Create
+ * @codingStandardsIgnoreFile
  */
 class Form extends \Magento\Backend\Block\Widget\Form\Generic
 {

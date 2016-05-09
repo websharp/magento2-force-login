@@ -13,6 +13,7 @@ namespace bitExpert\ForceCustomerLogin\Model\ResourceModel;
 /**
  * Class WhitelistEntry
  * @package bitExpert\ForceCustomerLogin\Model\ResourceModel
+ * @codingStandardsIgnoreFile
  */
 class WhitelistEntry extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {

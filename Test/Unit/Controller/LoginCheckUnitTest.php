@@ -72,11 +72,16 @@ class LoginCheckUnitTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($redirect));
 
         // --- Whitelist Entries
-        $whitelistEntityOne = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')->disableOriginalConstructor()->getMock();
+        $whitelistEntityOne = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+            ->disableOriginalConstructor()
+            ->getMock();
         $whitelistEntityOne->expects($this->once())
             ->method('getUrlRule')
             ->will($this->returnValue('/foobar'));
-        $whitelistCollection = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')->disableOriginalConstructor()->getMock();
+        $whitelistCollection = $this
+            ->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')
+            ->disableOriginalConstructor()
+            ->getMock();
         $whitelistCollection->expects($this->once())
             ->method('getItems')
             ->will($this->returnValue([$whitelistEntityOne]));
@@ -132,11 +137,16 @@ class LoginCheckUnitTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($redirect));
 
         // --- Whitelist Entries
-        $whitelistEntityOne = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')->disableOriginalConstructor()->getMock();
+        $whitelistEntityOne = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+            ->disableOriginalConstructor()
+            ->getMock();
         $whitelistEntityOne->expects($this->once())
             ->method('getUrlRule')
             ->will($this->returnValue('/foobar'));
-        $whitelistCollection = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')->disableOriginalConstructor()->getMock();
+        $whitelistCollection = $this
+            ->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')
+            ->disableOriginalConstructor()
+            ->getMock();
         $whitelistCollection->expects($this->once())
             ->method('getItems')
             ->will($this->returnValue([$whitelistEntityOne]));
@@ -198,11 +208,16 @@ class LoginCheckUnitTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($redirect));
 
         // --- Whitelist Entries
-        $whitelistEntityOne = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')->disableOriginalConstructor()->getMock();
+        $whitelistEntityOne = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+            ->disableOriginalConstructor()
+            ->getMock();
         $whitelistEntityOne->expects($this->once())
             ->method('getUrlRule')
             ->will($this->returnValue('/barfoo'));
-        $whitelistCollection = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')->disableOriginalConstructor()->getMock();
+        $whitelistCollection = $this
+            ->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')
+            ->disableOriginalConstructor()
+            ->getMock();
         $whitelistCollection->expects($this->once())
             ->method('getItems')
             ->will($this->returnValue([$whitelistEntityOne]));
@@ -264,11 +279,16 @@ class LoginCheckUnitTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($redirect));
 
         // --- Whitelist Entries
-        $whitelistEntityOne = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')->disableOriginalConstructor()->getMock();
+        $whitelistEntityOne = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+            ->disableOriginalConstructor()
+            ->getMock();
         $whitelistEntityOne->expects($this->once())
             ->method('getUrlRule')
             ->will($this->returnValue('/barfoo'));
-        $whitelistCollection = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')->disableOriginalConstructor()->getMock();
+        $whitelistCollection = $this
+            ->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')
+            ->disableOriginalConstructor()
+            ->getMock();
         $whitelistCollection->expects($this->once())
             ->method('getItems')
             ->will($this->returnValue([$whitelistEntityOne]));
@@ -331,7 +351,9 @@ class LoginCheckUnitTest extends \PHPUnit_Framework_TestCase
      */
     protected function getDeploymentConfig()
     {
-        return $this->getMockBuilder('\Magento\Framework\App\DeploymentConfig')->disableOriginalConstructor()->getMock();
+        return $this->getMockBuilder('\Magento\Framework\App\DeploymentConfig')
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 
     /**

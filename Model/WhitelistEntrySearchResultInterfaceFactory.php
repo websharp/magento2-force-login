@@ -13,6 +13,7 @@ namespace bitExpert\ForceCustomerLogin\Model;
 /**
  * Class WhitelistEntrySearchResultInterfaceFactory
  * @package bitExpert\ForceCustomerLogin\Api\Data\Collection
+ * @codingStandardsIgnoreFile
  */
 class WhitelistEntrySearchResultInterfaceFactory
 {

@@ -13,6 +13,7 @@ namespace bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist;
 /**
  * Class Index
  * @package bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist
+ * @codingStandardsIgnoreFile
  */
 class Index extends \Magento\Backend\App\Action
 {

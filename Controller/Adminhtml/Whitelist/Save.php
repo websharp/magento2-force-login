@@ -19,6 +19,7 @@ use \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
 /**
  * Class Save
  * @package bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist
+ * @codingStandardsIgnoreFile
  */
 class Save extends \Magento\Framework\App\Action\Action
 {

@@ -13,6 +13,7 @@ namespace bitExpert\ForceCustomerLogin\Block\Adminhtml;
 /**
  * Class Whitelist
  * @package bitExpert\ForceCustomerLogin\Block\Adminhtml
+ * @codingStandardsIgnoreFile
  */
 class Whitelist extends \Magento\Backend\Block\Widget\Container
 {

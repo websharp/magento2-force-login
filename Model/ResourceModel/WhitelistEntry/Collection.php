@@ -13,6 +13,7 @@ namespace bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry;
 /**
  * Class Collection
  * @package bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry
+ * @codingStandardsIgnoreFile
  */
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {

@@ -13,6 +13,7 @@ namespace bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist;
 /**
  * Class Create
  * @package bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist
+ * @codingStandardsIgnoreFile
  */
 class Create extends \Magento\Framework\App\Action\Action
 {

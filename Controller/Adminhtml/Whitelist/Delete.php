@@ -18,6 +18,7 @@ use \Magento\Framework\Message\ManagerInterface;
 /**
  * Class Delete
  * @package bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist
+ * @codingStandardsIgnoreFile
  */
 class Delete extends \Magento\Framework\App\Action\Action
 {

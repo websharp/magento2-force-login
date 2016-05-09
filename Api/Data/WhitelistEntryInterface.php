@@ -22,7 +22,7 @@ interface WhitelistEntryInterface
     const KEY_WHITELIST_ENTRY_ID = 'whitelist_entry_id';
     const KEY_STORE_ID = 'store_id';
     const KEY_LABEL = 'label';
-    const KEY_URl_RULE = 'url_rule';
+    const KEY_URL_RULE = 'url_rule';
     const KEY_EDITABLE = 'editable';
 
     /**

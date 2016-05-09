@@ -13,6 +13,7 @@ namespace bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry;
 /**
  * Class CollectionFactory
  * @package bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry
+ * @codingStandardsIgnoreFile
  */
 class CollectionFactory implements \bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface
 {
