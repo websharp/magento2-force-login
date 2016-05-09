@@ -55,7 +55,6 @@ class StoreName extends Column
      */
     public function prepareDataSource(array $dataSource)
     {
-\error_log('####### DEBUG ########');
         if (!isset($dataSource['data']['items'])) {
             return $dataSource;
         }
@@ -66,14 +65,13 @@ class StoreName extends Column
             }
 
             $fieldName = $this->getData('name');
-\error_log('Check item store id');
+
             $store = $this->storeManager->getStore((int) $item['store_id']);
             if (!$store->getId()) {
                 $item[$fieldName] = __('All Stores');
                 continue;
             }
 
-\error_log('Apply store name');
             $item[$fieldName] = $store->getName();
         }
 
