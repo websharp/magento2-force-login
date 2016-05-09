@@ -58,6 +58,66 @@ class LoginCheckUnitTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($urlString));
 
         $response = $this->getResponse();
+        $redirect = $this->getRedirect();
+
+        $context = $this->getContext();
+        $context->expects($this->exactly(2))
+            ->method('getUrl')
+            ->will($this->returnValue($url));
+        $context->expects($this->once())
+            ->method('getResponse')
+            ->will($this->returnValue($response));
+        $context->expects($this->once())
+            ->method('getRedirect')
+            ->will($this->returnValue($redirect));
+
+        // --- Whitelist Entries
+        $whitelistEntityOne = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')->disableOriginalConstructor()->getMock();
+        $whitelistEntityOne->expects($this->once())
+            ->method('getUrlRule')
+            ->will($this->returnValue('/foobar'));
+        $whitelistCollection = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')->disableOriginalConstructor()->getMock();
+        $whitelistCollection->expects($this->once())
+            ->method('getItems')
+            ->will($this->returnValue([$whitelistEntityOne]));
+        $whitelistRepository = $this->getWhitelistRepository();
+        $whitelistRepository->expects($this->once())
+            ->method('getCollection')
+            ->will($this->returnValue($whitelistCollection));
+
+        // --- Deployment configuration
+        $deploymentConfig = $this->getDeploymentConfig();
+        $deploymentConfig->expects($this->once())
+            ->method('get')
+            ->with(\Magento\Backend\Setup\ConfigOptionsList::CONFIG_PATH_BACKEND_FRONTNAME)
+            ->will($this->returnValue('admin'));
+
+        $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
+            $context,
+            $deploymentConfig,
+            $whitelistRepository,
+            $targetUrl
+        );
+
+        $loginCheck->execute();
+    }
+
+    /**
+     * @test
+     * @depends testConstructor
+     */
+    public function testNegativeWhitelistedUrlMapping()
+    {
+        $urlString = 'http://example.tld/foobar/baz';
+        $targetUrl = '/target-url';
+
+        // --- Context
+        $url = $this->getUrl();
+        $url->expects($this->once())
+            ->method('getCurrentUrl')
+            ->will($this->returnValue($urlString));
+
+        $response = $this->getResponse();
         $response->expects($this->once())
             ->method('sendResponse');
 
@@ -81,7 +141,7 @@ class LoginCheckUnitTest extends \PHPUnit_Framework_TestCase
         $whitelistEntityOne = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')->disableOriginalConstructor()->getMock();
         $whitelistEntityOne->expects($this->once())
             ->method('getUrlRule')
-            ->will($this->returnValue('/foobar'));
+            ->will($this->returnValue('/barfoo'));
         $whitelistCollection = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')->disableOriginalConstructor()->getMock();
         $whitelistCollection->expects($this->once())
             ->method('getItems')
