@@ -13,6 +13,7 @@ namespace bitExpert\ForceCustomerLogin\Repository;
 use \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
 use \bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface;
 use \bitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory as SearchResultFactory;
+use Magento\Store\Model\StoreManager;
 
 /**
  * Class WhitelistRepository
@@ -32,20 +33,27 @@ class WhitelistRepository implements \bitExpert\ForceCustomerLogin\Api\Repositor
      * @var SearchResultFactory
      */
     protected $searchResultFactory;
+    /**
+     * @var StoreManager
+     */
+    protected $storeManager;
 
     /**
      * WhitelistRepository constructor.
      * @param WhitelistEntryFactoryInterface $entityFactory
      * @param WhitelistEntryCollectionFactoryInterface $collectionFactory
+     * @param StoreManager $storeManager
      * @param SearchResultFactory $searchResultFactory
      */
     public function __construct(
         WhitelistEntryFactoryInterface $entityFactory,
         WhitelistEntryCollectionFactoryInterface $collectionFactory,
+        StoreManager $storeManager,
         SearchResultFactory $searchResultFactory
     ) {
         $this->entityFactory = $entityFactory;
         $this->collectionFactory = $collectionFactory;
+        $this->storeManager = $storeManager;
         $this->searchResultFactory = $searchResultFactory;
     }
 
@@ -89,7 +97,18 @@ class WhitelistRepository implements \bitExpert\ForceCustomerLogin\Api\Repositor
      */
     public function getCollection()
     {
-        return $this->collectionFactory->create()->load();
+        $currentStore = $this->storeManager->getStore();
+
+        $collection = $this->collectionFactory->create();
+        $collection->addFieldToFilter(
+            'store_id',
+            [
+                'eq' => $currentStore->getId(),
+                'eq' => 0
+            ]
+        );
+
+        return $collection->load();
     }
 
     /**

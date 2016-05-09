@@ -14,35 +14,36 @@ use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
+use Magento\Store\Model\StoreManager;
 
 /**
- * Class ViewAction
+ * Class StoreName
  * @package bitExpert\ForceCustomerLogin\Ui\Component\Listing\Column
  */
-class ViewAction extends Column
+class StoreName extends Column
 {
     /**
-     * @var UrlInterface
+     * @var StoreManager
      */
-    protected $urlBuilder;
+    protected $storeManager;
 
     /**
      * Constructor
      *
      * @param ContextInterface $context
+     * @param StoreManager $storeManager
      * @param UiComponentFactory $uiComponentFactory
-     * @param UrlInterface $urlBuilder
      * @param array $components
      * @param array $data
      */
     public function __construct(
         ContextInterface $context,
+        StoreManager $storeManager,
         UiComponentFactory $uiComponentFactory,
-        UrlInterface $urlBuilder,
         array $components = [],
         array $data = []
     ) {
-        $this->urlBuilder = $urlBuilder;
+        $this->storeManager = $storeManager;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 
@@ -54,29 +55,26 @@ class ViewAction extends Column
      */
     public function prepareDataSource(array $dataSource)
     {
+\error_log('####### DEBUG ########');
         if (!isset($dataSource['data']['items'])) {
             return $dataSource;
         }
 
         foreach ($dataSource['data']['items'] as &$item) {
-            if (!isset($item['whitelist_entry_id']) ||
-                !isset($item['editable']) ||
-                '1' !== $item['editable']) {
+            if (!isset($item['store_id'])) {
                 continue;
             }
 
-            $viewUrlPath = $this->getData('config/viewUrlPath') ?: '#';
-            $item[$this->getData('name')] = [
-                'edit' => [
-                    'href' => $this->urlBuilder->getUrl(
-                        $viewUrlPath,
-                        [
-                            'id' => $item['whitelist_entry_id']
-                        ]
-                    ),
-                    'label' => __('Delete')
-                ]
-            ];
+            $fieldName = $this->getData('name');
+\error_log('Check item store id');
+            $store = $this->storeManager->getStore((int) $item['store_id']);
+            if (!$store->getId()) {
+                $item[$fieldName] = __('All Stores');
+                continue;
+            }
+
+\error_log('Apply store name');
+            $item[$fieldName] = $store->getName();
         }
 
         return $dataSource;

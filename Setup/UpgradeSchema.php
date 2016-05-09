@@ -93,6 +93,12 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 $installer->getIdxName('bitexpert_forcelogin_whitelist', ['editable']),
                 ['editable']
             )
+            ->addIndex(
+                $installer->getIdxName('bitexpert_forcelogin_whitelist', ['url_rule', 'store_id']),
+                ['url_rule'],
+                ['store_id'],
+                ['unique' => true]
+            )
             ->addForeignKey(
                 $installer->getFkName('bitexpert_forcelogin_whitelist', 'store_id', 'store', 'store_id'),
                 'store_id',

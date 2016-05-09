@@ -57,6 +57,17 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             'required' => true
         ]);
 
+        $fieldsetBase->addField('store_id', 'select', [
+            'name' => 'store_id',
+            'label' => __('Store'),
+            'title' => __('Store'),
+            'value' => \base64_decode($this->_request->getParam('store_id')),
+            'options' =>  $this->getStoresAsArray(),
+            'required' => true
+        ]);
+        $form->setData('store_id', \base64_decode($this->_request->getParam('store_id')));
+
+
 
         $form->setUseContainer(true);
         $this->setForm($form);
@@ -64,4 +75,20 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         return parent::_prepareForm();
     }
 
+    /**
+     * @return array
+     */
+    protected function getStoresAsArray()
+    {
+        $stores = $this->_storeManager->getStores();
+
+        $storeSet = array(
+            0 => __('All Stores')
+        );
+        foreach ($stores as $store) {
+            $storeSet[(int) $store->getId()] = $store->getName();
+        }
+
+        return $storeSet;
+    }
 }
