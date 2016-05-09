@@ -52,7 +52,6 @@ class Save extends \Magento\Framework\App\Action\Action
     public function __construct(
         WhitelistEntryFactoryInterface $whitelistEntityFactory,
         WhitelistRepositoryInterface $whitelistRepository,
-
         Context $context
     ) {
         $this->whitelistEntityFactory = $whitelistEntityFactory;
@@ -72,19 +71,13 @@ class Save extends \Magento\Framework\App\Action\Action
     {
         $result = $this->redirectFactory->create();
 
-        $entityId = $this->_request->getParam('whitelist_entry_id', 0);
-
         try {
-            // Try to fetch entity if id is provided
-            if (0 !== $entityId) {
-                $whitelistEntry = $this->entityFactory->create()->load($entityId);
-            } else {
-                $whitelistEntry = $this->whitelistRepository->createEntry(
-                    $this->getRequest()->getParam('label'),
-                    $this->getRequest()->getParam('url_rule'),
-                    $this->getRequest()->getParam('store_id', 0)
-                );
-            }
+            $whitelistEntry = $this->whitelistRepository->createEntry(
+                $this->getRequest()->getParam('whitelist_entry_id'),
+                $this->getRequest()->getParam('label'),
+                $this->getRequest()->getParam('url_rule'),
+                $this->getRequest()->getParam('store_id', 0)
+            );
 
             if (!$whitelistEntry->getId() ||
                 !$whitelistEntry->getEditable()) {

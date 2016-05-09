@@ -60,9 +60,23 @@ class WhitelistRepository implements \bitExpert\ForceCustomerLogin\Api\Repositor
     /**
      * {@inheritDoc}
      */
-    public function createEntry($label, $urlRule, $storeId = 0)
+    public function createEntry($entityId, $label, $urlRule, $storeId = 0)
     {
-        $whitelist = $this->entityFactory->create()->load($label, 'label');
+        if (null !== $entityId) {
+            $whitelist = $this->entityFactory->create()->load($entityId);
+        }
+        if (!$whitelist->getId()) {
+            $whitelist = $this->entityFactory->create()->load($label, 'label');
+        }
+
+        // check if existing whitelist entry is editable
+        if ($whitelist->getId() &&
+            !$whitelist->getEditable()) {
+            throw new \RuntimeException(
+                'Whitelist entry not editable.'
+            );
+        }
+
         $whitelist->setLabel($label);
         $whitelist->setUrlRule($urlRule);
         $whitelist->setStoreId($storeId);

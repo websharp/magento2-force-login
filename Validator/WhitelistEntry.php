@@ -36,6 +36,9 @@ class WhitelistEntry
         if (0 === \strlen(\trim($whitelistEntry->getUrlRule()))) {
             throw new \InvalidArgumentException('Url Rule value is too short.');
         }
+        if (255 < \strlen(\trim($whitelistEntry->getUrlRule()))) {
+            throw new \InvalidArgumentException('Url Rule value is too long.');
+        }
 
         if (!\is_bool($whitelistEntry->getEditable())) {
             throw new \InvalidArgumentException('Editable is no boolean value.');

@@ -71,7 +71,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
             ->addColumn(
                 'url_rule',
                 \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                null,
+                255,
                 ['nullable' => true]
             )
             ->addColumn(

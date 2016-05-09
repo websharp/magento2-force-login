@@ -32,12 +32,13 @@ interface WhitelistRepositoryInterface
     public function getList(\Magento\Framework\Api\SearchCriteria $searchCriteria);
 
     /**
+     * @param int|null $entityId If NULL a new entity will be created
      * @param string $label
      * @param string $urlRule
      * @param int $storeId
      * @return \bitExpert\ForceCustomerLogin\Model\WhitelistEntry
      */
-    public function createEntry($label, $urlRule, $storeId = 0);
+    public function createEntry($entityId, $label, $urlRule, $storeId = 0);
 
     /**
      * @param int $id
