@@ -86,7 +86,8 @@ class Save extends \Magento\Framework\App\Action\Action
                 );
             }
 
-            if (!$whitelistEntry->getId()) {
+            if (!$whitelistEntry->getId() ||
+                !$whitelistEntry->getEditable()) {
                 throw new \RuntimeException(
                     __('Could not persist whitelist entry.')
                 );

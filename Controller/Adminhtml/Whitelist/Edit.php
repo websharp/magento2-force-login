@@ -14,22 +14,7 @@ namespace bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist;
  * Class Edit
  * @package bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist
  */
-class Edit extends \Magento\Framework\App\Action\Action
+class Edit extends Create
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function execute()
-    {
-        $this->_view->loadLayout();
-        $this->_view->renderLayout();
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function _isAllowed()
-    {
-        return $this->_authorization->isAllowed('bitExpert_ForceCustomerLogin::bitexpert_force_customer_login_manage');
-    }
 }
