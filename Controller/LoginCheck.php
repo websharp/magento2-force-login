@@ -16,6 +16,8 @@ use bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\UrlInterface;
+use Magento\Framework\App\DeploymentConfig;
+use \Magento\Backend\Setup\ConfigOptionsList as BackendConfigOptionsList;
 
 /**
  * Class LoginCheck
@@ -27,6 +29,10 @@ class LoginCheck extends Action implements LoginCheckInterface
      * @var UrlInterface
      */
     protected $url;
+    /**
+     * @var DeploymentConfig
+     */
+    protected $deploymentConfig;
     /**
      * @var WhitelistRepositoryInterface
      */
@@ -40,15 +46,18 @@ class LoginCheck extends Action implements LoginCheckInterface
      * Creates a new {@link \bitExpert\ForceCustomerLogin\Controller\LoginCheck}.
      *
      * @param Context $context
+     * @param DeploymentConfig $deploymentConfig
      * @param WhitelistRepositoryInterface $whitelistRepository
      * @param string $targetUrl
      */
     public function __construct(
         Context $context,
+        DeploymentConfig $deploymentConfig,
         WhitelistRepositoryInterface $whitelistRepository,
         $targetUrl
     ) {
         $this->url = $context->getUrl();
+        $this->deploymentConfig = $deploymentConfig;
         $this->whitelistRepository = $whitelistRepository;
         $this->targetUrl = $targetUrl;
         parent::__construct($context);
@@ -63,9 +72,10 @@ class LoginCheck extends Action implements LoginCheckInterface
         $path = \parse_url($url, PHP_URL_PATH);
 
         $ignoreUrls = $this->getUrlRuleSetByCollection($this->whitelistRepository->getCollection());
+        $extendedIgnoreUrls = $this->extendIgnoreUrls($ignoreUrls);
 
         // check if current url is a match with one of the ignored urls
-        foreach ($ignoreUrls as $ignoreUrl) {
+        foreach ($extendedIgnoreUrls as $ignoreUrl) {
             if (\preg_match(\sprintf('#^%s/?.*$#i', $ignoreUrl), $path)) {
                 return;
             }
@@ -86,5 +96,23 @@ class LoginCheck extends Action implements LoginCheckInterface
             \array_push($urlRuleSet, $whitelistEntry->getUrlRule());
         }
         return $urlRuleSet;
+    }
+
+    /**
+     * Add dynamic urls to forced login whitelist.
+     *
+     * @param array $ignoreUrls
+     * @return array
+     */
+    protected function extendIgnoreUrls(array $ignoreUrls)
+    {
+        $adminUri = \sprintf(
+            '/%s',
+            $this->deploymentConfig->get(BackendConfigOptionsList::CONFIG_PATH_BACKEND_FRONTNAME)
+        );
+
+        \array_push($ignoreUrls, $adminUri);
+
+        return $ignoreUrls;
     }
 }

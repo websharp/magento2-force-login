@@ -67,7 +67,6 @@ class UpgradeData implements UpgradeDataInterface
     protected function runUpgrade101(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
         $whitelistEntries = [
-            $this->getWhitelistEntryAsArray(0, 'Admin Area', '/admin'),
             $this->getWhitelistEntryAsArray(0, 'Rest API', '/rest'),
             $this->getWhitelistEntryAsArray(0, 'Customer Account Login', '/customer/account/login'),
             $this->getWhitelistEntryAsArray(0, 'Customer Account Logout', '/customer/account/logout'),
@@ -77,8 +76,8 @@ class UpgradeData implements UpgradeDataInterface
             $this->getWhitelistEntryAsArray(0, 'Customer Account Forgot Password', '/customer/account/forgotpassword'),
             $this->getWhitelistEntryAsArray(0, 'Customer Account Forgot Password Post', '/customer/account/forgotpasswordpost'),
             $this->getWhitelistEntryAsArray(0, 'Customer Section Load', '/customer/section/load'),
-            $this->getWhitelistEntryAsArray(0, 'Contact Us', '/contact'),
-            $this->getWhitelistEntryAsArray(0, 'Help', '/help')
+            $this->getWhitelistEntryAsArray(0, 'Contact Us', '/contact', true),
+            $this->getWhitelistEntryAsArray(0, 'Help', '/help', true)
         ];
 
         $setup->getConnection()->insertMultiple(
@@ -91,18 +90,20 @@ class UpgradeData implements UpgradeDataInterface
      * @param int $storeId
      * @param string $label
      * @param string $urlRule
+     * @param boolean $editable
      * @return array
      */
     protected function getWhitelistEntryAsArray(
         $storeId,
         $label,
-        $urlRule
+        $urlRule,
+        $editable = false
     ) {
         return array(
             'store_id' => $storeId,
             'label' => $label,
             'url_rule' => $urlRule,
-            'editable' => false
+            'editable' => $editable
         );
     }
 }
