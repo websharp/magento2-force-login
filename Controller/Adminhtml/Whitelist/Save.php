@@ -14,6 +14,7 @@ use \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
 use \Magento\Framework\Controller\Result\RedirectFactory;
 use \Magento\Framework\App\Action\Context;
 use \Magento\Framework\Message\ManagerInterface;
+use \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
 
 /**
  * Class Save
@@ -21,6 +22,10 @@ use \Magento\Framework\Message\ManagerInterface;
  */
 class Save extends \Magento\Framework\App\Action\Action
 {
+    /**
+     * @var WhitelistEntryFactoryInterface
+     */
+    protected $whitelistEntityFactory;
     /**
      * @var WhitelistRepositoryInterface
      */
@@ -40,14 +45,17 @@ class Save extends \Magento\Framework\App\Action\Action
 
     /**
      * Save constructor.
+     * @param WhitelistEntryFactoryInterface $whitelistEntityFactory
      * @param WhitelistRepositoryInterface $whitelistRepository
      * @param Context $context
      */
     public function __construct(
+        WhitelistEntryFactoryInterface $whitelistEntityFactory,
         WhitelistRepositoryInterface $whitelistRepository,
 
         Context $context
     ) {
+        $this->whitelistEntityFactory = $whitelistEntityFactory;
         $this->whitelistRepository = $whitelistRepository;
         $this->redirectFactory = $context->getResultRedirectFactory();
         $this->messageManager = $context->getMessageManager();
@@ -64,12 +72,19 @@ class Save extends \Magento\Framework\App\Action\Action
     {
         $result = $this->redirectFactory->create();
 
+        $entityId = $this->_request->getParam('whitelist_entry_id', 0);
+
         try {
-            $whitelistEntry = $this->whitelistRepository->createEntry(
-                $this->getRequest()->getParam('label'),
-                $this->getRequest()->getParam('url_rule'),
-                $this->getRequest()->getParam('store_id', 0)
-            );
+            // Try to fetch entity if id is provided
+            if (0 !== $entityId) {
+                $whitelistEntry = $this->entityFactory->create()->load($entityId);
+            } else {
+                $whitelistEntry = $this->whitelistRepository->createEntry(
+                    $this->getRequest()->getParam('label'),
+                    $this->getRequest()->getParam('url_rule'),
+                    $this->getRequest()->getParam('store_id', 0)
+                );
+            }
 
             if (!$whitelistEntry->getId()) {
                 throw new \RuntimeException(

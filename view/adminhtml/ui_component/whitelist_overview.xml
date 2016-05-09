@@ -55,7 +55,7 @@
                         <item name="provider" xsi:type="string">whitelist_overview.whitelist_overview.whitelist_entry_columns.actions</item>
                         <item name="target" xsi:type="string">applyAction</item>
                         <item name="params" xsi:type="array">
-                            <item name="0" xsi:type="string">view</item>
+                            <item name="0" xsi:type="string">edit</item>
                             <item name="1" xsi:type="string">${ $.$data.rowIndex }</item>
                         </item>
                     </item>
@@ -109,12 +109,24 @@
             </argument>
         </column>
 
-        <actionsColumn name="actions" class="\bitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\ViewAction">
+        <actionsColumn name="actions_edit" class="\bitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\EditAction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">whitelist_entry_id</item>
+                    <item name="viewUrlPath" xsi:type="string">ForceCustomerLogin/Whitelist/Edit</item>
+                    <item name="urlEntityParamName" xsi:type="string">whitelist_entry_id</item>
+                    <item name="label" xsi:type="string" translate="true">Edit</item>
+                </item>
+            </argument>
+        </actionsColumn>
+
+        <actionsColumn name="actions_delete" class="\bitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\DeleteAction">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="indexField" xsi:type="string">whitelist_entry_id</item>
                     <item name="viewUrlPath" xsi:type="string">ForceCustomerLogin/Whitelist/Delete</item>
                     <item name="urlEntityParamName" xsi:type="string">whitelist_entry_id</item>
+                    <item name="label" xsi:type="string" translate="true">Deletion</item>
                 </item>
             </argument>
         </actionsColumn>

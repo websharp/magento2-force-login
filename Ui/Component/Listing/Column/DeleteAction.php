@@ -16,10 +16,10 @@ use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 
 /**
- * Class ViewAction
+ * Class DeleteAction
  * @package bitExpert\ForceCustomerLogin\Ui\Component\Listing\Column
  */
-class ViewAction extends Column
+class DeleteAction extends Column
 {
     /**
      * @var UrlInterface
@@ -74,11 +74,19 @@ class ViewAction extends Column
                             'id' => $item['whitelist_entry_id']
                         ]
                     ),
-                    'label' => __('Delete')
+                    'label' => $this->getLabel()
                 ]
             ];
         }
 
         return $dataSource;
+    }
+
+    /**
+     * @return \Magento\Framework\Phrase|mixed|string
+     */
+    protected function getLabel()
+    {
+        return __('Delete');
     }
 }
