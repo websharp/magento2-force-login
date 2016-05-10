@@ -13,7 +13,7 @@ namespace bitExpert\ForceCustomerLogin\Repository;
 use \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
 use \bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface;
 use \bitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory as SearchResultFactory;
-use Magento\Store\Model\StoreManager;
+use \Magento\Store\Model\StoreManager;
 
 /**
  * Class WhitelistRepository
