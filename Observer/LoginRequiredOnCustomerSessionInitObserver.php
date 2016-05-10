@@ -10,9 +10,9 @@
  */
 namespace bitExpert\ForceCustomerLogin\Observer;
 
-use bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
-use bitExpert\ForceCustomerLogin\Api\Observer\LoginRequiredObserverInterface;
-use Magento\Framework\Event\Observer;
+use \bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
+use \bitExpert\ForceCustomerLogin\Api\Observer\LoginRequiredObserverInterface;
+use \Magento\Framework\Event\Observer;
 
 /**
  * Class LoginRequiredOnCustomerSessionInitObserver

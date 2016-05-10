@@ -10,7 +10,7 @@
  */
 namespace bitExpert\ForceCustomerLogin\Api\Controller;
 
-use Magento\Framework\App\ActionInterface;
+use \Magento\Framework\App\ActionInterface;
 
 /**
  * Interface LoginCheckInterface

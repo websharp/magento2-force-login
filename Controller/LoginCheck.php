@@ -10,13 +10,13 @@
  */
 namespace bitExpert\ForceCustomerLogin\Controller;
 
-use bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
-use bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
-use bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection;
-use Magento\Framework\App\Action\Action;
-use Magento\Framework\App\Action\Context;
-use Magento\Framework\UrlInterface;
-use Magento\Framework\App\DeploymentConfig;
+use \bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
+use \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
+use \bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection;
+use \Magento\Framework\App\Action\Action;
+use \Magento\Framework\App\Action\Context;
+use \Magento\Framework\UrlInterface;
+use \Magento\Framework\App\DeploymentConfig;
 use \Magento\Backend\Setup\ConfigOptionsList as BackendConfigOptionsList;
 
 /**
@@ -76,7 +76,7 @@ class LoginCheck extends Action implements LoginCheckInterface
 
         // check if current url is a match with one of the ignored urls
         foreach ($extendedIgnoreUrls as $ignoreUrl) {
-            if (\preg_match(\sprintf('#^%s/?.*$#i', $ignoreUrl), $path)) {
+            if (\preg_match(\sprintf('#^.*%s/?.*$#i', \preg_quote($ignoreUrl)), $path)) {
                 return;
             }
         }
