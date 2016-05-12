@@ -44,7 +44,8 @@ class LoginRequiredOnCustomerSessionInitObserver implements LoginRequiredObserve
         $customerSession = $observer->getEvent()->getData('customer_session');
 
         // if user is logged in, every thing is fine
-        if ($customerSession->isLoggedIn()) {
+        if ($customerSession instanceof \Magento\Customer\Model\Session &&
+            $customerSession->isLoggedIn()) {
             return;
         }
 

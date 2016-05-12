@@ -74,6 +74,34 @@ class LoginRequiredOnCustomerSessionInitObserverUnitTest extends \PHPUnit_Framew
     }
 
     /**
+     * Check if LoginController is run if the current visitor is not logged in and customer session does not exist
+     * @test
+     * @depends testConstructor
+     */
+    public function testLoginControllerExecutionIfCustomerSessionIsNull()
+    {
+        $event = $this->getEvent();
+        $event->expects($this->once())
+            ->method('getData')
+            ->with('customer_session')
+            ->will($this->returnValue(null));
+
+        $observer = $this->getObserver();
+        $observer->expects($this->once())
+            ->method('getEvent')
+            ->will($this->returnValue($event));
+
+        $loginCheckController = $this->getLoginCheck();
+        $loginCheckController->expects($this->once())
+            ->method('execute');
+
+        $loginCheck = new \bitExpert\ForceCustomerLogin\Observer\LoginRequiredOnCustomerSessionInitObserver(
+            $loginCheckController
+        );
+        $loginCheck->execute($observer);
+    }
+
+    /**
      * Check if LoginController is not run if the customer is logged in
      * @test
      * @depends testConstructor
