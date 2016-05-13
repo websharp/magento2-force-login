@@ -77,4 +77,4 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ## 1.0.0
 
-Initial release of the Disco package.
+Initial release of the Magento2 Force Frontend Customer Login Module package.
