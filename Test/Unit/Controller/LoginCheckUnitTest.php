@@ -166,7 +166,7 @@ class LoginCheckUnitTest extends \PHPUnit_Framework_TestCase
      */
     protected function getUrl()
     {
-        return $this->getMock('\Magento\Framework\UrlInterface');
+        return $this->createMock('\Magento\Framework\UrlInterface');
     }
 
     /**
@@ -174,7 +174,7 @@ class LoginCheckUnitTest extends \PHPUnit_Framework_TestCase
      */
     protected function getRedirect()
     {
-        return $this->getMock('\Magento\Framework\App\Response\RedirectInterface');
+        return $this->createMock('\Magento\Framework\App\Response\RedirectInterface');
     }
 
     /**
@@ -182,7 +182,7 @@ class LoginCheckUnitTest extends \PHPUnit_Framework_TestCase
      */
     protected function getResponse()
     {
-        return $this->getMock('\Magento\Framework\App\ResponseInterface');
+        return $this->createMock('\Magento\Framework\App\ResponseInterface');
     }
 
     /**
@@ -200,6 +200,6 @@ class LoginCheckUnitTest extends \PHPUnit_Framework_TestCase
      */
     protected function getWhitelistRepository()
     {
-        return $this->getMock('\bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface');
+        return $this->createMock('\bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface');
     }
 }
