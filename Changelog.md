@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.1.3
+
+### Added
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+-  [#7](https://github.com/bitExpert/magento2-force-login/pull/9) Fixed new whitlist entry saving fails
+
 ## 1.1.2
 
 ### Added
