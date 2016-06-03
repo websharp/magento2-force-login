@@ -62,9 +62,12 @@ class WhitelistRepository implements \bitExpert\ForceCustomerLogin\Api\Repositor
      */
     public function createEntry($entityId, $label, $urlRule, $storeId = 0)
     {
+        $whitelist = $this->entityFactory->create();
+
         if (null !== $entityId) {
-            $whitelist = $this->entityFactory->create()->load($entityId);
+            $whitelist = $whitelist->load($entityId);
         }
+
         if (!$whitelist->getId()) {
             $whitelist = $this->entityFactory->create()->load($label, 'label');
         }

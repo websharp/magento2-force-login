@@ -163,6 +163,6 @@ class LoginRequiredOnCustomerSessionInitObserverUnitTest extends \PHPUnit_Framew
      */
     protected function getLoginCheck()
     {
-        return $this->getMock('\bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface');
+        return $this->createMock('\bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface');
     }
 }
