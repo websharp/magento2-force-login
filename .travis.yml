@@ -8,8 +8,10 @@ matrix:
 
 before_script:
   - composer self-update
+  - rm composer.lock
 
 script:
     - composer validate
+    - COMPOSER=composer.travis.json composer install
     - ./vendor/bin/phing sniff
     - ./vendor/bin/phing unit
