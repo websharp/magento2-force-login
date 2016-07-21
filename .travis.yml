@@ -8,7 +8,6 @@ matrix:
 
 before_script:
   - composer self-update
-  - rm composer.lock
 
 script:
     - composer validate
