@@ -12,5 +12,6 @@ before_script:
 
 script:
     - composer validate
+    - composer install
     - ./vendor/bin/phing sniff
     - ./vendor/bin/phing unit
