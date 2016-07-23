@@ -56,7 +56,6 @@ class LoginCheck extends Action implements LoginCheckInterface
         WhitelistRepositoryInterface $whitelistRepository,
         $targetUrl
     ) {
-        $this->url = $context->getUrl();
         $this->deploymentConfig = $deploymentConfig;
         $this->whitelistRepository = $whitelistRepository;
         $this->targetUrl = $targetUrl;
@@ -68,20 +67,36 @@ class LoginCheck extends Action implements LoginCheckInterface
      */
     public function execute()
     {
-        $url = $this->url->getCurrentUrl();
+        $url = $this->_url->getCurrentUrl();
         $path = \parse_url($url, PHP_URL_PATH);
+
+        // current path is already pointing to target url, no redirect needed
+        if ($this->targetUrl === $path) {
+            return;
+        }
 
         $ignoreUrls = $this->getUrlRuleSetByCollection($this->whitelistRepository->getCollection());
         $extendedIgnoreUrls = $this->extendIgnoreUrls($ignoreUrls);
 
         // check if current url is a match with one of the ignored urls
         foreach ($extendedIgnoreUrls as $ignoreUrl) {
-            if (\preg_match(\sprintf('#^.*%s/?.*$#i', \preg_quote($ignoreUrl)), $path)) {
+            if (\preg_match(\sprintf('#^.*%s/?.*$#i', $this->quoteRule($ignoreUrl)), $path)) {
                 return;
             }
         }
 
         $this->_redirect($this->targetUrl)->sendResponse();
+    }
+
+    /**
+     * Quote delimiter in whitelist entry rule
+     * @param string $rule
+     * @param string $delimiter
+     * @return string
+     */
+    protected function quoteRule($rule, $delimiter = '#')
+    {
+        return \str_replace($delimiter, \sprintf('\%s', $delimiter), $rule);
     }
 
     /**
