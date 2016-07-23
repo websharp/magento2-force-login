@@ -58,6 +58,35 @@ class LoginCheckUnitTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Run test with data listed on the whitelist as wildcard, so no redirecting is forced.
+     * @test
+     * @depends testConstructor
+     */
+    public function testPositiveWhitelistedUrlMappingWithWildcardRule()
+    {
+        // --- Empty
+        $emptyUrlRule = '';
+        // simple
+        $this->runCase('http://example.tld/shopview/foobar/baz', $emptyUrlRule);
+        // with shopview prefix
+        $this->runCase('http://example.tld/foobar/baz', $emptyUrlRule);
+
+        // --- Wildcard
+        $wildcardUrlRule = '.*';
+        // simple
+        $this->runCase('http://example.tld/shopview/foobar/baz', $wildcardUrlRule);
+        // with shopview prefix
+        $this->runCase('http://example.tld/foobar/baz', $wildcardUrlRule);
+
+        // --- Wildcard
+        $wildcardUrlRule = '/.*';
+        // simple
+        $this->runCase('http://example.tld/shopview/foobar/baz', $wildcardUrlRule);
+        // with shopview prefix
+        $this->runCase('http://example.tld/foobar/baz', $wildcardUrlRule);
+    }
+
+    /**
      * Run test with data not listed on the whitelist, so redirecting is forced.
      * @test
      * @depends testConstructor
@@ -67,19 +96,20 @@ class LoginCheckUnitTest extends \PHPUnit_Framework_TestCase
         $urlRule = '/barfoo';
 
         // simple
-        $this->runCase('http://example.tld/foobar/baz', $urlRule, false);
+        $this->runCase('http://example.tld/foobar/baz', $urlRule, true);
         // with shopview prefix
-        $this->runCase('http://example.tld/shopview/foobar/baz', $urlRule, false);
+        $this->runCase('http://example.tld/shopview/foobar/baz', $urlRule, true);
     }
 
     /**
-     * @param string $urlString
-     * @param string $urlRule
-     * @param bool $runMapping
+     * Run test with data not listed on the whitelist, so redirecting is forced.
+     * @test
+     * @depends testConstructor
      */
-    protected function runCase($urlString, $urlRule, $runMapping = true)
+    public function testNoUrlMappingOnMatchingPathWithTargetUrl()
     {
-        $targetUrl = '/target-url';
+        $urlString = 'http://example.tld/customer/account/login';
+        $targetUrl = '/customer/account/login';
 
         // --- Context
         $url = $this->getUrl();
@@ -90,7 +120,53 @@ class LoginCheckUnitTest extends \PHPUnit_Framework_TestCase
         $response = $this->getResponse();
         $redirect = $this->getRedirect();
 
-        if ($runMapping) {
+        $response->expects($this->never())
+            ->method('sendResponse');
+
+        $redirect->expects($this->never())
+            ->method('redirect')
+            ->with($response, $targetUrl);
+
+        $context = $this->getContext();
+        $context->expects($this->exactly(1))
+            ->method('getUrl')
+            ->will($this->returnValue($url));
+        $context->expects($this->once())
+            ->method('getResponse')
+            ->will($this->returnValue($response));
+        $context->expects($this->once())
+            ->method('getRedirect')
+            ->will($this->returnValue($redirect));
+
+        $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
+            $context,
+            $this->getDeploymentConfig(),
+            $this->getWhitelistRepository(),
+            $targetUrl
+        );
+
+        $loginCheck->execute();
+    }
+
+    /**
+     * @param string $urlString
+     * @param string $urlRule
+     * @param bool $runMapping
+     */
+    protected function runCase($urlString, $urlRule, $runMapping = false)
+    {
+        $targetUrl = '/customer/account/login';
+
+        // --- Context
+        $url = $this->getUrl();
+        $url->expects($this->once())
+            ->method('getCurrentUrl')
+            ->will($this->returnValue($urlString));
+
+        $response = $this->getResponse();
+        $redirect = $this->getRedirect();
+
+        if (!$runMapping) {
             $response->expects($this->never())
                 ->method('sendResponse');
 
@@ -107,7 +183,7 @@ class LoginCheckUnitTest extends \PHPUnit_Framework_TestCase
         }
 
         $context = $this->getContext();
-        $context->expects($this->exactly(2))
+        $context->expects($this->exactly(1))
             ->method('getUrl')
             ->will($this->returnValue($url));
         $context->expects($this->once())
