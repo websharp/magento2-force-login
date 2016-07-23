@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3894d59b79cbcae45e2cc47644c37067",
-    "content-hash": "d4aa0b404abcd9d17ff61654747ca108",
+    "hash": "a314b5d7556ddf684da26bf905490cd4",
+    "content-hash": "233951fe0e1845032bc010f4baf390dd",
     "packages": [
         {
             "name": "magento/framework",
@@ -2665,16 +2665,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.4.6",
+            "version": "5.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "2f1fc94b77ea6418bd6a06c64a1dac0645fbce59"
+                "reference": "6c8a756c17a1a92a066c99860eb57922e8b723da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2f1fc94b77ea6418bd6a06c64a1dac0645fbce59",
-                "reference": "2f1fc94b77ea6418bd6a06c64a1dac0645fbce59",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6c8a756c17a1a92a066c99860eb57922e8b723da",
+                "reference": "6c8a756c17a1a92a066c99860eb57922e8b723da",
                 "shasum": ""
             },
             "require": {
@@ -2739,7 +2739,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-06-16 06:01:15"
+            "time": "2016-07-21 06:55:27"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3315,16 +3315,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "2.6.1",
+            "version": "2.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "fb72ed32f8418db5e7770be1653e62e0d6f5dd3d"
+                "reference": "4edb770cb853def6e60c93abb088ad5ac2010c83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/fb72ed32f8418db5e7770be1653e62e0d6f5dd3d",
-                "reference": "fb72ed32f8418db5e7770be1653e62e0d6f5dd3d",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/4edb770cb853def6e60c93abb088ad5ac2010c83",
+                "reference": "4edb770cb853def6e60c93abb088ad5ac2010c83",
                 "shasum": ""
             },
             "require": {
@@ -3389,7 +3389,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2016-05-30 22:24:32"
+            "time": "2016-07-13 23:29:13"
         },
         {
             "name": "symfony/yaml",
