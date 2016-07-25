@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.2.2
+
+### Added
+
+-  [#15](https://github.com/bitExpert/magento2-force-login/pull/18) Fixed appliance of whitelist repository collection filter
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+-  [#14](https://github.com/bitExpert/magento2-force-login/issues/14) Whitelist entire website or store view
+
 ## 1.2.1
 
 ### Added
@@ -37,6 +55,42 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Fixed
 
 - Nothing.
+
+## 1.1.5
+
+### Added
+
+-  [#15](https://github.com/bitExpert/magento2-force-login/pull/18) Fixed appliance of whitelist repository collection filter
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+-  [#14](https://github.com/bitExpert/magento2-force-login/issues/14) Whitelist entire website or store view
+
+## 1.1.4
+
+### Added
+
+-  [#15](https://github.com/bitExpert/magento2-force-login/pull/15) Reduced the quotation of the whitelist entries to allow some regular expressions
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+-  [#14](https://github.com/bitExpert/magento2-force-login/issues/14) Whitelist entire website or store view
 
 ## 1.1.3
 

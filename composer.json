@@ -3,7 +3,7 @@
   "description": "Magento2 Module to force the login for frontend customers.",
   "type": "magento2-module",
   "minimum-stability": "stable",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "license": "Apache-2.0",
   "authors": [
     {
