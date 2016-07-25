@@ -22,6 +22,11 @@ use \Magento\Store\Model\StoreManager;
 class WhitelistRepository implements \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface
 {
     /**
+     * Special store ids
+     */
+    const ROOT_STORE_ID = 0;
+
+    /**
      * @var WhitelistEntryFactoryInterface
      */
     protected $entityFactory;
@@ -117,11 +122,14 @@ class WhitelistRepository implements \bitExpert\ForceCustomerLogin\Api\Repositor
         $currentStore = $this->storeManager->getStore();
 
         $collection = $this->collectionFactory->create();
+
         $collection->addFieldToFilter(
             'store_id',
             [
-                'eq' => $currentStore->getId(),
-                'eq' => 0
+                'in' => [
+                    static::ROOT_STORE_ID,
+                    (int) $currentStore->getId()
+                ]
             ]
         );
 
