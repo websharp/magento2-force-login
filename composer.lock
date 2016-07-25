@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f617d928319fe1265266608b0bc70f3a",
-    "content-hash": "d80464c5ba6a86aaf6563580f2da17ea",
+    "hash": "3ab527a7457a05c4c4830e7890eed1a0",
+    "content-hash": "0ba4a6e15c38529021b3a82232f1028d",
     "packages": [
         {
             "name": "magento/framework",
