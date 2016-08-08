@@ -40,7 +40,7 @@ class Whitelist extends \Magento\Backend\Block\Widget\Container
      *
      * @return string
      */
-    protected function getCreateUrl()
+    private function getCreateUrl()
     {
         return $this->getUrl(
             'ForceCustomerLogin/Whitelist/Create'

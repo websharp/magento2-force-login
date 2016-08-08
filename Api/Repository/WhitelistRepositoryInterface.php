@@ -36,6 +36,7 @@ interface WhitelistRepositoryInterface
      * @param string $label
      * @param string $urlRule
      * @param int $storeId
+     * @throws \RuntimeException Thrown if whitelist entry not editable
      * @return \bitExpert\ForceCustomerLogin\Model\WhitelistEntry
      */
     public function createEntry($entityId, $label, $urlRule, $storeId = 0);

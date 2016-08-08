@@ -24,7 +24,7 @@ class DeleteAction extends Column
     /**
      * @var UrlInterface
      */
-    protected $urlBuilder;
+    private $urlBuilder;
 
     /**
      * Constructor
@@ -85,7 +85,7 @@ class DeleteAction extends Column
     /**
      * @return \Magento\Framework\Phrase|mixed|string
      */
-    protected function getLabel()
+    public function getLabel()
     {
         return __('Delete');
     }

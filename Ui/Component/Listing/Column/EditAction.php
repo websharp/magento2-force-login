@@ -19,7 +19,7 @@ class EditAction extends DeleteAction
     /**
      * @return \Magento\Framework\Phrase|mixed|string
      */
-    protected function getLabel()
+    public function getLabel()
     {
         return __('Edit');
     }

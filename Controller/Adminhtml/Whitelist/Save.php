@@ -13,7 +13,6 @@ namespace bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist;
 use \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
 use \Magento\Framework\Controller\Result\RedirectFactory;
 use \Magento\Framework\App\Action\Context;
-use \Magento\Framework\Message\ManagerInterface;
 use \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
 
 /**
@@ -26,23 +25,19 @@ class Save extends \Magento\Framework\App\Action\Action
     /**
      * @var WhitelistEntryFactoryInterface
      */
-    protected $whitelistEntityFactory;
+    private $whitelistEntityFactory;
     /**
      * @var WhitelistRepositoryInterface
      */
-    protected $whitelistRepository;
+    private $whitelistRepository;
     /**
      * @var RedirectFactory
      */
-    protected $redirectFactory;
+    private $redirectFactory;
     /**
      * @var Context
      */
-    protected $context;
-    /**
-     * @var ManagerInterface
-     */
-    protected $messageManager;
+    private $context;
 
     /**
      * Save constructor.
@@ -58,7 +53,6 @@ class Save extends \Magento\Framework\App\Action\Action
         $this->whitelistEntityFactory = $whitelistEntityFactory;
         $this->whitelistRepository = $whitelistRepository;
         $this->redirectFactory = $context->getResultRedirectFactory();
-        $this->messageManager = $context->getMessageManager();
         $this->context = $context;
         parent::__construct($context);
     }

@@ -32,6 +32,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit_Framework_TestCase
     {
         $whitelistRepository = new \bitExpert\ForceCustomerLogin\Repository\WhitelistRepository(
             $this->getWhitelistEntryFactory(),
+            $this->getWhitelistValidatorFactory(),
             $this->getWhitelistEntryCollectionFactory(),
             $this->getStoreManager(),
             $this->getWhitelistEntrySearchResultInterfaceFactory()
@@ -57,13 +58,17 @@ class WhitelistRepositoryUnitTest extends \PHPUnit_Framework_TestCase
         $urlRule = '/foobar';
         $storeId = 0;
 
+        // Entity
         $expectedWhitelistEntry = $this->createMock('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry');
         $expectedWhitelistEntry->expects($this->at(0))
             ->method('getId')
             ->will($this->returnValue($entityId));
         $expectedWhitelistEntry->expects($this->at(1))
             ->method('load')
-            ->with($label, 'label')
+            ->with(
+                $label,
+                'label'
+            )
             ->will($this->returnSelf());
         $expectedWhitelistEntry->expects($this->at(2))
             ->method('getId')
@@ -81,21 +86,6 @@ class WhitelistRepositoryUnitTest extends \PHPUnit_Framework_TestCase
             ->method('setEditable')
             ->with(true);
         $expectedWhitelistEntry->expects($this->at(7))
-            ->method('getLabel')
-            ->will($this->returnValue($label));
-        $expectedWhitelistEntry->expects($this->at(8))
-            ->method('getLabel')
-            ->will($this->returnValue($label));
-        $expectedWhitelistEntry->expects($this->at(9))
-            ->method('getUrlRule')
-            ->will($this->returnValue($urlRule));
-        $expectedWhitelistEntry->expects($this->at(10))
-            ->method('getUrlRule')
-            ->will($this->returnValue($urlRule));
-        $expectedWhitelistEntry->expects($this->at(11))
-            ->method('getEditable')
-            ->will($this->returnValue(true));
-        $expectedWhitelistEntry->expects($this->at(12))
             ->method('save');
 
         $whitelistEntryFactory = $this->getWhitelistEntryFactory();
@@ -106,20 +96,42 @@ class WhitelistRepositoryUnitTest extends \PHPUnit_Framework_TestCase
             ->method('create')
             ->will($this->returnValue($expectedWhitelistEntry));
 
+        // Validator
+        $expectedWhitelistValidator = $this->createMock('\bitExpert\ForceCustomerLogin\Validator\WhitelistEntry');
+        $expectedWhitelistValidator->expects($this->once())
+            ->method('validate')
+            ->with($expectedWhitelistEntry)
+            ->willReturn(true);
+
+        $whitelistValidatoryFactory = $this->getWhitelistValidatorFactory();
+        $whitelistValidatoryFactory->expects($this->at(0))
+            ->method('create')
+            ->will($this->returnValue($expectedWhitelistValidator));
+
         $whitelistRepository = new \bitExpert\ForceCustomerLogin\Repository\WhitelistRepository(
             $whitelistEntryFactory,
+            $whitelistValidatoryFactory,
             $this->getWhitelistEntryCollectionFactory(),
             $this->getStoreManager(),
             $this->getWhitelistEntrySearchResultInterfaceFactory()
         );
 
-        $resultWhitelistEntity = $whitelistRepository->createEntry($entityId, $label, $urlRule, $storeId);
+        $resultWhitelistEntity = $whitelistRepository->createEntry(
+            $entityId,
+            $label,
+            $urlRule,
+            $storeId
+        );
 
-        $this->assertEquals($expectedWhitelistEntry, $resultWhitelistEntity);
+        $this->assertEquals(
+            $expectedWhitelistEntry,
+            $resultWhitelistEntity
+        );
     }
 
     /**
-     * @return \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterfac
+     * @return \PHPUnit_Framework_MockObject_MockObject|
+     *      \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface
      */
     protected function getWhitelistEntryFactory()
     {
@@ -127,7 +139,17 @@ class WhitelistRepositoryUnitTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|
+     *      \bitExpert\ForceCustomerLogin\Api\Validator\WhitelistEntryFactoryInterface
+     */
+    protected function getWhitelistValidatorFactory()
+    {
+        return $this->createMock('\bitExpert\ForceCustomerLogin\Api\Validator\WhitelistEntryFactoryInterface');
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|
+     *      \bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface
      */
     protected function getWhitelistEntryCollectionFactory()
     {
@@ -137,7 +159,8 @@ class WhitelistRepositoryUnitTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \bitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory
+     * @return \PHPUnit_Framework_MockObject_MockObject|
+     *      \bitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory
      */
     protected function getWhitelistEntrySearchResultInterfaceFactory()
     {
@@ -147,7 +170,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \Magento\Store\Model\StoreManager
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Store\Model\StoreManager
      */
     protected function getStoreManager()
     {

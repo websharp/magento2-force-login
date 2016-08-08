@@ -22,5 +22,5 @@ interface WhitelistEntryFactoryInterface
      * @param array $data
      * @return \bitExpert\ForceCustomerLogin\Model\WhitelistEntry
      */
-    public function create(array $data = array());
+    public function create(array $data = []);
 }

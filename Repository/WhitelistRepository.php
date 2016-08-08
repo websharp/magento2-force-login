@@ -11,6 +11,7 @@
 namespace bitExpert\ForceCustomerLogin\Repository;
 
 use \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
+use \bitExpert\ForceCustomerLogin\Api\Validator\WhitelistEntryFactoryInterface as WhitelistValidatorFactoryInterface;
 use \bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface;
 use \bitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory as SearchResultFactory;
 use \Magento\Store\Model\StoreManager;
@@ -29,34 +30,41 @@ class WhitelistRepository implements \bitExpert\ForceCustomerLogin\Api\Repositor
     /**
      * @var WhitelistEntryFactoryInterface
      */
-    protected $entityFactory;
+    private $entityFactory;
     /**
      * @var WhitelistEntryCollectionFactoryInterface
      */
-    protected $collectionFactory;
+    private $collectionFactory;
+    /**
+     * @var WhitelistValidatorFactoryInterface
+     */
+    private $validatorFactory;
     /**
      * @var SearchResultFactory
      */
-    protected $searchResultFactory;
+    private $searchResultFactory;
     /**
      * @var StoreManager
      */
-    protected $storeManager;
+    private $storeManager;
 
     /**
      * WhitelistRepository constructor.
      * @param WhitelistEntryFactoryInterface $entityFactory
+     * @param WhitelistValidatorFactoryInterface $validatorFactory
      * @param WhitelistEntryCollectionFactoryInterface $collectionFactory
      * @param StoreManager $storeManager
      * @param SearchResultFactory $searchResultFactory
      */
     public function __construct(
         WhitelistEntryFactoryInterface $entityFactory,
+        WhitelistValidatorFactoryInterface $validatorFactory,
         WhitelistEntryCollectionFactoryInterface $collectionFactory,
         StoreManager $storeManager,
         SearchResultFactory $searchResultFactory
     ) {
         $this->entityFactory = $entityFactory;
+        $this->validatorFactory = $validatorFactory;
         $this->collectionFactory = $collectionFactory;
         $this->storeManager = $storeManager;
         $this->searchResultFactory = $searchResultFactory;
@@ -90,7 +98,7 @@ class WhitelistRepository implements \bitExpert\ForceCustomerLogin\Api\Repositor
         $whitelist->setStoreId($storeId);
         $whitelist->setEditable(true);
 
-        $validator = new \bitExpert\ForceCustomerLogin\Validator\WhitelistEntry();
+        $validator = $this->validatorFactory->create();
         $validator->validate($whitelist);
 
         $whitelist->save();
@@ -144,7 +152,12 @@ class WhitelistRepository implements \bitExpert\ForceCustomerLogin\Api\Repositor
         /** @var \bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntrySearchResultInterface $searchResult */
         $searchResult = $this->searchResultFactory->create();
         foreach ($searchCriteria->getFilterGroups() as $filterGroup) {
-            foreach ($filterGroup->getFilters() as $filter) {
+            $filters = $filterGroup->getFilters();
+            if (!$filters) {
+                continue;
+            }
+            /** @var \Magento\Framework\Api\Filter[] $filters */
+            foreach ($filters as $filter) {
                 $condition = $filter->getConditionType() ? $filter->getConditionType() : 'eq';
                 $searchResult->addFieldToFilter($filter->getField(), [$condition => $filter->getValue()]);
             }

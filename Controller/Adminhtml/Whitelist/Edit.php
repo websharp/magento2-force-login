@@ -10,11 +10,20 @@
  */
 namespace bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist;
 
+use \Magento\Framework\App\Action\Context;
+
 /**
  * Class Edit
  * @package bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist
  */
 class Edit extends Create
 {
-
+    /**
+     * Edit constructor.
+     * @param Context $context
+     */
+    public function __construct(Context $context)
+    {
+        parent::__construct($context);
+    }
 }

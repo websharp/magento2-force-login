@@ -24,10 +24,10 @@
     <!-- Entities -->
     <preference for="\bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryInterface"
                 type="\bitExpert\ForceCustomerLogin\Model\WhitelistEntry" />
-
-    <!-- Factories -->
     <preference for="\bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface"
                 type="\bitExpert\ForceCustomerLogin\Model\WhitelistEntryFactory" />
+
+    <!-- Collection -->
     <preference for="\bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface"
                 type="\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\CollectionFactory" />
 
@@ -39,6 +39,9 @@
     <preference for="\bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface"
                 type="\bitExpert\ForceCustomerLogin\Repository\WhitelistRepository" />
 
+    <!-- Validators -->
+    <preference for="\bitExpert\ForceCustomerLogin\Api\Validator\WhitelistEntryFactoryInterface"
+                type="\bitExpert\ForceCustomerLogin\Validator\WhitelistEntryFactory" />
 
     <!-- UI Components -->
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">

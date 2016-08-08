@@ -19,7 +19,7 @@
 
     <event name="visitor_init">
         <observer name="bitexpert_force_customer_login_required_on_visitor_init"
-                  instance="\bitExpert\ForceCustomerLogin\Observer\LoginRequiredOnVisitorInitObserver" />
+                  instance="\bitExpert\ForceCustomerLogin\Observer\LoginRequiredOnCustomerSessionInitObserver" />
     </event>
 
 </config>

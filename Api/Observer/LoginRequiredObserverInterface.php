@@ -18,4 +18,8 @@ use \Magento\Framework\Event\ObserverInterface;
  */
 interface LoginRequiredObserverInterface extends ObserverInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function execute(\Magento\Framework\Event\Observer $observer);
 }

@@ -18,5 +18,8 @@ use \Magento\Framework\App\ActionInterface;
  */
 interface LoginCheckInterface extends ActionInterface
 {
-
+    /**
+     * {@inheritdoc}
+     */
+    public function execute();
 }

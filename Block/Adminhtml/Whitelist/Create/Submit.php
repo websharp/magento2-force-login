@@ -10,10 +10,26 @@
  */
 namespace bitExpert\ForceCustomerLogin\Block\Adminhtml\Whitelist\Create;
 
+use \Magento\Backend\Block\Template\Context;
+
 /**
  * Class Submit
  * @package bitExpert\ForceCustomerLogin\Block\Adminhtml\Whitelist\Create
  */
 class Submit extends \Magento\Backend\Block\Template
 {
+    /**
+     * Submit constructor.
+     * @param Context $context
+     * @param array $data
+     */
+    public function __construct(
+        Context $context,
+        array $data
+    ) {
+        parent::__construct(
+            $context,
+            $data
+        );
+    }
 }

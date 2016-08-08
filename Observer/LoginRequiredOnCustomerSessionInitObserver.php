@@ -23,7 +23,7 @@ class LoginRequiredOnCustomerSessionInitObserver implements LoginRequiredObserve
     /**
      * @var LoginCheckInterface
      */
-    protected $loginCheckController;
+    private $loginCheckController;
 
     /**
      * Creates a new {@link \bitExpert\ForceCustomerLogin\Observer\LoginRequiredOnCustomerSessionInitObserver}.

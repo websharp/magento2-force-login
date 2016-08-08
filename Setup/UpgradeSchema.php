@@ -26,8 +26,14 @@ class UpgradeSchema implements UpgradeSchemaInterface
     {
         $setup->startSetup();
 
-        if (version_compare($context->getVersion(), '1.1.0', '<')) {
-            $this->runUpgrade101($setup, $context);
+        if (version_compare(
+            $context->getVersion(),
+            '1.1.0',
+            '<'
+        )) {
+            $this->runUpgrade101(
+                $setup
+            );
         }
 
         $setup->endSetup();
@@ -35,14 +41,12 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
     /**
      * @param SchemaSetupInterface $setup
-     * @param ModuleContextInterface $context
      */
-    protected function runUpgrade101(SchemaSetupInterface $setup, ModuleContextInterface $context)
+    private function runUpgrade101(SchemaSetupInterface $setup)
     {
         $installer = $setup;
 
         $installer->startSetup();
-
 
         /**
          * Create entity 'whitelist_entry'
@@ -81,26 +85,43 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ['nullable' => false, 'default' => true]
             )
             ->addIndex(
-                $installer->getIdxName('bitexpert_forcelogin_whitelist', ['label']),
+                $installer->getIdxName(
+                    'bitexpert_forcelogin_whitelist',
+                    ['label']
+                ),
                 ['label'],
                 ['type' => 'unique']
             )
             ->addIndex(
-                $installer->getIdxName('bitexpert_forcelogin_whitelist', ['store_id']),
+                $installer->getIdxName(
+                    'bitexpert_forcelogin_whitelist',
+                    ['store_id']
+                ),
                 ['store_id']
             )
             ->addIndex(
-                $installer->getIdxName('bitexpert_forcelogin_whitelist', ['editable']),
+                $installer->getIdxName(
+                    'bitexpert_forcelogin_whitelist',
+                    ['editable']
+                ),
                 ['editable']
             )
             ->addIndex(
-                $installer->getIdxName('bitexpert_forcelogin_whitelist', ['url_rule', 'store_id']),
+                $installer->getIdxName(
+                    'bitexpert_forcelogin_whitelist',
+                    ['url_rule', 'store_id']
+                ),
                 ['url_rule'],
                 ['store_id'],
                 ['unique' => true]
             )
             ->addForeignKey(
-                $installer->getFkName('bitexpert_forcelogin_whitelist', 'store_id', 'store', 'store_id'),
+                $installer->getFkName(
+                    'bitexpert_forcelogin_whitelist',
+                    'store_id',
+                    'store',
+                    'store_id'
+                ),
                 'store_id',
                 $installer->getTable('store'),
                 'store_id',

@@ -22,7 +22,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
     /**
      * @var WhitelistEntryFactoryInterface
      */
-    protected $entityFactory;
+    private $entityFactory;
 
     /**
      * Form constructor.
@@ -119,7 +119,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
     /**
      * @return array
      */
-    protected function getStoresAsArray()
+    private function getStoresAsArray()
     {
         $stores = $this->_storeManager->getStores();
 

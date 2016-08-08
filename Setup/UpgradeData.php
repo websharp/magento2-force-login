@@ -47,41 +47,82 @@ class UpgradeData implements UpgradeDataInterface
     {
         $setup->startSetup();
 
-
-        // Add tag attribute to EAV
-        /* @var $eavSetup \Magento\Eav\Setup\EavSetup */
-        $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
-
-        if (version_compare($context->getVersion(), '1.1.0', '<')) {
-            $this->runUpgrade101($setup, $context);
+        if (version_compare(
+            $context->getVersion(),
+            '1.1.0',
+            '<'
+        )) {
+            $this->runUpgrade101(
+                $setup
+            );
         }
-
 
         $setup->endSetup();
     }
 
     /**
-     * @param SchemaSetupInterface $setup
-     * @param ModuleContextInterface $context
+     * @param ModuleDataSetupInterface $setup
      */
-    protected function runUpgrade101(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
+    private function runUpgrade101(ModuleDataSetupInterface $setup)
     {
         $whitelistEntries = [
-            $this->getWhitelistEntryAsArray(0, 'Rest API', '/rest'),
-            $this->getWhitelistEntryAsArray(0, 'Customer Account Login', '/customer/account/login'),
-            $this->getWhitelistEntryAsArray(0, 'Customer Account Logout', '/customer/account/logout'),
-            $this->getWhitelistEntryAsArray(0, 'Customer Account Logout Success', '/customer/account/logoutSuccess'),
-            $this->getWhitelistEntryAsArray(0, 'Customer Account Create', '/customer/account/create'),
-            $this->getWhitelistEntryAsArray(0, 'Customer Account Create Password', '/customer/account/createPassword'),
-            $this->getWhitelistEntryAsArray(0, 'Customer Account Forgot Password', '/customer/account/forgotpassword'),
+            $this->getWhitelistEntryAsArray(
+                0,
+                'Rest API',
+                '/rest'
+            ),
+            $this->getWhitelistEntryAsArray(
+                0,
+                'Customer Account Login',
+                '/customer/account/login'
+            ),
+            $this->getWhitelistEntryAsArray(
+                0,
+                'Customer Account Logout',
+                '/customer/account/logout'
+            ),
+            $this->getWhitelistEntryAsArray(
+                0,
+                'Customer Account Logout Success',
+                '/customer/account/logoutSuccess'
+            ),
+            $this->getWhitelistEntryAsArray(
+                0,
+                'Customer Account Create',
+                '/customer/account/create'
+            ),
+            $this->getWhitelistEntryAsArray(
+                0,
+                'Customer Account Create Password',
+                '/customer/account/createPassword'
+            ),
+            $this->getWhitelistEntryAsArray(
+                0,
+                'Customer Account Forgot Password',
+                '/customer/account/forgotpassword'
+            ),
             $this->getWhitelistEntryAsArray(
                 0,
                 'Customer Account Forgot Password Post',
                 '/customer/account/forgotpasswordpost'
             ),
-            $this->getWhitelistEntryAsArray(0, 'Customer Section Load', '/customer/section/load'),
-            $this->getWhitelistEntryAsArray(0, 'Contact Us', '/contact', true),
-            $this->getWhitelistEntryAsArray(0, 'Help', '/help', true)
+            $this->getWhitelistEntryAsArray(
+                0,
+                'Customer Section Load',
+                '/customer/section/load'
+            ),
+            $this->getWhitelistEntryAsArray(
+                0,
+                'Contact Us',
+                '/contact',
+                true
+            ),
+            $this->getWhitelistEntryAsArray(
+                0,
+                'Help',
+                '/help',
+                true
+            )
         ];
 
         $setup->getConnection()->insertMultiple(
@@ -97,17 +138,17 @@ class UpgradeData implements UpgradeDataInterface
      * @param boolean $editable
      * @return array
      */
-    protected function getWhitelistEntryAsArray(
+    private function getWhitelistEntryAsArray(
         $storeId,
         $label,
         $urlRule,
         $editable = false
     ) {
-        return array(
+        return [
             'store_id' => $storeId,
             'label' => $label,
             'url_rule' => $urlRule,
             'editable' => $editable
-        );
+        ];
     }
 }

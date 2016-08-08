@@ -25,7 +25,7 @@ class StoreName extends Column
     /**
      * @var StoreManager
      */
-    protected $storeManager;
+    private $storeManager;
 
     /**
      * Constructor

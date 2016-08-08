@@ -20,7 +20,7 @@ class Create extends \Magento\Backend\Block\Widget\Form\Container
     /**
      * @var string
      */
-    protected $formIdentifier = 'create_whitelist_entry_form';
+    private $formIdentifier = 'create_whitelist_entry_form';
 
     /**
      * Initialize printer post create block
@@ -77,7 +77,7 @@ class Create extends \Magento\Backend\Block\Widget\Form\Container
 
     /**
      */
-    protected function updateButtonControls()
+    private function updateButtonControls()
     {
         $this->buttonList->update(
             'save',

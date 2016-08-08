@@ -26,21 +26,17 @@ use \Magento\Backend\Setup\ConfigOptionsList as BackendConfigOptionsList;
 class LoginCheck extends Action implements LoginCheckInterface
 {
     /**
-     * @var UrlInterface
-     */
-    protected $url;
-    /**
      * @var DeploymentConfig
      */
-    protected $deploymentConfig;
+    private $deploymentConfig;
     /**
      * @var WhitelistRepositoryInterface
      */
-    protected $whitelistRepository;
+    private $whitelistRepository;
     /**
      * @var string
      */
-    protected $targetUrl;
+    private $targetUrl;
 
     /**
      * Creates a new {@link \bitExpert\ForceCustomerLogin\Controller\LoginCheck}.
@@ -94,7 +90,7 @@ class LoginCheck extends Action implements LoginCheckInterface
      * @param string $delimiter
      * @return string
      */
-    protected function quoteRule($rule, $delimiter = '#')
+    private function quoteRule($rule, $delimiter = '#')
     {
         return \str_replace($delimiter, \sprintf('\%s', $delimiter), $rule);
     }
@@ -103,9 +99,9 @@ class LoginCheck extends Action implements LoginCheckInterface
      * @param Collection $collection
      * @return string[]
      */
-    protected function getUrlRuleSetByCollection(Collection $collection)
+    private function getUrlRuleSetByCollection(Collection $collection)
     {
-        $urlRuleSet = array();
+        $urlRuleSet = [];
         foreach ($collection->getItems() as $whitelistEntry) {
             /** @var $whitelistEntry \bitExpert\ForceCustomerLogin\Model\WhitelistEntry */
             \array_push($urlRuleSet, $whitelistEntry->getUrlRule());
@@ -119,7 +115,7 @@ class LoginCheck extends Action implements LoginCheckInterface
      * @param array $ignoreUrls
      * @return array
      */
-    protected function extendIgnoreUrls(array $ignoreUrls)
+    private function extendIgnoreUrls(array $ignoreUrls)
     {
         $adminUri = \sprintf(
             '/%s',
