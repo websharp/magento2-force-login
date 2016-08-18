@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Magento2 Force Login Module package.
+ * This file is part of the Force Login Module package for Magento2.
  *
  * (c) bitExpert AG
  *
@@ -47,15 +47,9 @@ class UpgradeData implements UpgradeDataInterface
     {
         $setup->startSetup();
 
-
-        // Add tag attribute to EAV
-        /* @var $eavSetup \Magento\Eav\Setup\EavSetup */
-        $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
-
         if (version_compare($context->getVersion(), '1.1.0', '<')) {
             $this->runUpgrade101($setup, $context);
         }
-
 
         $setup->endSetup();
     }

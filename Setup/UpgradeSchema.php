@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Magento2 Force Login Module package.
+ * This file is part of the Force Login Module package for Magento2.
  *
  * (c) bitExpert AG
  *
@@ -15,7 +15,9 @@ use \Magento\Framework\Setup\ModuleContextInterface;
 use \Magento\Framework\Setup\SchemaSetupInterface;
 
 /**
- * Upgrade the AssetProduct module DB scheme
+ * Class UpgradeSchema
+ * @package bitExpert\ForceCustomerLogin\Setup
+ * @codeCoverageIgnore
  */
 class UpgradeSchema implements UpgradeSchemaInterface
 {
