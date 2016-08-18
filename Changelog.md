@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.1.6
+
+### Added
+
+-  [#20](https://github.com/bitExpert/magento2-force-login/pull/20) Updated docs to match Magento2 marketplace regulations
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+-  Nothing.
+
 ## 1.1.5
 
 ### Added
