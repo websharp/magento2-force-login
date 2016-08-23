@@ -1,7 +1,7 @@
-# Force Frontend Customer Login Module for Magento2
+# Force Login for Magento2
 
-The *Force Frontend Customer Login* Module for **Magento2** redirects a storefront visitor to the Magento2 Frontend login page, 
-if the visitor is not logged in. It is possible to configure the whitelisted urls to add custom definitions.
+The *Force Login* Module for **Magento2** redirects a storefront visitor to the store's login page, 
+if the visitor is not logged in. It is possible to configure some whitelisted urls to allow explicit pages to be accessable by visitors.
 
 ## Use Case
 
@@ -57,4 +57,4 @@ Feel free to contribute to this module by reporting issues or create some pull r
 
 ## License
 
-The Magento2 Frontend Customer Force Login Module is released under the Apache 2.0 license.
+The Force Login module for Magento2 is released under the Apache 2.0 license.
