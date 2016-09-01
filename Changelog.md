@@ -221,4 +221,4 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ## 1.0.0
 
-Initial release of the Magento2 Force Frontend Customer Login Module package.
+Initial release of the Force Login module for Magento2.
