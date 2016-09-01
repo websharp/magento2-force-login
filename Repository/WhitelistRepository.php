@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Force Login Module package for Magento2.
+ * This file is part of the Force Login module for Magento2.
  *
  * (c) bitExpert AG
  *
