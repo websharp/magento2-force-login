@@ -51,11 +51,15 @@ class UpgradeData implements UpgradeDataInterface
             $this->runUpgrade101($setup, $context);
         }
 
+        if (version_compare($context->getVersion(), '1.1.7', '<')) {
+            $this->runUpgrade107($setup);
+        }
+
         $setup->endSetup();
     }
 
     /**
-     * @param SchemaSetupInterface $setup
+     * @param ModuleDataSetupInterface $setup
      * @param ModuleContextInterface $context
      */
     protected function runUpgrade101(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
@@ -83,6 +87,33 @@ class UpgradeData implements UpgradeDataInterface
             $whitelistEntries
         );
     }
+
+    /**
+     * @param ModuleDataSetupInterface $setup
+     */
+    protected function runUpgrade107(ModuleDataSetupInterface $setup)
+    {
+        $bind = [
+            'editable' => true
+        ];
+
+        $urlRules = [
+            '/rest',
+            '/customer/account/login'
+        ];
+
+        // All routes can be editable except for rest
+        $where = [
+            'url_rule NOT IN(?)' => $urlRules
+        ];
+
+        $setup->getConnection()->update(
+            $setup->getTable('bitexpert_forcelogin_whitelist'),
+            $bind,
+            $where
+        );
+    }
+
 
     /**
      * @param int $storeId

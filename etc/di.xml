@@ -21,6 +21,23 @@
     <preference for="\bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface"
                 type="\bitExpert\ForceCustomerLogin\Controller\LoginCheck" />
 
+    <type name="\bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist\RestoreDefault">
+        <arguments>
+            <argument name="defaultRoutes" xsi:type="array">
+                <item name="/rest" xsi:type="string">Rest API</item>
+                <item name="/customer/account/logout" xsi:type="string">Customer Account Logout</item>
+                <item name="/customer/account/logoutSuccess" xsi:type="string">Customer Account Logout Success</item>
+                <item name="/customer/account/create" xsi:type="string">Customer Account Create</item>
+                <item name="/customer/account/createPassword" xsi:type="string">Customer Account Create Password</item>
+                <item name="/customer/account/forgotpassword" xsi:type="string">Customer Account Forgot Password</item>
+                <item name="/customer/account/forgotpasswordpost" xsi:type="string">Customer Account Forgot Password Post</item>
+                <item name="/customer/section/load" xsi:type="string">Customer Section Load</item>
+                <item name="/contact" xsi:type="string">Contact Us</item>
+                <item name="/help" xsi:type="string">Help</item>
+            </argument>
+        </arguments>
+    </type>
+
     <!-- Entities -->
     <preference for="\bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryInterface"
                 type="\bitExpert\ForceCustomerLogin\Model\WhitelistEntry" />
