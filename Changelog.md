@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.1.7
+
+### Added
+
+-  [#27](https://github.com/bitExpert/magento2-force-login/pull/27) Allow to edit default paths
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+-  [#22](https://github.com/bitExpert/magento2-force-login/issue/22) disable /customer/account/create
+
 ## 1.1.6
 
 ### Added
