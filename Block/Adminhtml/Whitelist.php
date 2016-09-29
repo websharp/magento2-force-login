@@ -22,6 +22,16 @@ class Whitelist extends \Magento\Backend\Block\Widget\Container
      */
     protected function _prepareLayout()
     {
+        $restoreDefautsButtonProps = [
+            'id' => 'restore_defaults',
+            'label' => __('Restore Defaults'),
+            'class' => 'primary add',
+            'button_class' => '',
+            'onclick' => "setLocation('" . $this->getRestoreDefaultsUrl() . "')",
+            'class_name' => 'Magento\Backend\Block\Widget\Button'
+        ];
+        $this->buttonList->add('restore_defaults', $restoreDefautsButtonProps);
+
         $addButtonProps = [
             'id' => 'add_new_entry',
             'label' => __('Add Entry'),
@@ -44,6 +54,18 @@ class Whitelist extends \Magento\Backend\Block\Widget\Container
     {
         return $this->getUrl(
             'ForceCustomerLogin/Whitelist/Create'
+        );
+    }
+
+    /**
+     * Retrieve restore defaults url
+     *
+     * @return string
+     */
+    protected function getRestoreDefaultsUrl()
+    {
+        return $this->getUrl(
+            'ForceCustomerLogin/Whitelist/RestoreDefault'
         );
     }
 }
