@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.3.1
+
+### Added
+
+-  Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Increased version number in module.xml
+
+## 1.3.0
+
+### Added
+
+-  Unified support for Magento 2.0 and Magento 2.1
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 1.2.4
 
 ### Added
