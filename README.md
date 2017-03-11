@@ -23,12 +23,59 @@ composer.phar require bitexpert/magento2-force-customer-login
 Optional you can download the latest version [here](https://github.com/bitExpert/magento2-force-login/releases) and install the
 decompressed code in your projects directory under *app/code/bitExpert/ForceCustomerLogin*.  
 
+## Post-Install
+
+After the installment of the module source code, the module has to be enabled by the *Magento® 2* CLI.
+
+```
+bin/magento module:enable bitExpert_ForceCustomerLogin
+```
+
+## System Upgrade
+
+After enabling the module, the *Magento® 2* system must be upgraded. 
+
+If the system mode is set to *production*, run the *compile* command first. This is not necessary for the *developer* mode.
+```
+bin/magento setup:di:compile
+```
+
+To upgrade the system, the *upgrade* command must be run.
+```
+bin/magento setup:upgrade
+```
+
+## Clear Cache
+
+At last, the *Magento® 2* should be cleared by running the *flush* command.
+```
+bin/magento cache:flush
+```
+
+Sometimes, other cache systems or services must be restarted first, e.g. Apache Webserver and PHP FPM.
+
 # User Guide
 Find the complete user guide [here](./docs/UserGuide.pdf "User Guide").
 
 ## How to use
 The usage of the **Force Login** Module for *Magento® 2* is applied implicitly by redirecting visitors 
 if the called URI does not match any configured whitelisted url rules.
+
+### Whitelisting
+
+Whitelisting is based upon the usage of rules. The rule syntax uses the [RegEx](https://en.wikipedia.org/wiki/Regular_expression) (regular expression) pattern.
+By default, some static rules are already listed. The following example shows, how to add a whitelist entry for the homepage (startpage).
+
+Navigate to the **Overview Grid** and use the *Add Entry* button.
+
+Enter **Homepage** into the text field beside from the **Label** label.
+
+Enter **/$** into the text field beside from the **Url Rule** label.
+
+Select **All Stores** from the selection field beside from the **Store** label.
+
+Use the **Save** button in the upper menu. After being redirected to the **Overview Grid**, the new 
+entry should appear to the list and the systems homepage should be available for guest visitors.
 
 ## How to configure
 
