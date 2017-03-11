@@ -70,7 +70,7 @@ Navigate to the **Overview Grid** and use the *Add Entry* button.
 
 Enter **Homepage** into the text field beside from the **Label** label.
 
-Enter **/$** into the text field beside from the **Url Rule** label.
+Enter **/?$** into the text field beside from the **Url Rule** label.
 
 Select **All Stores** from the selection field beside from the **Store** label.
 
