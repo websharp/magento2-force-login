@@ -58,20 +58,37 @@ class LoginCheckUnitTest extends \PHPUnit_Framework_TestCase
         $this->runCase('http://example.tld/foobar/baz', $urlRule);
 
         // --- Homepage
-        $urlRule = '/$';
+        $urlRule = '/?';
 
         // simple
         $this->runCase('http://example.tld/', $urlRule);
         // with shopview prefix
         $this->runCase('http://example.tld', $urlRule);
+        // without rewrite
+        $this->runCase('http://example.tld/index.php', $urlRule);
+        $this->runCase('http://example.tld/index.php/', $urlRule);
 
         // --- Homepage
-        $urlRule = '^/$';
+        $urlRule = '/?$';
 
         // simple
         $this->runCase('http://example.tld/', $urlRule);
         // with shopview prefix
         $this->runCase('http://example.tld', $urlRule);
+        // without rewrite
+        $this->runCase('http://example.tld/index.php', $urlRule);
+        $this->runCase('http://example.tld/index.php/', $urlRule);
+
+        // --- Homepage
+        $urlRule = '^/?$';
+
+        // simple
+        $this->runCase('http://example.tld/', $urlRule);
+        // with shopview prefix
+        $this->runCase('http://example.tld', $urlRule);
+        // without rewrite
+        $this->runCase('http://example.tld/index.php', $urlRule, true);
+        $this->runCase('http://example.tld/index.php/', $urlRule, true);
     }
 
     /**
