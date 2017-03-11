@@ -49,12 +49,29 @@ class LoginCheckUnitTest extends \PHPUnit_Framework_TestCase
      */
     public function testPositiveWhitelistedUrlMapping()
     {
+        // --- Static
         $urlRule = '/foobar';
 
         // simple
         $this->runCase('http://example.tld/shopview/foobar/baz', $urlRule);
         // with shopview prefix
         $this->runCase('http://example.tld/foobar/baz', $urlRule);
+
+        // --- Homepage
+        $urlRule = '/$';
+
+        // simple
+        $this->runCase('http://example.tld/', $urlRule);
+        // with shopview prefix
+        $this->runCase('http://example.tld', $urlRule);
+
+        // --- Homepage
+        $urlRule = '^/$';
+
+        // simple
+        $this->runCase('http://example.tld/', $urlRule);
+        // with shopview prefix
+        $this->runCase('http://example.tld', $urlRule);
     }
 
     /**
