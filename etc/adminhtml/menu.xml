@@ -17,7 +17,7 @@
              resource="BitExpert_ForceCustomerLogin::bitexpert_force_customer_login_manage"/>
 
         <add id="bitExpert_ForceCustomerLogin::bitexpert_force_login_whitelist"
-             title="Forced Login Whitelist"
+             title="Force Customer Login"
              module="Magento_Backend"
              sortOrder="50"
              parent="Magento_Customer::customer"
