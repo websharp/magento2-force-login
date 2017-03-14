@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist;
+namespace bitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 
 use \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
-use \Magento\Framework\Controller\Result\RedirectFactory;
-use \Magento\Framework\App\Action\Context;
+use \Magento\Backend\Model\View\Result\RedirectFactory;
+use \Magento\Backend\App\Action\Context;
 use \Magento\Framework\Message\ManagerInterface;
 
 /**
  * Class Delete
- * @package bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist
+ * @package bitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage
  * @codingStandardsIgnoreFile
  */
-class Delete extends \Magento\Framework\App\Action\Action
+class Delete extends \Magento\Backend\App\Action
 {
     /**
      * @var WhitelistRepositoryInterface
@@ -46,7 +46,6 @@ class Delete extends \Magento\Framework\App\Action\Action
      */
     public function __construct(
         WhitelistRepositoryInterface $whitelistRepository,
-
         Context $context
     ) {
         $this->whitelistRepository = $whitelistRepository;
@@ -64,7 +63,7 @@ class Delete extends \Magento\Framework\App\Action\Action
     public function execute()
     {
         $result = $this->redirectFactory->create();
-        $result->setPath('ForceCustomerLogin/Whitelist/index');
+        $result->setPath('ForceCustomerLogin/Manage/index');
 
         try {
             if (!$this->whitelistRepository->deleteEntry(
@@ -72,20 +71,20 @@ class Delete extends \Magento\Framework\App\Action\Action
             )) {
                 throw new \RuntimeException(
                     \sprintf(
-                        __('Could not delete whitelist entry with id %s.'),
+                        __('Could not delete manage entry with id %s.'),
                         $this->getRequest()->getParam('id', 0)
                     )
                 );
             }
 
-            $this->messageManager->addSuccess(
+            $this->messageManager->addSuccessMessage(
                 __('Whitelist entry successfully removed.')
             );
 
             $result->setHttpResponseCode(200);
         } catch (\Exception $e) {
             $result->setHttpResponseCode(\Magento\Framework\Webapi\Exception::HTTP_INTERNAL_ERROR);
-            $this->messageManager->addError(
+            $this->messageManager->addErrorMessage(
                 \sprintf(
                     __('Could not remove record: %s'),
                     $e->getMessage()

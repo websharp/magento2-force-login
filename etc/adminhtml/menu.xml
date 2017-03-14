@@ -9,11 +9,18 @@
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
         <add id="bitExpert_ForceCustomerLogin::manage"
-             title="Forced Login Whitelist"
+             title="Whitelist"
              module="bitExpert_ForceCustomerLogin"
+             parent="bitExpert_ForceCustomerLogin::bitexpert_force_login_whitelist"
+             sortOrder="55"
+             action="ForceCustomerLogin/Manage"
+             resource="BitExpert_ForceCustomerLogin::bitexpert_force_customer_login_manage"/>
+
+        <add id="bitExpert_ForceCustomerLogin::bitexpert_force_login_whitelist"
+             title="Force Customer Login"
+             module="Magento_Backend"
+             sortOrder="50"
              parent="Magento_Customer::customer"
-             sortOrder="20"
-             action="ForceCustomerLogin/Whitelist"
              resource="BitExpert_ForceCustomerLogin::bitexpert_force_customer_login_manage"/>
     </menu>
 </config>

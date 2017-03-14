@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Block\Adminhtml\Whitelist;
+namespace bitExpert\ForceCustomerLogin\Block\Adminhtml\Manage;
 
 /**
  * Class Create
- * @package bitExpert\ForceCustomerLogin\Block\Adminhtml\Whitelist
+ * @package bitExpert\ForceCustomerLogin\Block\Adminhtml\Manage
  * @codingStandardsIgnoreFile
  */
 class Create extends \Magento\Backend\Block\Widget\Form\Container
@@ -20,7 +20,7 @@ class Create extends \Magento\Backend\Block\Widget\Form\Container
     /**
      * @var string
      */
-    protected $formIdentifier = 'create_whitelist_entry_form';
+    protected $formIdentifier = 'create_manage_entry_form';
 
     /**
      * Initialize printer post create block
@@ -31,7 +31,7 @@ class Create extends \Magento\Backend\Block\Widget\Form\Container
     {
         $this->_objectId = 'whitelist_entry_id';
         $this->_blockGroup = 'BitExpert_ForceCustomerLogin';
-        $this->_controller = 'adminhtml_whitelist';
+        $this->_controller = 'adminhtml_manage';
         $this->_mode = 'create';
 
         parent::_construct();
@@ -61,7 +61,7 @@ class Create extends \Magento\Backend\Block\Widget\Form\Container
     public function getSaveUrl()
     {
         return $this->getUrl(
-            'ForceCustomerLogin/Whitelist/Save',
+            'ForceCustomerLogin/Manage/Save',
             [
                 $this->_objectId => $this->getRequest()->getParam($this->_objectId)
         ]);
@@ -72,7 +72,7 @@ class Create extends \Magento\Backend\Block\Widget\Form\Container
      */
     public function getBackUrl()
     {
-        return $this->getUrl('ForceCustomerLogin/Whitelist');
+        return $this->getUrl('ForceCustomerLogin/Manage');
     }
 
     /**

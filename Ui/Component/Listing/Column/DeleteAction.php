@@ -59,9 +59,8 @@ class DeleteAction extends Column
         }
 
         foreach ($dataSource['data']['items'] as &$item) {
-            if (!isset($item['whitelist_entry_id']) ||
-                !isset($item['editable']) ||
-                '1' !== $item['editable']) {
+            if (!isset($item[$this->getData('config/idFieldName')]) ||
+                (isset($item['editable']) && '1' !== $item['editable'])) {
                 continue;
             }
 
@@ -71,22 +70,14 @@ class DeleteAction extends Column
                     'href' => $this->urlBuilder->getUrl(
                         $viewUrlPath,
                         [
-                            'id' => $item['whitelist_entry_id']
+                            'id' => $item[$this->getData('config/idFieldName')]
                         ]
                     ),
-                    'label' => $this->getLabel()
+                    'label' => $this->getData('config/label')
                 ]
             ];
         }
 
         return $dataSource;
-    }
-
-    /**
-     * @return \Magento\Framework\Phrase|mixed|string
-     */
-    protected function getLabel()
-    {
-        return __('Delete');
     }
 }

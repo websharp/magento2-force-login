@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Block\Adminhtml\Whitelist\Create;
+namespace bitExpert\ForceCustomerLogin\Block\Adminhtml\Manage\Create;
 
 use \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
 
 /**
  * Class Form
- * @package bitExpert\ForceCustomerLogin\Block\Adminhtml\Whitelist\Create
+ * @package bitExpert\ForceCustomerLogin\Block\Adminhtml\Manage\Create
  * @codingStandardsIgnoreFile
  */
 class Form extends \Magento\Backend\Block\Widget\Form\Generic
@@ -61,8 +61,8 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         /** @var \Magento\Framework\Data\Form $form */
         $form = $this->_formFactory->create([
             'data' => [
-                'id' => 'create_whitelist_entry_form',
-                'action' => $this->getUrl('ForceCustomerLogin/Whitelist/Save'),
+                'id' => 'create_manage_entry_form',
+                'action' => $this->getUrl('ForceCustomerLogin/Manage/Save'),
                 'method' => 'post'
             ]
         ]);

@@ -21,7 +21,6 @@
     </argument>
 
 
-
     <dataSource name="whitelist_overview_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
@@ -31,6 +30,9 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">whitelist_entry_id</item>
+                    </item>
                 </item>
             </argument>
         </argument>
@@ -40,8 +42,6 @@
             </item>
         </argument>
     </dataSource>
-
-
 
     <columns name="whitelist_entry_columns">
         <argument name="data" xsi:type="array">
@@ -113,9 +113,11 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="indexField" xsi:type="string">whitelist_entry_id</item>
-                    <item name="viewUrlPath" xsi:type="string">ForceCustomerLogin/Whitelist/Edit</item>
+                    <item name="viewUrlPath" xsi:type="string">ForceCustomerLogin/Manage/Edit</item>
                     <item name="urlEntityParamName" xsi:type="string">whitelist_entry_id</item>
                     <item name="label" xsi:type="string" translate="true">Edit</item>
+                    <item name="entity_id" xsi:type="string">whitelist_entry_id</item>
+                    <item name="idFieldName" xsi:type="string">whitelist_entry_id</item>
                 </item>
             </argument>
         </actionsColumn>
@@ -124,9 +126,10 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="indexField" xsi:type="string">whitelist_entry_id</item>
-                    <item name="viewUrlPath" xsi:type="string">ForceCustomerLogin/Whitelist/Delete</item>
+                    <item name="viewUrlPath" xsi:type="string">ForceCustomerLogin/Manage/Delete</item>
                     <item name="urlEntityParamName" xsi:type="string">whitelist_entry_id</item>
                     <item name="label" xsi:type="string" translate="true">Deletion</item>
+                    <item name="idFieldName" xsi:type="string">whitelist_entry_id</item>
                 </item>
             </argument>
         </actionsColumn>

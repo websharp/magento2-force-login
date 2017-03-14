@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist;
+namespace bitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 
 use \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
-use \Magento\Framework\Controller\Result\RedirectFactory;
-use \Magento\Framework\App\Action\Context;
+use \Magento\Backend\Model\View\Result\RedirectFactory;
+use \Magento\Backend\App\Action\Context;
 use \Magento\Framework\Message\ManagerInterface;
 use \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
 
 /**
  * Class Save
- * @package bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist
+ * @package bitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage
  * @codingStandardsIgnoreFile
  */
-class Save extends \Magento\Framework\App\Action\Action
+class Save extends \Magento\Backend\App\Action
 {
     /**
      * @var WhitelistEntryFactoryInterface
@@ -83,18 +83,18 @@ class Save extends \Magento\Framework\App\Action\Action
             if (!$whitelistEntry->getId() ||
                 !$whitelistEntry->getEditable()) {
                 throw new \RuntimeException(
-                    __('Could not persist whitelist entry.')
+                    __('Could not persist manage entry.')
                 );
             }
-            $this->messageManager->addSuccess(
+            $this->messageManager->addSuccessMessage(
                 __('Whitelist entry successfully saved.')
             );
 
             $result->setHttpResponseCode(200);
-            $result->setPath('ForceCustomerLogin/Whitelist/index');
+            $result->setPath('ForceCustomerLogin/Manage/index');
         } catch (\Exception $e) {
             $result->setHttpResponseCode(\Magento\Framework\Webapi\Exception::HTTP_INTERNAL_ERROR);
-            $this->messageManager->addError(
+            $this->messageManager->addErrorMessage(
                 \sprintf(
                     __('Could not add record: %s'),
                     $e->getMessage()
@@ -102,7 +102,7 @@ class Save extends \Magento\Framework\App\Action\Action
             );
 
             $result->setPath(
-                'ForceCustomerLogin/Whitelist/Create',
+                'ForceCustomerLogin/Manage/Create',
                 [
                     'label' => \base64_encode($this->getRequest()->getParam('label')),
                     'url_rule' => \base64_encode($this->getRequest()->getParam('url_rule')),

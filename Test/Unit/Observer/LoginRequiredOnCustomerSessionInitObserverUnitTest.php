@@ -15,7 +15,7 @@ namespace bitExpert\ForceCustomerLogin\Test\Unit\Observer;
  * @package bitExpert\ForceCustomerLogin\Test\Unit\Observer
  * @codingStandardsIgnoreFile
  */
-class LoginRequiredOnCustomerSessionInitObserverUnitTest extends \PHPUnit_Framework_TestCase
+class LoginRequiredOnCustomerSessionInitObserverUnitTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test

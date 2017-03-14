@@ -9,13 +9,16 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
 
     <head>
-        <title>Forced Login Whitelist - Overview</title>
+        <title>Force Customer Login - Edit Entry</title>
     </head>
 
     <body>
         <referenceContainer name="content">
-            <uiComponent name="whitelist_overview"/>
-            <block class="bitExpert\ForceCustomerLogin\Block\Adminhtml\Whitelist" name="whitelist_list"/>
+            <block class="bitExpert\ForceCustomerLogin\Block\Adminhtml\Manage\Create"
+                   name="manage_entry_create"/>
+            <block class="bitExpert\ForceCustomerLogin\Block\Adminhtml\Manage\Create\Submit"
+                   template="manage/create/submit.phtml"
+                   name="manage_entry_create_submit"/>
         </referenceContainer>
     </body>
 </page>

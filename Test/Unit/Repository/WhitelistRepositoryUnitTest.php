@@ -14,7 +14,7 @@ namespace bitExpert\ForceCustomerLogin\Test\Unit\Repository;
  * Class WhitelistRepositoryUnitTest
  * @package bitExpert\ForceCustomerLogin\Test\Unit\Repository
  */
-class WhitelistRepositoryUnitTest extends \PHPUnit_Framework_TestCase
+class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
