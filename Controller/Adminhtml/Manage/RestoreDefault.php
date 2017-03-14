@@ -8,17 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist;
+namespace bitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 
 use \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
-use \Magento\Framework\Controller\Result\RedirectFactory;
+use \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
+use \bitExpert\ForceCustomerLogin\Model\WhitelistEntry;
+use \Magento\Backend\Model\View\Result\RedirectFactory;
 use \Magento\Framework\App\Action\Context;
 use \Magento\Framework\Message\ManagerInterface;
-use \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
 
 /**
  * Class RestoreDefault
- * @package bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist
+ * @package bitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage
  * @codingStandardsIgnoreFile
  */
 class RestoreDefault extends \Magento\Framework\App\Action\Action
@@ -78,8 +79,7 @@ class RestoreDefault extends \Magento\Framework\App\Action\Action
     public function execute()
     {
         $result = $this->redirectFactory->create();
-        $result->setHttpResponseCode(200);
-        $result->setPath('ForceCustomerLogin/Whitelist/index');
+        $result->setPath('ForceCustomerLogin/Manage/index');
 
         $whiteLists = $this->getWhiteListEntriesIndexedByPath();
 
@@ -92,12 +92,14 @@ class RestoreDefault extends \Magento\Framework\App\Action\Action
                 $this->whitelistRepository->createEntry(null, $description, $route);
             }
         } catch (\Exception $e) {
+            $result->setHttpResponseCode(\Magento\Framework\Webapi\Exception::HTTP_INTERNAL_ERROR);
             $this->messageManager->addErrorMessage(
                 __("Could not restore default whitelist!")
             );
             return $result;
         }
 
+        $result->setHttpResponseCode(200);
         $this->messageManager->addSuccessMessage(
             __("Successfully restored whitelist defaults.")
         );
@@ -116,9 +118,8 @@ class RestoreDefault extends \Magento\Framework\App\Action\Action
         $whiteLists = [];
 
         foreach ($whiteListCollection->getItems() as $whiteList) {
-
-            $whiteLists[$whiteList->getData(\bitExpert\ForceCustomerLogin\Model\WhitelistEntry::KEY_URL_RULE)] =
-                $whiteList->getData(\bitExpert\ForceCustomerLogin\Model\WhitelistEntry::KEY_LABEL);
+            $whiteLists[$whiteList->getData(WhitelistEntry::KEY_URL_RULE)] =
+                $whiteList->getData(WhitelistEntry::KEY_LABEL);
         }
 
         return $whiteLists;

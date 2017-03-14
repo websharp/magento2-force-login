@@ -9,7 +9,7 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
 
     <head>
-        <title>Forced Login Whitelist - Create new Entry</title>
+        <title>Force Customer Login - Create new Entry</title>
     </head>
 
     <body>

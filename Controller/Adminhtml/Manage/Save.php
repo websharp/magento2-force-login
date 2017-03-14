@@ -11,8 +11,8 @@
 namespace bitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 
 use \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
-use \Magento\Framework\Controller\Result\RedirectFactory;
-use \Magento\Framework\App\Action\Context;
+use \Magento\Backend\Model\View\Result\RedirectFactory;
+use \Magento\Backend\App\Action\Context;
 use \Magento\Framework\Message\ManagerInterface;
 use \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
 
@@ -86,7 +86,7 @@ class Save extends \Magento\Backend\App\Action
                     __('Could not persist manage entry.')
                 );
             }
-            $this->messageManager->addSuccess(
+            $this->messageManager->addSuccessMessage(
                 __('Whitelist entry successfully saved.')
             );
 
@@ -94,7 +94,7 @@ class Save extends \Magento\Backend\App\Action
             $result->setPath('ForceCustomerLogin/Manage/index');
         } catch (\Exception $e) {
             $result->setHttpResponseCode(\Magento\Framework\Webapi\Exception::HTTP_INTERNAL_ERROR);
-            $this->messageManager->addError(
+            $this->messageManager->addErrorMessage(
                 \sprintf(
                     __('Could not add record: %s'),
                     $e->getMessage()

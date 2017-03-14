@@ -68,11 +68,9 @@ By default, some static rules are already listed. The following example shows, h
 
 Navigate to the **Overview Grid** and use the *Add Entry* button.
 
-Enter **Homepage** into the text field beside from the **Label** label.
-
-Enter **/?$** into the text field beside from the **Url Rule** label.
-
-Select **All Stores** from the selection field beside from the **Store** label.
+- Enter **Homepage** into the text field beside from the **Label** label.
+- Enter **^/?$** into the text field beside from the **Url Rule** label.
+- Select **All Stores** from the selection field beside from the **Store** label.
 
 Use the **Save** button in the upper menu. After being redirected to the **Overview Grid**, the new 
 entry should appear to the list and the systems homepage should be available for guest visitors.

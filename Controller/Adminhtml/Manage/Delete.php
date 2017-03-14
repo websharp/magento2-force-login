@@ -11,8 +11,8 @@
 namespace bitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 
 use \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
-use \Magento\Framework\Controller\Result\RedirectFactory;
-use \Magento\Framework\App\Action\Context;
+use \Magento\Backend\Model\View\Result\RedirectFactory;
+use \Magento\Backend\App\Action\Context;
 use \Magento\Framework\Message\ManagerInterface;
 
 /**
@@ -46,7 +46,6 @@ class Delete extends \Magento\Backend\App\Action
      */
     public function __construct(
         WhitelistRepositoryInterface $whitelistRepository,
-
         Context $context
     ) {
         $this->whitelistRepository = $whitelistRepository;
@@ -78,14 +77,14 @@ class Delete extends \Magento\Backend\App\Action
                 );
             }
 
-            $this->messageManager->addSuccess(
+            $this->messageManager->addSuccessMessage(
                 __('Whitelist entry successfully removed.')
             );
 
             $result->setHttpResponseCode(200);
         } catch (\Exception $e) {
             $result->setHttpResponseCode(\Magento\Framework\Webapi\Exception::HTTP_INTERNAL_ERROR);
-            $this->messageManager->addError(
+            $this->messageManager->addErrorMessage(
                 \sprintf(
                     __('Could not remove record: %s'),
                     $e->getMessage()

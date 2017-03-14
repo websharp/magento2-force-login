@@ -21,7 +21,7 @@
     <preference for="bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface"
                 type="bitExpert\ForceCustomerLogin\Controller\LoginCheck" />
 
-    <type name="bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist\RestoreDefault">
+    <type name="bitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage\RestoreDefault">
         <arguments>
             <argument name="defaultRoutes" xsi:type="array">
                 <item name="/rest" xsi:type="string">Rest API</item>
