@@ -48,10 +48,6 @@
     <preference for="bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface"
                 type="bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\CollectionFactory" />
 
-    <!-- Preferences -->
-    <preference for="bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface"
-                type="bitExpert\ForceCustomerLogin\Controller\LoginCheck" />
-
     <!-- Repositories -->
     <preference for="bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface"
                 type="bitExpert\ForceCustomerLogin\Repository\WhitelistRepository" />

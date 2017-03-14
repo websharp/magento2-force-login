@@ -14,7 +14,7 @@ namespace bitExpert\ForceCustomerLogin\Test\Unit\Controller;
  * Class LoginCheckUnitTest
  * @package bitExpert\ForceCustomerLogin\Test\Unit\Controller
  */
-class LoginCheckUnitTest extends \PHPUnit_Framework_TestCase
+class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test

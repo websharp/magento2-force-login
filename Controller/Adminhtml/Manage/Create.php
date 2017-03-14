@@ -8,18 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist;
+namespace bitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 
 /**
- * Class Index
- * @package bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist
+ * Class Create
+ * @package bitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage
  * @codingStandardsIgnoreFile
  */
-class Index extends \Magento\Backend\App\Action
+class Create extends \Magento\Backend\App\Action
 {
     /**
-     * Index Action*
-     * @return void
+     * {@inheritdoc}
      */
     public function execute()
     {

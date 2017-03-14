@@ -8,25 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist;
+namespace bitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 
 use \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
 use \Magento\Framework\Controller\Result\RedirectFactory;
 use \Magento\Framework\App\Action\Context;
 use \Magento\Framework\Message\ManagerInterface;
-use \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
 
 /**
- * Class Save
- * @package bitExpert\ForceCustomerLogin\Controller\Adminhtml\Whitelist
+ * Class Delete
+ * @package bitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage
  * @codingStandardsIgnoreFile
  */
-class Save extends \Magento\Framework\App\Action\Action
+class Delete extends \Magento\Backend\App\Action
 {
-    /**
-     * @var WhitelistEntryFactoryInterface
-     */
-    protected $whitelistEntityFactory;
     /**
      * @var WhitelistRepositoryInterface
      */
@@ -46,16 +41,14 @@ class Save extends \Magento\Framework\App\Action\Action
 
     /**
      * Save constructor.
-     * @param WhitelistEntryFactoryInterface $whitelistEntityFactory
      * @param WhitelistRepositoryInterface $whitelistRepository
      * @param Context $context
      */
     public function __construct(
-        WhitelistEntryFactoryInterface $whitelistEntityFactory,
         WhitelistRepositoryInterface $whitelistRepository,
+
         Context $context
     ) {
-        $this->whitelistEntityFactory = $whitelistEntityFactory;
         $this->whitelistRepository = $whitelistRepository;
         $this->redirectFactory = $context->getResultRedirectFactory();
         $this->messageManager = $context->getMessageManager();
@@ -64,50 +57,40 @@ class Save extends \Magento\Framework\App\Action\Action
     }
 
     /**
-     * Save action.
+     * Delete action.
      *
      * @return \Magento\Backend\Model\View\Result\Redirect
      */
     public function execute()
     {
         $result = $this->redirectFactory->create();
+        $result->setPath('ForceCustomerLogin/Manage/index');
 
         try {
-            $whitelistEntry = $this->whitelistRepository->createEntry(
-                $this->getRequest()->getParam('whitelist_entry_id'),
-                $this->getRequest()->getParam('label'),
-                $this->getRequest()->getParam('url_rule'),
-                $this->getRequest()->getParam('store_id', 0)
-            );
-
-            if (!$whitelistEntry->getId() ||
-                !$whitelistEntry->getEditable()) {
+            if (!$this->whitelistRepository->deleteEntry(
+                $this->getRequest()->getParam('id', 0)
+            )) {
                 throw new \RuntimeException(
-                    __('Could not persist whitelist entry.')
+                    \sprintf(
+                        __('Could not delete manage entry with id %s.'),
+                        $this->getRequest()->getParam('id', 0)
+                    )
                 );
             }
+
             $this->messageManager->addSuccess(
-                __('Whitelist entry successfully saved.')
+                __('Whitelist entry successfully removed.')
             );
 
             $result->setHttpResponseCode(200);
-            $result->setPath('ForceCustomerLogin/Whitelist/index');
         } catch (\Exception $e) {
             $result->setHttpResponseCode(\Magento\Framework\Webapi\Exception::HTTP_INTERNAL_ERROR);
             $this->messageManager->addError(
                 \sprintf(
-                    __('Could not add record: %s'),
+                    __('Could not remove record: %s'),
                     $e->getMessage()
                 )
             );
-
-            $result->setPath(
-                'ForceCustomerLogin/Whitelist/Create',
-                [
-                    'label' => \base64_encode($this->getRequest()->getParam('label')),
-                    'url_rule' => \base64_encode($this->getRequest()->getParam('url_rule')),
-                    'store_id' => \base64_encode($this->getRequest()->getParam('store_id', 0))
-            ]);
         }
 
         return $result;

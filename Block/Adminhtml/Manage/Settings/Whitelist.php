@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Block\Adminhtml;
+namespace bitExpert\ForceCustomerLogin\Block\Adminhtml\Settings;
 
 /**
  * Class Whitelist
- * @package bitExpert\ForceCustomerLogin\Block\Adminhtml
+ * @package bitExpert\ForceCustomerLogin\Block\Adminhtml\Settings
  * @codingStandardsIgnoreFile
  */
 class Whitelist extends \Magento\Backend\Block\Widget\Container
@@ -53,7 +53,7 @@ class Whitelist extends \Magento\Backend\Block\Widget\Container
     protected function getCreateUrl()
     {
         return $this->getUrl(
-            'ForceCustomerLogin/Whitelist/Create'
+            'ForceCustomerLogin/Manage/Create'
         );
     }
 
@@ -65,7 +65,7 @@ class Whitelist extends \Magento\Backend\Block\Widget\Container
     protected function getRestoreDefaultsUrl()
     {
         return $this->getUrl(
-            'ForceCustomerLogin/Whitelist/RestoreDefault'
+            'ForceCustomerLogin/Manage/RestoreDefault'
         );
     }
 }
