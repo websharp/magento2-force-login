@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file, in reverse 
 - Respect configured login option behavior.
 - Definition of default target URI in DI.
 - Added own session handler.
+- #43 Added additional default rules for sitemap.xml and robots.txt
 
 ### Deprecated
 
