@@ -38,6 +38,11 @@
         </arguments>
     </type>
 
+    <!-- Plugins -->
+    <type name="Magento\Customer\Controller\Account\LoginPost">
+        <plugin name="after_execute_login" type="bitExpert\ForceCustomerLogin\Plugin\AfterLoginPlugin" sortOrder="10" disabled="false"/>
+    </type>
+
     <!-- Entities -->
     <preference for="bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryInterface"
                 type="bitExpert\ForceCustomerLogin\Model\WhitelistEntry" />

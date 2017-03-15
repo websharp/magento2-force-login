@@ -85,7 +85,10 @@ class LoginCheck extends Action implements LoginCheckInterface
             }
         }
 
-        $this->_redirect($this->targetUrl)->sendResponse();
+        $this->_redirect($this->targetUrl, [
+            'referer',
+            \base64_encode($url)
+        ])->sendResponse();
     }
 
     /**
