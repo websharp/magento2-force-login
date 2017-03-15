@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 2.0.0
+
+### Added
+
+- Changed type namings in DI to match best practice.
+- Respect configured login option behavior.
+- Definition of default target URI in DI.
+- Added own session handler.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Removed full qualification of namespace represtantion type name to match best practice.
+
+### Fixed
+
+- Refactored code structure.
+- #35 Redirection after logging in
+
 ## 1.3.1
 
 ### Added

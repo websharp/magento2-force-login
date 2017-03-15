@@ -12,10 +12,8 @@ namespace bitExpert\ForceCustomerLogin\Plugin;
 
 use \Magento\Customer\Controller\Account\LoginPost;
 use \Magento\Framework\Controller\Result\Redirect;
-use \Magento\Framework\App\Action\Context;
-use \Magento\Framework\UrlInterface;
-use \Magento\Customer\Model\Account\Redirect as AccountRedirect;
 use \Magento\Framework\App\Config\ScopeConfigInterface;
+use \bitExpert\ForceCustomerLogin\Model\Session;
 
 /**
  * Class AfterLoginPlugin
@@ -24,13 +22,18 @@ use \Magento\Framework\App\Config\ScopeConfigInterface;
 class AfterLoginPlugin
 {
     /**
-     * @var AccountRedirect
+     * Redirect behaviour
      */
-    protected $accountRedirect;
+    const REDIRECT_DASHBOARD_ENABLED = '1';
+
     /**
-     * @var UrlInterface
+     * @var Session
      */
-    protected $url;
+    protected $session;
+    /**
+     * @var string
+     */
+    protected $defaultTargetUrl;
     /**
      * @var ScopeConfigInterface
      */
@@ -38,15 +41,15 @@ class AfterLoginPlugin
 
     /**
      * AfterLoginPlugin constructor.
-     * @param Context $context
-     * @param AccountRedirect $accountRedirect
+     * @param Session $session
+     * @param string $defaultTargetUrl
      */
     public function __construct(
-        Context $context,
-        AccountRedirect $accountRedirect
+        Session $session,
+        $defaultTargetUrl
     ) {
-        $this->accountRedirect = $accountRedirect;
-        $this->url = $context->getUrl();
+        $this->session = $session;
+        $this->defaultTargetUrl = $defaultTargetUrl;
     }
 
     /**
@@ -57,14 +60,18 @@ class AfterLoginPlugin
      */
     public function afterExecute(LoginPost $customerAccountLoginController, $resultRedirect)
     {
-        $currentUrl = $this->url->getCurrentUrl();
-
-        if ($this->getScopeConfig()->getValue('customer/startup/redirect_dashboard')) {
+        if (self::REDIRECT_DASHBOARD_ENABLED ===
+            $this->getScopeConfig()->getValue('customer/startup/redirect_dashboard')) {
             return $resultRedirect;
         }
 
+        $targetUrl = $this->session->getAfterLoginReferer();
+        if (empty($targetUrl)) {
+            $targetUrl = $this->defaultTargetUrl;
+        }
+
         /** @var $resultRedirect Redirect */
-        $resultRedirect->setUrl($currentUrl);
+        $resultRedirect->setUrl($targetUrl);
 
         return $resultRedirect;
     }
