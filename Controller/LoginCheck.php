@@ -15,6 +15,7 @@ use \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
 use \bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection;
 use \Magento\Framework\App\Action\Action;
 use \Magento\Framework\App\Action\Context;
+use \bitExpert\ForceCustomerLogin\Model\Session;
 use \Magento\Framework\UrlInterface;
 use \Magento\Framework\App\DeploymentConfig;
 use \Magento\Backend\Setup\ConfigOptionsList as BackendConfigOptionsList;
@@ -29,6 +30,10 @@ class LoginCheck extends Action implements LoginCheckInterface
      * @var UrlInterface
      */
     protected $url;
+    /**
+     * @var Session
+     */
+    protected $session;
     /**
      * @var DeploymentConfig
      */
@@ -46,16 +51,19 @@ class LoginCheck extends Action implements LoginCheckInterface
      * Creates a new {@link \bitExpert\ForceCustomerLogin\Controller\LoginCheck}.
      *
      * @param Context $context
+     * @param Session $session
      * @param DeploymentConfig $deploymentConfig
      * @param WhitelistRepositoryInterface $whitelistRepository
      * @param string $targetUrl
      */
     public function __construct(
         Context $context,
+        Session $session,
         DeploymentConfig $deploymentConfig,
         WhitelistRepositoryInterface $whitelistRepository,
         $targetUrl
     ) {
+        $this->session = $session;
         $this->deploymentConfig = $deploymentConfig;
         $this->whitelistRepository = $whitelistRepository;
         $this->targetUrl = $targetUrl;
@@ -84,6 +92,8 @@ class LoginCheck extends Action implements LoginCheckInterface
                 return;
             }
         }
+
+        $this->session->setAfterLoginReferer($path);
 
         $this->_redirect($this->targetUrl)->sendResponse();
     }

@@ -32,6 +32,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     {
         $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $this->getContext(),
+            $this->getCustomerSession(),
             $this->getDeploymentConfig(),
             $this->getWhitelistRepository(),
             ''
@@ -174,6 +175,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
 
         $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $context,
+            $this->getCustomerSession(),
             $this->getDeploymentConfig(),
             $this->getWhitelistRepository(),
             $targetUrl
@@ -255,6 +257,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
 
         $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $context,
+            $this->getCustomerSession(),
             $deploymentConfig,
             $whitelistRepository,
             $targetUrl
@@ -269,6 +272,14 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     protected function getContext()
     {
         return $this->getMockBuilder('\Magento\Framework\App\Action\Context')->disableOriginalConstructor()->getMock();
+    }
+
+    /**
+     * @return \bitExpert\ForceCustomerLogin\Model\Session
+     */
+    protected function getCustomerSession()
+    {
+        return $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\Session')->disableOriginalConstructor()->getMock();
     }
 
     /**
