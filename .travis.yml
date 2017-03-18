@@ -1,0 +1,20 @@
+language: php
+
+env:
+  - secure: "gaYDTYjjoKa1HmvcVHLTsxJ6YBUBthBr95Dappzzzbj1OMy/dsXfMk2GRddaHsLtgeP8CJOonbuyBAQgjyy+r9LwezbHWxskeSe0ncd5fHlj94bWLYemheBp21slDfe0YYPpzNJ4n2lPT0i4J/3CSA4ymY5FP2gx32yX65YxsdYxYWmGx8gqmpBF5fQbc33Z3ivX8L2JWwVS5Xy4v4nAp2f9NzdpFtO85xt/Cw652Nh4OtEcFPqYRpBJC3fHhh/VxZ7yEmdSjaiDTow08lkZ3LLkjUn/u4CBQkLo0Ujf7tYj0SkM3Tvn28NR5q1src7NVki2vDl0049jrpRxDxs6wtlPfTBUkM9xQJIbX0BpQsPHmcGO9sRsBJ0k1/8VCbwE0bO2ddZxKTQaqWlgTB2/HU2NXRhHp2r9CTqkmU0s14QuiUjddhRJ3NlTDtMyLSkx3FiX7Wn7WVe9dcMtcoLVQsBdYsNFGU6eGp/n6H1oyXZTGkRQNt/8lMgcN+l/MDQoErUH0KMAvx0VIkm54Aj2EsZpvbQGx2yOo8pBW7getzdY9Bh3icPmAnqEwnnWwYMtmf5HZFFrGe77hNQebK1fxBiiE1hY5XtK7zHCf10lfHMcqWWfST6pfXGkhftQHWgOUVVXrGV7gqEEHOWW+5362WihJ0MggOP7c/HU5O8e8co="
+  - secure: "pGfZgomBCRuVfrm7Q5bHwqyBKm9OUscGt0BN9dod5LXuvPyQnvutfSgrwI2Es/YZcBtX93CFhsg0udyU6rTwhFcvnuOhsbjht/injhAQkPj1nfAJJlmz4BoSYnG5wpE02noY5+RYin/df1j2KPB4kaFitt0kcq6G4hm7XMD0wzgMRCt/Wf0bFQ3X6EdEBsk5Pj82aUPwbcmxzSb6m0d/ijQt7uMS7sCWWHD2EjhrwikywBOPcRat+IospgtVXJI1gjFQyH4oOsjNGwdv3oRR267CkcwLkIZtREjdnZNq9fRDrKTXbJcsD+gIrFIKQIEEcD/A3QX5iap9PZvsfyBAC72DPBlCmG3sZ6DkrwsWzdi8mEbeEGXhFRD2dlD32e4oHVSP1jgs8bhO7wgYWuVkEnrTqNE7z03nkary1Ym5QF2l4bGrgqrlQ7gIF9AlclpvdFhYDpwsC8I4ITxvN8jJvZpfZpIdfslisr+ppljWQoeoTrIlRx1MaGhXb6rxjHUk2TRrwM0iDHaY6OPmpi3xboY6OlLjiVCzb08BCEUqeQ2ugFqA4YOIn84IxHBulqZQBPa436/j2CHQ+6E54+fmU53MWeMV1HeDsOMVv9N4boe2h4kH0NluYXQx0KV1oic9mAD4KkojazuAOAUS7Io8js6PUt9E/bwM4MTp8khVTTE="
+
+matrix:
+  include:
+    - php: 5.6
+    - php: 7.0
+
+before_script:
+  - composer self-update
+  - composer install --prefer-source
+  - composer config -a http-basic.repo.magento.com $MAGENTO_REPO_USER $MAGENTO_REPO_PASS
+
+script:
+  - composer validate
+  - ./vendor/bin/phing sniff
+  - ./vendor/bin/phing unit
