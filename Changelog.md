@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file, in reverse 
 - Respect configured login option behavior.
 - Definition of default target URI in DI.
 - Added own session handler.
+- #54 Added configuration to enabled or disabled the module
+- #24 Added configuration to set target url
 
 ### Deprecated
 
