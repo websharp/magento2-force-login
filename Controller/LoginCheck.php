@@ -118,7 +118,7 @@ class LoginCheck extends Action implements LoginCheckInterface
         $this->session->setAfterLoginReferer($path);
 
         $this->response->setNoCacheHeaders();
-        $this->response->setRedirect($targetUrl);
+        $this->response->setRedirect($this->getRedirectUrl($targetUrl));
         $this->response->sendResponse();
     }
 
@@ -163,6 +163,19 @@ class LoginCheck extends Action implements LoginCheckInterface
         \array_push($ignoreUrls, $adminUri);
 
         return $ignoreUrls;
+    }
+
+    /**
+     * @param string $targetUrl
+     * @return string
+     */
+    protected function getRedirectUrl($targetUrl)
+    {
+        return \sprintf(
+            '%s%s',
+            $this->_url->getBaseUrl(),
+            $targetUrl
+        );
     }
 
     /**
