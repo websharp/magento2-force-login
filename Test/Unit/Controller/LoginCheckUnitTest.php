@@ -36,7 +36,8 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             $this->getScopeConfig(),
             $this->getDeploymentConfig(),
             $this->getWhitelistRepository(),
-            $this->getModuleCheck()
+            $this->getModuleCheck(),
+            $this->getResponseHttp()
         );
 
         // check if mandatory interfaces are implemented
@@ -166,13 +167,6 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $response = $this->getResponse();
         $redirect = $this->getRedirect();
 
-        $response->expects($this->never())
-            ->method('sendResponse');
-
-        $redirect->expects($this->never())
-            ->method('redirect')
-            ->with($response, $targetUrl);
-
         $context = $this->getContext();
         $context->expects($this->exactly(1))
             ->method('getUrl')
@@ -184,13 +178,23 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->method('getRedirect')
             ->will($this->returnValue($redirect));
 
+        // --- Response
+        $responseHttp = $this->getResponseHttp();
+        $responseHttp->expects($this->never())
+            ->method('setNoCacheHeaders');
+        $responseHttp->expects($this->never())
+            ->method('setRedirect');
+        $responseHttp->expects($this->never())
+            ->method('sendResponse');
+
         $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $context,
             $this->getCustomerSession(),
             $scopeConfig,
             $this->getDeploymentConfig(),
             $this->getWhitelistRepository(),
-            $this->getModuleCheck()
+            $this->getModuleCheck(),
+            $responseHttp
         );
 
         $loginCheck->execute();
@@ -224,20 +228,24 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $response = $this->getResponse();
         $redirect = $this->getRedirect();
 
+        // --- Response
+        $responseHttp = $this->getResponseHttp();
+
         if (!$runMapping) {
-            $response->expects($this->never())
+            $responseHttp->expects($this->never())
+                ->method('setNoCacheHeaders');
+            $responseHttp->expects($this->never())
+                ->method('setRedirect');
+            $responseHttp->expects($this->never())
                 ->method('sendResponse');
-
-            $redirect->expects($this->never())
-                ->method('redirect')
-                ->with($response, $targetUrl);
         } else {
-            $response->expects($this->once())
+            $responseHttp->expects($this->once())
+                ->method('setNoCacheHeaders');
+            $responseHttp->expects($this->once())
+                ->method('setRedirect')
+                ->with($targetUrl);
+            $responseHttp->expects($this->once())
                 ->method('sendResponse');
-
-            $redirect->expects($this->once())
-                ->method('redirect')
-                ->with($response, $targetUrl);
         }
 
         $context = $this->getContext();
@@ -283,7 +291,8 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             $scopeConfig,
             $deploymentConfig,
             $whitelistRepository,
-            $this->getModuleCheck()
+            $this->getModuleCheck(),
+            $responseHttp
         );
 
         $loginCheck->execute();
@@ -366,5 +375,15 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     protected function getWhitelistRepository()
     {
         return $this->createMock('\bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface');
+    }
+
+    /**
+     * @return \Magento\Framework\App\Response\Http
+     */
+    protected function getResponseHttp()
+    {
+        return $this->getMockBuilder('\Magento\Framework\App\Response\Http')
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 }

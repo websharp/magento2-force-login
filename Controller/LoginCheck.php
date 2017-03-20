@@ -13,14 +13,15 @@ namespace bitExpert\ForceCustomerLogin\Controller;
 use \bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
 use \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
 use \bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection;
+use \bitExpert\ForceCustomerLogin\Model\Session;
 use \Magento\Framework\App\Action\Action;
 use \Magento\Framework\App\Action\Context;
-use \bitExpert\ForceCustomerLogin\Model\Session;
 use \Magento\Framework\UrlInterface;
 use \Magento\Framework\App\DeploymentConfig;
 use \Magento\Backend\Setup\ConfigOptionsList as BackendConfigOptionsList;
 use \Magento\Framework\App\Config\ScopeConfigInterface;
 use \Magento\Store\Model\ScopeInterface;
+use \Magento\Framework\App\Response\Http as ResponseHttp;
 
 /**
  * Class LoginCheck
@@ -52,6 +53,10 @@ class LoginCheck extends Action implements LoginCheckInterface
      * @var ModuleCheck
      */
     protected $moduleCheck;
+    /**
+     * @var ResponseHttp
+     */
+    protected $response;
 
     /**
      * Creates a new {@link \bitExpert\ForceCustomerLogin\Controller\LoginCheck}.
@@ -62,6 +67,7 @@ class LoginCheck extends Action implements LoginCheckInterface
      * @param DeploymentConfig $deploymentConfig
      * @param WhitelistRepositoryInterface $whitelistRepository
      * @param ModuleCheck $moduleCheck
+     * @param ResponseHttp $response
      */
     public function __construct(
         Context $context,
@@ -69,13 +75,15 @@ class LoginCheck extends Action implements LoginCheckInterface
         ScopeConfigInterface $scopeConfig,
         DeploymentConfig $deploymentConfig,
         WhitelistRepositoryInterface $whitelistRepository,
-        ModuleCheck $moduleCheck
+        ModuleCheck $moduleCheck,
+        ResponseHttp $response
     ) {
         $this->session = $session;
         $this->scopeConfig = $scopeConfig;
         $this->deploymentConfig = $deploymentConfig;
         $this->whitelistRepository = $whitelistRepository;
         $this->moduleCheck = $moduleCheck;
+        $this->response = $response;
         parent::__construct($context);
     }
 
@@ -109,7 +117,9 @@ class LoginCheck extends Action implements LoginCheckInterface
 
         $this->session->setAfterLoginReferer($path);
 
-        $this->_redirect($targetUrl)->sendResponse();
+        $this->response->setNoCacheHeaders();
+        $this->response->setRedirect($this->getRedirectUrl($targetUrl));
+        $this->response->sendResponse();
     }
 
     /**
@@ -153,6 +163,19 @@ class LoginCheck extends Action implements LoginCheckInterface
         \array_push($ignoreUrls, $adminUri);
 
         return $ignoreUrls;
+    }
+
+    /**
+     * @param string $targetUrl
+     * @return string
+     */
+    protected function getRedirectUrl($targetUrl)
+    {
+        return \sprintf(
+            '%s%s',
+            $this->_url->getBaseUrl(),
+            $targetUrl
+        );
     }
 
     /**
