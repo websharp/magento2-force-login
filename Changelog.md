@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file, in reverse 
 - Definition of default target URI in DI.
 - Added own session handler.
 - #54 Added configuration to enabled or disabled the module
+- #43 Added additional default rules for sitemap.xml and robots.txt
 - #24 Added configuration to set target url
 
 ### Deprecated

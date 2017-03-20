@@ -302,7 +302,8 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
      */
     protected function getCustomerSession()
     {
-        return $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\Session')->disableOriginalConstructor()->getMock();
+        return $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\Session')->disableOriginalConstructor()
+            ->getMock();
     }
 
     /**

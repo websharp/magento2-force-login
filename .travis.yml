@@ -1,0 +1,18 @@
+language: php
+
+matrix:
+  include:
+  - php: 5.6
+  - php: 7.0
+
+before_install:
+  - if [[ $encrypted_98dcc32c9b33_key != '' ]]; then openssl aes-256-cbc -K $encrypted_98dcc32c9b33_key -iv $encrypted_98dcc32c9b33_iv -in auth.json.enc -out auth.json -d ; fi
+
+before_script:
+  - composer self-update
+  - if [[ $encrypted_98dcc32c9b33_key != '' ]]; then composer install --prefer-source ; fi
+
+script:
+  - composer validate
+  - if [[ $encrypted_98dcc32c9b33_key != '' ]]; then ./vendor/bin/phing sniff ; fi
+  - if [[ $encrypted_98dcc32c9b33_key != '' ]]; then ./vendor/bin/phing unit ; fi

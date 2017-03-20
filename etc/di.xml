@@ -29,6 +29,8 @@
                 <item name="/customer/section/load" xsi:type="string">Customer Section Load</item>
                 <item name="/contact" xsi:type="string">Contact Us</item>
                 <item name="/help" xsi:type="string">Help</item>
+                <item name="/sitemap.xml" xsi:type="string">Sitemap.xml</item>
+                <item name="/robots.txt" xsi:type="string">Robots.txt</item>
             </argument>
         </arguments>
     </type>
