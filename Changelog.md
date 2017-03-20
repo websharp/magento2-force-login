@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file, in reverse 
 - Added own session handler.
 - #54 Added configuration to enabled or disabled the module
 - #43 Added additional default rules for sitemap.xml and robots.txt
+- #26 Added cache control to redirecting
 - #24 Added configuration to set target url
 
 ### Deprecated
