@@ -77,6 +77,20 @@ entry should appear to the list and the systems homepage should be available for
 
 ## How to configure
 
+### Administration
+
+The **Force Login** Module for *Magento® 2* allows you to enable or disable the module itself on the level of websites, stores and store views.
+
+If the module is *disabled*, the whitelist ruling and the redirection are not applied. If the module is *enabled* based upon the configuration,
+the whitelist rules are process, which themselves are also configurable for all enabled stores or just specific ones.
+
+After installing and enabling **Force Login** Module for *Magento® 2* with the CLI, you must be able to navigate to 
+*Stores > Configuration > Force Login*, where you are able to configure the availability of the module for each website, store and store view.
+
+In the administration configuration, you are also able to setup the URL the redirecting is targeting to if not whitelist rule is matching.
+
+![alt text](./resources/ui_step_00.png "Administration")
+
 ### Navigation
 Navigating through the *Magento® 2* backend menu by clicking onto **Customers** you must see a new menu 
 entry **Forced Login Whitelist**. 

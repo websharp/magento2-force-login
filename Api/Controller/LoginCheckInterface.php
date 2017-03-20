@@ -18,5 +18,8 @@ use \Magento\Framework\App\ActionInterface;
  */
 interface LoginCheckInterface extends ActionInterface
 {
-
+    /*
+     * Configuration
+     */
+    const MODULE_CONFIG_TARGET = 'bitExpert_ForceCustomerLogin/target/url';
 }
