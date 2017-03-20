@@ -19,6 +19,8 @@ use \bitExpert\ForceCustomerLogin\Model\Session;
 use \Magento\Framework\UrlInterface;
 use \Magento\Framework\App\DeploymentConfig;
 use \Magento\Backend\Setup\ConfigOptionsList as BackendConfigOptionsList;
+use \Magento\Framework\App\Config\ScopeConfigInterface;
+use \Magento\Store\Model\ScopeInterface;
 
 /**
  * Class LoginCheck
@@ -35,6 +37,10 @@ class LoginCheck extends Action implements LoginCheckInterface
      */
     protected $session;
     /**
+     * @var ScopeConfigInterface
+     */
+    protected $scopeConfig;
+    /**
      * @var DeploymentConfig
      */
     protected $deploymentConfig;
@@ -43,30 +49,33 @@ class LoginCheck extends Action implements LoginCheckInterface
      */
     protected $whitelistRepository;
     /**
-     * @var string
+     * @var ModuleCheck
      */
-    protected $targetUrl;
+    protected $moduleCheck;
 
     /**
      * Creates a new {@link \bitExpert\ForceCustomerLogin\Controller\LoginCheck}.
      *
      * @param Context $context
      * @param Session $session
+     * @param ScopeConfigInterface $scopeConfig
      * @param DeploymentConfig $deploymentConfig
      * @param WhitelistRepositoryInterface $whitelistRepository
-     * @param string $targetUrl
+     * @param ModuleCheck $moduleCheck
      */
     public function __construct(
         Context $context,
         Session $session,
+        ScopeConfigInterface $scopeConfig,
         DeploymentConfig $deploymentConfig,
         WhitelistRepositoryInterface $whitelistRepository,
-        $targetUrl
+        ModuleCheck $moduleCheck
     ) {
         $this->session = $session;
+        $this->scopeConfig = $scopeConfig;
         $this->deploymentConfig = $deploymentConfig;
         $this->whitelistRepository = $whitelistRepository;
-        $this->targetUrl = $targetUrl;
+        $this->moduleCheck = $moduleCheck;
         parent::__construct($context);
     }
 
@@ -75,11 +84,16 @@ class LoginCheck extends Action implements LoginCheckInterface
      */
     public function execute()
     {
+        if ($this->moduleCheck->isModuleEnabled() === false) {
+            return;
+        }
+
         $url = $this->_url->getCurrentUrl();
         $path = \parse_url($url, PHP_URL_PATH);
+        $targetUrl = $this->getTargetUrl();
 
         // current path is already pointing to target url, no redirect needed
-        if ($this->targetUrl === $path) {
+        if ($targetUrl === $path) {
             return;
         }
 
@@ -95,7 +109,7 @@ class LoginCheck extends Action implements LoginCheckInterface
 
         $this->session->setAfterLoginReferer($path);
 
-        $this->_redirect($this->targetUrl)->sendResponse();
+        $this->_redirect($targetUrl)->sendResponse();
     }
 
     /**
@@ -139,5 +153,16 @@ class LoginCheck extends Action implements LoginCheckInterface
         \array_push($ignoreUrls, $adminUri);
 
         return $ignoreUrls;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getTargetUrl()
+    {
+        return $this->scopeConfig->getValue(
+            self::MODULE_CONFIG_TARGET,
+            ScopeInterface::SCOPE_STORE
+        );
     }
 }

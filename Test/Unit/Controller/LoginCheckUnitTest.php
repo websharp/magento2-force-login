@@ -33,9 +33,10 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $this->getContext(),
             $this->getCustomerSession(),
+            $this->getScopeConfig(),
             $this->getDeploymentConfig(),
             $this->getWhitelistRepository(),
-            ''
+            $this->getModuleCheck()
         );
 
         // check if mandatory interfaces are implemented
@@ -146,6 +147,16 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $urlString = 'http://example.tld/customer/account/login';
         $targetUrl = '/customer/account/login';
 
+        // --- Scope Config
+        $scopeConfig = $this->getScopeConfig();
+        $scopeConfig->expects($this->once())
+            ->method('getValue')
+            ->with(
+                \bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface::MODULE_CONFIG_TARGET,
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            )
+            ->will($this->returnValue($targetUrl));
+
         // --- Context
         $url = $this->getUrl();
         $url->expects($this->once())
@@ -176,9 +187,10 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $context,
             $this->getCustomerSession(),
+            $scopeConfig,
             $this->getDeploymentConfig(),
             $this->getWhitelistRepository(),
-            $targetUrl
+            $this->getModuleCheck()
         );
 
         $loginCheck->execute();
@@ -192,6 +204,16 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     protected function runCase($urlString, $urlRule, $runMapping = false)
     {
         $targetUrl = '/customer/account/login';
+
+        // --- Scope Config
+        $scopeConfig = $this->getScopeConfig();
+        $scopeConfig->expects($this->once())
+            ->method('getValue')
+            ->with(
+                \bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface::MODULE_CONFIG_TARGET,
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            )
+            ->will($this->returnValue($targetUrl));
 
         // --- Context
         $url = $this->getUrl();
@@ -258,9 +280,10 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $context,
             $this->getCustomerSession(),
+            $scopeConfig,
             $deploymentConfig,
             $whitelistRepository,
-            $targetUrl
+            $this->getModuleCheck()
         );
 
         $loginCheck->execute();
@@ -291,6 +314,16 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * @return \Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    protected function getScopeConfig()
+    {
+        return $this->getMockBuilder('\Magento\Framework\App\Config\ScopeConfigInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
      * @return \Magento\Framework\App\Response\RedirectInterface
      */
     protected function getRedirect()
@@ -312,6 +345,16 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     protected function getDeploymentConfig()
     {
         return $this->getMockBuilder('\Magento\Framework\App\DeploymentConfig')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
+     * @return \bitExpert\ForceCustomerLogin\Controller\ModuleCheck
+     */
+    protected function getModuleCheck()
+    {
+        return $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Controller\ModuleCheck')
             ->disableOriginalConstructor()
             ->getMock();
     }
