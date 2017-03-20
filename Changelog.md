@@ -8,7 +8,6 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Changed type namings in DI to match best practice.
 - Respect configured login option behavior.
-- Definition of default target URI in DI.
 - Added own session handler.
 - #54 Added configuration to enabled or disabled the module
 - #43 Added additional default rules for sitemap.xml and robots.txt
@@ -21,7 +20,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Removed full qualification of namespace represtantion type name to match best practice.
+- Removed full qualification of namespace representation type name to match best practice.
 
 ### Fixed
 
