@@ -55,6 +55,10 @@ class UpgradeData implements UpgradeDataInterface
             $this->runUpgrade124($setup);
         }
 
+        if (version_compare($context->getVersion(), '2.0.0', '<')) {
+            $this->runUpgrade200($setup);
+        }
+
         $setup->endSetup();
     }
 
@@ -113,6 +117,21 @@ class UpgradeData implements UpgradeDataInterface
         );
     }
 
+    /**
+     * @param ModuleDataSetupInterface $setup
+     */
+    protected function runUpgrade200(ModuleDataSetupInterface $setup)
+    {
+        $whitelistEntries = [
+            $this->getWhitelistEntryAsArray(0, 'Sitemap.xml', '/sitemap.xml', true),
+            $this->getWhitelistEntryAsArray(0, 'Robots.txt', '/robots.txt', true)
+        ];
+
+        $setup->getConnection()->insertMultiple(
+            $setup->getTable('bitexpert_forcelogin_whitelist'),
+            $whitelistEntries
+        );
+    }
 
     /**
      * @param int $storeId
