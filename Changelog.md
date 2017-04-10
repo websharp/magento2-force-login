@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file, in reverse 
 - Changed type namings in DI to match best practice.
 - Respect configured login option behavior.
 - Added own session handler.
+- #62 Move UpgradeSchema to InstallSchema
 - #54 Added configuration to enabled or disabled the module
 - #43 Added additional default rules for sitemap.xml and robots.txt
 - #26 Added cache control to redirecting
@@ -25,6 +26,7 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Fixed
 
 - Refactored code structure.
+- #61 Setup install then upgrade fails
 - #35 Redirection after logging in
 
 ## 1.3.1
