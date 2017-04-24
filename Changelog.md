@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 2.0.1
+
+### Added
+
+- #67 Resolve redirect loop from login to customer dashboard
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- #66 Redirect loop
+
 ## 2.0.0
 
 ### Added
