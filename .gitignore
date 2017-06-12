@@ -4,3 +4,5 @@
 /nbproject/
 /node_modules
 /vendor/
+/dist
+/.docker
