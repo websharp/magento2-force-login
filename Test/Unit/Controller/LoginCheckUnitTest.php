@@ -34,8 +34,8 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             $this->getContext(),
             $this->getCustomerSession(),
             $this->getScopeConfig(),
-            $this->getDeploymentConfig(),
             $this->getWhitelistRepository(),
+            $this->getStrategyManager(),
             $this->getModuleCheck(),
             $this->getResponseHttp()
         );
@@ -46,104 +46,55 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Run test with data listed on the whitelist, so no redirecting is forced.
+     * Run test with url equals target, so no redirecting is happening.
      * @test
      * @depends testConstructor
      */
-    public function testPositiveWhitelistedUrlMapping()
+    public function skipMatchingWhenModuleIsDisabled()
     {
-        // --- Static
-        $urlRule = '/foobar';
+        $moduleCheck = $this->getModuleCheck();
+        $moduleCheck->expects($this->once())
+            ->method('isModuleEnabled')
+            ->willReturn(false);
 
-        // simple
-        $this->runCase('http://example.tld/shopview/foobar/baz', $urlRule);
-        // with shopview prefix
-        $this->runCase('http://example.tld/foobar/baz', $urlRule);
+        // --- Context
+        $url = $this->getUrl();
+        $url->expects($this->never())
+            ->method('getCurrentUrl');
 
-        // --- Homepage
-        $urlRule = '/?';
+        $response = $this->getResponse();
+        $redirect = $this->getRedirect();
 
-        // simple
-        $this->runCase('http://example.tld/', $urlRule);
-        // with shopview prefix
-        $this->runCase('http://example.tld', $urlRule);
-        // without rewrite
-        $this->runCase('http://example.tld/index.php', $urlRule);
-        $this->runCase('http://example.tld/index.php/', $urlRule);
+        $context = $this->getContext();
+        $context->expects($this->exactly(1))
+            ->method('getUrl')
+            ->will($this->returnValue($url));
+        $context->expects($this->once())
+            ->method('getResponse')
+            ->will($this->returnValue($response));
+        $context->expects($this->once())
+            ->method('getRedirect')
+            ->will($this->returnValue($redirect));
 
-        // --- Homepage
-        $urlRule = '/?$';
+        $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
+            $context,
+            $this->getCustomerSession(),
+            $this->getScopeConfig(),
+            $this->getWhitelistRepository(),
+            $this->getStrategyManager(),
+            $moduleCheck,
+            $this->getResponseHttp()
+        );
 
-        // simple
-        $this->runCase('http://example.tld/', $urlRule);
-        // with shopview prefix
-        $this->runCase('http://example.tld', $urlRule);
-        // without rewrite
-        $this->runCase('http://example.tld/index.php', $urlRule);
-        $this->runCase('http://example.tld/index.php/', $urlRule);
-
-        // --- Homepage
-        $urlRule = '^/?$';
-
-        // simple
-        $this->runCase('http://example.tld/', $urlRule);
-        // with shopview prefix
-        $this->runCase('http://example.tld', $urlRule);
-        // without rewrite
-        $this->runCase('http://example.tld/index.php', $urlRule, true);
-        $this->runCase('http://example.tld/index.php/', $urlRule, true);
+        $loginCheck->execute();
     }
 
     /**
-     * Run test with data listed on the whitelist as wildcard, so no redirecting is forced.
+     * Run test with url equals target, so no redirecting is happening.
      * @test
      * @depends testConstructor
      */
-    public function testPositiveWhitelistedUrlMappingWithWildcardRule()
-    {
-        // --- Empty
-        $emptyUrlRule = '';
-        // simple
-        $this->runCase('http://example.tld/shopview/foobar/baz', $emptyUrlRule);
-        // with shopview prefix
-        $this->runCase('http://example.tld/foobar/baz', $emptyUrlRule);
-
-        // --- Wildcard
-        $wildcardUrlRule = '.*';
-        // simple
-        $this->runCase('http://example.tld/shopview/foobar/baz', $wildcardUrlRule);
-        // with shopview prefix
-        $this->runCase('http://example.tld/foobar/baz', $wildcardUrlRule);
-
-        // --- Wildcard
-        $wildcardUrlRule = '/.*';
-        // simple
-        $this->runCase('http://example.tld/shopview/foobar/baz', $wildcardUrlRule);
-        // with shopview prefix
-        $this->runCase('http://example.tld/foobar/baz', $wildcardUrlRule);
-    }
-
-    /**
-     * Run test with data not listed on the whitelist, so redirecting is forced.
-     * @test
-     * @depends testConstructor
-     */
-    public function testNegativeWhitelistedUrlMapping()
-    {
-        $urlRule = '/barfoo';
-
-        // simple
-        $this->runCase('http://example.tld/foobar/baz', $urlRule, true);
-        // with shopview prefix
-        $this->runCase('http://example.tld/shopview/foobar/baz', $urlRule, true);
-    }
-
-    /**
-     * Run test with data not listed on the whitelist, so redirecting is forced.
-     * @test
-     * @depends testConstructor
-     */
-    public function testNoUrlMappingOnMatchingPathWithTargetUrl()
+    public function urlMatchesTargetUrlExactlyAndNoRedirectIsForced()
     {
         $urlString = 'http://example.tld/customer/account/login';
         $targetUrl = '/customer/account/login';
@@ -187,12 +138,22 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $responseHttp->expects($this->never())
             ->method('sendResponse');
 
+        // --- Whitelist Entries
+        $whitelistRepository = $this->getWhitelistRepository();
+        $whitelistRepository->expects($this->never())
+            ->method('getCollection');
+
+        // --- Strategy
+        $strategyManager = $this->getStrategyManager();
+        $strategyManager->expects($this->never())
+            ->method('get');
+
         $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $context,
             $this->getCustomerSession(),
             $scopeConfig,
-            $this->getDeploymentConfig(),
-            $this->getWhitelistRepository(),
+            $whitelistRepository,
+            $strategyManager,
             $this->getModuleCheck(),
             $responseHttp
         );
@@ -201,12 +162,13 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @param string $urlString
-     * @param string $urlRule
-     * @param bool $runMapping
+     * Run test with data listed on the whitelist, so no redirecting is happening.
+     * @test
+     * @depends testConstructor
      */
-    protected function runCase($urlString, $urlRule, $runMapping = false)
+    public function ruleMatchingPositiveWithoutRedirect()
     {
+        $urlString = 'http://example.tld/foo/bar';
         $targetUrl = '/customer/account/login';
 
         // --- Scope Config
@@ -228,26 +190,6 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $response = $this->getResponse();
         $redirect = $this->getRedirect();
 
-        // --- Response
-        $responseHttp = $this->getResponseHttp();
-
-        if (!$runMapping) {
-            $responseHttp->expects($this->never())
-                ->method('setNoCacheHeaders');
-            $responseHttp->expects($this->never())
-                ->method('setRedirect');
-            $responseHttp->expects($this->never())
-                ->method('sendResponse');
-        } else {
-            $responseHttp->expects($this->once())
-                ->method('setNoCacheHeaders');
-            $responseHttp->expects($this->once())
-                ->method('setRedirect')
-                ->with($targetUrl);
-            $responseHttp->expects($this->once())
-                ->method('sendResponse');
-        }
-
         $context = $this->getContext();
         $context->expects($this->exactly(1))
             ->method('getUrl')
@@ -259,13 +201,22 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->method('getRedirect')
             ->will($this->returnValue($redirect));
 
+        // --- Response
+        $responseHttp = $this->getResponseHttp();
+        $responseHttp->expects($this->never())
+            ->method('setNoCacheHeaders');
+        $responseHttp->expects($this->never())
+            ->method('setRedirect');
+        $responseHttp->expects($this->never())
+            ->method('sendResponse');
+
         // --- Whitelist Entries
         $whitelistEntityOne = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')
             ->disableOriginalConstructor()
             ->getMock();
         $whitelistEntityOne->expects($this->once())
-            ->method('getUrlRule')
-            ->will($this->returnValue($urlRule));
+            ->method('getStrategy')
+            ->will($this->returnValue('default'));
         $whitelistCollection = $this
             ->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')
             ->disableOriginalConstructor()
@@ -278,19 +229,25 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->method('getCollection')
             ->will($this->returnValue($whitelistCollection));
 
-        // --- Deployment configuration
-        $deploymentConfig = $this->getDeploymentConfig();
-        $deploymentConfig->expects($this->once())
+        // --- Strategy
+        $strategy = $this->createMock('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy->expects($this->once())
+            ->method('isMatch')
+            ->with('/foo/bar', $whitelistEntityOne)
+            ->willReturn(true);
+
+        $strategyManager = $this->getStrategyManager();
+        $strategyManager->expects($this->once())
             ->method('get')
-            ->with(\Magento\Backend\Setup\ConfigOptionsList::CONFIG_PATH_BACKEND_FRONTNAME)
-            ->will($this->returnValue('admin'));
+            ->with('default')
+            ->willReturn($strategy);
 
         $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $context,
             $this->getCustomerSession(),
             $scopeConfig,
-            $deploymentConfig,
             $whitelistRepository,
+            $strategyManager,
             $this->getModuleCheck(),
             $responseHttp
         );
@@ -299,24 +256,122 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return \Magento\Framework\App\Action\Context
+     * Run test with data not listed on the whitelist, so redirecting is forced.
+     * @test
+     * @depends testConstructor
      */
-    protected function getContext()
+    public function ruleMatchingFailsAndResultsInRedirect()
     {
-        return $this->getMockBuilder('\Magento\Framework\App\Action\Context')->disableOriginalConstructor()->getMock();
+        $urlString = 'http://example.tld/foo/bar';
+        $targetUrl = '/customer/account/login';
+
+        // --- Scope Config
+        $scopeConfig = $this->getScopeConfig();
+        $scopeConfig->expects($this->once())
+            ->method('getValue')
+            ->with(
+                \bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface::MODULE_CONFIG_TARGET,
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            )
+            ->will($this->returnValue($targetUrl));
+
+        // --- Context
+        $url = $this->getUrl();
+        $url->expects($this->once())
+            ->method('getCurrentUrl')
+            ->will($this->returnValue($urlString));
+
+        $response = $this->getResponse();
+        $redirect = $this->getRedirect();
+
+        $context = $this->getContext();
+        $context->expects($this->exactly(1))
+            ->method('getUrl')
+            ->will($this->returnValue($url));
+        $context->expects($this->once())
+            ->method('getResponse')
+            ->will($this->returnValue($response));
+        $context->expects($this->once())
+            ->method('getRedirect')
+            ->will($this->returnValue($redirect));
+
+        // --- Response
+        $responseHttp = $this->getResponseHttp();
+        $responseHttp->expects($this->once())
+            ->method('setNoCacheHeaders');
+        $responseHttp->expects($this->once())
+            ->method('setRedirect')
+            ->with($targetUrl);
+        $responseHttp->expects($this->once())
+            ->method('sendResponse');
+
+        // --- Whitelist Entries
+        $whitelistEntityOne = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $whitelistEntityOne->expects($this->once())
+            ->method('getStrategy')
+            ->will($this->returnValue('default'));
+        $whitelistCollection = $this
+            ->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $whitelistCollection->expects($this->once())
+            ->method('getItems')
+            ->will($this->returnValue([$whitelistEntityOne]));
+        $whitelistRepository = $this->getWhitelistRepository();
+        $whitelistRepository->expects($this->once())
+            ->method('getCollection')
+            ->will($this->returnValue($whitelistCollection));
+
+        // --- Strategy
+        $strategy = $this->createMock('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy->expects($this->once())
+            ->method('isMatch')
+            ->with('/foo/bar', $whitelistEntityOne)
+            ->willReturn(false);
+
+        $strategyManager = $this->getStrategyManager();
+        $strategyManager->expects($this->once())
+            ->method('get')
+            ->with('default')
+            ->will($this->returnValue($strategy));
+
+        $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
+            $context,
+            $this->getCustomerSession(),
+            $scopeConfig,
+            $whitelistRepository,
+            $strategyManager,
+            $this->getModuleCheck(),
+            $responseHttp
+        );
+
+        $loginCheck->execute();
     }
 
     /**
-     * @return \bitExpert\ForceCustomerLogin\Model\Session
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Action\Context
      */
-    protected function getCustomerSession()
+    protected function getContext()
     {
-        return $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\Session')->disableOriginalConstructor()
+        return $this->getMockBuilder('\Magento\Framework\App\Action\Context')
+            ->disableOriginalConstructor()
             ->getMock();
     }
 
     /**
-     * @return \Magento\Framework\UrlInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|\bitExpert\ForceCustomerLogin\Model\Session
+     */
+    protected function getCustomerSession()
+    {
+        return $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\Session')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\UrlInterface
      */
     protected function getUrl()
     {
@@ -324,7 +379,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return \Magento\Framework\App\Config\ScopeConfigInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Config\ScopeConfigInterface
      */
     protected function getScopeConfig()
     {
@@ -334,7 +389,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return \Magento\Framework\App\Response\RedirectInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Response\RedirectInterface
      */
     protected function getRedirect()
     {
@@ -342,7 +397,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return \Magento\Framework\App\ResponseInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\ResponseInterface
      */
     protected function getResponse()
     {
@@ -350,17 +405,17 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return \Magento\Framework\App\DeploymentConfig
+     * @return \PHPUnit_Framework_MockObject_MockObject|\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager
      */
-    protected function getDeploymentConfig()
+    protected function getStrategyManager()
     {
-        return $this->getMockBuilder('\Magento\Framework\App\DeploymentConfig')
+        return $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager')
             ->disableOriginalConstructor()
             ->getMock();
     }
 
     /**
-     * @return \bitExpert\ForceCustomerLogin\Controller\ModuleCheck
+     * @return \PHPUnit_Framework_MockObject_MockObject|\bitExpert\ForceCustomerLogin\Controller\ModuleCheck
      */
     protected function getModuleCheck()
     {
@@ -370,7 +425,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|\bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface
      */
     protected function getWhitelistRepository()
     {
@@ -378,7 +433,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return \Magento\Framework\App\Response\Http
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Response\Http
      */
     protected function getResponseHttp()
     {

@@ -59,6 +59,21 @@
     <preference for="bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface"
                 type="bitExpert\ForceCustomerLogin\Repository\WhitelistRepository" />
 
+    <!-- Helper -->
+    <type name="bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager">
+        <arguments>
+            <argument name="strategies" xsi:type="array">
+                <item name="default" xsi:type="array">
+                    <item name="name" xsi:type="string">Static</item>
+                    <item name="instance" xsi:type="object">bitExpert\ForceCustomerLogin\Helper\Strategy\StaticMatcher</item>
+                </item>
+                <item name="regex-all" xsi:type="array">
+                    <item name="name" xsi:type="string">RegEx (All)</item>
+                    <item name="instance" xsi:type="object">bitExpert\ForceCustomerLogin\Helper\Strategy\RegExAllMatcher</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
 
     <!-- UI Components -->
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">

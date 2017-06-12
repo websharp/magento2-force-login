@@ -10,6 +10,8 @@
  */
 namespace bitExpert\ForceCustomerLogin\Model;
 
+use bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryInterface;
+
 /**
  * Class WhitelistEntry
  * @package bitExpert\ForceCustomerLogin\Model
@@ -90,5 +92,21 @@ class WhitelistEntry extends \Magento\Framework\Model\AbstractModel implements
     public function setEditable($editable)
     {
         return $this->setData(static::KEY_EDITABLE, $editable);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStrategy()
+    {
+        return $this->getData(static::KEY_STRATEGY);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setStrategy($strategy)
+    {
+        return $this->setData(static::KEY_STRATEGY, $strategy);
     }
 }

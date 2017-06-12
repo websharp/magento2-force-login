@@ -24,6 +24,7 @@ interface WhitelistEntryInterface
     const KEY_LABEL = 'label';
     const KEY_URL_RULE = 'url_rule';
     const KEY_EDITABLE = 'editable';
+    const KEY_STRATEGY = 'strategy';
 
     /**
      * @return int|null
@@ -79,4 +80,15 @@ interface WhitelistEntryInterface
      * @return $this
      */
     public function setEditable($editable);
+
+    /**
+     * @return string|null
+     */
+    public function getStrategy();
+
+    /**
+     * @param string $strategy
+     * @return $this
+     */
+    public function setStrategy($strategy);
 }

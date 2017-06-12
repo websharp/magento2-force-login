@@ -11,6 +11,7 @@
 namespace bitExpert\ForceCustomerLogin\Block\Adminhtml\Manage\Create;
 
 use \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
+use bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
 
 /**
  * Class Form
@@ -23,6 +24,10 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
      * @var WhitelistEntryFactoryInterface
      */
     protected $entityFactory;
+    /**
+     * @var StrategyManager
+     */
+    protected $strategyManager;
 
     /**
      * Form constructor.
@@ -37,6 +42,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         \Magento\Framework\Registry $registry,
         \Magento\Framework\Data\FormFactory $formFactory,
         WhitelistEntryFactoryInterface $entityFactory,
+        StrategyManager $strategyManager,
         array $data
     ) {
         $this->entityFactory = $entityFactory;
@@ -55,6 +61,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         if (!$whitelistEntry->getId()) {
             $whitelistEntry->setLabel(\base64_decode($this->_request->getParam('label')));
             $whitelistEntry->setUrlRule(\base64_decode($this->_request->getParam('url_rule')));
+            $whitelistEntry->setStrategy(\base64_decode($this->_request->getParam('strategy')));
             $whitelistEntry->setStoreId(\base64_decode($this->_request->getParam('store_id')));
         }
 
@@ -95,6 +102,15 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             'label' => __('Url Rule'),
             'title' => __('Url Rule'),
             'value' => $whitelistEntry->getUrlRule(),
+            'required' => true
+        ]);
+
+        $fieldsetBase->addField('strategy', 'text', [
+            'name' => 'strategy',
+            'label' => __('Strategy'),
+            'title' => __('Strategy'),
+            'value' => $whitelistEntry->getUrlRule(),
+            'options' =>  $this->strategyManager->getStrategyNames(),
             'required' => true
         ]);
 

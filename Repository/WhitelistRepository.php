@@ -22,11 +22,6 @@ use \Magento\Store\Model\StoreManager;
 class WhitelistRepository implements \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface
 {
     /**
-     * Special store ids
-     */
-    const ROOT_STORE_ID = 0;
-
-    /**
      * @var WhitelistEntryFactoryInterface
      */
     protected $entityFactory;
@@ -65,7 +60,7 @@ class WhitelistRepository implements \bitExpert\ForceCustomerLogin\Api\Repositor
     /**
      * {@inheritDoc}
      */
-    public function createEntry($entityId, $label, $urlRule, $storeId = 0)
+    public function createEntry($entityId, $label, $urlRule, $strategy = self::DEFAULT_STRATEGY, $storeId = 0)
     {
         $whitelist = $this->entityFactory->create();
 
@@ -87,6 +82,7 @@ class WhitelistRepository implements \bitExpert\ForceCustomerLogin\Api\Repositor
 
         $whitelist->setLabel($label);
         $whitelist->setUrlRule($urlRule);
+        $whitelist->setStrategy($strategy);
         $whitelist->setStoreId($storeId);
         $whitelist->setEditable(true);
 

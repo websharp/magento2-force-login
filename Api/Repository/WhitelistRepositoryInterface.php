@@ -16,6 +16,15 @@ namespace bitExpert\ForceCustomerLogin\Api\Repository;
  */
 interface WhitelistRepositoryInterface
 {
+    /*
+     * Special store ids
+     */
+    const ROOT_STORE_ID = 0;
+    /*
+     * Strategy
+     */
+    const DEFAULT_STRATEGY = 'default';
+
     /**
      * Get collection {@link \bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection}.
      *
@@ -35,10 +44,11 @@ interface WhitelistRepositoryInterface
      * @param int|null $entityId If NULL a new entity will be created
      * @param string $label
      * @param string $urlRule
+     * @param string $strategy
      * @param int $storeId
      * @return \bitExpert\ForceCustomerLogin\Model\WhitelistEntry
      */
-    public function createEntry($entityId, $label, $urlRule, $storeId = 0);
+    public function createEntry($entityId, $label, $urlRule, $strategy = self::DEFAULT_STRATEGY, $storeId = 0);
 
     /**
      * @param int $id

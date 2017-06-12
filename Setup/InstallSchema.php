@@ -62,6 +62,12 @@ class InstallSchema implements InstallSchemaInterface
                 ['nullable' => true]
             )
             ->addColumn(
+                'strategy',
+                \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                255,
+                ['nullable' => true]
+            )
+            ->addColumn(
                 'editable',
                 \Magento\Framework\DB\Ddl\Table::TYPE_BOOLEAN,
                 null,
@@ -96,5 +102,7 @@ class InstallSchema implements InstallSchemaInterface
             ->setComment('bitExpert Force Customer Login Whitelist Table');
 
             $installer->getConnection()->createTable($table);
+
+        $installer->endSetup();
     }
 }

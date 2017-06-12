@@ -21,10 +21,15 @@ use \bitExpert\ForceCustomerLogin\Model\Session;
  */
 class AfterLoginPlugin
 {
-    /**
+    /*
      * Redirect behaviour
      */
     const REDIRECT_DASHBOARD_ENABLED = '1';
+    const REDIRECT_DASHBOARD_DISABLED = '0';
+    /*
+     * Configuration
+     */
+    const REDIRECT_DASHBOARD_CONFIG = 'customer/startup/redirect_dashboard';
 
     /**
      * @var Session
@@ -42,13 +47,16 @@ class AfterLoginPlugin
     /**
      * AfterLoginPlugin constructor.
      * @param Session $session
+     * @param ScopeConfigInterface $scopeConfig
      * @param string $defaultTargetUrl
      */
     public function __construct(
         Session $session,
+        ScopeConfigInterface $scopeConfig,
         $defaultTargetUrl
     ) {
         $this->session = $session;
+        $this->scopeConfig = $scopeConfig;
         $this->defaultTargetUrl = $defaultTargetUrl;
     }
 
@@ -61,7 +69,7 @@ class AfterLoginPlugin
     public function afterExecute(LoginPost $customerAccountLoginController, $resultRedirect)
     {
         if (self::REDIRECT_DASHBOARD_ENABLED ===
-            $this->getScopeConfig()->getValue('customer/startup/redirect_dashboard')) {
+            $this->scopeConfig->getValue(self::REDIRECT_DASHBOARD_CONFIG)) {
             return $resultRedirect;
         }
 
@@ -74,21 +82,5 @@ class AfterLoginPlugin
         $resultRedirect->setUrl($targetUrl);
 
         return $resultRedirect;
-    }
-
-    /**
-     * Get scope config
-     *
-     * @return ScopeConfigInterface
-     */
-    private function getScopeConfig()
-    {
-        if (!($this->scopeConfig instanceof \Magento\Framework\App\Config\ScopeConfigInterface)) {
-            return \Magento\Framework\App\ObjectManager::getInstance()->get(
-                \Magento\Framework\App\Config\ScopeConfigInterface::class
-            );
-        } else {
-            return $this->scopeConfig;
-        }
     }
 }

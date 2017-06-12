@@ -12,13 +12,11 @@ namespace bitExpert\ForceCustomerLogin\Controller;
 
 use \bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
 use \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
-use \bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection;
+use bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
 use \bitExpert\ForceCustomerLogin\Model\Session;
 use \Magento\Framework\App\Action\Action;
 use \Magento\Framework\App\Action\Context;
 use \Magento\Framework\UrlInterface;
-use \Magento\Framework\App\DeploymentConfig;
-use \Magento\Backend\Setup\ConfigOptionsList as BackendConfigOptionsList;
 use \Magento\Framework\App\Config\ScopeConfigInterface;
 use \Magento\Store\Model\ScopeInterface;
 use \Magento\Framework\App\Response\Http as ResponseHttp;
@@ -42,13 +40,13 @@ class LoginCheck extends Action implements LoginCheckInterface
      */
     protected $scopeConfig;
     /**
-     * @var DeploymentConfig
-     */
-    protected $deploymentConfig;
-    /**
      * @var WhitelistRepositoryInterface
      */
     protected $whitelistRepository;
+    /**
+     * @var StrategyManager
+     */
+    protected $strategyManager;
     /**
      * @var ModuleCheck
      */
@@ -64,8 +62,8 @@ class LoginCheck extends Action implements LoginCheckInterface
      * @param Context $context
      * @param Session $session
      * @param ScopeConfigInterface $scopeConfig
-     * @param DeploymentConfig $deploymentConfig
      * @param WhitelistRepositoryInterface $whitelistRepository
+     * @param StrategyManager $strategyManager
      * @param ModuleCheck $moduleCheck
      * @param ResponseHttp $response
      */
@@ -73,15 +71,15 @@ class LoginCheck extends Action implements LoginCheckInterface
         Context $context,
         Session $session,
         ScopeConfigInterface $scopeConfig,
-        DeploymentConfig $deploymentConfig,
         WhitelistRepositoryInterface $whitelistRepository,
+        StrategyManager $strategyManager,
         ModuleCheck $moduleCheck,
         ResponseHttp $response
     ) {
         $this->session = $session;
         $this->scopeConfig = $scopeConfig;
-        $this->deploymentConfig = $deploymentConfig;
         $this->whitelistRepository = $whitelistRepository;
+        $this->strategyManager = $strategyManager;
         $this->moduleCheck = $moduleCheck;
         $this->response = $response;
         parent::__construct($context);
@@ -105,12 +103,11 @@ class LoginCheck extends Action implements LoginCheckInterface
             return;
         }
 
-        $ignoreUrls = $this->getUrlRuleSetByCollection($this->whitelistRepository->getCollection());
-        $extendedIgnoreUrls = $this->extendIgnoreUrls($ignoreUrls);
-
         // check if current url is a match with one of the ignored urls
-        foreach ($extendedIgnoreUrls as $ignoreUrl) {
-            if (\preg_match(\sprintf('#^.*%s/?.*$#i', $this->quoteRule($ignoreUrl)), $path)) {
+        foreach ($this->whitelistRepository->getCollection()->getItems() as $rule) {
+            /** @var $rule \bitExpert\ForceCustomerLogin\Model\WhitelistEntry */
+            $strategy = $this->strategyManager->get($rule->getStrategy());
+            if ($strategy->isMatch($path, $rule)) {
                 return;
             }
         }
@@ -120,49 +117,6 @@ class LoginCheck extends Action implements LoginCheckInterface
         $this->response->setNoCacheHeaders();
         $this->response->setRedirect($this->getRedirectUrl($targetUrl));
         $this->response->sendResponse();
-    }
-
-    /**
-     * Quote delimiter in whitelist entry rule
-     * @param string $rule
-     * @param string $delimiter
-     * @return string
-     */
-    protected function quoteRule($rule, $delimiter = '#')
-    {
-        return \str_replace($delimiter, \sprintf('\%s', $delimiter), $rule);
-    }
-
-    /**
-     * @param Collection $collection
-     * @return string[]
-     */
-    protected function getUrlRuleSetByCollection(Collection $collection)
-    {
-        $urlRuleSet = array();
-        foreach ($collection->getItems() as $whitelistEntry) {
-            /** @var $whitelistEntry \bitExpert\ForceCustomerLogin\Model\WhitelistEntry */
-            \array_push($urlRuleSet, $whitelistEntry->getUrlRule());
-        }
-        return $urlRuleSet;
-    }
-
-    /**
-     * Add dynamic urls to forced login whitelist.
-     *
-     * @param array $ignoreUrls
-     * @return array
-     */
-    protected function extendIgnoreUrls(array $ignoreUrls)
-    {
-        $adminUri = \sprintf(
-            '/%s',
-            $this->deploymentConfig->get(BackendConfigOptionsList::CONFIG_PATH_BACKEND_FRONTNAME)
-        );
-
-        \array_push($ignoreUrls, $adminUri);
-
-        return $ignoreUrls;
     }
 
     /**

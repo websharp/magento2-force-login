@@ -28,7 +28,7 @@
               passthru="true"
               checkreturn="true">
             <arg value="--standard=PSR2"/>
-            <arg value="--ignore=vendor"/>
+            <arg value="--ignore=**/*.js,vendor,build,logs,Test,var"/>
             <arg path="${phing.dir}"/>
         </exec>
     </target>

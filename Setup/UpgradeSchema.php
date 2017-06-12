@@ -28,8 +28,40 @@ class UpgradeSchema implements UpgradeSchemaInterface
     {
         $setup->startSetup();
 
-        // Nothing to do here
+        if (version_compare($context->getVersion(), '2.1.0', '<')) {
+            $this->runUpgrade210($setup, $context);
+        }
 
         $setup->endSetup();
+    }
+
+
+
+    /**
+     * @param SchemaSetupInterface $setup
+     * @param ModuleContextInterface $context
+     */
+    protected function runUpgrade210(SchemaSetupInterface $setup, ModuleContextInterface $context)
+    {
+        $installer = $setup;
+
+        $installer->startSetup();
+
+        /**
+         * Add strategy column
+         */
+        $installer->getConnection()
+            ->addColumn(
+                $installer->getTable('bitexpert_forcelogin_whitelist'),
+                'strategy',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'size' => 255,
+                    'nullable' => false,
+                    'comment' => 'strategy matcher identifier',
+                ]
+            );
+
+        $installer->endSetup();
     }
 }

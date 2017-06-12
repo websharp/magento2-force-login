@@ -40,6 +40,13 @@ class WhitelistEntry
             throw new \InvalidArgumentException('Url Rule value is too long.');
         }
 
+        if (0 === \strlen(\trim($whitelistEntry->getStrategy()))) {
+            throw new \InvalidArgumentException('Strategy value is too short.');
+        }
+        if (255 < \strlen(\trim($whitelistEntry->getStrategy()))) {
+            throw new \InvalidArgumentException('Strategy value is too long.');
+        }
+
         if (!\is_bool($whitelistEntry->getEditable())) {
             throw new \InvalidArgumentException('Editable is no boolean value.');
         }

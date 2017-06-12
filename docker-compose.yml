@@ -12,6 +12,7 @@ services:
     volumes: &appvolumes
       - appdata:/var/www/html
       - .:/var/www/html/app/code/bitExpert/ForceCustomerLogin:cached
+      - ./var:/var/www/html/var
     ports:
       - 8000:80
     networks: &appnetworks

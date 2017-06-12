@@ -56,6 +56,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
         $label = 'foobar';
         $urlRule = '/foobar';
         $storeId = 0;
+        $strategy = 'default';
 
         $expectedWhitelistEntry = $this->createMock('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry');
         $expectedWhitelistEntry->expects($this->at(0))
@@ -75,27 +76,36 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
             ->method('setUrlRule')
             ->with($urlRule);
         $expectedWhitelistEntry->expects($this->at(5))
+            ->method('setStrategy')
+            ->with($strategy);
+        $expectedWhitelistEntry->expects($this->at(6))
             ->method('setStoreId')
             ->with($storeId);
-        $expectedWhitelistEntry->expects($this->at(6))
+        $expectedWhitelistEntry->expects($this->at(7))
             ->method('setEditable')
             ->with(true);
-        $expectedWhitelistEntry->expects($this->at(7))
-            ->method('getLabel')
-            ->will($this->returnValue($label));
         $expectedWhitelistEntry->expects($this->at(8))
             ->method('getLabel')
             ->will($this->returnValue($label));
         $expectedWhitelistEntry->expects($this->at(9))
-            ->method('getUrlRule')
-            ->will($this->returnValue($urlRule));
+            ->method('getLabel')
+            ->will($this->returnValue($label));
         $expectedWhitelistEntry->expects($this->at(10))
             ->method('getUrlRule')
             ->will($this->returnValue($urlRule));
         $expectedWhitelistEntry->expects($this->at(11))
+            ->method('getUrlRule')
+            ->will($this->returnValue($urlRule));
+        $expectedWhitelistEntry->expects($this->at(12))
+            ->method('getStrategy')
+            ->will($this->returnValue($strategy));
+        $expectedWhitelistEntry->expects($this->at(13))
+            ->method('getStrategy')
+            ->will($this->returnValue($strategy));
+        $expectedWhitelistEntry->expects($this->at(14))
             ->method('getEditable')
             ->will($this->returnValue(true));
-        $expectedWhitelistEntry->expects($this->at(12))
+        $expectedWhitelistEntry->expects($this->at(15))
             ->method('save');
 
         $whitelistEntryFactory = $this->getWhitelistEntryFactory();
@@ -113,13 +123,13 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
             $this->getWhitelistEntrySearchResultInterfaceFactory()
         );
 
-        $resultWhitelistEntity = $whitelistRepository->createEntry($entityId, $label, $urlRule, $storeId);
+        $resultWhitelistEntity = $whitelistRepository->createEntry($entityId, $label, $urlRule, $strategy, $storeId);
 
         $this->assertEquals($expectedWhitelistEntry, $resultWhitelistEntity);
     }
 
     /**
-     * @return \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterfac
+     * @return \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface
      */
     protected function getWhitelistEntryFactory()
     {

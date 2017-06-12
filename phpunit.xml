@@ -2,12 +2,12 @@
 
 <phpunit backupGlobals="false"
 	backupStaticAttributes="false"
-	colors="true"
+	colors="false"
 	convertErrorsToExceptions="true"
 	convertNoticesToExceptions="true"
 	convertWarningsToExceptions="true"
 	processIsolation="false"
-	stopOnFailure="true"
+	stopOnFailure="false"
 	syntaxCheck="false">
 
     <testsuites>
@@ -21,6 +21,8 @@
 			<directory suffix=".php">./</directory>
 			<exclude>
 				<directory>./vendor</directory>
+				<directory>./var</directory>
+				<directory>./build</directory>
 				<directory>./Test</directory>
 				<directory>./logs</directory>
 				<file>./registration.php</file>
