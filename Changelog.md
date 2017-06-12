@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 2.0.2
+
+### Added
+
+- #71 Moved events.xml to frontend/events.xml
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- #68 Activating the module also blocks the backend
+
 ## 2.0.1
 
 ### Added
