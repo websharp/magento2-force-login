@@ -57,7 +57,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                     'size' => 255,
-                    'nullable' => false,
+                    'nullable' => true,
                     'comment' => 'strategy matcher identifier',
                 ]
             );

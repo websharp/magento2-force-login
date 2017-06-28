@@ -35,6 +35,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\Data\FormFactory $formFactory
      * @param WhitelistEntryFactoryInterface $entityFactory
+     * @param StrategyManager $strategyManager
      * @param array $data
      */
     public function __construct(
@@ -46,6 +47,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         array $data
     ) {
         $this->entityFactory = $entityFactory;
+        $this->strategyManager = $strategyManager;
         parent::__construct($context, $registry, $formFactory, $data);
     }
 
@@ -105,11 +107,11 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             'required' => true
         ]);
 
-        $fieldsetBase->addField('strategy', 'text', [
+        $fieldsetBase->addField('strategy', 'select', [
             'name' => 'strategy',
             'label' => __('Strategy'),
             'title' => __('Strategy'),
-            'value' => $whitelistEntry->getUrlRule(),
+            'value' => $whitelistEntry->getStrategy(),
             'options' =>  $this->strategyManager->getStrategyNames(),
             'required' => true
         ]);

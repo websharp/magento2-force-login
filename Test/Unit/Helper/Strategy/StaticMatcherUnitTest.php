@@ -23,7 +23,9 @@ class StaticMatcherUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function matchStaticRulesCorrectly()
     {
-        $matcher = new StaticMatcher();
+        $matcher = new StaticMatcher('foobar');
+
+        $this->assertEquals('foobar', $matcher->getName());
 
         /* @var $rule \bitExpert\ForceCustomerLogin\Model\WhitelistEntry */
         $rule = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')

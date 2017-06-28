@@ -23,7 +23,9 @@ class RegExAllMatcherUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function matchStaticRulesCorrectly()
     {
-        $matcher = new RegExAllMatcher();
+        $matcher = new RegExAllMatcher('foobar');
+
+        $this->assertEquals('foobar', $matcher->getName());
 
         /* @var $rule \bitExpert\ForceCustomerLogin\Model\WhitelistEntry */
         $rule = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')
@@ -50,7 +52,7 @@ class RegExAllMatcherUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function matchCatchAllRuleCorrectly()
     {
-        $matcher = new RegExAllMatcher();
+        $matcher = new RegExAllMatcher('foobar');
 
         /* @var $rule \bitExpert\ForceCustomerLogin\Model\WhitelistEntry */
         $rule = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')
@@ -76,7 +78,7 @@ class RegExAllMatcherUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function matchCatchAllWithLineEndIdentifierRuleCorrectly()
     {
-        $matcher = new RegExAllMatcher();
+        $matcher = new RegExAllMatcher('foobar');
 
         /* @var $rule \bitExpert\ForceCustomerLogin\Model\WhitelistEntry */
         $rule = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')
@@ -102,7 +104,7 @@ class RegExAllMatcherUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function matchHomepageRuleCorrectly()
     {
-        $matcher = new RegExAllMatcher();
+        $matcher = new RegExAllMatcher('foobar');
 
         /* @var $rule \bitExpert\ForceCustomerLogin\Model\WhitelistEntry */
         $rule = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')

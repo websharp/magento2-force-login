@@ -18,6 +18,28 @@ use \bitExpert\ForceCustomerLogin\Model\WhitelistEntry;
  */
 class StaticMatcher implements StrategyInterface
 {
+    /**+
+     * @var string
+     */
+    private $name;
+
+    /**
+     * RegExAllMatcher constructor.
+     * @param string $name
+     */
+    public function __construct($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
     /**
      * {@inheritdoc}
      */

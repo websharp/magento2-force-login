@@ -77,6 +77,7 @@ class Save extends \Magento\Backend\App\Action
                 $this->getRequest()->getParam('whitelist_entry_id'),
                 $this->getRequest()->getParam('label'),
                 $this->getRequest()->getParam('url_rule'),
+                $this->getRequest()->getParam('strategy'),
                 $this->getRequest()->getParam('store_id', 0)
             );
 
@@ -106,6 +107,7 @@ class Save extends \Magento\Backend\App\Action
                 [
                     'label' => \base64_encode($this->getRequest()->getParam('label')),
                     'url_rule' => \base64_encode($this->getRequest()->getParam('url_rule')),
+                    'strategy' => \base64_encode($this->getRequest()->getParam('strategy')),
                     'store_id' => \base64_encode($this->getRequest()->getParam('store_id', 0))
             ]);
         }
