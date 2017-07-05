@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- #72 Fixes on class resolution
 
 ## 2.0.2
 
