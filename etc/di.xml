@@ -60,17 +60,21 @@
                 type="bitExpert\ForceCustomerLogin\Repository\WhitelistRepository" />
 
     <!-- Helper -->
+    <type name="bitExpert\ForceCustomerLogin\Helper\Strategy\StaticMatcher">
+        <arguments>
+            <argument name="name" xsi:type="string">Static</argument>
+        </arguments>
+    </type>
+    <type name="bitExpert\ForceCustomerLogin\Helper\Strategy\RegExAllMatcher">
+        <arguments>
+            <argument name="name" xsi:type="string">RegEx (All)</argument>
+        </arguments>
+    </type>
     <type name="bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager">
         <arguments>
             <argument name="strategies" xsi:type="array">
-                <item name="default" xsi:type="array">
-                    <item name="name" xsi:type="string">Static</item>
-                    <item name="instance" xsi:type="object">bitExpert\ForceCustomerLogin\Helper\Strategy\StaticMatcher</item>
-                </item>
-                <item name="regex-all" xsi:type="array">
-                    <item name="name" xsi:type="string">RegEx (All)</item>
-                    <item name="instance" xsi:type="object">bitExpert\ForceCustomerLogin\Helper\Strategy\RegExAllMatcher</item>
-                </item>
+                <item name="default" xsi:type="object">\bitExpert\ForceCustomerLogin\Helper\Strategy\StaticMatcher</item>
+                <item name="regex-all" xsi:type="object">\bitExpert\ForceCustomerLogin\Helper\Strategy\RegExAllMatcher</item>
             </argument>
         </arguments>
     </type>

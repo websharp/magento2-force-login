@@ -23,7 +23,9 @@ class StaticMatcherUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function matchStaticRulesCorrectly()
     {
-        $matcher = new StaticMatcher();
+        $matcher = new StaticMatcher('foobar');
+
+        $this->assertEquals('foobar', $matcher->getName());
 
         /* @var $rule \bitExpert\ForceCustomerLogin\Model\WhitelistEntry */
         $rule = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')
@@ -39,5 +41,8 @@ class StaticMatcherUnitTest extends \PHPUnit\Framework\TestCase
         // simple
         $this->assertTrue($matcher->isMatch('/foobar', $rule));
         $this->assertFalse($matcher->isMatch('/bar', $rule));
+        // without rewrite
+        $this->assertTrue($matcher->isMatch('/index.php/foobar', $rule));
+        $this->assertFalse($matcher->isMatch('/index.php/bar', $rule));
     }
 }

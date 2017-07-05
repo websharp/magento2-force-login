@@ -32,13 +32,13 @@ class StrategyManager
 
     /**
      * LoginRequiredOnVisitorInitObserver constructor.
-     * @param array $strategies
+     * @param StrategyInterface[] $strategies
      */
     public function __construct(array $strategies)
     {
         foreach ($strategies as $identifier => $strategyEntry) {
-            $this->strategies[$identifier] = $strategyEntry['instance'];
-            $this->strategyNames[$identifier] = $strategyEntry['name'];
+            $this->strategies[$identifier] = $strategyEntry;
+            $this->strategyNames[$identifier] = $strategyEntry->getName();
         }
     }
 

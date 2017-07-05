@@ -24,19 +24,20 @@ class StrategyManagerUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function getStrategyNamesSuccessfully()
     {
-        /* @var $strategy1 StrategyInterface */
+        /* @var $strategy1 StrategyInterface|\PHPUnit_Framework_MockObject_MockObject */
         $strategy1 = $this->createMock('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy1->expects($this->once())
+            ->method('getName')
+            ->willReturn('Static');
+        /* @var $strategy2 StrategyInterface|\PHPUnit_Framework_MockObject_MockObject */
         $strategy2 = $this->createMock('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy2->expects($this->once())
+            ->method('getName')
+            ->willReturn('RegEx (All)');
 
         $manager = new StrategyManager([
-            'default' => [
-                'name' => 'Static',
-                'instance' => $strategy1
-            ],
-            'regex-all' => [
-                'name' => 'RegEx (All)',
-                'instance' => $strategy2
-            ]
+            'default' => $strategy1,
+            'regex-all' => $strategy2
         ]);
 
         $this->assertEquals(
@@ -53,19 +54,20 @@ class StrategyManagerUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function getStrategyInstancesSuccessfully()
     {
-        /* @var $strategy1 StrategyInterface */
+        /* @var $strategy1 StrategyInterface|\PHPUnit_Framework_MockObject_MockObject */
         $strategy1 = $this->createMock('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy1->expects($this->once())
+            ->method('getName')
+            ->willReturn('Static');
+        /* @var $strategy2 StrategyInterface|\PHPUnit_Framework_MockObject_MockObject */
         $strategy2 = $this->createMock('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy2->expects($this->once())
+            ->method('getName')
+            ->willReturn('RegEx (All)');
 
         $manager = new StrategyManager([
-            'default' => [
-                'name' => 'Static',
-                'instance' => $strategy1
-            ],
-            'regex-all' => [
-                'name' => 'RegEx (All)',
-                'instance' => $strategy2
-            ]
+            'default' => $strategy1,
+            'regex-all' => $strategy2
         ]);
 
         $this->assertEquals(
@@ -82,19 +84,20 @@ class StrategyManagerUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function getStrategyInstanceSuccessfully()
     {
-        /* @var $strategy1 StrategyInterface */
+        /* @var $strategy1 StrategyInterface|\PHPUnit_Framework_MockObject_MockObject */
         $strategy1 = $this->createMock('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy1->expects($this->once())
+            ->method('getName')
+            ->willReturn('Static');
+        /* @var $strategy2 StrategyInterface|\PHPUnit_Framework_MockObject_MockObject */
         $strategy2 = $this->createMock('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy2->expects($this->once())
+            ->method('getName')
+            ->willReturn('RegEx (All)');
 
         $manager = new StrategyManager([
-            'default' => [
-                'name' => 'Static',
-                'instance' => $strategy1
-            ],
-            'regex-all' => [
-                'name' => 'RegEx (All)',
-                'instance' => $strategy2
-            ]
+            'default' => $strategy1,
+            'regex-all' => $strategy2
         ]);
 
         $this->assertFalse($manager->has('foo'));
@@ -107,19 +110,20 @@ class StrategyManagerUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function getDefaultStrategyInstanceSuccessfully()
     {
-        /* @var $strategy1 StrategyInterface */
+        /* @var $strategy1 StrategyInterface|\PHPUnit_Framework_MockObject_MockObject */
         $strategy1 = $this->createMock('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy1->expects($this->once())
+            ->method('getName')
+            ->willReturn('Static');
+        /* @var $strategy2 StrategyInterface|\PHPUnit_Framework_MockObject_MockObject */
         $strategy2 = $this->createMock('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy2->expects($this->once())
+            ->method('getName')
+            ->willReturn('RegEx (All)');
 
         $manager = new StrategyManager([
-            'default' => [
-                'name' => 'Static',
-                'instance' => $strategy1
-            ],
-            'regex-all' => [
-                'name' => 'RegEx (All)',
-                'instance' => $strategy2
-            ]
+            'default' => $strategy1,
+            'regex-all' => $strategy2
         ]);
 
         $this->assertFalse($manager->has('foo'));

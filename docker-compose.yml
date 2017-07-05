@@ -11,12 +11,27 @@ services:
       - phpfpm
     volumes: &appvolumes
       - appdata:/var/www/html
-      - .:/var/www/html/app/code/bitExpert/ForceCustomerLogin:cached
+      - ./Api:/var/www/html/app/code/bitExpert/ForceCustomerLogin/Api:cached
+      - ./Block:/var/www/html/app/code/bitExpert/ForceCustomerLogin/Block:cached
+      - ./Controller:/var/www/html/app/code/bitExpert/ForceCustomerLogin/Controller:cached
+      - ./etc:/var/www/html/app/code/bitExpert/ForceCustomerLogin/etc:cached
+      - ./Helper:/var/www/html/app/code/bitExpert/ForceCustomerLogin/Helper:cached
+      - ./Model:/var/www/html/app/code/bitExpert/ForceCustomerLogin/Model:cached
+      - ./Observer:/var/www/html/app/code/bitExpert/ForceCustomerLogin/Observer:cached
+      - ./Plugin:/var/www/html/app/code/bitExpert/ForceCustomerLogin/Plugin:cached
+      - ./Repository:/var/www/html/app/code/bitExpert/ForceCustomerLogin/Repository:cached
+      - ./Setup:/var/www/html/app/code/bitExpert/ForceCustomerLogin/Setup:cached
+      - ./Ui:/var/www/html/app/code/bitExpert/ForceCustomerLogin/Ui:cached
+      - ./Validator:/var/www/html/app/code/bitExpert/ForceCustomerLogin/Validator:cached
+      - ./view:/var/www/html/app/code/bitExpert/ForceCustomerLogin/view:cached
+      - ./registration.php:/var/www/html/app/code/bitExpert/ForceCustomerLogin/registration.php
       - ./var:/var/www/html/var
     ports:
       - 8000:80
     networks: &appnetworks
       - www
+    environment:
+      - APP_MAGE_MODE=developer
 
   phpfpm:
     image: mageinferno/magento2-php:7.0-fpm-1
@@ -24,6 +39,9 @@ services:
       - db
     volumes: *appvolumes
     networks: *appnetworks
+    environment:
+      - PHP_MEMORY_LIMIT=4096M
+      - APP_MAGE_MODE=developer
 
   db:
     image: percona:5.7

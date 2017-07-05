@@ -24,4 +24,9 @@ interface StrategyInterface
      * @return bool
      */
     public function isMatch($url, WhitelistEntry $rule);
+
+    /**
+     * @return string
+     */
+    public function getName();
 }
