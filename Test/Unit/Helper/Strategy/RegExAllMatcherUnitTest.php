@@ -45,6 +45,13 @@ class RegExAllMatcherUnitTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($matcher->isMatch('/foobar/', $rule));
         $this->assertTrue($matcher->isMatch('/foobar/baz', $rule));
         $this->assertTrue($matcher->isMatch('/foobar/baz/', $rule));
+        // without rewrite
+        $this->assertFalse($matcher->isMatch('/index.php', $rule));
+        $this->assertFalse($matcher->isMatch('/index.php/', $rule));
+        $this->assertTrue($matcher->isMatch('/index.php/foobar', $rule));
+        $this->assertTrue($matcher->isMatch('/index.php/foobar/', $rule));
+        $this->assertTrue($matcher->isMatch('/index.php/foobar/baz', $rule));
+        $this->assertTrue($matcher->isMatch('/index.php/foobar/baz/', $rule));
     }
     
     /**

@@ -18,6 +18,11 @@ use \bitExpert\ForceCustomerLogin\Model\WhitelistEntry;
  */
 class StaticMatcher implements StrategyInterface
 {
+    /*
+     * Rewrite
+     */
+    const REWRITE_DISABLED_URL_PREFIX = '/index.php';
+
     /**+
      * @var string
      */
@@ -45,6 +50,15 @@ class StaticMatcher implements StrategyInterface
      */
     public function isMatch($url, WhitelistEntry $rule)
     {
-        return ($url === $rule->getUrlRule());
+        return ($this->getCleanUrl($url) === $rule->getUrlRule());
+    }
+
+    /**
+     * @param $url
+     * @return string
+     */
+    private function getCleanUrl($url)
+    {
+        return str_replace(self::REWRITE_DISABLED_URL_PREFIX, '', $url);
     }
 }

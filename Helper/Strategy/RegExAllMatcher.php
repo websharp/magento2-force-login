@@ -18,6 +18,11 @@ use \bitExpert\ForceCustomerLogin\Model\WhitelistEntry;
  */
 class RegExAllMatcher implements StrategyInterface
 {
+    /*
+     * Rewrite
+     */
+    const REWRITE_DISABLED_URL_PREFIX = '/index.php';
+
     /**+
      * @var string
      */
@@ -45,7 +50,15 @@ class RegExAllMatcher implements StrategyInterface
      */
     public function isMatch($url, WhitelistEntry $rule)
     {
-        return (\preg_match(\sprintf('#^.*%s/?.*$#i', $this->quoteRule($rule->getUrlRule())), $url) === 1);
+        return (
+            preg_match(
+                sprintf(
+                    '#^.*%s/?.*$#i',
+                    $this->quoteRule($rule->getUrlRule())
+                ),
+                $this->getCleanUrl($url)
+            ) === 1
+        );
     }
 
     /**
@@ -56,6 +69,15 @@ class RegExAllMatcher implements StrategyInterface
      */
     private function quoteRule($rule, $delimiter = '#')
     {
-        return \str_replace($delimiter, \sprintf('\%s', $delimiter), $rule);
+        return str_replace($delimiter, \sprintf('\%s', $delimiter), $rule);
+    }
+
+    /**
+     * @param $url
+     * @return string
+     */
+    private function getCleanUrl($url)
+    {
+        return str_replace(self::REWRITE_DISABLED_URL_PREFIX, '', $url);
     }
 }

@@ -41,5 +41,8 @@ class StaticMatcherUnitTest extends \PHPUnit\Framework\TestCase
         // simple
         $this->assertTrue($matcher->isMatch('/foobar', $rule));
         $this->assertFalse($matcher->isMatch('/bar', $rule));
+        // without rewrite
+        $this->assertTrue($matcher->isMatch('/index.php/foobar', $rule));
+        $this->assertFalse($matcher->isMatch('/index.php/bar', $rule));
     }
 }
