@@ -66,7 +66,7 @@ if the called URI does not match any configured whitelisted url rules.
 
 ### Whitelisting
 
-Whitelisting is based upon the usage of rules. The rule syntax uses the [RegEx](https://en.wikipedia.org/wiki/Regular_expression) (regular expression) pattern.
+Whitelisting is based upon the usage of rules. The strategy selection defines how the rules are interpreted, [details are listed below](#strategies).
 By default, some static rules are already listed. The following example shows, how to add a whitelist entry for the homepage (startpage).
 
 Navigate to the **Overview Grid** and use the *Add Entry* button.
@@ -112,11 +112,20 @@ The *Url Rules* ( **3** ) are part of a regular expression checking on the calle
 
 ### Detail Form
 You can return to the *Overview Grid* by using the *Back* button ( **1** ). The *Label* value has only declarative character and
-is for information purpose only ( **2** ). The *Url Rule* is part of a regular expression checking on the called 
+is for information purpose only ( **2** ). The *Url Rule* is an expression checking on the called 
 *Url* and tries to match against the whitelist ( **3** ). *Url Rules* may be related to all stores or to a specific one ( **4** ).
-Persist the rule by using the *Save* button ( **5** ).
+The strategy selection ( **5** ) defines how the *Url Rule* is interpreted, [details are listed below](#strategies).
+Persist the rule by using the *Save* button ( **6** ).
 
 ![alt text](./resources/ui_step_03.png "UI Form")
+
+### Strategies
+
+#### Static
+Rule is used as a literal value and will be added onto the base url for matching. This is default behaviour. 
+
+#### RegEx-All 
+Rule is based on [regular expression](https://en.wikipedia.org/wiki/Regular_expression), and will be used for looking up matching anywhere in the current Url.
 
 ## Contribution
 Feel free to contribute to this module by reporting issues or create some pull requests for improvements.
