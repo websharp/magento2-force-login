@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
+- #73 Move backend configuration to customer > customer configuration section
 - #72 Fixes on class resolution
 
 ## 2.0.2
