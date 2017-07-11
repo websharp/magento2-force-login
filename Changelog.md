@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
+- #75 Static matcher now canonicalizes url and rule to omit differences of trailing slashes
 - #72 Fixes on class resolution
 
 ## 2.0.2

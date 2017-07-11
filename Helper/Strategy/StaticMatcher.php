@@ -50,15 +50,25 @@ class StaticMatcher implements StrategyInterface
      */
     public function isMatch($url, WhitelistEntry $rule)
     {
-        return ($this->getCleanUrl($url) === $rule->getUrlRule());
+        return ($this->getCanonicalUrl($url) === $this->getCanonicalRule($rule->getUrlRule()));
     }
 
     /**
-     * @param $url
+     * @param string $url
      * @return string
      */
-    private function getCleanUrl($url)
+    private function getCanonicalUrl($url)
     {
-        return str_replace(self::REWRITE_DISABLED_URL_PREFIX, '', $url);
+        $canonicalUrl = rtrim($url,'/') . '/';
+        return str_replace(self::REWRITE_DISABLED_URL_PREFIX, '', $canonicalUrl);
+    }
+
+    /**
+     * @param string $rule
+     * @return string
+     */
+    private function getCanonicalRule($rule)
+    {
+        return rtrim($rule,'/') . '/';
     }
 }
