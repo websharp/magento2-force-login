@@ -22,7 +22,7 @@ class ModuleCheck
     /*
      * Configuration
      */
-    const MODULE_CONFIG_ENABLED = 'bitExpert_ForceCustomerLogin/general/enabled';
+    const MODULE_CONFIG_ENABLED = 'customer/bitExpert_ForceCustomerLogin/enabled';
 
     /**
      * @var ScopeConfigInterface
