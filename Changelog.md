@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
+- #74 Provides backwards compatibility by set strategy for existing rules to regex matcher instead of static
 - #72 Fixes on class resolution
 
 ## 2.0.2
