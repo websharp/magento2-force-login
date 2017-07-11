@@ -59,7 +59,7 @@ class StaticMatcher implements StrategyInterface
      */
     private function getCanonicalUrl($url)
     {
-        $canonicalUrl = rtrim($url,'/') . '/';
+        $canonicalUrl = rtrim($url, '/') . '/';
         return str_replace(self::REWRITE_DISABLED_URL_PREFIX, '', $canonicalUrl);
     }
 
@@ -69,6 +69,6 @@ class StaticMatcher implements StrategyInterface
      */
     private function getCanonicalRule($rule)
     {
-        return rtrim($rule,'/') . '/';
+        return rtrim($rule, '/') . '/';
     }
 }
