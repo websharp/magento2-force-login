@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - #75 Static matcher now canonicalizes url and rule to omit differences of trailing slashes
 - #74 Provides backwards compatibility by set strategy for existing rules to regex matcher instead of static
+- #73 Move backend configuration to customer > customer configuration section
 - #72 Fixes on class resolution
 
 ## 2.0.2

@@ -21,5 +21,5 @@ interface LoginCheckInterface extends ActionInterface
     /*
      * Configuration
      */
-    const MODULE_CONFIG_TARGET = 'bitExpert_ForceCustomerLogin/target/url';
+    const MODULE_CONFIG_TARGET = 'customer/bitExpert_ForceCustomerLogin/url';
 }
