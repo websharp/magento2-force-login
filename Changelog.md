@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
+- #82 Fixed invalid position of tag resource in system.xml
 - #78 Move backend configuration to customer > customer configuration section
 - #77 Provides backwards compatibility by set strategy for existing rules to regex matcher instead of static
 - #76 Static matcher now canonicalizes url and rule to omit differences of trailing slashes
@@ -21,6 +22,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
+- #81 Error in admin pages due to invalid XML
+- #79 Invalid system.xml file
 - #75 Static matching strategy could ignore ending slash
 - #74 Upgrade to 2.1 RC2 from 2 breaks backward compatibility of rules
 - #73 Force login top level system config tab is overkill
