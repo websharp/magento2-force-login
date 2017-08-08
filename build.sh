@@ -136,9 +136,9 @@ function help () {
 
 # shellcheck disable=SC2015
 [[ "${__usage+x}" ]] || read -r -d '' __usage <<-'EOF' || true # exits non-zero when EOF encountered
-  -s --src    [arg] Source folder. Default=.
-  -d --dest   [arg] Target folder. Default=./build/store
-  -t --tmp    [arg] Tmp folder. Default=./build/tmp
+  -s --src    [arg] Source folder.
+  -d --dest   [arg] Target folder.
+  -t --tmp    [arg] Tmp folder.
   -h --help           This page
 EOF
 
@@ -344,9 +344,9 @@ fi
 ##############################################################################
 
 CURDIR=$(pwd)
-SRC=${arg_s:-"."}
-TMP=${arg_t:-"./build/tmp"}
-DEST=${arg_d:-"./build/store"}
+SRC=${arg_s:-"${CURDIR}"}
+TMP=${arg_t:-"${CURDIR}/build/tmp"}
+DEST=${arg_d:-"${CURDIR}/build/store"}
 OUTPUT="${DEST}/bitexpert_forcecustomerlogin.zip"
 
 ##
@@ -358,11 +358,17 @@ fi
 if [ ! -d "${TMP}" ]; then
     mkdir -p "${TMP}"
 fi
-rm -rf "${TMP}/*"
+rm -rf "${TMP}"/*
 if [ ! -d "${DEST}" ]; then
     mkdir -p "${DEST}"
 fi
-rm -rf "${DEST}/*"
+rm -rf "${DEST}"/*
+
+##
+## Update dependencies
+## Based upon  PHP 5.6
+##
+docker run -v "${SRC}":/www -v ~/.composer:/root/.composer danieldent/php-5.6-composer:latest bash -c 'apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng12-dev libxslt-dev && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && docker-php-ext-install gd mcrypt xsl && cd /www && composer update'
 
 ##
 ## Prepare important files
@@ -395,10 +401,16 @@ cp -pP "${SRC}/registration.php" "${TMP}/registration.php"
 ##
 ## Build package
 ##
-cd "${TMP}" && zip -r "${CURDIR}/${OUTPUT}" . && cd "${CURDIR}"
+cd "${TMP}"
+zip -r "${OUTPUT}" .
+
+if [ ! -e "${OUTPUT}" ]; then
+    error "Failed to create build package: ${OUTPUT}"
+    exit 129
+fi
 
 ##
 ## Validate package
 ##
-echo "Running: php -f validate_m2_package.php ${OUTPUT}"
+cd "${CURDIR}"
 php -f validate_m2_package.php "${OUTPUT}"
