@@ -10,6 +10,7 @@
  */
 namespace bitExpert\ForceCustomerLogin\Controller;
 
+use bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
 use Magento\Framework\App\Router\Base;
 use Magento\Framework\App\ActionFactory;
 
@@ -34,7 +35,7 @@ class LoginRouter extends Base
      * @param \Magento\Framework\UrlInterface $url
      * @param \Magento\Framework\Code\NameBuilder $nameBuilder
      * @param \Magento\Framework\App\Router\PathConfigInterface $pathConfig
-     * @param LoginCheck $loginCheck
+     * @param LoginCheckInterface $loginCheck
      */
     public function __construct(
         \Magento\Framework\App\Router\ActionList $actionList,
@@ -45,7 +46,7 @@ class LoginRouter extends Base
         \Magento\Framework\UrlInterface $url,
         \Magento\Framework\Code\NameBuilder $nameBuilder,
         \Magento\Framework\App\Router\PathConfigInterface $pathConfig,
-        LoginCheck $loginCheck
+        LoginCheckInterface $loginCheck
     ) {
 
         $this->actionList = $actionList;
