@@ -14,6 +14,7 @@ use \bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
 use \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
 use bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
 use \bitExpert\ForceCustomerLogin\Model\Session;
+use \Magento\Customer\Model\Session as CustomerSession;
 use \Magento\Framework\App\Action\Action;
 use \Magento\Framework\App\Action\Context;
 use \Magento\Framework\UrlInterface;
@@ -31,6 +32,10 @@ class LoginCheck extends Action implements LoginCheckInterface
      * @var UrlInterface
      */
     protected $url;
+    /**
+     * @var CustomerSession
+     */
+    protected $customerSession;
     /**
      * @var Session
      */
@@ -60,6 +65,7 @@ class LoginCheck extends Action implements LoginCheckInterface
      * Creates a new {@link \bitExpert\ForceCustomerLogin\Controller\LoginCheck}.
      *
      * @param Context $context
+     * @param CustomerSession $customerSession
      * @param Session $session
      * @param ScopeConfigInterface $scopeConfig
      * @param WhitelistRepositoryInterface $whitelistRepository
@@ -69,6 +75,7 @@ class LoginCheck extends Action implements LoginCheckInterface
      */
     public function __construct(
         Context $context,
+        CustomerSession $customerSession,
         Session $session,
         ScopeConfigInterface $scopeConfig,
         WhitelistRepositoryInterface $whitelistRepository,
@@ -76,6 +83,7 @@ class LoginCheck extends Action implements LoginCheckInterface
         ModuleCheck $moduleCheck,
         ResponseHttp $response
     ) {
+        $this->customerSession = $customerSession;
         $this->session = $session;
         $this->scopeConfig = $scopeConfig;
         $this->whitelistRepository = $whitelistRepository;
@@ -87,11 +95,18 @@ class LoginCheck extends Action implements LoginCheckInterface
 
     /**
      * Manages redirect
+     * @return bool TRUE if redirection is applied, else FALSE
      */
     public function execute()
     {
         if ($this->moduleCheck->isModuleEnabled() === false) {
-            return;
+            return false;
+        }
+
+        // if user is logged in, every thing is fine
+        if ($this->customerSession instanceof \Magento\Customer\Model\Session &&
+            $this->customerSession->isLoggedIn()) {
+            return false;
         }
 
         $url = $this->_url->getCurrentUrl();
@@ -100,7 +115,7 @@ class LoginCheck extends Action implements LoginCheckInterface
 
         // current path is already pointing to target url, no redirect needed
         if ($targetUrl === $path) {
-            return;
+            return false;
         }
 
         // check if current url is a match with one of the ignored urls
@@ -108,7 +123,7 @@ class LoginCheck extends Action implements LoginCheckInterface
             /** @var $rule \bitExpert\ForceCustomerLogin\Model\WhitelistEntry */
             $strategy = $this->strategyManager->get($rule->getStrategy());
             if ($strategy->isMatch($path, $rule)) {
-                return;
+                return false;
             }
         }
 
@@ -117,6 +132,7 @@ class LoginCheck extends Action implements LoginCheckInterface
         $this->response->setNoCacheHeaders();
         $this->response->setRedirect($this->getRedirectUrl($targetUrl));
         $this->response->sendResponse();
+        return true;
     }
 
     /**

@@ -33,6 +33,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $this->getContext(),
             $this->getCustomerSession(),
+            $this->getSession(),
             $this->getScopeConfig(),
             $this->getWhitelistRepository(),
             $this->getStrategyManager(),
@@ -79,6 +80,57 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $context,
             $this->getCustomerSession(),
+            $this->getSession(),
+            $this->getScopeConfig(),
+            $this->getWhitelistRepository(),
+            $this->getStrategyManager(),
+            $moduleCheck,
+            $this->getResponseHttp()
+        );
+
+        $loginCheck->execute();
+    }
+
+    /**
+     * Run test with existing customer session, so no redirecting is happening.
+     * @test
+     * @depends testConstructor
+     */
+    public function skipMatchingWhenCustomerSessionIsActive()
+    {
+        $moduleCheck = $this->getModuleCheck();
+        $moduleCheck->expects($this->once())
+            ->method('isModuleEnabled')
+            ->willReturn(true);
+
+        $customerSession = $this->getCustomerSession();
+        $customerSession->expects($this->once())
+            ->method('isLoggedIn')
+            ->willReturn(true);
+
+        // --- Context
+        $url = $this->getUrl();
+        $url->expects($this->never())
+            ->method('getCurrentUrl');
+
+        $response = $this->getResponse();
+        $redirect = $this->getRedirect();
+
+        $context = $this->getContext();
+        $context->expects($this->exactly(1))
+            ->method('getUrl')
+            ->will($this->returnValue($url));
+        $context->expects($this->once())
+            ->method('getResponse')
+            ->will($this->returnValue($response));
+        $context->expects($this->once())
+            ->method('getRedirect')
+            ->will($this->returnValue($redirect));
+
+        $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
+            $context,
+            $customerSession,
+            $this->getSession(),
             $this->getScopeConfig(),
             $this->getWhitelistRepository(),
             $this->getStrategyManager(),
@@ -151,6 +203,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $context,
             $this->getCustomerSession(),
+            $this->getSession(),
             $scopeConfig,
             $whitelistRepository,
             $strategyManager,
@@ -245,6 +298,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $context,
             $this->getCustomerSession(),
+            $this->getSession(),
             $scopeConfig,
             $whitelistRepository,
             $strategyManager,
@@ -340,6 +394,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $context,
             $this->getCustomerSession(),
+            $this->getSession(),
             $scopeConfig,
             $whitelistRepository,
             $strategyManager,
@@ -361,9 +416,19 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\bitExpert\ForceCustomerLogin\Model\Session
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Customer\Model\Session
      */
     protected function getCustomerSession()
+    {
+        return $this->getMockBuilder('\Magento\Customer\Model\Session')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\bitExpert\ForceCustomerLogin\Model\Session
+     */
+    protected function getSession()
     {
         return $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\Session')
             ->disableOriginalConstructor()
