@@ -127,6 +127,7 @@ class RestoreDefault extends \Magento\Framework\App\Action\Action
 
     /**
      * {@inheritdoc}
+     * @codeCoverageIgnore
      */
     protected function _isAllowed()
     {

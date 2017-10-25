@@ -23,9 +23,12 @@
 				<directory>./vendor</directory>
 				<directory>./var</directory>
 				<directory>./build</directory>
+				<directory>./Model/ResourceModel/WhitelistEntry/Collection.php</directory>
+				<directory>./Setup</directory>
 				<directory>./Test</directory>
 				<directory>./logs</directory>
 				<file>./registration.php</file>
+				<file>./validate_m2_package.php</file>
 			</exclude>
 		</whitelist>
 	</filter>

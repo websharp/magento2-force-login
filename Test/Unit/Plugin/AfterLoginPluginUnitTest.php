@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Test\Unit\Observer;
+namespace bitExpert\ForceCustomerLogin\Test\Unit\Plugin;
 
 use bitExpert\ForceCustomerLogin\Plugin\AfterLoginPlugin;
 
 /**
  * Class AfterLoginPluginUnitTest
- * @package bitExpert\ForceCustomerLogin\Test\Unit\Observer
+ * @package bitExpert\ForceCustomerLogin\Test\Unit\Plugin
  */
 class AfterLoginPluginUnitTest extends \PHPUnit\Framework\TestCase
 {
