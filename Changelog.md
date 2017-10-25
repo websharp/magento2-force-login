@@ -2,11 +2,12 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.2.1
+## 2.3.0
 
 ### Added
 
 - #88 Migrated from using observers to hook into router chain
+- #89 Enabled edition of default whitelist routes
 
 ### Deprecated
 
