@@ -20,6 +20,7 @@
         <arguments>
             <argument name="defaultRoutes" xsi:type="array">
                 <item name="/rest" xsi:type="string">Rest API</item>
+                <item name="/customer/account/login" xsi:type="string">Customer Account Login</item>
                 <item name="/customer/account/logout" xsi:type="string">Customer Account Logout</item>
                 <item name="/customer/account/logoutSuccess" xsi:type="string">Customer Account Logout Success</item>
                 <item name="/customer/account/create" xsi:type="string">Customer Account Create</item>
