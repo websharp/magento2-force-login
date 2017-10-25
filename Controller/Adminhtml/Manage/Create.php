@@ -28,6 +28,7 @@ class Create extends \Magento\Backend\App\Action
 
     /**
      * {@inheritdoc}
+     * @codeCoverageIgnore
      */
     protected function _isAllowed()
     {
