@@ -67,6 +67,10 @@ class UpgradeData implements UpgradeDataInterface
             $this->runUpgrade210($setup);
         }
 
+        if (version_compare($context->getVersion(), '2.2.1', '<')) {
+            $this->runUpgrade221($setup);
+        }
+
         $setup->endSetup();
     }
 
@@ -164,6 +168,17 @@ class UpgradeData implements UpgradeDataInterface
         $setup->getConnection()->update(
             $setup->getTable('bitexpert_forcelogin_whitelist'),
             ['strategy' => 'regex-all']
+        );
+    }
+
+    /**
+     * @param ModuleDataSetupInterface $setup
+     */
+    protected function runUpgrade221(ModuleDataSetupInterface $setup)
+    {
+        $setup->getConnection()->update(
+            $setup->getTable('bitexpert_forcelogin_whitelist'),
+            ['editable' => true]
         );
     }
 

@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 2.2.1
+
+### Added
+
+- #88 Migrated from using observers to hook into router chain
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- #88 Usage of observers (LoginRequiredOnCustomerSessionInitObserver, LoginRequiredOnVisitorInitObserver) and event hooks (customer_session_init, visitor_init) have been removed
+
+### Fixed
+
+- #83 404 pages do not show when logged out
+- #84 Disable registration isn't possible
+
 ## 2.2.0
 
 ### Added
