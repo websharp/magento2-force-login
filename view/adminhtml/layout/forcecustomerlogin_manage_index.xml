@@ -15,7 +15,7 @@
     <body>
         <referenceContainer name="content">
             <uiComponent name="whitelist_overview"/>
-            <block class="bitExpert\ForceCustomerLogin\Block\Adminhtml\Settings\Whitelist" name="whitelist_list"/>
+            <block class="BitExpert\ForceCustomerLogin\Block\Adminhtml\Settings\Whitelist" name="whitelist_list"/>
         </referenceContainer>
     </body>
 </page>

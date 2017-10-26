@@ -12,6 +12,10 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
+    <!-- Blocks -->
+    <preference for="BitExpert\ForceCustomerLogin\Block\Adminhtml\Settings\Whitelist"
+                type="bitExpert\ForceCustomerLogin\Block\Adminhtml\Settings\Whitelist" />
+
     <!-- Controllers -->
     <preference for="bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface"
                 type="bitExpert\ForceCustomerLogin\Controller\LoginCheck" />
