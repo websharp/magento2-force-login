@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - #88 Migrated from using observers to hook into router chain
 - #89 Enabled edition of default whitelist routes
+- #92 Fixed syntax issue in layout xml, invalid block definition
 
 ### Deprecated
 
@@ -21,6 +22,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - #83 404 pages do not show when logged out
 - #84 Disable registration isn't possible
+- #91 Whitelist is Not works for Magento 2.2.0
 
 ## 2.2.0
 
