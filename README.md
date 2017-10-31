@@ -127,6 +127,12 @@ Rule is used as a literal value and will be added onto the base url for matching
 #### RegEx-All 
 Rule is based on [regular expression](https://en.wikipedia.org/wiki/Regular_expression), and will be used for looking up matching anywhere in the current Url.
 
+## Tests
+
+You can run the unit tests with the following command (requires dependency installation):
+
+    composer test
+
 ## Contribution
 Feel free to contribute to this module by reporting issues or create some pull requests for improvements.
 

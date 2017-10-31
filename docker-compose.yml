@@ -17,7 +17,6 @@ services:
       - ./etc:/var/www/html/app/code/bitExpert/ForceCustomerLogin/etc:cached
       - ./Helper:/var/www/html/app/code/bitExpert/ForceCustomerLogin/Helper:cached
       - ./Model:/var/www/html/app/code/bitExpert/ForceCustomerLogin/Model:cached
-      - ./Observer:/var/www/html/app/code/bitExpert/ForceCustomerLogin/Observer:cached
       - ./Plugin:/var/www/html/app/code/bitExpert/ForceCustomerLogin/Plugin:cached
       - ./Repository:/var/www/html/app/code/bitExpert/ForceCustomerLogin/Repository:cached
       - ./Setup:/var/www/html/app/code/bitExpert/ForceCustomerLogin/Setup:cached
