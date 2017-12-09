@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
+namespace BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 
 /**
  * Class Edit
- * @package bitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage
+ * @package BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage
  */
 class Edit extends Create
 {

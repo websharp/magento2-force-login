@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Model\ResourceModel;
+namespace BitExpert\ForceCustomerLogin\Model\ResourceModel;
 
 /**
  * Class WhitelistEntry
- * @package bitExpert\ForceCustomerLogin\Model\ResourceModel
+ * @package BitExpert\ForceCustomerLogin\Model\ResourceModel
  * @codingStandardsIgnoreFile
  */
 class WhitelistEntry extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb

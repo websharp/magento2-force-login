@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Test\Unit\Plugin;
+namespace BitExpert\ForceCustomerLogin\Test\Unit\Plugin;
 
-use bitExpert\ForceCustomerLogin\Plugin\AfterLoginPlugin;
+use BitExpert\ForceCustomerLogin\Plugin\AfterLoginPlugin;
 
 /**
  * Class AfterLoginPluginUnitTest
- * @package bitExpert\ForceCustomerLogin\Test\Unit\Plugin
+ * @package BitExpert\ForceCustomerLogin\Test\Unit\Plugin
  */
 class AfterLoginPluginUnitTest extends \PHPUnit\Framework\TestCase
 {
@@ -130,11 +130,11 @@ class AfterLoginPluginUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\bitExpert\ForceCustomerLogin\Model\Session
+     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Model\Session
      */
     private function getSession()
     {
-        return $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\Session')
+        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\Session')
             ->disableOriginalConstructor()
             ->setMethods([
                 'getAfterLoginReferer'

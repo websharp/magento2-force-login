@@ -9,7 +9,7 @@
 
     <router id="admin">
         <route id="ForceCustomerLogin" frontName="ForceCustomerLogin">
-            <module name="bitExpert_ForceCustomerLogin" />
+            <module name="BitExpert_ForceCustomerLogin" />
         </route>
     </router>
 

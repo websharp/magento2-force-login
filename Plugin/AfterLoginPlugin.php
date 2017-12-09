@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Plugin;
+namespace BitExpert\ForceCustomerLogin\Plugin;
 
 use \Magento\Customer\Controller\Account\LoginPost;
 use \Magento\Framework\Controller\Result\Redirect;
 use \Magento\Framework\App\Config\ScopeConfigInterface;
-use \bitExpert\ForceCustomerLogin\Model\Session;
+use \BitExpert\ForceCustomerLogin\Model\Session;
 
 /**
  * Class AfterLoginPlugin
- * @package bitExpert\ForceCustomerLogin\Plugin
+ * @package BitExpert\ForceCustomerLogin\Plugin
  */
 class AfterLoginPlugin
 {

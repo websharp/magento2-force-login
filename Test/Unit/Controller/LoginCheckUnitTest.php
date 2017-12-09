@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Test\Unit\Controller;
+namespace BitExpert\ForceCustomerLogin\Test\Unit\Controller;
 
 /**
  * Class LoginCheckUnitTest
- * @package bitExpert\ForceCustomerLogin\Test\Unit\Controller
+ * @package BitExpert\ForceCustomerLogin\Test\Unit\Controller
  */
 class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
 {
@@ -21,7 +21,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function testClassExists()
     {
-        $this->assertTrue(class_exists('\bitExpert\ForceCustomerLogin\Controller\LoginCheck'));
+        $this->assertTrue(class_exists('\BitExpert\ForceCustomerLogin\Controller\LoginCheck'));
     }
 
     /**
@@ -30,7 +30,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function testConstructor()
     {
-        $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
+        $loginCheck = new \BitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $this->getContext(),
             $this->getCustomerSession(),
             $this->getSession(),
@@ -43,7 +43,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
 
         // check if mandatory interfaces are implemented
         $classInterfaces = class_implements($loginCheck);
-        $this->assertContains('bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface', $classInterfaces);
+        $this->assertContains('BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface', $classInterfaces);
     }
 
     /**
@@ -77,7 +77,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->method('getRedirect')
             ->will($this->returnValue($redirect));
 
-        $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
+        $loginCheck = new \BitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $context,
             $this->getCustomerSession(),
             $this->getSession(),
@@ -127,7 +127,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->method('getRedirect')
             ->will($this->returnValue($redirect));
 
-        $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
+        $loginCheck = new \BitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $context,
             $customerSession,
             $this->getSession(),
@@ -156,7 +156,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $scopeConfig->expects($this->once())
             ->method('getValue')
             ->with(
-                \bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface::MODULE_CONFIG_TARGET,
+                \BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface::MODULE_CONFIG_TARGET,
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE
             )
             ->will($this->returnValue($targetUrl));
@@ -200,7 +200,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $strategyManager->expects($this->never())
             ->method('get');
 
-        $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
+        $loginCheck = new \BitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $context,
             $this->getCustomerSession(),
             $this->getSession(),
@@ -229,7 +229,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $scopeConfig->expects($this->once())
             ->method('getValue')
             ->with(
-                \bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface::MODULE_CONFIG_TARGET,
+                \BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface::MODULE_CONFIG_TARGET,
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE
             )
             ->will($this->returnValue($targetUrl));
@@ -264,14 +264,14 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->method('sendResponse');
 
         // --- Whitelist Entries
-        $whitelistEntityOne = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+        $whitelistEntityOne = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
             ->disableOriginalConstructor()
             ->getMock();
         $whitelistEntityOne->expects($this->once())
             ->method('getStrategy')
             ->will($this->returnValue('default'));
         $whitelistCollection = $this
-            ->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')
+            ->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')
             ->disableOriginalConstructor()
             ->getMock();
         $whitelistCollection->expects($this->once())
@@ -283,7 +283,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->will($this->returnValue($whitelistCollection));
 
         // --- Strategy
-        $strategy = $this->createMock('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy = $this->createMock('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
         $strategy->expects($this->once())
             ->method('isMatch')
             ->with('/foo/bar', $whitelistEntityOne)
@@ -295,7 +295,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->with('default')
             ->willReturn($strategy);
 
-        $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
+        $loginCheck = new \BitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $context,
             $this->getCustomerSession(),
             $this->getSession(),
@@ -324,7 +324,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $scopeConfig->expects($this->once())
             ->method('getValue')
             ->with(
-                \bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface::MODULE_CONFIG_TARGET,
+                \BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface::MODULE_CONFIG_TARGET,
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE
             )
             ->will($this->returnValue($targetUrl));
@@ -360,14 +360,14 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->method('sendResponse');
 
         // --- Whitelist Entries
-        $whitelistEntityOne = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+        $whitelistEntityOne = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
             ->disableOriginalConstructor()
             ->getMock();
         $whitelistEntityOne->expects($this->once())
             ->method('getStrategy')
             ->will($this->returnValue('default'));
         $whitelistCollection = $this
-            ->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')
+            ->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')
             ->disableOriginalConstructor()
             ->getMock();
         $whitelistCollection->expects($this->once())
@@ -379,7 +379,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->will($this->returnValue($whitelistCollection));
 
         // --- Strategy
-        $strategy = $this->createMock('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy = $this->createMock('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
         $strategy->expects($this->once())
             ->method('isMatch')
             ->with('/foo/bar', $whitelistEntityOne)
@@ -391,7 +391,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->with('default')
             ->will($this->returnValue($strategy));
 
-        $loginCheck = new \bitExpert\ForceCustomerLogin\Controller\LoginCheck(
+        $loginCheck = new \BitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $context,
             $this->getCustomerSession(),
             $this->getSession(),
@@ -426,11 +426,11 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\bitExpert\ForceCustomerLogin\Model\Session
+     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Model\Session
      */
     protected function getSession()
     {
-        return $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\Session')
+        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\Session')
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -470,31 +470,31 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager
+     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager
      */
     protected function getStrategyManager()
     {
-        return $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager')
+        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager')
             ->disableOriginalConstructor()
             ->getMock();
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\bitExpert\ForceCustomerLogin\Controller\ModuleCheck
+     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Controller\ModuleCheck
      */
     protected function getModuleCheck()
     {
-        return $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Controller\ModuleCheck')
+        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Controller\ModuleCheck')
             ->disableOriginalConstructor()
             ->getMock();
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface
      */
     protected function getWhitelistRepository()
     {
-        return $this->createMock('\bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface');
+        return $this->createMock('\BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface');
     }
 
     /**

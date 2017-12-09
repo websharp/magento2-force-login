@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy;
+namespace BitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy;
 
-use bitExpert\ForceCustomerLogin\Helper\Strategy\RegExAllMatcher;
+use BitExpert\ForceCustomerLogin\Helper\Strategy\RegExAllMatcher;
 
 /**
  * Class RegExAllMatcherUnitTest
- * @package bitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy
+ * @package BitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy
  */
 class RegExAllMatcherUnitTest extends \PHPUnit\Framework\TestCase
 {
@@ -27,8 +27,8 @@ class RegExAllMatcherUnitTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals('foobar', $matcher->getName());
 
-        /* @var $rule \bitExpert\ForceCustomerLogin\Model\WhitelistEntry */
-        $rule = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+        /* @var $rule \BitExpert\ForceCustomerLogin\Model\WhitelistEntry */
+        $rule = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
             ->disableOriginalConstructor()
             ->getMock();
         $rule->expects($this->any())
@@ -61,8 +61,8 @@ class RegExAllMatcherUnitTest extends \PHPUnit\Framework\TestCase
     {
         $matcher = new RegExAllMatcher('foobar');
 
-        /* @var $rule \bitExpert\ForceCustomerLogin\Model\WhitelistEntry */
-        $rule = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+        /* @var $rule \BitExpert\ForceCustomerLogin\Model\WhitelistEntry */
+        $rule = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
             ->disableOriginalConstructor()
             ->getMock();
         $rule->expects($this->any())
@@ -87,8 +87,8 @@ class RegExAllMatcherUnitTest extends \PHPUnit\Framework\TestCase
     {
         $matcher = new RegExAllMatcher('foobar');
 
-        /* @var $rule \bitExpert\ForceCustomerLogin\Model\WhitelistEntry */
-        $rule = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+        /* @var $rule \BitExpert\ForceCustomerLogin\Model\WhitelistEntry */
+        $rule = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
             ->disableOriginalConstructor()
             ->getMock();
         $rule->expects($this->any())
@@ -113,8 +113,8 @@ class RegExAllMatcherUnitTest extends \PHPUnit\Framework\TestCase
     {
         $matcher = new RegExAllMatcher('foobar');
 
-        /* @var $rule \bitExpert\ForceCustomerLogin\Model\WhitelistEntry */
-        $rule = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+        /* @var $rule \BitExpert\ForceCustomerLogin\Model\WhitelistEntry */
+        $rule = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
             ->disableOriginalConstructor()
             ->getMock();
         $rule->expects($this->any())

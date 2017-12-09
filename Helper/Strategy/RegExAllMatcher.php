@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Helper\Strategy;
+namespace BitExpert\ForceCustomerLogin\Helper\Strategy;
 
-use \bitExpert\ForceCustomerLogin\Model\WhitelistEntry;
+use \BitExpert\ForceCustomerLogin\Model\WhitelistEntry;
 
 /**
  * Class RegExAllMatcher
- * @package bitExpert\ForceCustomerLogin\Helper\Strategy
+ * @package BitExpert\ForceCustomerLogin\Helper\Strategy
  */
 class RegExAllMatcher implements StrategyInterface
 {

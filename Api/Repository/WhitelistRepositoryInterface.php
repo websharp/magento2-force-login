@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Api\Repository;
+namespace BitExpert\ForceCustomerLogin\Api\Repository;
 
 /**
  * Interface WhitelistRepositoryInterface
- * @package bitExpert\ForceCustomerLogin\Api\Repository
+ * @package BitExpert\ForceCustomerLogin\Api\Repository
  */
 interface WhitelistRepositoryInterface
 {
@@ -26,9 +26,9 @@ interface WhitelistRepositoryInterface
     const DEFAULT_STRATEGY = 'default';
 
     /**
-     * Get collection {@link \bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection}.
+     * Get collection {@link \BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection}.
      *
-     * @return \bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection
+     * @return \BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection
      */
     public function getCollection();
 
@@ -36,7 +36,7 @@ interface WhitelistRepositoryInterface
      * Search by criterias for whitelist entries.
      *
      * @param \Magento\Framework\Api\SearchCriteria $searchCriteria
-     * @return \bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntrySearchResultInterface
+     * @return \BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntrySearchResultInterface
      */
     public function getList(\Magento\Framework\Api\SearchCriteria $searchCriteria);
 
@@ -46,7 +46,7 @@ interface WhitelistRepositoryInterface
      * @param string $urlRule
      * @param string $strategy
      * @param int $storeId
-     * @return \bitExpert\ForceCustomerLogin\Model\WhitelistEntry
+     * @return \BitExpert\ForceCustomerLogin\Model\WhitelistEntry
      */
     public function createEntry($entityId, $label, $urlRule, $strategy = self::DEFAULT_STRATEGY, $storeId = 0);
 

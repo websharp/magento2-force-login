@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Ui\Component\Listing\Column;
+namespace BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column;
 
 use \Magento\Framework\UrlInterface;
 use \Magento\Framework\View\Element\UiComponent\ContextInterface;
@@ -17,7 +17,7 @@ use \Magento\Ui\Component\Listing\Columns\Column;
 
 /**
  * Class DeleteAction
- * @package bitExpert\ForceCustomerLogin\Ui\Component\Listing\Column
+ * @package BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column
  */
 class DeleteAction extends Column
 {

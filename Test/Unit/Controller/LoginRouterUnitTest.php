@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Test\Unit\Controller;
+namespace BitExpert\ForceCustomerLogin\Test\Unit\Controller;
 
 /**
  * Class LoginCheckUnitTest
- * @package bitExpert\ForceCustomerLogin\Test\Unit\Controller
+ * @package BitExpert\ForceCustomerLogin\Test\Unit\Controller
  */
 class LoginRouterUnitTest extends \PHPUnit\Framework\TestCase
 {
@@ -21,7 +21,7 @@ class LoginRouterUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function testClassExists()
     {
-        $this->assertTrue(class_exists('\bitExpert\ForceCustomerLogin\Controller\LoginRouter'));
+        $this->assertTrue(class_exists('\BitExpert\ForceCustomerLogin\Controller\LoginRouter'));
     }
 
     /**
@@ -41,7 +41,7 @@ class LoginRouterUnitTest extends \PHPUnit\Framework\TestCase
             ->method('execute')
             ->willReturn(true);
 
-        $loginRouter = new \bitExpert\ForceCustomerLogin\Controller\LoginRouter(
+        $loginRouter = new \BitExpert\ForceCustomerLogin\Controller\LoginRouter(
             $this->getActionList(),
             $actionFactory,
             $this->getDefaultPath(),
@@ -91,7 +91,7 @@ class LoginRouterUnitTest extends \PHPUnit\Framework\TestCase
             ->method('execute')
             ->willReturn(false);
 
-        $loginRouter = new \bitExpert\ForceCustomerLogin\Controller\LoginRouter(
+        $loginRouter = new \BitExpert\ForceCustomerLogin\Controller\LoginRouter(
             $this->getActionList(),
             $actionFactory,
             $this->getDefaultPath(),
@@ -197,10 +197,10 @@ class LoginRouterUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface
      */
     protected function getLoginCheck()
     {
-        return $this->createMock('\bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface');
+        return $this->createMock('\BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface');
     }
 }

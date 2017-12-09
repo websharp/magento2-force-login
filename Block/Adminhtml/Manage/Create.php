@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Block\Adminhtml\Manage;
+namespace BitExpert\ForceCustomerLogin\Block\Adminhtml\Manage;
 
 /**
  * Class Create
- * @package bitExpert\ForceCustomerLogin\Block\Adminhtml\Manage
+ * @package BitExpert\ForceCustomerLogin\Block\Adminhtml\Manage
  * @codingStandardsIgnoreFile
  */
 class Create extends \Magento\Backend\Block\Widget\Form\Container
@@ -45,14 +45,6 @@ class Create extends \Magento\Backend\Block\Widget\Form\Container
     protected function getFormIdentifier()
     {
         return $this->formIdentifier;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    protected function _buildFormClassName()
-    {
-        return \lcfirst(parent::_buildFormClassName());
     }
 
     /**

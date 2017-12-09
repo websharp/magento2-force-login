@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Controller;
+namespace BitExpert\ForceCustomerLogin\Controller;
 
-use bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
+use BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
 use Magento\Framework\App\Router\Base;
 use Magento\Framework\App\ActionFactory;
 
 /**
  * Class LoginRouter
- * @package bitExpert\ForceCustomerLogin\Controller
+ * @package BitExpert\ForceCustomerLogin\Controller
  */
 class LoginRouter extends Base
 {

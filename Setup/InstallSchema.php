@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Setup;
+namespace BitExpert\ForceCustomerLogin\Setup;
 
 use \Magento\Framework\Setup\InstallSchemaInterface;
 use \Magento\Framework\Setup\ModuleContextInterface;
@@ -16,7 +16,7 @@ use \Magento\Framework\Setup\SchemaSetupInterface;
 
 /**
  * Class InstallSchema
- * @package bitExpert\ForceCustomerLogin\Setup
+ * @package BitExpert\ForceCustomerLogin\Setup
  * @codeCoverageIgnore
  */
 class InstallSchema implements InstallSchemaInterface

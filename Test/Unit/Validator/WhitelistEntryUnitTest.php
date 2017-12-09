@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Test\Unit\Validator;
+namespace BitExpert\ForceCustomerLogin\Test\Unit\Validator;
 
-use bitExpert\ForceCustomerLogin\Validator\WhitelistEntry;
+use BitExpert\ForceCustomerLogin\Validator\WhitelistEntry;
 
 /**
  * Class WhitelistEntryUnitTest
- * @package bitExpert\ForceCustomerLogin\Test\Unit\Validator
+ * @package BitExpert\ForceCustomerLogin\Test\Unit\Validator
  */
 class WhitelistEntryUnitTest extends \PHPUnit\Framework\TestCase
 {
@@ -226,11 +226,11 @@ class WhitelistEntryUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\bitExpert\ForceCustomerLogin\Model\WhitelistEntry
+     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Model\WhitelistEntry
      */
     private function getWhitelistEntry()
     {
-        return $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
             ->disableOriginalConstructor()
             ->getMock();
     }

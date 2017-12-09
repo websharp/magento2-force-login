@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
+namespace BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 
-use \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
+use \BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
 use \Magento\Backend\Model\View\Result\RedirectFactory;
 use \Magento\Backend\App\Action\Context;
 use \Magento\Framework\Message\ManagerInterface;
 
 /**
  * Class Delete
- * @package bitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage
+ * @package BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage
  * @codingStandardsIgnoreFile
  */
 class Delete extends \Magento\Backend\App\Action
@@ -101,6 +101,6 @@ class Delete extends \Magento\Backend\App\Action
      */
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('bitExpert_ForceCustomerLogin::bitexpert_force_customer_login_manage');
+        return $this->_authorization->isAllowed('BitExpert_ForceCustomerLogin::bitexpert_force_customer_login_manage');
     }
 }

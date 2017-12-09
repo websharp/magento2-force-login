@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Test\Unit\Model;
+namespace BitExpert\ForceCustomerLogin\Test\Unit\Model;
 
-use bitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory;
+use BitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory;
 
 /**
  * Class WhitelistEntrySearchResultInterfaceFactoryUnitTest
- * @package bitExpert\ForceCustomerLogin\Test\Unit\Model
+ * @package BitExpert\ForceCustomerLogin\Test\Unit\Model
  */
 class WhitelistEntrySearchResultInterfaceFactoryUnitTest extends \PHPUnit\Framework\TestCase
 {
@@ -23,13 +23,13 @@ class WhitelistEntrySearchResultInterfaceFactoryUnitTest extends \PHPUnit\Framew
      */
     public function createEntitySuccessfully()
     {
-        $expectedEntity = $this->createMock('\bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntrySearchResultInterface');
+        $expectedEntity = $this->createMock('\BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntrySearchResultInterface');
 
         $om = $this->getObjectManager();
         $om->expects($this->once())
             ->method('create')
             ->with(
-                '\\bitExpert\\ForceCustomerLogin\\Api\\Data\\Collection\\WhitelistEntrySearchResultInterface',
+                '\\BitExpert\\ForceCustomerLogin\\Api\\Data\\Collection\\WhitelistEntrySearchResultInterface',
                 ['foo' => 'bar']
             )
             ->willReturn($expectedEntity);

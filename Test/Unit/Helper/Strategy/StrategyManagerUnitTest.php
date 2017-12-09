@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy;
+namespace BitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy;
 
-use bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
-use bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface;
+use BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
+use BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface;
 
 /**
  * Class StrategyManagerUnitTest
- * @package bitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy
+ * @package BitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy
  */
 class StrategyManagerUnitTest extends \PHPUnit\Framework\TestCase
 {
@@ -25,12 +25,12 @@ class StrategyManagerUnitTest extends \PHPUnit\Framework\TestCase
     public function getStrategyNamesSuccessfully()
     {
         /* @var $strategy1 StrategyInterface|\PHPUnit_Framework_MockObject_MockObject */
-        $strategy1 = $this->createMock('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy1 = $this->createMock('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
         $strategy1->expects($this->once())
             ->method('getName')
             ->willReturn('Static');
         /* @var $strategy2 StrategyInterface|\PHPUnit_Framework_MockObject_MockObject */
-        $strategy2 = $this->createMock('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy2 = $this->createMock('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
         $strategy2->expects($this->once())
             ->method('getName')
             ->willReturn('RegEx (All)');
@@ -55,12 +55,12 @@ class StrategyManagerUnitTest extends \PHPUnit\Framework\TestCase
     public function getStrategyInstancesSuccessfully()
     {
         /* @var $strategy1 StrategyInterface|\PHPUnit_Framework_MockObject_MockObject */
-        $strategy1 = $this->createMock('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy1 = $this->createMock('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
         $strategy1->expects($this->once())
             ->method('getName')
             ->willReturn('Static');
         /* @var $strategy2 StrategyInterface|\PHPUnit_Framework_MockObject_MockObject */
-        $strategy2 = $this->createMock('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy2 = $this->createMock('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
         $strategy2->expects($this->once())
             ->method('getName')
             ->willReturn('RegEx (All)');
@@ -85,12 +85,12 @@ class StrategyManagerUnitTest extends \PHPUnit\Framework\TestCase
     public function getStrategyInstanceSuccessfully()
     {
         /* @var $strategy1 StrategyInterface|\PHPUnit_Framework_MockObject_MockObject */
-        $strategy1 = $this->createMock('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy1 = $this->createMock('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
         $strategy1->expects($this->once())
             ->method('getName')
             ->willReturn('Static');
         /* @var $strategy2 StrategyInterface|\PHPUnit_Framework_MockObject_MockObject */
-        $strategy2 = $this->createMock('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy2 = $this->createMock('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
         $strategy2->expects($this->once())
             ->method('getName')
             ->willReturn('RegEx (All)');
@@ -111,12 +111,12 @@ class StrategyManagerUnitTest extends \PHPUnit\Framework\TestCase
     public function getDefaultStrategyInstanceSuccessfully()
     {
         /* @var $strategy1 StrategyInterface|\PHPUnit_Framework_MockObject_MockObject */
-        $strategy1 = $this->createMock('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy1 = $this->createMock('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
         $strategy1->expects($this->once())
             ->method('getName')
             ->willReturn('Static');
         /* @var $strategy2 StrategyInterface|\PHPUnit_Framework_MockObject_MockObject */
-        $strategy2 = $this->createMock('\bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy2 = $this->createMock('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
         $strategy2->expects($this->once())
             ->method('getName')
             ->willReturn('RegEx (All)');

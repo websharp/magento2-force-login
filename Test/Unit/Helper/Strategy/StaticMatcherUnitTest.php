@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy;
+namespace BitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy;
 
-use bitExpert\ForceCustomerLogin\Helper\Strategy\StaticMatcher;
+use BitExpert\ForceCustomerLogin\Helper\Strategy\StaticMatcher;
 
 /**
  * Class StaticMatcherUnitTest
- * @package bitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy
+ * @package BitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy
  */
 class StaticMatcherUnitTest extends \PHPUnit\Framework\TestCase
 {
@@ -27,8 +27,8 @@ class StaticMatcherUnitTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals('foobar', $matcher->getName());
 
-        /* @var $rule \bitExpert\ForceCustomerLogin\Model\WhitelistEntry */
-        $rule = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+        /* @var $rule \BitExpert\ForceCustomerLogin\Model\WhitelistEntry */
+        $rule = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
             ->disableOriginalConstructor()
             ->getMock();
         $rule->expects($this->any())

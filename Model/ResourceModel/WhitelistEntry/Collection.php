@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry;
+namespace BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry;
 
 /**
  * Class Collection
- * @package bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry
+ * @package BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry
  * @codingStandardsIgnoreFile
  */
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
@@ -28,8 +28,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected function _construct()
     {
         $this->_init(
-            'bitExpert\ForceCustomerLogin\Model\WhitelistEntry',
-            'bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry'
+            'BitExpert\ForceCustomerLogin\Model\WhitelistEntry',
+            'BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry'
         );
     }
 }

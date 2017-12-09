@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Test\Unit\Ui\Component\Listing\Column;
+namespace BitExpert\ForceCustomerLogin\Test\Unit\Ui\Component\Listing\Column;
 
-use bitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\DeleteAction;
+use BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\DeleteAction;
 
 /**
  * Class DeleteActionUnitTest
- * @package bitExpert\ForceCustomerLogin\Test\Unit\Ui\Component\Listing\Column
+ * @package BitExpert\ForceCustomerLogin\Test\Unit\Ui\Component\Listing\Column
  */
 class DeleteActionUnitTest extends \PHPUnit\Framework\TestCase
 {

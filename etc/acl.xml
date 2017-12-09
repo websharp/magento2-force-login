@@ -9,7 +9,7 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="BitExpert_ForceCustomerLogin::bitexpert_force_customer_login" title="bitExpert Force Login" sortOrder="40">
+                <resource id="BitExpert_ForceCustomerLogin::bitexpert_force_customer_login" title="Force Login" sortOrder="40">
                     <resource id="BitExpert_ForceCustomerLogin::bitexpert_force_customer_login_manage" title="Manage Whitelist" sortOrder="10" />
                 </resource>
             </resource>
