@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
+namespace BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 
-use \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
-use \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
-use \bitExpert\ForceCustomerLogin\Model\WhitelistEntry;
+use \BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
+use \BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
+use \BitExpert\ForceCustomerLogin\Model\WhitelistEntry;
 use \Magento\Backend\Model\View\Result\RedirectFactory;
 use \Magento\Framework\App\Action\Context;
 use \Magento\Framework\Message\ManagerInterface;
 
 /**
  * Class RestoreDefault
- * @package bitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage
+ * @package BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage
  * @codingStandardsIgnoreFile
  */
 class RestoreDefault extends \Magento\Framework\App\Action\Action
@@ -131,6 +131,6 @@ class RestoreDefault extends \Magento\Framework\App\Action\Action
      */
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('bitExpert_ForceCustomerLogin::bitexpert_force_customer_login_manage');
+        return $this->_authorization->isAllowed('BitExpert_ForceCustomerLogin::bitexpert_force_customer_login_manage');
     }
 }

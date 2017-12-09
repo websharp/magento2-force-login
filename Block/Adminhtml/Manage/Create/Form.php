@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Block\Adminhtml\Manage\Create;
+namespace BitExpert\ForceCustomerLogin\Block\Adminhtml\Manage\Create;
 
-use \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
-use bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
+use \BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
+use BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
 
 /**
  * Class Form
- * @package bitExpert\ForceCustomerLogin\Block\Adminhtml\Manage\Create
+ * @package BitExpert\ForceCustomerLogin\Block\Adminhtml\Manage\Create
  * @codingStandardsIgnoreFile
  */
 class Form extends \Magento\Backend\Block\Widget\Form\Generic

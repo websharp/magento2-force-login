@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Test\Unit\Model;
+namespace BitExpert\ForceCustomerLogin\Test\Unit\Model;
 
-use bitExpert\ForceCustomerLogin\Model\WhitelistEntryFactory;
+use BitExpert\ForceCustomerLogin\Model\WhitelistEntryFactory;
 
 /**
  * Class WhitelistEntryFactoryUnitTest
- * @package bitExpert\ForceCustomerLogin\Test\Unit\Model
+ * @package BitExpert\ForceCustomerLogin\Test\Unit\Model
  */
 class WhitelistEntryFactoryUnitTest extends \PHPUnit\Framework\TestCase
 {
@@ -23,12 +23,12 @@ class WhitelistEntryFactoryUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function createEntitySuccessfully()
     {
-        $expectedEntity = $this->createMock('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry');
+        $expectedEntity = $this->createMock('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry');
 
         $om = $this->getObjectManager();
         $om->expects($this->once())
             ->method('create')
-            ->with('\\bitExpert\\ForceCustomerLogin\\Model\\WhitelistEntry', ['foo' => 'bar'])
+            ->with('\\BitExpert\\ForceCustomerLogin\\Model\\WhitelistEntry', ['foo' => 'bar'])
             ->willReturn($expectedEntity);
 
         $factory = new WhitelistEntryFactory($om);

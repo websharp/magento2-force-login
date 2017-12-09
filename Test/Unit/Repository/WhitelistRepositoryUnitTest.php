@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Test\Unit\Repository;
+namespace BitExpert\ForceCustomerLogin\Test\Unit\Repository;
 
-use bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
-use bitExpert\ForceCustomerLogin\Repository\WhitelistRepository;
+use BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
+use BitExpert\ForceCustomerLogin\Repository\WhitelistRepository;
 
 /**
  * Class WhitelistRepositoryUnitTest
- * @package bitExpert\ForceCustomerLogin\Test\Unit\Repository
+ * @package BitExpert\ForceCustomerLogin\Test\Unit\Repository
  */
 class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
 {
@@ -24,7 +24,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function testClassExists()
     {
-        $this->assertTrue(class_exists('\bitExpert\ForceCustomerLogin\Repository\WhitelistRepository'));
+        $this->assertTrue(class_exists('\BitExpert\ForceCustomerLogin\Repository\WhitelistRepository'));
     }
 
     /**
@@ -43,7 +43,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
         // check if mandatory interfaces are implemented
         $classInterfaces = class_implements($whitelistRepository);
         $this->assertContains(
-            'bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface',
+            'BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface',
             $classInterfaces
         );
     }
@@ -61,7 +61,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
         $storeId = 0;
         $strategy = 'default';
 
-        $expectedWhitelistEntry = $this->createMock('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry');
+        $expectedWhitelistEntry = $this->createMock('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry');
         $expectedWhitelistEntry->expects($this->at(0))
             ->method('getId')
             ->will($this->returnValue($entityId));
@@ -144,7 +144,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
         $storeId = 0;
         $strategy = 'default';
 
-        $expectedWhitelistEntry = $this->createMock('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry');
+        $expectedWhitelistEntry = $this->createMock('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry');
         $expectedWhitelistEntry->expects($this->at(0))
             ->method('load')
             ->with($entityId)
@@ -230,7 +230,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
         $storeId = 0;
         $strategy = 'default';
 
-        $expectedWhitelistEntry = $this->createMock('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry');
+        $expectedWhitelistEntry = $this->createMock('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry');
         $expectedWhitelistEntry->expects($this->at(0))
             ->method('load')
             ->with($entityId)
@@ -268,7 +268,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
     {
         $entityId = 42;
 
-        $expectedWhitelistEntry = $this->createMock('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry');
+        $expectedWhitelistEntry = $this->createMock('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry');
         $expectedWhitelistEntry->expects($this->once())
             ->method('load')
             ->willReturnSelf();
@@ -302,7 +302,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
     {
         $entityId = 42;
 
-        $expectedWhitelistEntry = $this->createMock('\bitExpert\ForceCustomerLogin\Model\WhitelistEntry');
+        $expectedWhitelistEntry = $this->createMock('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry');
         $expectedWhitelistEntry->expects($this->once())
             ->method('load')
             ->willReturnSelf();
@@ -347,7 +347,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
             ->method('getStore')
             ->willReturn($store);
 
-        $expectedCollection = $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')
+        $expectedCollection = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')
             ->disableOriginalConstructor()
             ->getMock();
         $expectedCollection->expects($this->once())
@@ -419,7 +419,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
             ->willReturn(42);
 
         $expectedSearchResult = $this->getMockBuilder(
-            '\bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntrySearchResultInterface'
+            '\BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntrySearchResultInterface'
             )
             ->setMethods([
                 'getItems',
@@ -459,29 +459,29 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface
+     * @return \BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface
      */
     protected function getWhitelistEntryFactory()
     {
-        return $this->createMock('\bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface');
+        return $this->createMock('\BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface');
     }
 
     /**
-     * @return \bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface
+     * @return \BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface
      */
     protected function getWhitelistEntryCollectionFactory()
     {
         return $this->createMock(
-            '\bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface'
+            '\BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface'
         );
     }
 
     /**
-     * @return \bitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory
+     * @return \BitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory
      */
     protected function getWhitelistEntrySearchResultInterfaceFactory()
     {
-        return $this->getMockBuilder('\bitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory')
+        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory')
             ->disableOriginalConstructor()
             ->getMock();
     }

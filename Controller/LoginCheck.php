@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Controller;
+namespace BitExpert\ForceCustomerLogin\Controller;
 
-use \bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
-use \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
-use bitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
-use \bitExpert\ForceCustomerLogin\Model\Session;
+use \BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
+use \BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
+use \BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
+use \BitExpert\ForceCustomerLogin\Model\Session;
 use \Magento\Customer\Model\Session as CustomerSession;
 use \Magento\Framework\App\Action\Action;
 use \Magento\Framework\App\Action\Context;
@@ -24,7 +24,7 @@ use \Magento\Framework\App\Response\Http as ResponseHttp;
 
 /**
  * Class LoginCheck
- * @package bitExpert\ForceCustomerLogin\Controller
+ * @package BitExpert\ForceCustomerLogin\Controller
  */
 class LoginCheck extends Action implements LoginCheckInterface
 {
@@ -62,7 +62,7 @@ class LoginCheck extends Action implements LoginCheckInterface
     protected $response;
 
     /**
-     * Creates a new {@link \bitExpert\ForceCustomerLogin\Controller\LoginCheck}.
+     * Creates a new {@link \BitExpert\ForceCustomerLogin\Controller\LoginCheck}.
      *
      * @param Context $context
      * @param CustomerSession $customerSession
@@ -120,7 +120,7 @@ class LoginCheck extends Action implements LoginCheckInterface
 
         // check if current url is a match with one of the ignored urls
         foreach ($this->whitelistRepository->getCollection()->getItems() as $rule) {
-            /** @var $rule \bitExpert\ForceCustomerLogin\Model\WhitelistEntry */
+            /** @var $rule \BitExpert\ForceCustomerLogin\Model\WhitelistEntry */
             $strategy = $this->strategyManager->get($rule->getStrategy());
             if ($strategy->isMatch($path, $rule)) {
                 return false;

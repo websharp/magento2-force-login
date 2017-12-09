@@ -31,7 +31,7 @@ decompressed code in your projects directory under *app/code/bitExpert/ForceCust
 After the installment of the module source code, the module has to be enabled by the *Magento® 2* CLI.
 
 ```
-bin/magento module:enable bitExpert_ForceCustomerLogin
+bin/magento module:enable BitExpert_ForceCustomerLogin
 ```
 
 ## System Upgrade

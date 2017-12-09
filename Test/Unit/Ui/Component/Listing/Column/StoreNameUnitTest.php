@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace bitExpert\ForceCustomerLogin\Ui\Component\Listing\Column;
+namespace BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column;
 function __($value) { return $value; }
 
-namespace bitExpert\ForceCustomerLogin\Test\Unit\Ui\Component\Listing\Column;
+namespace BitExpert\ForceCustomerLogin\Test\Unit\Ui\Component\Listing\Column;
 
-use bitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\StoreName;
+use BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\StoreName;
 
 /**
  * Class StoreNameUnitTest
- * @package bitExpert\ForceCustomerLogin\Test\Unit\Ui\Component\Listing\Column
+ * @package BitExpert\ForceCustomerLogin\Test\Unit\Ui\Component\Listing\Column
  */
 class StoreNameUnitTest extends \PHPUnit\Framework\TestCase
 {

@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Model;
+namespace BitExpert\ForceCustomerLogin\Model;
 
 /**
  * Class WhitelistEntryFactory
- * @package bitExpert\ForceCustomerLogin\Model
+ * @package BitExpert\ForceCustomerLogin\Model
  * @codingStandardsIgnoreFile
  */
-class WhitelistEntryFactory implements \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface
+class WhitelistEntryFactory implements \BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface
 {
     /**
      * Object Manager instance
@@ -39,7 +39,7 @@ class WhitelistEntryFactory implements \bitExpert\ForceCustomerLogin\Api\Data\Wh
      */
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $objectManager,
-        $instanceName = '\\bitExpert\\ForceCustomerLogin\\Model\\WhitelistEntry'
+        $instanceName = '\\BitExpert\\ForceCustomerLogin\\Model\\WhitelistEntry'
     ) {
         $this->_objectManager = $objectManager;
         $this->_instanceName = $instanceName;

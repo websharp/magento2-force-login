@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Model;
+namespace BitExpert\ForceCustomerLogin\Model;
 
 /**
  * Class WhitelistEntrySearchResultInterfaceFactory
- * @package bitExpert\ForceCustomerLogin\Api\Data\Collection
+ * @package BitExpert\ForceCustomerLogin\Api\Data\Collection
  * @codingStandardsIgnoreFile
  */
 class WhitelistEntrySearchResultInterfaceFactory
@@ -39,7 +39,7 @@ class WhitelistEntrySearchResultInterfaceFactory
      */
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $objectManager,
-        $instanceName = '\\bitExpert\\ForceCustomerLogin\\Api\\Data\\Collection\\WhitelistEntrySearchResultInterface'
+        $instanceName = '\\BitExpert\\ForceCustomerLogin\\Api\\Data\\Collection\\WhitelistEntrySearchResultInterface'
     ) {
         $this->_objectManager = $objectManager;
         $this->_instanceName = $instanceName;
@@ -49,7 +49,7 @@ class WhitelistEntrySearchResultInterfaceFactory
      * Create class instance with specified parameters
      *
      * @param array $data
-     * @return \bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntrySearchResultInterface
+     * @return \BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntrySearchResultInterface
      */
     public function create(array $data = array())
     {

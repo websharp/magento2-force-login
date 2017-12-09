@@ -14,9 +14,9 @@
 
     <body>
         <referenceContainer name="content">
-            <block class="bitExpert\ForceCustomerLogin\Block\Adminhtml\Manage\Create"
+            <block class="BitExpert\ForceCustomerLogin\Block\Adminhtml\Manage\Create"
                    name="manage_entry_create"/>
-            <block class="bitExpert\ForceCustomerLogin\Block\Adminhtml\Manage\Create\Submit"
+            <block class="BitExpert\ForceCustomerLogin\Block\Adminhtml\Manage\Create\Submit"
                    template="manage/create/submit.phtml"
                    name="manage_entry_create_submit"/>
         </referenceContainer>

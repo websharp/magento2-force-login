@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Test\Unit\Controller;
+namespace BitExpert\ForceCustomerLogin\Test\Unit\Controller;
 
-use bitExpert\ForceCustomerLogin\Controller\ModuleCheck;
+use BitExpert\ForceCustomerLogin\Controller\ModuleCheck;
 use Magento\Store\Model\ScopeInterface;
 
 /**
  * Class ModuleCheckUnitTest
- * @package bitExpert\ForceCustomerLogin\Test\Unit\Controller
+ * @package BitExpert\ForceCustomerLogin\Test\Unit\Controller
  */
 class ModuleCheckUnitTest extends \PHPUnit\Framework\TestCase
 {

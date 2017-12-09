@@ -10,7 +10,7 @@
         <arguments>
             <argument name="routerList" xsi:type="array">
                 <item name="forcelogin" xsi:type="array">
-                    <item name="class" xsi:type="string">bitExpert\ForceCustomerLogin\Controller\LoginRouter</item>
+                    <item name="class" xsi:type="string">BitExpert\ForceCustomerLogin\Controller\LoginRouter</item>
                     <item name="disable" xsi:type="boolean">false</item>
                     <item name="sortOrder" xsi:type="string">15</item>
                 </item>

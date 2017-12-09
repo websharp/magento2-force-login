@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry;
+namespace BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry;
 
 /**
  * Class CollectionFactory
- * @package bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry
+ * @package BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry
  * @codingStandardsIgnoreFile
  */
-class CollectionFactory implements \bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface
+class CollectionFactory implements \BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface
 {
     /**
      * Object Manager instance
@@ -39,7 +39,7 @@ class CollectionFactory implements \bitExpert\ForceCustomerLogin\Api\Data\Collec
      */
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $objectManager,
-        $instanceName = '\\bitExpert\\ForceCustomerLogin\\Model\\ResourceModel\\WhitelistEntry\\Collection'
+        $instanceName = '\\BitExpert\\ForceCustomerLogin\\Model\\ResourceModel\\WhitelistEntry\\Collection'
     ) {
         $this->_objectManager = $objectManager;
         $this->_instanceName = $instanceName;

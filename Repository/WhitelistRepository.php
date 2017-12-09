@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Repository;
+namespace BitExpert\ForceCustomerLogin\Repository;
 
-use \bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
-use \bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface;
-use \bitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory as SearchResultFactory;
+use \BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
+use \BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface;
+use \BitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory as SearchResultFactory;
 use \Magento\Store\Model\StoreManager;
 
 /**
  * Class WhitelistRepository
- * @package bitExpert\ForceCustomerLogin\Model
+ * @package BitExpert\ForceCustomerLogin\Model
  */
-class WhitelistRepository implements \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface
+class WhitelistRepository implements \BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface
 {
     /**
      * @var WhitelistEntryFactoryInterface
@@ -86,7 +86,7 @@ class WhitelistRepository implements \bitExpert\ForceCustomerLogin\Api\Repositor
         $whitelist->setStoreId($storeId);
         $whitelist->setEditable(true);
 
-        $validator = new \bitExpert\ForceCustomerLogin\Validator\WhitelistEntry();
+        $validator = new \BitExpert\ForceCustomerLogin\Validator\WhitelistEntry();
         $validator->validate($whitelist);
 
         $whitelist->save();
@@ -137,7 +137,7 @@ class WhitelistRepository implements \bitExpert\ForceCustomerLogin\Api\Repositor
      */
     public function getList(\Magento\Framework\Api\SearchCriteria $searchCriteria)
     {
-        /** @var \bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntrySearchResultInterface $searchResult */
+        /** @var \BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntrySearchResultInterface $searchResult */
         $searchResult = $this->searchResultFactory->create();
         foreach ($searchCriteria->getFilterGroups() as $filterGroup) {
             foreach ($filterGroup->getFilters() as $filter) {

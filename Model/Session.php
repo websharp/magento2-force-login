@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Model;
+namespace BitExpert\ForceCustomerLogin\Model;
 
 /**
  * Class Session
- * @package bitExpert\ForceCustomerLogin\Model
+ * @package BitExpert\ForceCustomerLogin\Model
  */
 class Session extends \Magento\Framework\Session\SessionManager
 {

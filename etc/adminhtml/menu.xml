@@ -8,15 +8,15 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="bitExpert_ForceCustomerLogin::manage"
+        <add id="BitExpert_ForceCustomerLogin::manage"
              title="Whitelist"
-             module="bitExpert_ForceCustomerLogin"
-             parent="bitExpert_ForceCustomerLogin::bitexpert_force_login_whitelist"
+             module="BitExpert_ForceCustomerLogin"
+             parent="BitExpert_ForceCustomerLogin::bitexpert_force_login_whitelist"
              sortOrder="55"
              action="ForceCustomerLogin/Manage"
              resource="BitExpert_ForceCustomerLogin::bitexpert_force_customer_login_manage"/>
 
-        <add id="bitExpert_ForceCustomerLogin::bitexpert_force_login_whitelist"
+        <add id="BitExpert_ForceCustomerLogin::bitexpert_force_login_whitelist"
              title="Force Customer Login"
              module="Magento_Backend"
              sortOrder="50"

@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Test\Unit\Model\Resource\WhitelistEntry;
+namespace BitExpert\ForceCustomerLogin\Test\Unit\Model\Resource\WhitelistEntry;
 
-use bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\CollectionFactory;
+use BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\CollectionFactory;
 
 /**
  * Class CollectionFactoryUnitTest
- * @package bitExpert\ForceCustomerLogin\Test\Unit\Model\Resource\WhitelistEntry
+ * @package BitExpert\ForceCustomerLogin\Test\Unit\Model\Resource\WhitelistEntry
  */
 class CollectionFactoryUnitTest extends \PHPUnit\Framework\TestCase
 {
@@ -23,12 +23,12 @@ class CollectionFactoryUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function createEntitySuccessfully()
     {
-        $expectedEntity = $this->createMock('\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection');
+        $expectedEntity = $this->createMock('\BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection');
 
         $om = $this->getObjectManager();
         $om->expects($this->once())
             ->method('create')
-            ->with('\\bitExpert\\ForceCustomerLogin\\Model\\ResourceModel\\WhitelistEntry\\Collection', ['foo' => 'bar'])
+            ->with('\\BitExpert\\ForceCustomerLogin\\Model\\ResourceModel\\WhitelistEntry\\Collection', ['foo' => 'bar'])
             ->willReturn($expectedEntity);
 
         $factory = new CollectionFactory($om);

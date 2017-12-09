@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Api\Controller;
+namespace BitExpert\ForceCustomerLogin\Api\Controller;
 
 use \Magento\Framework\App\ActionInterface;
 
 /**
  * Interface LoginCheckInterface
- * @package bitExpert\ForceCustomerLogin\Api\Controller
+ * @package BitExpert\ForceCustomerLogin\Api\Controller
  */
 interface LoginCheckInterface extends ActionInterface
 {
     /*
      * Configuration
      */
-    const MODULE_CONFIG_TARGET = 'customer/bitExpert_ForceCustomerLogin/url';
+    const MODULE_CONFIG_TARGET = 'customer/BitExpert_ForceCustomerLogin/url';
 }

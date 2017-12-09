@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Api\Data\Collection;
+namespace BitExpert\ForceCustomerLogin\Api\Data\Collection;
 
 /**
  * Interface WhitelistEntryCollectionFactoryInterface
- * @package bitExpert\ForceCustomerLogin\Api\Data\Collection
+ * @package BitExpert\ForceCustomerLogin\Api\Data\Collection
  */
 interface WhitelistEntryCollectionFactoryInterface
 {
@@ -20,7 +20,7 @@ interface WhitelistEntryCollectionFactoryInterface
      * Create class instance with specified parameters
      *
      * @param array $data
-     * @return \bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection
+     * @return \BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection
      */
     public function create(array $data = array());
 }

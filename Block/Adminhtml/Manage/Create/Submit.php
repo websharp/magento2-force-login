@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Block\Adminhtml\Manage\Create;
+namespace BitExpert\ForceCustomerLogin\Block\Adminhtml\Manage\Create;
 
 /**
  * Class Submit
- * @package bitExpert\ForceCustomerLogin\Block\Adminhtml\Manage\Create
+ * @package BitExpert\ForceCustomerLogin\Block\Adminhtml\Manage\Create
  */
 class Submit extends \Magento\Backend\Block\Template
 {

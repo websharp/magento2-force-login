@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Helper\Strategy;
+namespace BitExpert\ForceCustomerLogin\Helper\Strategy;
 
 /**
  * Class StrategyManager
- * @package bitExpert\ForceCustomerLogin\Helper\Strategy
+ * @package BitExpert\ForceCustomerLogin\Helper\Strategy
  */
 class StrategyManager
 {

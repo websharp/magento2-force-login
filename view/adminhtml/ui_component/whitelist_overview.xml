@@ -100,7 +100,7 @@
             </argument>
         </column>
 
-        <column name="strategy" class="\bitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\StrategyName">
+        <column name="strategy" class="\BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\StrategyName">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="indexField" xsi:type="string">strategy</item>
@@ -109,7 +109,7 @@
             </argument>
         </column>
 
-        <column name="store" class="\bitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\StoreName">
+        <column name="store" class="\BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\StoreName">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="indexField" xsi:type="string">store_id</item>
@@ -118,7 +118,7 @@
             </argument>
         </column>
 
-        <actionsColumn name="actions_edit" class="\bitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\EditAction">
+        <actionsColumn name="actions_edit" class="\BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\EditAction">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="indexField" xsi:type="string">whitelist_entry_id</item>
@@ -131,7 +131,7 @@
             </argument>
         </actionsColumn>
 
-        <actionsColumn name="actions_delete" class="\bitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\DeleteAction">
+        <actionsColumn name="actions_delete" class="\BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\DeleteAction">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="indexField" xsi:type="string">whitelist_entry_id</item>

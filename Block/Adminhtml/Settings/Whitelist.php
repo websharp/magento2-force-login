@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Block\Adminhtml\Settings;
+namespace BitExpert\ForceCustomerLogin\Block\Adminhtml\Settings;
 
 /**
  * Class Whitelist
- * @package bitExpert\ForceCustomerLogin\Block\Adminhtml\Settings
+ * @package BitExpert\ForceCustomerLogin\Block\Adminhtml\Settings
  * @codingStandardsIgnoreFile
  */
 class Whitelist extends \Magento\Backend\Block\Widget\Container

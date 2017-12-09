@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Controller;
+namespace BitExpert\ForceCustomerLogin\Controller;
 
 use \Magento\Framework\App\Config\ScopeConfigInterface;
 use \Magento\Store\Model\ScopeInterface;
 
 /**
  * Class ModuleCheck
- * @package bitExpert\ForceCustomerLogin\Controller
+ * @package BitExpert\ForceCustomerLogin\Controller
  */
 class ModuleCheck
 {
     /*
      * Configuration
      */
-    const MODULE_CONFIG_ENABLED = 'customer/bitExpert_ForceCustomerLogin/enabled';
+    const MODULE_CONFIG_ENABLED = 'customer/BitExpert_ForceCustomerLogin/enabled';
 
     /**
      * @var ScopeConfigInterface
