@@ -8,12 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Ui\Component\Listing\Column;
 
 use BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\StrategyName;
 
 /**
  * Class StrategyNameUnitTest
+ *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Ui\Component\Listing\Column
  */
 class StrategyNameUnitTest extends \PHPUnit\Framework\TestCase
@@ -50,7 +52,8 @@ class StrategyNameUnitTest extends \PHPUnit\Framework\TestCase
 
         $action->setData([
             'name' => 'strategy'
-        ]);
+        ]
+        );
 
         $dataSource = ['foo' => 'bar'];
         $this->assertEquals($dataSource, $action->prepareDataSource($dataSource));
@@ -91,6 +94,16 @@ class StrategyNameUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager
+     */
+    protected function getStrategyManager()
+    {
+        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\View\Element\UiComponent\ContextInterface
      */
     protected function getContext()
@@ -104,16 +117,6 @@ class StrategyNameUnitTest extends \PHPUnit\Framework\TestCase
     protected function getUiComponentFactory()
     {
         return $this->getMockBuilder('\Magento\Framework\View\Element\UiComponentFactory')
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager
-     */
-    protected function getStrategyManager()
-    {
-        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager')
             ->disableOriginalConstructor()
             ->getMock();
     }

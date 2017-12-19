@@ -8,12 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Model;
 
 use BitExpert\ForceCustomerLogin\Model\WhitelistEntryFactory;
 
 /**
  * Class WhitelistEntryFactoryUnitTest
+ *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Model
  */
 class WhitelistEntryFactoryUnitTest extends \PHPUnit\Framework\TestCase

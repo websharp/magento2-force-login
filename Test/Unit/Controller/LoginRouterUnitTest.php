@@ -8,10 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Controller;
 
 /**
  * Class LoginCheckUnitTest
+ *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Controller
  */
 class LoginRouterUnitTest extends \PHPUnit\Framework\TestCase
@@ -65,7 +67,8 @@ class LoginRouterUnitTest extends \PHPUnit\Framework\TestCase
                 'getCookie',
                 'isSecure',
                 'setDispatched'
-            ])
+            ]
+            )
             ->getMock();
         $request->expects($this->once())
             ->method('setDispatched')
@@ -75,53 +78,21 @@ class LoginRouterUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @test
-     * @depends testClassExists
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\ActionFactory
      */
-    public function skipRedirectRoutingIfLoginCheckHasNotBeenExecuted()
+    protected function getActionFactory()
     {
-        $actionFactory = $this->getActionFactory();
-        $actionFactory->expects($this->never())
-            ->method('create')
-            ->willReturn(\Magento\Framework\App\Action\Redirect::class);
-
-
-        $loginCheck = $this->getLoginCheck();
-        $loginCheck->expects($this->once())
-            ->method('execute')
-            ->willReturn(false);
-
-        $loginRouter = new \BitExpert\ForceCustomerLogin\Controller\LoginRouter(
-            $this->getActionList(),
-            $actionFactory,
-            $this->getDefaultPath(),
-            $this->getResponseFactory(),
-            $this->getConfig(),
-            $this->getUrl(),
-            $this->getNameBuilder(),
-            $this->getPathConfig(),
-            $loginCheck
-        );
-
-        $request = $this->getMockBuilder('\Magento\Framework\App\RequestInterface')
-            ->setMethods([
-                'getModuleName',
-                'setModuleName',
-                'getActionName',
-                'setActionName',
-                'getParam',
-                'getParams',
-                'setParams',
-                'getCookie',
-                'isSecure',
-                'setDispatched'
-            ])
+        return $this->getMockBuilder('\Magento\Framework\App\ActionFactory')
+            ->disableOriginalConstructor()
             ->getMock();
-        $request->expects($this->never())
-            ->method('setDispatched')
-            ->with(true);
+    }
 
-        $loginRouter->match($request);
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface
+     */
+    protected function getLoginCheck()
+    {
+        return $this->createMock('\BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface');
     }
 
     /**
@@ -130,16 +101,6 @@ class LoginRouterUnitTest extends \PHPUnit\Framework\TestCase
     protected function getActionList()
     {
         return $this->getMockBuilder('\Magento\Framework\App\Router\ActionList')
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\ActionFactory
-     */
-    protected function getActionFactory()
-    {
-        return $this->getMockBuilder('\Magento\Framework\App\ActionFactory')
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -197,10 +158,53 @@ class LoginRouterUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface
+     * @test
+     * @depends testClassExists
      */
-    protected function getLoginCheck()
+    public function skipRedirectRoutingIfLoginCheckHasNotBeenExecuted()
     {
-        return $this->createMock('\BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface');
+        $actionFactory = $this->getActionFactory();
+        $actionFactory->expects($this->never())
+            ->method('create')
+            ->willReturn(\Magento\Framework\App\Action\Redirect::class);
+
+
+        $loginCheck = $this->getLoginCheck();
+        $loginCheck->expects($this->once())
+            ->method('execute')
+            ->willReturn(false);
+
+        $loginRouter = new \BitExpert\ForceCustomerLogin\Controller\LoginRouter(
+            $this->getActionList(),
+            $actionFactory,
+            $this->getDefaultPath(),
+            $this->getResponseFactory(),
+            $this->getConfig(),
+            $this->getUrl(),
+            $this->getNameBuilder(),
+            $this->getPathConfig(),
+            $loginCheck
+        );
+
+        $request = $this->getMockBuilder('\Magento\Framework\App\RequestInterface')
+            ->setMethods([
+                'getModuleName',
+                'setModuleName',
+                'getActionName',
+                'setActionName',
+                'getParam',
+                'getParams',
+                'setParams',
+                'getCookie',
+                'isSecure',
+                'setDispatched'
+            ]
+            )
+            ->getMock();
+        $request->expects($this->never())
+            ->method('setDispatched')
+            ->with(true);
+
+        $loginRouter->match($request);
     }
 }

@@ -8,10 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Model;
 
 /**
  * Class WhitelistEntrySearchResultInterfaceFactory
+ *
  * @package BitExpert\ForceCustomerLogin\Api\Data\Collection
  * @codingStandardsIgnoreFile
  */
@@ -22,14 +24,14 @@ class WhitelistEntrySearchResultInterfaceFactory
      *
      * @var \Magento\Framework\ObjectManagerInterface
      */
-    protected $_objectManager = null;
+    private $_objectManager = null;
 
     /**
      * Instance name to create
      *
      * @var string
      */
-    protected $_instanceName = null;
+    private $_instanceName = null;
 
     /**
      * Factory constructor

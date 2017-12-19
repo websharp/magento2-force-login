@@ -8,15 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Plugin;
 
-use \Magento\Customer\Controller\Account\LoginPost;
-use \Magento\Framework\Controller\Result\Redirect;
-use \Magento\Framework\App\Config\ScopeConfigInterface;
-use \BitExpert\ForceCustomerLogin\Model\Session;
+use BitExpert\ForceCustomerLogin\Model\Session;
+use Magento\Customer\Controller\Account\LoginPost;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Controller\Result\Redirect;
 
 /**
  * Class AfterLoginPlugin
+ *
  * @package BitExpert\ForceCustomerLogin\Plugin
  */
 class AfterLoginPlugin
@@ -34,11 +36,11 @@ class AfterLoginPlugin
     /**
      * @var Session
      */
-    protected $session;
+    private $session;
     /**
      * @var string
      */
-    protected $defaultTargetUrl;
+    private $defaultTargetUrl;
     /**
      * @var ScopeConfigInterface
      */
@@ -46,6 +48,7 @@ class AfterLoginPlugin
 
     /**
      * AfterLoginPlugin constructor.
+     *
      * @param Session $session
      * @param ScopeConfigInterface $scopeConfig
      * @param string $defaultTargetUrl
@@ -62,6 +65,7 @@ class AfterLoginPlugin
 
     /**
      * Customer login form page
+     *
      * @param LoginPost $customerAccountLoginController
      * @param Redirect $resultRedirect
      * @return Redirect

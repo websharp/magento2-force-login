@@ -8,14 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Controller;
 
 use BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
-use Magento\Framework\App\Router\Base;
 use Magento\Framework\App\ActionFactory;
+use Magento\Framework\App\Router\Base;
 
 /**
  * Class LoginRouter
+ *
  * @package BitExpert\ForceCustomerLogin\Controller
  */
 class LoginRouter extends Base
@@ -23,10 +25,11 @@ class LoginRouter extends Base
     /**
      * @var LoginCheck
      */
-    protected $loginCheck;
+    private $loginCheck;
 
     /**
      * LoginRouter constructor.
+     *
      * @param \Magento\Framework\App\Router\ActionList $actionList
      * @param ActionFactory $actionFactory
      * @param \Magento\Framework\App\DefaultPathInterface $defaultPath
@@ -36,6 +39,7 @@ class LoginRouter extends Base
      * @param \Magento\Framework\Code\NameBuilder $nameBuilder
      * @param \Magento\Framework\App\Router\PathConfigInterface $pathConfig
      * @param LoginCheckInterface $loginCheck
+     * @throws \InvalidArgumentException
      */
     public function __construct(
         \Magento\Framework\App\Router\ActionList $actionList,
@@ -48,15 +52,16 @@ class LoginRouter extends Base
         \Magento\Framework\App\Router\PathConfigInterface $pathConfig,
         LoginCheckInterface $loginCheck
     ) {
-
-        $this->actionList = $actionList;
-        $this->actionFactory = $actionFactory;
-        $this->_responseFactory = $responseFactory;
-        $this->_defaultPath = $defaultPath;
-        $this->_routeConfig = $routeConfig;
-        $this->_url = $url;
-        $this->nameBuilder = $nameBuilder;
-        $this->pathConfig = $pathConfig;
+        parent::__construct(
+            $actionList,
+            $actionFactory,
+            $defaultPath,
+            $responseFactory,
+            $routeConfig,
+            $url,
+            $nameBuilder,
+            $pathConfig
+        );
 
         $this->loginCheck = $loginCheck;
     }

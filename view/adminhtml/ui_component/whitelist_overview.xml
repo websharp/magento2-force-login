@@ -47,12 +47,16 @@
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="storageConfig" xsi:type="array">
-                    <item name="provider" xsi:type="string">whitelist_overview.whitelist_overview.listing_top.bookmarks</item>
+                    <item name="provider" xsi:type="string">
+                        whitelist_overview.whitelist_overview.listing_top.bookmarks
+                    </item>
                     <item name="namespace" xsi:type="string">current</item>
                 </item>
                 <item name="childDefaults" xsi:type="array">
                     <item name="fieldAction" xsi:type="array">
-                        <item name="provider" xsi:type="string">whitelist_overview.whitelist_overview.whitelist_entry_columns.actions</item>
+                        <item name="provider" xsi:type="string">
+                            whitelist_overview.whitelist_overview.whitelist_entry_columns.actions
+                        </item>
                         <item name="target" xsi:type="string">applyAction</item>
                         <item name="params" xsi:type="array">
                             <item name="0" xsi:type="string">edit</item>
@@ -60,7 +64,9 @@
                         </item>
                     </item>
                     <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">whitelist_overview.whitelist_overview.listing_top.bookmarks</item>
+                        <item name="provider" xsi:type="string">
+                            whitelist_overview.whitelist_overview.listing_top.bookmarks
+                        </item>
                         <item name="root" xsi:type="string">columns.${ $.index }</item>
                         <item name="namespace" xsi:type="string">current.${ $.storageConfig.root}</item>
                     </item>
@@ -131,7 +137,8 @@
             </argument>
         </actionsColumn>
 
-        <actionsColumn name="actions_delete" class="\BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\DeleteAction">
+        <actionsColumn name="actions_delete"
+                       class="\BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\DeleteAction">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="indexField" xsi:type="string">whitelist_entry_id</item>

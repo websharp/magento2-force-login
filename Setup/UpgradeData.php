@@ -8,16 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Setup;
 
-use \Magento\Eav\Setup\EavSetup;
-use \Magento\Eav\Setup\EavSetupFactory;
-use \Magento\Framework\Setup\UpgradeDataInterface;
-use \Magento\Framework\Setup\ModuleContextInterface;
-use \Magento\Framework\Setup\ModuleDataSetupInterface;
+use Magento\Eav\Setup\EavSetupFactory;
+use Magento\Framework\Setup\ModuleContextInterface;
+use Magento\Framework\Setup\ModuleDataSetupInterface;
+use Magento\Framework\Setup\UpgradeDataInterface;
 
 /**
  * Upgrade Data script
+ *
  * @codeCoverageIgnore
  */
 class UpgradeData implements UpgradeDataInterface
@@ -31,11 +32,11 @@ class UpgradeData implements UpgradeDataInterface
 
     /**
      * UpgradeData constructor.
+     *
      * @param EavSetupFactory $eavSetupFactory
      */
-    public function __construct(
-        EavSetupFactory $eavSetupFactory
-    ) {
+    public function __construct(EavSetupFactory $eavSetupFactory)
+    {
         $this->eavSetupFactory = $eavSetupFactory;
     }
 
@@ -77,7 +78,7 @@ class UpgradeData implements UpgradeDataInterface
     /**
      * @param ModuleDataSetupInterface $setup
      */
-    protected function runUpgrade101(ModuleDataSetupInterface $setup)
+    private function runUpgrade101(ModuleDataSetupInterface $setup)
     {
         $whitelistEntries = [
             $this->getWhitelistEntryAsArray(0, 'Rest API', '/rest'),
@@ -104,9 +105,33 @@ class UpgradeData implements UpgradeDataInterface
     }
 
     /**
+     * @param int $storeId
+     * @param string $label
+     * @param string $urlRule
+     * @param boolean $editable
+     * @param string $strategy
+     * @return array
+     */
+    private function getWhitelistEntryAsArray(
+        $storeId,
+        $label,
+        $urlRule,
+        $editable = false,
+        $strategy = 'default'
+    ) {
+        return [
+            'store_id' => $storeId,
+            'label' => $label,
+            'url_rule' => $urlRule,
+            'editable' => $editable,
+            'strategy' => $strategy
+        ];
+    }
+
+    /**
      * @param ModuleDataSetupInterface $setup
      */
-    protected function runUpgrade124(ModuleDataSetupInterface $setup)
+    private function runUpgrade124(ModuleDataSetupInterface $setup)
     {
         $bind = [
             'editable' => true
@@ -132,7 +157,7 @@ class UpgradeData implements UpgradeDataInterface
     /**
      * @param ModuleDataSetupInterface $setup
      */
-    protected function runUpgrade200(ModuleDataSetupInterface $setup)
+    private function runUpgrade200(ModuleDataSetupInterface $setup)
     {
         $whitelistEntries = [
             $this->getWhitelistEntryAsArray(0, 'Sitemap.xml', '/sitemap.xml', true),
@@ -148,7 +173,7 @@ class UpgradeData implements UpgradeDataInterface
     /**
      * @param ModuleDataSetupInterface $setup
      */
-    protected function runUpgrade201(ModuleDataSetupInterface $setup)
+    private function runUpgrade201(ModuleDataSetupInterface $setup)
     {
         $whitelistEntries = [
             $this->getWhitelistEntryAsArray(0, 'Customer Account Dashboard', '/customer/account')
@@ -163,46 +188,26 @@ class UpgradeData implements UpgradeDataInterface
     /**
      * @param ModuleDataSetupInterface $setup
      */
-    protected function runUpgrade210(ModuleDataSetupInterface $setup)
+    private function runUpgrade210(ModuleDataSetupInterface $setup)
     {
         $setup->getConnection()->update(
             $setup->getTable('bitexpert_forcelogin_whitelist'),
-            ['strategy' => 'regex-all']
+            [
+                'strategy' => 'regex-all'
+            ]
         );
     }
 
     /**
      * @param ModuleDataSetupInterface $setup
      */
-    protected function runUpgrade221(ModuleDataSetupInterface $setup)
+    private function runUpgrade221(ModuleDataSetupInterface $setup)
     {
         $setup->getConnection()->update(
             $setup->getTable('bitexpert_forcelogin_whitelist'),
-            ['editable' => true]
-        );
-    }
-
-    /**
-     * @param int $storeId
-     * @param string $label
-     * @param string $urlRule
-     * @param boolean $editable
-     * @param string $strategy
-     * @return array
-     */
-    protected function getWhitelistEntryAsArray(
-        $storeId,
-        $label,
-        $urlRule,
-        $editable = false,
-        $strategy = 'default'
-    ) {
-        return array(
-            'store_id' => $storeId,
-            'label' => $label,
-            'url_rule' => $urlRule,
-            'editable' => $editable,
-            'strategy' => $strategy
+            [
+                'editable' => true
+            ]
         );
     }
 }

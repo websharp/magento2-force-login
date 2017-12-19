@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Controller;
 
 use BitExpert\ForceCustomerLogin\Controller\ModuleCheck;
@@ -15,6 +16,7 @@ use Magento\Store\Model\ScopeInterface;
 
 /**
  * Class ModuleCheckUnitTest
+ *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Controller
  */
 class ModuleCheckUnitTest extends \PHPUnit\Framework\TestCase
@@ -37,6 +39,17 @@ class ModuleCheckUnitTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue($moduleCheck->isModuleEnabled());
     }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    protected function getScopeConfig()
+    {
+        return $this->getMockBuilder('\Magento\Framework\App\Config\ScopeConfigInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
     /**
      * @test
      */
@@ -54,15 +67,5 @@ class ModuleCheckUnitTest extends \PHPUnit\Framework\TestCase
         $moduleCheck = new ModuleCheck($scopeConfig);
 
         $this->assertFalse($moduleCheck->isModuleEnabled());
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Config\ScopeConfigInterface
-     */
-    protected function getScopeConfig()
-    {
-        return $this->getMockBuilder('\Magento\Framework\App\Config\ScopeConfigInterface')
-            ->disableOriginalConstructor()
-            ->getMock();
     }
 }

@@ -8,12 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy;
 
 use BitExpert\ForceCustomerLogin\Helper\Strategy\RegExAllMatcher;
 
 /**
  * Class RegExAllMatcherUnitTest
+ *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy
  */
 class RegExAllMatcherUnitTest extends \PHPUnit\Framework\TestCase
@@ -53,7 +55,7 @@ class RegExAllMatcherUnitTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($matcher->isMatch('/index.php/foobar/baz', $rule));
         $this->assertTrue($matcher->isMatch('/index.php/foobar/baz/', $rule));
     }
-    
+
     /**
      * @test
      */
@@ -79,7 +81,7 @@ class RegExAllMatcherUnitTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($matcher->isMatch('/foobar/baz', $rule));
         $this->assertTrue($matcher->isMatch('/foobar/baz/', $rule));
     }
-    
+
     /**
      * @test
      */
@@ -105,7 +107,7 @@ class RegExAllMatcherUnitTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($matcher->isMatch('/foobar/baz', $rule));
         $this->assertTrue($matcher->isMatch('/foobar/baz/', $rule));
     }
-    
+
     /**
      * @test
      */

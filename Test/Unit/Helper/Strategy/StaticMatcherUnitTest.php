@@ -8,12 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy;
 
 use BitExpert\ForceCustomerLogin\Helper\Strategy\StaticMatcher;
 
 /**
  * Class StaticMatcherUnitTest
+ *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy
  */
 class StaticMatcherUnitTest extends \PHPUnit\Framework\TestCase

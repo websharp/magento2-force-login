@@ -8,15 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column;
 
-use \Magento\Framework\View\Element\UiComponent\ContextInterface;
-use \Magento\Framework\View\Element\UiComponentFactory;
-use \Magento\Ui\Component\Listing\Columns\Column;
-use \Magento\Store\Model\StoreManager;
+use Magento\Framework\View\Element\UiComponent\ContextInterface;
+use Magento\Framework\View\Element\UiComponentFactory;
+use Magento\Store\Model\StoreManager;
+use Magento\Ui\Component\Listing\Columns\Column;
 
 /**
  * Class StoreName
+ *
  * @package BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column
  */
 class StoreName extends Column
@@ -24,7 +26,7 @@ class StoreName extends Column
     /**
      * @var StoreManager
      */
-    protected $storeManager;
+    private $storeManager;
 
     /**
      * Constructor

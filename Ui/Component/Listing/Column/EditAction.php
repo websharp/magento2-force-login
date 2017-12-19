@@ -8,10 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column;
 
 /**
  * Class EditAction
+ *
  * @package BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column
  */
 class EditAction extends DeleteAction

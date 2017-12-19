@@ -8,12 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Model;
 
 use BitExpert\ForceCustomerLogin\Model\WhitelistEntry;
 
 /**
  * Class WhitelistEntryUnitTest
+ *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Model
  */
 class WhitelistEntryUnitTest extends \PHPUnit\Framework\TestCase
@@ -49,6 +51,22 @@ class WhitelistEntryUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\Model\ResourceModel\AbstractResource
+     */
+    protected function getResourceModel()
+    {
+        return $this->getMockBuilder('\Magento\Framework\Model\ResourceModel\AbstractResource')
+            ->disableOriginalConstructor()
+            ->setMethods([
+                '_construct',
+                'getConnection',
+                'getIdFieldName'
+            ]
+            )
+            ->getMock();
+    }
+
+    /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\Model\Context
      */
     protected function getContext()
@@ -65,21 +83,6 @@ class WhitelistEntryUnitTest extends \PHPUnit\Framework\TestCase
     {
         return $this->getMockBuilder('\Magento\Framework\Registry')
             ->disableOriginalConstructor()
-            ->getMock();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\Model\ResourceModel\AbstractResource
-     */
-    protected function getResourceModel()
-    {
-        return $this->getMockBuilder('\Magento\Framework\Model\ResourceModel\AbstractResource')
-            ->disableOriginalConstructor()
-            ->setMethods([
-                '_construct',
-                'getConnection',
-                'getIdFieldName'
-            ])
             ->getMock();
     }
 

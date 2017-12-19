@@ -10,7 +10,11 @@
  */
 
 namespace BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column;
-function __($value) { return $value; }
+
+function __($value)
+{
+    return $value;
+}
 
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Ui\Component\Listing\Column;
 
@@ -18,6 +22,7 @@ use BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\StoreName;
 
 /**
  * Class StoreNameUnitTest
+ *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Ui\Component\Listing\Column
  */
 class StoreNameUnitTest extends \PHPUnit\Framework\TestCase
@@ -99,6 +104,14 @@ class StoreNameUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Store\Model\StoreManager
+     */
+    protected function getStoreManager()
+    {
+        return $this->createMock('\Magento\Store\Model\StoreManager');
+    }
+
+    /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\View\Element\UiComponent\ContextInterface
      */
     protected function getContext()
@@ -114,13 +127,5 @@ class StoreNameUnitTest extends \PHPUnit\Framework\TestCase
         return $this->getMockBuilder('\Magento\Framework\View\Element\UiComponentFactory')
             ->disableOriginalConstructor()
             ->getMock();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Store\Model\StoreManager
-     */
-    protected function getStoreManager()
-    {
-        return $this->createMock('\Magento\Store\Model\StoreManager');
     }
 }

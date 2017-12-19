@@ -8,13 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Block\Adminhtml\Manage\Create;
 
-use \BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
+use BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
 use BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
 
 /**
  * Class Form
+ *
  * @package BitExpert\ForceCustomerLogin\Block\Adminhtml\Manage\Create
  * @codingStandardsIgnoreFile
  */
@@ -23,14 +25,15 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
     /**
      * @var WhitelistEntryFactoryInterface
      */
-    protected $entityFactory;
+    private $entityFactory;
     /**
      * @var StrategyManager
      */
-    protected $strategyManager;
+    private $strategyManager;
 
     /**
      * Form constructor.
+     *
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\Data\FormFactory $formFactory
@@ -74,7 +77,8 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 'action' => $this->getUrl('ForceCustomerLogin/Manage/Save'),
                 'method' => 'post'
             ]
-        ]);
+        ]
+        );
         $form->setHtmlIdPrefix('');
 
         $fieldsetBase = $form->addFieldset(
@@ -88,7 +92,8 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             $fieldsetBase->addField('whitelist_entry_id', 'hidden', [
                 'name' => 'whitelist_entry_id',
                 'value' => $whitelistEntry->getId()
-            ]);
+            ]
+            );
         }
 
         $fieldsetBase->addField('label', 'text', [
@@ -97,7 +102,8 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             'title' => __('Label'),
             'value' => $whitelistEntry->getLabel(),
             'required' => true
-        ]);
+        ]
+        );
 
         $fieldsetBase->addField('url_rule', 'text', [
             'name' => 'url_rule',
@@ -105,27 +111,29 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             'title' => __('Url Rule'),
             'value' => $whitelistEntry->getUrlRule(),
             'required' => true
-        ]);
+        ]
+        );
 
         $fieldsetBase->addField('strategy', 'select', [
             'name' => 'strategy',
             'label' => __('Strategy'),
             'title' => __('Strategy'),
             'value' => $whitelistEntry->getStrategy(),
-            'options' =>  $this->strategyManager->getStrategyNames(),
+            'options' => $this->strategyManager->getStrategyNames(),
             'required' => true
-        ]);
+        ]
+        );
 
         $fieldsetBase->addField('store_id', 'select', [
             'name' => 'store_id',
             'label' => __('Store'),
             'title' => __('Store'),
             'value' => $whitelistEntry->getStoreId(),
-            'options' =>  $this->getStoresAsArray(),
+            'options' => $this->getStoresAsArray(),
             'required' => true
-        ]);
+        ]
+        );
         $form->setData('store_id', $whitelistEntry->getStoreId());
-
 
 
         $form->setUseContainer(true);

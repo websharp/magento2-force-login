@@ -8,16 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 
-use \BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
-use \Magento\Backend\Model\View\Result\RedirectFactory;
-use \Magento\Backend\App\Action\Context;
-use \Magento\Framework\Message\ManagerInterface;
-use \BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
+use BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
+use BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
+use Magento\Backend\App\Action\Context;
+use Magento\Backend\Model\View\Result\RedirectFactory;
+use Magento\Framework\Message\ManagerInterface;
 
 /**
  * Class Save
+ *
  * @package BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage
  * @codingStandardsIgnoreFile
  */
@@ -26,26 +28,23 @@ class Save extends \Magento\Backend\App\Action
     /**
      * @var WhitelistEntryFactoryInterface
      */
-    protected $whitelistEntityFactory;
+    private $whitelistEntityFactory;
     /**
      * @var WhitelistRepositoryInterface
      */
-    protected $whitelistRepository;
+    private $whitelistRepository;
     /**
      * @var RedirectFactory
      */
-    protected $redirectFactory;
+    private $redirectFactory;
     /**
      * @var Context
      */
-    protected $context;
-    /**
-     * @var ManagerInterface
-     */
-    protected $messageManager;
+    private $context;
 
     /**
      * Save constructor.
+     *
      * @param WhitelistEntryFactoryInterface $whitelistEntityFactory
      * @param WhitelistRepositoryInterface $whitelistRepository
      * @param Context $context
@@ -55,12 +54,10 @@ class Save extends \Magento\Backend\App\Action
         WhitelistRepositoryInterface $whitelistRepository,
         Context $context
     ) {
+        parent::__construct($context);
         $this->whitelistEntityFactory = $whitelistEntityFactory;
         $this->whitelistRepository = $whitelistRepository;
         $this->redirectFactory = $context->getResultRedirectFactory();
-        $this->messageManager = $context->getMessageManager();
-        $this->context = $context;
-        parent::__construct($context);
     }
 
     /**
@@ -109,7 +106,8 @@ class Save extends \Magento\Backend\App\Action
                     'url_rule' => \base64_encode($this->getRequest()->getParam('url_rule')),
                     'strategy' => \base64_encode($this->getRequest()->getParam('strategy')),
                     'store_id' => \base64_encode($this->getRequest()->getParam('store_id', 0))
-            ]);
+                ]
+            );
         }
 
         return $result;

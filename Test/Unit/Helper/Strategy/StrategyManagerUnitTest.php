@@ -8,13 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy;
 
-use BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
 use BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface;
+use BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
 
 /**
  * Class StrategyManagerUnitTest
+ *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy
  */
 class StrategyManagerUnitTest extends \PHPUnit\Framework\TestCase
@@ -38,7 +40,8 @@ class StrategyManagerUnitTest extends \PHPUnit\Framework\TestCase
         $manager = new StrategyManager([
             'default' => $strategy1,
             'regex-all' => $strategy2
-        ]);
+        ]
+        );
 
         $this->assertEquals(
             [
@@ -68,7 +71,8 @@ class StrategyManagerUnitTest extends \PHPUnit\Framework\TestCase
         $manager = new StrategyManager([
             'default' => $strategy1,
             'regex-all' => $strategy2
-        ]);
+        ]
+        );
 
         $this->assertEquals(
             [
@@ -98,7 +102,8 @@ class StrategyManagerUnitTest extends \PHPUnit\Framework\TestCase
         $manager = new StrategyManager([
             'default' => $strategy1,
             'regex-all' => $strategy2
-        ]);
+        ]
+        );
 
         $this->assertFalse($manager->has('foo'));
         $this->assertTrue($manager->has('regex-all'));
@@ -124,7 +129,8 @@ class StrategyManagerUnitTest extends \PHPUnit\Framework\TestCase
         $manager = new StrategyManager([
             'default' => $strategy1,
             'regex-all' => $strategy2
-        ]);
+        ]
+        );
 
         $this->assertFalse($manager->has('foo'));
         $this->assertTrue($manager->has('default'));

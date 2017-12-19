@@ -8,10 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 
 /**
  * Class Index
+ *
  * @package BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage
  * @codingStandardsIgnoreFile
  */
@@ -19,6 +21,7 @@ class Index extends \Magento\Backend\App\Action
 {
     /**
      * Index Action*
+     *
      * @return void
      */
     public function execute()

@@ -8,13 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Controller;
 
-use \Magento\Framework\App\Config\ScopeConfigInterface;
-use \Magento\Store\Model\ScopeInterface;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Store\Model\ScopeInterface;
 
 /**
  * Class ModuleCheck
+ *
  * @package BitExpert\ForceCustomerLogin\Controller
  */
 class ModuleCheck
@@ -27,15 +29,15 @@ class ModuleCheck
     /**
      * @var ScopeConfigInterface
      */
-    protected $scopeConfig;
+    private $scopeConfig;
 
     /**
      * ModuleCheck constructor.
+     *
      * @param ScopeConfigInterface $scopeConfig
      */
-    public function __construct(
-        ScopeConfigInterface $scopeConfig
-    ) {
+    public function __construct(ScopeConfigInterface $scopeConfig)
+    {
         $this->scopeConfig = $scopeConfig;
     }
 

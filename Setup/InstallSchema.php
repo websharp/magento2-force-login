@@ -8,14 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Setup;
 
-use \Magento\Framework\Setup\InstallSchemaInterface;
-use \Magento\Framework\Setup\ModuleContextInterface;
-use \Magento\Framework\Setup\SchemaSetupInterface;
+use Magento\Framework\Setup\InstallSchemaInterface;
+use Magento\Framework\Setup\ModuleContextInterface;
+use Magento\Framework\Setup\SchemaSetupInterface;
 
 /**
  * Class InstallSchema
+ *
  * @package BitExpert\ForceCustomerLogin\Setup
  * @codeCoverageIgnore
  */
@@ -24,6 +26,7 @@ class InstallSchema implements InstallSchemaInterface
     /**
      * @param SchemaSetupInterface $setup
      * @param ModuleContextInterface $context
+     * @throws \Zend_Db_Exception
      */
     public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
@@ -101,7 +104,7 @@ class InstallSchema implements InstallSchemaInterface
             )
             ->setComment('bitExpert Force Customer Login Whitelist Table');
 
-            $installer->getConnection()->createTable($table);
+        $installer->getConnection()->createTable($table);
 
         $installer->endSetup();
     }

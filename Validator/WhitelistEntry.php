@@ -8,12 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Validator;
 
-use \BitExpert\ForceCustomerLogin\Model\WhitelistEntry as WhitelistEntryModel;
+use BitExpert\ForceCustomerLogin\Model\WhitelistEntry as WhitelistEntryModel;
 
 /**
  * Class WhitelistEntry
+ *
  * @package BitExpert\ForceCustomerLogin\Validator
  */
 class WhitelistEntry

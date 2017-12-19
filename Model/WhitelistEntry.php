@@ -8,28 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace BitExpert\ForceCustomerLogin\Model;
 
-use BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryInterface;
+namespace BitExpert\ForceCustomerLogin\Model;
 
 /**
  * Class WhitelistEntry
+ *
  * @package BitExpert\ForceCustomerLogin\Model
  * @codingStandardsIgnoreFile
  */
 class WhitelistEntry extends \Magento\Framework\Model\AbstractModel implements
     \BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryInterface
 {
-    /**
-     * Initialize resource model
-     *
-     * @return void
-     */
-    protected function _construct()
-    {
-        $this->_init('BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry');
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -108,5 +98,15 @@ class WhitelistEntry extends \Magento\Framework\Model\AbstractModel implements
     public function setStrategy($strategy)
     {
         return $this->setData(static::KEY_STRATEGY, $strategy);
+    }
+
+    /**
+     * Initialize resource model
+     *
+     * @return void
+     */
+    protected function _construct()
+    {
+        $this->_init('BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry');
     }
 }
