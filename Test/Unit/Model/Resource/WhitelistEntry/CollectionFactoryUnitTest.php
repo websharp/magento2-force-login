@@ -8,12 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Model\Resource\WhitelistEntry;
 
 use BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\CollectionFactory;
 
 /**
  * Class CollectionFactoryUnitTest
+ *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Model\Resource\WhitelistEntry
  */
 class CollectionFactoryUnitTest extends \PHPUnit\Framework\TestCase

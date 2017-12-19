@@ -8,10 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Helper\Strategy;
 
 /**
  * Class StrategyManager
+ *
  * @package BitExpert\ForceCustomerLogin\Helper\Strategy
  */
 class StrategyManager
@@ -32,6 +34,7 @@ class StrategyManager
 
     /**
      * LoginRequiredOnVisitorInitObserver constructor.
+     *
      * @param StrategyInterface[] $strategies
      */
     public function __construct(array $strategies)

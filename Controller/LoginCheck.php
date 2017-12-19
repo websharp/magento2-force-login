@@ -8,22 +8,24 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Controller;
 
-use \BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
-use \BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
-use \BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
-use \BitExpert\ForceCustomerLogin\Model\Session;
-use \Magento\Customer\Model\Session as CustomerSession;
-use \Magento\Framework\App\Action\Action;
-use \Magento\Framework\App\Action\Context;
-use \Magento\Framework\UrlInterface;
-use \Magento\Framework\App\Config\ScopeConfigInterface;
-use \Magento\Store\Model\ScopeInterface;
-use \Magento\Framework\App\Response\Http as ResponseHttp;
+use BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
+use BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
+use BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
+use BitExpert\ForceCustomerLogin\Model\Session;
+use Magento\Customer\Model\Session as CustomerSession;
+use Magento\Framework\App\Action\Action;
+use Magento\Framework\App\Action\Context;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\App\Response\Http as ResponseHttp;
+use Magento\Framework\UrlInterface;
+use Magento\Store\Model\ScopeInterface;
 
 /**
  * Class LoginCheck
+ *
  * @package BitExpert\ForceCustomerLogin\Controller
  */
 class LoginCheck extends Action implements LoginCheckInterface
@@ -31,35 +33,35 @@ class LoginCheck extends Action implements LoginCheckInterface
     /**
      * @var UrlInterface
      */
-    protected $url;
+    private $url;
     /**
      * @var CustomerSession
      */
-    protected $customerSession;
+    private $customerSession;
     /**
      * @var Session
      */
-    protected $session;
+    private $session;
     /**
      * @var ScopeConfigInterface
      */
-    protected $scopeConfig;
+    private $scopeConfig;
     /**
      * @var WhitelistRepositoryInterface
      */
-    protected $whitelistRepository;
+    private $whitelistRepository;
     /**
      * @var StrategyManager
      */
-    protected $strategyManager;
+    private $strategyManager;
     /**
      * @var ModuleCheck
      */
-    protected $moduleCheck;
+    private $moduleCheck;
     /**
      * @var ResponseHttp
      */
-    protected $response;
+    private $response;
 
     /**
      * Creates a new {@link \BitExpert\ForceCustomerLogin\Controller\LoginCheck}.
@@ -95,6 +97,7 @@ class LoginCheck extends Action implements LoginCheckInterface
 
     /**
      * Manages redirect
+     *
      * @return bool TRUE if redirection is applied, else FALSE
      */
     public function execute()
@@ -136,26 +139,26 @@ class LoginCheck extends Action implements LoginCheckInterface
     }
 
     /**
+     * @return string
+     */
+    private function getTargetUrl()
+    {
+        return $this->scopeConfig->getValue(
+            self::MODULE_CONFIG_TARGET,
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
      * @param string $targetUrl
      * @return string
      */
-    protected function getRedirectUrl($targetUrl)
+    private function getRedirectUrl($targetUrl)
     {
         return \sprintf(
             '%s%s',
             $this->_url->getBaseUrl(),
             $targetUrl
-        );
-    }
-
-    /**
-     * @return string
-     */
-    protected function getTargetUrl()
-    {
-        return $this->scopeConfig->getValue(
-            self::MODULE_CONFIG_TARGET,
-            ScopeInterface::SCOPE_STORE
         );
     }
 }

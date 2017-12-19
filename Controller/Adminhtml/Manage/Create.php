@@ -8,10 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 
 /**
  * Class Create
+ *
  * @package BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage
  * @codingStandardsIgnoreFile
  */

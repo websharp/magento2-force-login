@@ -8,12 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Plugin;
 
 use BitExpert\ForceCustomerLogin\Plugin\AfterLoginPlugin;
 
 /**
  * Class AfterLoginPluginUnitTest
+ *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Plugin
  */
 class AfterLoginPluginUnitTest extends \PHPUnit\Framework\TestCase
@@ -45,6 +47,50 @@ class AfterLoginPluginUnitTest extends \PHPUnit\Framework\TestCase
             ->method('setUrl');
 
         $this->assertEquals($redirect, $plugin->afterExecute($loginPost, $redirect));
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Model\Session
+     */
+    private function getSession()
+    {
+        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\Session')
+            ->disableOriginalConstructor()
+            ->setMethods([
+                'getAfterLoginReferer'
+            ]
+            )
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    private function getScopeConfig()
+    {
+        return $this->getMockBuilder('\Magento\Framework\App\Config\ScopeConfigInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Customer\Controller\Account\LoginPost
+     */
+    private function getLoginPost()
+    {
+        return $this->getMockBuilder('\Magento\Customer\Controller\Account\LoginPost')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\Controller\Result\Redirect
+     */
+    private function getRedirect()
+    {
+        return $this->getMockBuilder('\Magento\Framework\Controller\Result\Redirect')
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 
     /**
@@ -107,48 +153,5 @@ class AfterLoginPluginUnitTest extends \PHPUnit\Framework\TestCase
             ->with('default-target-url');
 
         $this->assertEquals($redirect, $plugin->afterExecute($loginPost, $redirect));
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Customer\Controller\Account\LoginPost
-     */
-    private function getLoginPost()
-    {
-        return $this->getMockBuilder('\Magento\Customer\Controller\Account\LoginPost')
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\Controller\Result\Redirect
-     */
-    private function getRedirect()
-    {
-        return $this->getMockBuilder('\Magento\Framework\Controller\Result\Redirect')
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Model\Session
-     */
-    private function getSession()
-    {
-        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\Session')
-            ->disableOriginalConstructor()
-            ->setMethods([
-                'getAfterLoginReferer'
-            ])
-            ->getMock();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Config\ScopeConfigInterface
-     */
-    private function getScopeConfig()
-    {
-        return $this->getMockBuilder('\Magento\Framework\App\Config\ScopeConfigInterface')
-            ->disableOriginalConstructor()
-            ->getMock();
     }
 }

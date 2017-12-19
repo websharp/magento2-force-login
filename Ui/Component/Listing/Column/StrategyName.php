@@ -8,15 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column;
 
 use BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
-use \Magento\Framework\View\Element\UiComponent\ContextInterface;
-use \Magento\Framework\View\Element\UiComponentFactory;
-use \Magento\Ui\Component\Listing\Columns\Column;
+use Magento\Framework\View\Element\UiComponent\ContextInterface;
+use Magento\Framework\View\Element\UiComponentFactory;
+use Magento\Ui\Component\Listing\Columns\Column;
 
 /**
  * Class StrategyName
+ *
  * @package BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column
  */
 class StrategyName extends Column
@@ -24,7 +26,7 @@ class StrategyName extends Column
     /**
      * @var StrategyManager
      */
-    protected $strategyManager;
+    private $strategyManager;
 
     /**
      * Constructor

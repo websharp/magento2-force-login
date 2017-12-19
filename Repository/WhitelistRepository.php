@@ -8,15 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Repository;
 
-use \BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
-use \BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface;
-use \BitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory as SearchResultFactory;
-use \Magento\Store\Model\StoreManager;
+use BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface;
+use BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
+use BitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory as SearchResultFactory;
+use Magento\Store\Model\StoreManager;
 
 /**
  * Class WhitelistRepository
+ *
  * @package BitExpert\ForceCustomerLogin\Model
  */
 class WhitelistRepository implements \BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface
@@ -24,22 +26,23 @@ class WhitelistRepository implements \BitExpert\ForceCustomerLogin\Api\Repositor
     /**
      * @var WhitelistEntryFactoryInterface
      */
-    protected $entityFactory;
+    private $entityFactory;
     /**
      * @var WhitelistEntryCollectionFactoryInterface
      */
-    protected $collectionFactory;
+    private $collectionFactory;
     /**
      * @var SearchResultFactory
      */
-    protected $searchResultFactory;
+    private $searchResultFactory;
     /**
      * @var StoreManager
      */
-    protected $storeManager;
+    private $storeManager;
 
     /**
      * WhitelistRepository constructor.
+     *
      * @param WhitelistEntryFactoryInterface $entityFactory
      * @param WhitelistEntryCollectionFactoryInterface $collectionFactory
      * @param StoreManager $storeManager

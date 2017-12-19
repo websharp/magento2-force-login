@@ -8,10 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Controller;
 
 /**
  * Class LoginCheckUnitTest
+ *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Controller
  */
 class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
@@ -47,7 +49,86 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Action\Context
+     */
+    protected function getContext()
+    {
+        return $this->getMockBuilder('\Magento\Framework\App\Action\Context')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Customer\Model\Session
+     */
+    protected function getCustomerSession()
+    {
+        return $this->getMockBuilder('\Magento\Customer\Model\Session')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Model\Session
+     */
+    protected function getSession()
+    {
+        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\Session')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    protected function getScopeConfig()
+    {
+        return $this->getMockBuilder('\Magento\Framework\App\Config\ScopeConfigInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface
+     */
+    protected function getWhitelistRepository()
+    {
+        return $this->createMock('\BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface');
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager
+     */
+    protected function getStrategyManager()
+    {
+        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Controller\ModuleCheck
+     */
+    protected function getModuleCheck()
+    {
+        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Controller\ModuleCheck')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Response\Http
+     */
+    protected function getResponseHttp()
+    {
+        return $this->getMockBuilder('\Magento\Framework\App\Response\Http')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
      * Run test with url equals target, so no redirecting is happening.
+     *
      * @test
      * @depends testConstructor
      */
@@ -92,7 +173,32 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\UrlInterface
+     */
+    protected function getUrl()
+    {
+        return $this->createMock('\Magento\Framework\UrlInterface');
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\ResponseInterface
+     */
+    protected function getResponse()
+    {
+        return $this->createMock('\Magento\Framework\App\ResponseInterface');
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Response\RedirectInterface
+     */
+    protected function getRedirect()
+    {
+        return $this->createMock('\Magento\Framework\App\Response\RedirectInterface');
+    }
+
+    /**
      * Run test with existing customer session, so no redirecting is happening.
+     *
      * @test
      * @depends testConstructor
      */
@@ -143,6 +249,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Run test with url equals target, so no redirecting is happening.
+     *
      * @test
      * @depends testConstructor
      */
@@ -216,6 +323,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Run test with data listed on the whitelist, so no redirecting is happening.
+     *
      * @test
      * @depends testConstructor
      */
@@ -311,6 +419,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Run test with data not listed on the whitelist, so redirecting is forced.
+     *
      * @test
      * @depends testConstructor
      */
@@ -403,107 +512,5 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         );
 
         $loginCheck->execute();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Action\Context
-     */
-    protected function getContext()
-    {
-        return $this->getMockBuilder('\Magento\Framework\App\Action\Context')
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Customer\Model\Session
-     */
-    protected function getCustomerSession()
-    {
-        return $this->getMockBuilder('\Magento\Customer\Model\Session')
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Model\Session
-     */
-    protected function getSession()
-    {
-        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\Session')
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\UrlInterface
-     */
-    protected function getUrl()
-    {
-        return $this->createMock('\Magento\Framework\UrlInterface');
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Config\ScopeConfigInterface
-     */
-    protected function getScopeConfig()
-    {
-        return $this->getMockBuilder('\Magento\Framework\App\Config\ScopeConfigInterface')
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Response\RedirectInterface
-     */
-    protected function getRedirect()
-    {
-        return $this->createMock('\Magento\Framework\App\Response\RedirectInterface');
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\ResponseInterface
-     */
-    protected function getResponse()
-    {
-        return $this->createMock('\Magento\Framework\App\ResponseInterface');
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager
-     */
-    protected function getStrategyManager()
-    {
-        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager')
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Controller\ModuleCheck
-     */
-    protected function getModuleCheck()
-    {
-        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Controller\ModuleCheck')
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface
-     */
-    protected function getWhitelistRepository()
-    {
-        return $this->createMock('\BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface');
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Response\Http
-     */
-    protected function getResponseHttp()
-    {
-        return $this->getMockBuilder('\Magento\Framework\App\Response\Http')
-            ->disableOriginalConstructor()
-            ->getMock();
     }
 }

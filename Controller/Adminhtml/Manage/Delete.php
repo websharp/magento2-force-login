@@ -8,15 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 
-use \BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
-use \Magento\Backend\Model\View\Result\RedirectFactory;
-use \Magento\Backend\App\Action\Context;
-use \Magento\Framework\Message\ManagerInterface;
+use BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
+use Magento\Backend\App\Action\Context;
+use Magento\Backend\Model\View\Result\RedirectFactory;
+use Magento\Framework\Message\ManagerInterface;
 
 /**
  * Class Delete
+ *
  * @package BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage
  * @codingStandardsIgnoreFile
  */
@@ -25,22 +27,19 @@ class Delete extends \Magento\Backend\App\Action
     /**
      * @var WhitelistRepositoryInterface
      */
-    protected $whitelistRepository;
+    private $whitelistRepository;
     /**
      * @var RedirectFactory
      */
-    protected $redirectFactory;
+    private $redirectFactory;
     /**
      * @var Context
      */
-    protected $context;
-    /**
-     * @var ManagerInterface
-     */
-    protected $messageManager;
+    private $context;
 
     /**
      * Save constructor.
+     *
      * @param WhitelistRepositoryInterface $whitelistRepository
      * @param Context $context
      */
@@ -48,11 +47,9 @@ class Delete extends \Magento\Backend\App\Action
         WhitelistRepositoryInterface $whitelistRepository,
         Context $context
     ) {
+        parent::__construct($context);
         $this->whitelistRepository = $whitelistRepository;
         $this->redirectFactory = $context->getResultRedirectFactory();
-        $this->messageManager = $context->getMessageManager();
-        $this->context = $context;
-        parent::__construct($context);
     }
 
     /**

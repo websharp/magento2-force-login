@@ -8,10 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Block\Adminhtml\Manage;
 
 /**
  * Class Create
+ *
  * @package BitExpert\ForceCustomerLogin\Block\Adminhtml\Manage
  * @codingStandardsIgnoreFile
  */
@@ -20,7 +22,7 @@ class Create extends \Magento\Backend\Block\Widget\Form\Container
     /**
      * @var string
      */
-    protected $formIdentifier = 'create_manage_entry_form';
+    private $formIdentifier = 'create_manage_entry_form';
 
     /**
      * Initialize printer post create block
@@ -40,14 +42,6 @@ class Create extends \Magento\Backend\Block\Widget\Form\Container
     }
 
     /**
-     * @return string
-     */
-    protected function getFormIdentifier()
-    {
-        return $this->formIdentifier;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getSaveUrl()
@@ -56,7 +50,8 @@ class Create extends \Magento\Backend\Block\Widget\Form\Container
             'ForceCustomerLogin/Manage/Save',
             [
                 $this->_objectId => $this->getRequest()->getParam($this->_objectId)
-        ]);
+            ]
+        );
     }
 
     /**
@@ -83,5 +78,13 @@ class Create extends \Magento\Backend\Block\Widget\Form\Container
                 ],
             ]
         );
+    }
+
+    /**
+     * @return string
+     */
+    protected function getFormIdentifier()
+    {
+        return $this->formIdentifier;
     }
 }

@@ -8,10 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Api\Data\Collection;
 
 /**
  * Interface WhitelistEntryCollectionFactoryInterface
+ *
  * @package BitExpert\ForceCustomerLogin\Api\Data\Collection
  */
 interface WhitelistEntryCollectionFactoryInterface
@@ -22,5 +24,5 @@ interface WhitelistEntryCollectionFactoryInterface
      * @param array $data
      * @return \BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection
      */
-    public function create(array $data = array());
+    public function create(array $data = []);
 }

@@ -8,12 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Ui\Component\Listing\Column;
 
 use BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\DeleteAction;
 
 /**
  * Class DeleteActionUnitTest
+ *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Ui\Component\Listing\Column
  */
 class DeleteActionUnitTest extends \PHPUnit\Framework\TestCase
@@ -28,7 +30,8 @@ class DeleteActionUnitTest extends \PHPUnit\Framework\TestCase
             ->method('getUrl')
             ->with('viewurlpath', [
                 'id' => '1'
-            ])
+            ]
+            )
             ->willReturn('some-url');
 
         $action = new DeleteAction(
@@ -44,7 +47,8 @@ class DeleteActionUnitTest extends \PHPUnit\Framework\TestCase
                 'label' => 'some-label'
             ],
             'name' => 'delete'
-        ]);
+        ]
+        );
 
         $dataSource = ['foo' => 'bar'];
         $this->assertEquals($dataSource, $action->prepareDataSource($dataSource));
@@ -95,6 +99,14 @@ class DeleteActionUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\UrlInterface
+     */
+    protected function getUrl()
+    {
+        return $this->createMock('\Magento\Framework\UrlInterface');
+    }
+
+    /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\View\Element\UiComponent\ContextInterface
      */
     protected function getContext()
@@ -110,13 +122,5 @@ class DeleteActionUnitTest extends \PHPUnit\Framework\TestCase
         return $this->getMockBuilder('\Magento\Framework\View\Element\UiComponentFactory')
             ->disableOriginalConstructor()
             ->getMock();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\UrlInterface
-     */
-    protected function getUrl()
-    {
-        return $this->createMock('\Magento\Framework\UrlInterface');
     }
 }

@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Repository;
 
 use BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
@@ -15,6 +16,7 @@ use BitExpert\ForceCustomerLogin\Repository\WhitelistRepository;
 
 /**
  * Class WhitelistRepositoryUnitTest
+ *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Repository
  */
 class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
@@ -49,7 +51,46 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * @return \BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface
+     */
+    protected function getWhitelistEntryFactory()
+    {
+        return $this->createMock('\BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface');
+    }
+
+    /**
+     * @return \BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface
+     */
+    protected function getWhitelistEntryCollectionFactory()
+    {
+        return $this->createMock(
+            '\BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface'
+        );
+    }
+
+    /**
+     * @return \Magento\Store\Model\StoreManager
+     */
+    protected function getStoreManager()
+    {
+        return $this->getMockBuilder('\Magento\Store\Model\StoreManager')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
+     * @return \BitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory
+     */
+    protected function getWhitelistEntrySearchResultInterfaceFactory()
+    {
+        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
      * Run test of creating a new entry without existing entity
+     *
      * @test
      * @depends testConstructor
      */
@@ -133,6 +174,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Run test of creating a new entry with existing entity
+     *
      * @test
      * @depends testConstructor
      */
@@ -217,6 +259,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Run test of creating a new entry with existing entity being not editable
+     *
      * @test
      * @depends testConstructor
      * @expectedException \RuntimeException
@@ -420,7 +463,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
 
         $expectedSearchResult = $this->getMockBuilder(
             '\BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntrySearchResultInterface'
-            )
+        )
             ->setMethods([
                 'getItems',
                 'setItems',
@@ -431,7 +474,8 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
                 'addFieldToFilter',
                 'setCurPage',
                 'setPageSize'
-            ])
+            ]
+            )
             ->getMock();
         $expectedSearchResult->expects($this->once())
             ->method('addFieldToFilter')
@@ -456,43 +500,5 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
         );
 
         $this->assertEquals($expectedSearchResult, $whitelistRepository->getList($searchCriteria));
-    }
-
-    /**
-     * @return \BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface
-     */
-    protected function getWhitelistEntryFactory()
-    {
-        return $this->createMock('\BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface');
-    }
-
-    /**
-     * @return \BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface
-     */
-    protected function getWhitelistEntryCollectionFactory()
-    {
-        return $this->createMock(
-            '\BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface'
-        );
-    }
-
-    /**
-     * @return \BitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory
-     */
-    protected function getWhitelistEntrySearchResultInterfaceFactory()
-    {
-        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory')
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
-
-    /**
-     * @return \Magento\Store\Model\StoreManager
-     */
-    protected function getStoreManager()
-    {
-        return $this->getMockBuilder('\Magento\Store\Model\StoreManager')
-            ->disableOriginalConstructor()
-            ->getMock();
     }
 }

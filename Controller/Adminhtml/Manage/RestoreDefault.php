@@ -8,17 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 
-use \BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
-use \BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
-use \BitExpert\ForceCustomerLogin\Model\WhitelistEntry;
-use \Magento\Backend\Model\View\Result\RedirectFactory;
-use \Magento\Framework\App\Action\Context;
-use \Magento\Framework\Message\ManagerInterface;
+use BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
+use BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
+use BitExpert\ForceCustomerLogin\Model\WhitelistEntry;
+use Magento\Backend\Model\View\Result\RedirectFactory;
+use Magento\Framework\App\Action\Context;
+use Magento\Framework\Message\ManagerInterface;
 
 /**
  * Class RestoreDefault
+ *
  * @package BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage
  * @codingStandardsIgnoreFile
  */
@@ -27,30 +29,27 @@ class RestoreDefault extends \Magento\Framework\App\Action\Action
     /**
      * @var WhitelistEntryFactoryInterface
      */
-    protected $whitelistEntityFactory;
+    private $whitelistEntityFactory;
     /**
      * @var WhitelistRepositoryInterface
      */
-    protected $whitelistRepository;
+    private $whitelistRepository;
     /**
      * @var RedirectFactory
      */
-    protected $redirectFactory;
+    private $redirectFactory;
     /**
      * @var Context
      */
-    protected $context;
-    /**
-     * @var ManagerInterface
-     */
-    protected $messageManager;
+    private $context;
     /**
      * @var array Default routes
      */
-    protected $defaultRoutes;
+    private $defaultRoutes;
 
     /**
      * Save constructor.
+     *
      * @param WhitelistEntryFactoryInterface $whitelistEntityFactory
      * @param WhitelistRepositoryInterface $whitelistRepository
      * @param Context $context
@@ -62,13 +61,12 @@ class RestoreDefault extends \Magento\Framework\App\Action\Action
         Context $context,
         array $defaultRoutes
     ) {
+        parent::__construct($context);
         $this->whitelistEntityFactory = $whitelistEntityFactory;
         $this->whitelistRepository = $whitelistRepository;
         $this->redirectFactory = $context->getResultRedirectFactory();
-        $this->messageManager = $context->getMessageManager();
         $this->context = $context;
         $this->defaultRoutes = $defaultRoutes;
-        parent::__construct($context);
     }
 
     /**

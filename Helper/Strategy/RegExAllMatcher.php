@@ -8,12 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace BitExpert\ForceCustomerLogin\Helper\Strategy;
 
-use \BitExpert\ForceCustomerLogin\Model\WhitelistEntry;
+use BitExpert\ForceCustomerLogin\Model\WhitelistEntry;
 
 /**
  * Class RegExAllMatcher
+ *
  * @package BitExpert\ForceCustomerLogin\Helper\Strategy
  */
 class RegExAllMatcher implements StrategyInterface
@@ -30,6 +32,7 @@ class RegExAllMatcher implements StrategyInterface
 
     /**
      * RegExAllMatcher constructor.
+     *
      * @param string $name
      */
     public function __construct($name)
@@ -63,6 +66,7 @@ class RegExAllMatcher implements StrategyInterface
 
     /**
      * Quote delimiter in whitelist entry rule
+     *
      * @param string $rule
      * @param string $delimiter
      * @return string
