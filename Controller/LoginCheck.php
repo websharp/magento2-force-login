@@ -130,7 +130,9 @@ class LoginCheck extends Action implements LoginCheckInterface
             }
         }
 
-        $this->session->setAfterLoginReferer($path);
+        if (!$this->isAjaxRequest()) {
+            $this->session->setAfterLoginReferer($path);
+        }
 
         $this->response->setNoCacheHeaders();
         $this->response->setRedirect($this->getRedirectUrl($targetUrl));
@@ -147,6 +149,21 @@ class LoginCheck extends Action implements LoginCheckInterface
             self::MODULE_CONFIG_TARGET,
             ScopeInterface::SCOPE_STORE
         );
+    }
+
+    /**
+     * Check if a request is AJAX request
+     *
+     * @return bool
+     */
+    protected function isAjaxRequest()
+    {
+        if (method_exists($this->_request, 'isAjax') && is_callable([$this->_request, 'isAjax'])) {
+            /** @uses \Magento\Framework\App\Request\Http::isAjax() */
+            return $this->_request->isAjax();
+        }
+
+        return (bool) $this->_request->getParam('isAjax');
     }
 
     /**
