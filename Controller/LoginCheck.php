@@ -158,8 +158,7 @@ class LoginCheck extends Action implements LoginCheckInterface
      */
     protected function isAjaxRequest()
     {
-        if (method_exists($this->_request, 'isAjax') && is_callable([$this->_request, 'isAjax'])) {
-            /** @uses \Magento\Framework\App\Request\Http::isAjax() */
+        if ($this->_request instanceof \Magento\Framework\App\Request\Http) {
             return $this->_request->isAjax();
         }
 
