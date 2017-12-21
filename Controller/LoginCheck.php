@@ -161,8 +161,10 @@ class LoginCheck extends Action implements LoginCheckInterface
         if ($this->_request instanceof \Magento\Framework\App\Request\Http) {
             return $this->_request->isAjax();
         }
-
-        return (bool) $this->_request->getParam('isAjax');
+        if ($this->_request->getParam('ajax') || $this->_request->getParam('isAjax')) {
+            return true;
+        }
+        return false;
     }
 
     /**
