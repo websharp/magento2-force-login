@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.0.0
+
+### Added
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- #98 Convert "bitExpert" namespace to "BitExpert" to fix the Magento 2.2 XSD issue
+- #99 Don't store AJAX requests as after login url
+- #100 Apply fixes sugested by the EQP tool
+- #101 Update docs to fix typos and reflect latest changes
+- #102 Rename button "delete"
+
 ## 2.3.0
 
 ### Added
