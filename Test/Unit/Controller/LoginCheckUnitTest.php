@@ -75,6 +75,10 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     {
         return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\Session')
             ->disableOriginalConstructor()
+            ->setMethods([
+                    'setAfterLoginReferer'
+                ]
+            )
             ->getMock();
     }
 
@@ -186,6 +190,22 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     protected function getResponse()
     {
         return $this->createMock('\Magento\Framework\App\ResponseInterface');
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\RequestInterface
+     */
+    protected function getRequest()
+    {
+        return $this->createMock('\Magento\Framework\App\RequestInterface');
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Request\Http
+     */
+    protected function getRequestObject()
+    {
+        return $this->createMock('\Magento\Framework\App\Request\Http');
     }
 
     /**
@@ -444,6 +464,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->method('getCurrentUrl')
             ->will($this->returnValue($urlString));
 
+        $request = $this->getRequest();
         $response = $this->getResponse();
         $redirect = $this->getRedirect();
 
@@ -451,6 +472,9 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $context->expects($this->exactly(1))
             ->method('getUrl')
             ->will($this->returnValue($url));
+        $context->expects($this->once())
+            ->method('getRequest')
+            ->will($this->returnValue($request));
         $context->expects($this->once())
             ->method('getResponse')
             ->will($this->returnValue($response));
@@ -467,6 +491,10 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->with($targetUrl);
         $responseHttp->expects($this->once())
             ->method('sendResponse');
+
+        // --- Request
+        $request->expects($this->exactly(2))
+            ->method('getParam');
 
         // --- Whitelist Entries
         $whitelistEntityOne = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
@@ -500,10 +528,244 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->with('default')
             ->will($this->returnValue($strategy));
 
+        // -- Session
+        $session = $this->getSession();
+        $session->expects($this->once())
+            ->method('setAfterLoginReferer')
+            ->with('/foo/bar');
+
         $loginCheck = new \BitExpert\ForceCustomerLogin\Controller\LoginCheck(
             $context,
             $this->getCustomerSession(),
-            $this->getSession(),
+            $session,
+            $scopeConfig,
+            $whitelistRepository,
+            $strategyManager,
+            $this->getModuleCheck(),
+            $responseHttp
+        );
+
+        $loginCheck->execute();
+    }
+
+    /**
+     * Run test with ajax request and rule matching fails, so redirect is happening but "after login url" is not saved.
+     *
+     * @test
+     * @depends testConstructor
+     */
+    public function requestIsAjaxAndRuleMatchingFails()
+    {
+        $urlString = 'http://example.tld/company-module/api/endpoint';
+        $targetUrl = '/customer/account/login';
+
+        // --- Scope Config
+        $scopeConfig = $this->getScopeConfig();
+        $scopeConfig->expects($this->once())
+            ->method('getValue')
+            ->with(
+                \BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface::MODULE_CONFIG_TARGET,
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            )
+            ->will($this->returnValue($targetUrl));
+
+        // --- Context
+        $url = $this->getUrl();
+        $url->expects($this->once())
+            ->method('getCurrentUrl')
+            ->will($this->returnValue($urlString));
+
+        $request = $this->getRequest();
+        $response = $this->getResponse();
+        $redirect = $this->getRedirect();
+
+        $context = $this->getContext();
+        $context->expects($this->exactly(1))
+            ->method('getUrl')
+            ->will($this->returnValue($url));
+        $context->expects($this->once())
+            ->method('getRequest')
+            ->will($this->returnValue($request));
+        $context->expects($this->once())
+            ->method('getResponse')
+            ->will($this->returnValue($response));
+        $context->expects($this->once())
+            ->method('getRedirect')
+            ->will($this->returnValue($redirect));
+
+        // --- Response
+        $responseHttp = $this->getResponseHttp();
+        $responseHttp->expects($this->once())
+            ->method('setNoCacheHeaders');
+        $responseHttp->expects($this->once())
+            ->method('setRedirect')
+            ->with($targetUrl);
+        $responseHttp->expects($this->once())
+            ->method('sendResponse');
+
+        // --- Request
+        $request->expects($this->exactly(2))
+            ->method('getParam')
+            ->will($this->returnValueMap(
+                [
+                    ['ajax', null, null],
+                    ['isAjax', null, '1']
+                ]
+            ));
+
+        // --- Whitelist Entries
+        $whitelistEntityOne = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $whitelistEntityOne->expects($this->once())
+            ->method('getStrategy')
+            ->will($this->returnValue('default'));
+        $whitelistCollection = $this
+            ->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $whitelistCollection->expects($this->once())
+            ->method('getItems')
+            ->will($this->returnValue([$whitelistEntityOne]));
+        $whitelistRepository = $this->getWhitelistRepository();
+        $whitelistRepository->expects($this->once())
+            ->method('getCollection')
+            ->will($this->returnValue($whitelistCollection));
+
+        // --- Strategy
+        $strategy = $this->createMock('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy->expects($this->once())
+            ->method('isMatch')
+            ->with('/company-module/api/endpoint', $whitelistEntityOne)
+            ->willReturn(false);
+
+        $strategyManager = $this->getStrategyManager();
+        $strategyManager->expects($this->once())
+            ->method('get')
+            ->with('default')
+            ->will($this->returnValue($strategy));
+
+        // -- Session
+        $session = $this->getSession();
+        $session->expects($this->never())
+            ->method('setAfterLoginReferer');
+
+        $loginCheck = new \BitExpert\ForceCustomerLogin\Controller\LoginCheck(
+            $context,
+            $this->getCustomerSession(),
+            $session,
+            $scopeConfig,
+            $whitelistRepository,
+            $strategyManager,
+            $this->getModuleCheck(),
+            $responseHttp
+        );
+
+        $loginCheck->execute();
+    }
+
+    /**
+     * Run test with default request object and with data not listed on the whitelist, so redirecting is forced and "isAjax" method is hit.
+     *
+     * @test
+     * @depends testConstructor
+     */
+    public function ruleMatchingFailsAjaxCheckUsesHttpObject()
+    {
+        $urlString = 'http://example.tld/foo/bar';
+        $targetUrl = '/customer/account/login';
+
+        // --- Scope Config
+        $scopeConfig = $this->getScopeConfig();
+        $scopeConfig->expects($this->once())
+            ->method('getValue')
+            ->with(
+                \BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface::MODULE_CONFIG_TARGET,
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            )
+            ->will($this->returnValue($targetUrl));
+
+        // --- Context
+        $url = $this->getUrl();
+        $url->expects($this->once())
+            ->method('getCurrentUrl')
+            ->will($this->returnValue($urlString));
+
+        $request = $this->getRequestObject();
+        $response = $this->getResponse();
+        $redirect = $this->getRedirect();
+
+        $context = $this->getContext();
+        $context->expects($this->exactly(1))
+            ->method('getUrl')
+            ->will($this->returnValue($url));
+        $context->expects($this->once())
+            ->method('getRequest')
+            ->will($this->returnValue($request));
+        $context->expects($this->once())
+            ->method('getResponse')
+            ->will($this->returnValue($response));
+        $context->expects($this->once())
+            ->method('getRedirect')
+            ->will($this->returnValue($redirect));
+
+        // --- Response
+        $responseHttp = $this->getResponseHttp();
+        $responseHttp->expects($this->once())
+            ->method('setNoCacheHeaders');
+        $responseHttp->expects($this->once())
+            ->method('setRedirect')
+            ->with($targetUrl);
+        $responseHttp->expects($this->once())
+            ->method('sendResponse');
+
+        // --- Request
+        $request->expects($this->once())
+            ->method('isAjax')
+            ->willReturn(false);
+
+        // --- Whitelist Entries
+        $whitelistEntityOne = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $whitelistEntityOne->expects($this->once())
+            ->method('getStrategy')
+            ->will($this->returnValue('default'));
+        $whitelistCollection = $this
+            ->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $whitelistCollection->expects($this->once())
+            ->method('getItems')
+            ->will($this->returnValue([$whitelistEntityOne]));
+        $whitelistRepository = $this->getWhitelistRepository();
+        $whitelistRepository->expects($this->once())
+            ->method('getCollection')
+            ->will($this->returnValue($whitelistCollection));
+
+        // --- Strategy
+        $strategy = $this->createMock('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy->expects($this->once())
+            ->method('isMatch')
+            ->with('/foo/bar', $whitelistEntityOne)
+            ->willReturn(false);
+
+        $strategyManager = $this->getStrategyManager();
+        $strategyManager->expects($this->once())
+            ->method('get')
+            ->with('default')
+            ->will($this->returnValue($strategy));
+
+        // -- Session
+        $session = $this->getSession();
+        $session->expects($this->once())
+            ->method('setAfterLoginReferer')
+            ->with('/foo/bar');
+
+        $loginCheck = new \BitExpert\ForceCustomerLogin\Controller\LoginCheck(
+            $context,
+            $this->getCustomerSession(),
+            $session,
             $scopeConfig,
             $whitelistRepository,
             $strategyManager,
