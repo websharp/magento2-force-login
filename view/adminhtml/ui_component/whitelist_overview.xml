@@ -144,7 +144,7 @@
                     <item name="indexField" xsi:type="string">whitelist_entry_id</item>
                     <item name="viewUrlPath" xsi:type="string">ForceCustomerLogin/Manage/Delete</item>
                     <item name="urlEntityParamName" xsi:type="string">whitelist_entry_id</item>
-                    <item name="label" xsi:type="string" translate="true">Deletion</item>
+                    <item name="label" xsi:type="string" translate="true">Delete</item>
                     <item name="idFieldName" xsi:type="string">whitelist_entry_id</item>
                 </item>
             </argument>
