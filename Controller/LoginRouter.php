@@ -13,15 +13,19 @@ namespace BitExpert\ForceCustomerLogin\Controller;
 
 use BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
 use Magento\Framework\App\ActionFactory;
-use Magento\Framework\App\Router\Base;
+use Magento\Framework\App\RouterInterface;
 
 /**
  * Class LoginRouter
  *
  * @package BitExpert\ForceCustomerLogin\Controller
  */
-class LoginRouter extends Base
+class LoginRouter implements RouterInterface
 {
+    /**
+     * @var ActionFactory
+     */
+    private $actionFactory;
     /**
      * @var LoginCheck
      */
@@ -30,39 +34,15 @@ class LoginRouter extends Base
     /**
      * LoginRouter constructor.
      *
-     * @param \Magento\Framework\App\Router\ActionList $actionList
      * @param ActionFactory $actionFactory
-     * @param \Magento\Framework\App\DefaultPathInterface $defaultPath
-     * @param \Magento\Framework\App\ResponseFactory $responseFactory
-     * @param \Magento\Framework\App\Route\ConfigInterface $routeConfig
-     * @param \Magento\Framework\UrlInterface $url
-     * @param \Magento\Framework\Code\NameBuilder $nameBuilder
-     * @param \Magento\Framework\App\Router\PathConfigInterface $pathConfig
      * @param LoginCheckInterface $loginCheck
      * @throws \InvalidArgumentException
      */
     public function __construct(
-        \Magento\Framework\App\Router\ActionList $actionList,
-        \Magento\Framework\App\ActionFactory $actionFactory,
-        \Magento\Framework\App\DefaultPathInterface $defaultPath,
-        \Magento\Framework\App\ResponseFactory $responseFactory,
-        \Magento\Framework\App\Route\ConfigInterface $routeConfig,
-        \Magento\Framework\UrlInterface $url,
-        \Magento\Framework\Code\NameBuilder $nameBuilder,
-        \Magento\Framework\App\Router\PathConfigInterface $pathConfig,
+        ActionFactory $actionFactory,
         LoginCheckInterface $loginCheck
     ) {
-        parent::__construct(
-            $actionList,
-            $actionFactory,
-            $defaultPath,
-            $responseFactory,
-            $routeConfig,
-            $url,
-            $nameBuilder,
-            $pathConfig
-        );
-
+        $this->actionFactory = $actionFactory;
         $this->loginCheck = $loginCheck;
     }
 

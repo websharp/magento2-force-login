@@ -44,14 +44,7 @@ class LoginRouterUnitTest extends \PHPUnit\Framework\TestCase
             ->willReturn(true);
 
         $loginRouter = new \BitExpert\ForceCustomerLogin\Controller\LoginRouter(
-            $this->getActionList(),
             $actionFactory,
-            $this->getDefaultPath(),
-            $this->getResponseFactory(),
-            $this->getConfig(),
-            $this->getUrl(),
-            $this->getNameBuilder(),
-            $this->getPathConfig(),
             $loginCheck
         );
 
@@ -96,68 +89,6 @@ class LoginRouterUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Router\ActionList
-     */
-    protected function getActionList()
-    {
-        return $this->getMockBuilder('\Magento\Framework\App\Router\ActionList')
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\DefaultPathInterface
-     */
-    protected function getDefaultPath()
-    {
-        return $this->createMock('\Magento\Framework\App\DefaultPathInterface');
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\ResponseFactory
-     */
-    protected function getResponseFactory()
-    {
-        return $this->getMockBuilder('\Magento\Framework\App\ResponseFactory')
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Route\ConfigInterface
-     */
-    protected function getConfig()
-    {
-        return $this->createMock('\Magento\Framework\App\Route\ConfigInterface');
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\UrlInterface
-     */
-    protected function getUrl()
-    {
-        return $this->createMock('\Magento\Framework\UrlInterface');
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\Code\NameBuilder
-     */
-    protected function getNameBuilder()
-    {
-        return $this->getMockBuilder('\Magento\Framework\Code\NameBuilder')
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Router\PathConfigInterface
-     */
-    protected function getPathConfig()
-    {
-        return $this->createMock('\Magento\Framework\App\Router\PathConfigInterface');
-    }
-
-    /**
      * @test
      * @depends testClassExists
      */
@@ -175,14 +106,7 @@ class LoginRouterUnitTest extends \PHPUnit\Framework\TestCase
             ->willReturn(false);
 
         $loginRouter = new \BitExpert\ForceCustomerLogin\Controller\LoginRouter(
-            $this->getActionList(),
             $actionFactory,
-            $this->getDefaultPath(),
-            $this->getResponseFactory(),
-            $this->getConfig(),
-            $this->getUrl(),
-            $this->getNameBuilder(),
-            $this->getPathConfig(),
             $loginCheck
         );
 
