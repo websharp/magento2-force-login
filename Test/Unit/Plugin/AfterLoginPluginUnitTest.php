@@ -16,6 +16,7 @@ use BitExpert\ForceCustomerLogin\Plugin\AfterLoginPlugin;
 use Magento\Customer\Controller\Account\LoginPost;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Controller\Result\Redirect;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -53,50 +54,6 @@ class AfterLoginPluginUnitTest extends TestCase
 
         $this->assertEquals($redirect, $plugin->afterExecute($loginPost, $redirect));
     }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Model\Session
-     */
-    private function getSession()
-    {
-        return $this->getMockBuilder(Session::class)
-            ->disableOriginalConstructor()
-            ->setMethods([
-                'getAfterLoginReferer'
-            ])
-            ->getMock();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Config\ScopeConfigInterface
-     */
-    private function getScopeConfig()
-    {
-        return $this->getMockBuilder(ScopeConfigInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Customer\Controller\Account\LoginPost
-     */
-    private function getLoginPost()
-    {
-        return $this->getMockBuilder(LoginPost::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\Controller\Result\Redirect
-     */
-    private function getRedirect()
-    {
-        return $this->getMockBuilder(Redirect::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
-
     /**
      * @test
      */
@@ -157,5 +114,48 @@ class AfterLoginPluginUnitTest extends TestCase
             ->with('default-target-url');
 
         $this->assertEquals($redirect, $plugin->afterExecute($loginPost, $redirect));
+    }
+
+    /**
+     * @return MockObject|Session
+     */
+    private function getSession()
+    {
+        return $this->getMockBuilder(Session::class)
+            ->disableOriginalConstructor()
+            ->setMethods([
+                'getAfterLoginReferer'
+            ])
+            ->getMock();
+    }
+
+    /**
+     * @return MockObject|ScopeConfigInterface
+     */
+    private function getScopeConfig()
+    {
+        return $this->getMockBuilder(ScopeConfigInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
+     * @return MockObject|LoginPost
+     */
+    private function getLoginPost()
+    {
+        return $this->getMockBuilder(LoginPost::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
+     * @return MockObject|Redirect
+     */
+    private function getRedirect()
+    {
+        return $this->getMockBuilder(Redirect::class)
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 }

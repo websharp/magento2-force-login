@@ -14,6 +14,7 @@ namespace BitExpert\ForceCustomerLogin\Test\Unit\Model;
 use BitExpert\ForceCustomerLogin\Model\WhitelistEntry;
 use BitExpert\ForceCustomerLogin\Model\WhitelistEntryFactory;
 use Magento\Framework\ObjectManagerInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -42,7 +43,7 @@ class WhitelistEntryFactoryUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\ObjectManagerInterface
+     * @return MockObject|ObjectManagerInterface
      */
     private function getObjectManager()
     {

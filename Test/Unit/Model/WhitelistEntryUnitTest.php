@@ -16,6 +16,7 @@ use Magento\Framework\Data\Collection\AbstractDb;
 use Magento\Framework\Model\Context;
 use Magento\Framework\Model\ResourceModel\AbstractResource;
 use Magento\Framework\Registry;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -56,7 +57,7 @@ class WhitelistEntryUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\Model\ResourceModel\AbstractResource
+     * @return MockObject|AbstractResource
      */
     private function getResourceModel()
     {
@@ -71,7 +72,7 @@ class WhitelistEntryUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\Model\Context
+     * @return MockObject|Context
      */
     private function getContext()
     {
@@ -81,7 +82,7 @@ class WhitelistEntryUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\Registry
+     * @return MockObject|Registry
      */
     private function getRegistry()
     {
@@ -91,7 +92,7 @@ class WhitelistEntryUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\Data\Collection\AbstractDb
+     * @return MockObject|AbstractDb
      */
     private function getDatabase()
     {

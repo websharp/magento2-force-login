@@ -13,6 +13,7 @@ namespace BitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy;
 
 use BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface;
 use BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -27,12 +28,12 @@ class StrategyManagerUnitTest extends TestCase
      */
     public function getStrategyNamesSuccessfully()
     {
-        /** @var $strategy1 \PHPUnit_Framework_MockObject_MockObject|StrategyInterface */
+        /** @var $strategy1 MockObject|StrategyInterface */
         $strategy1 = $this->createMock(StrategyInterface::class);
         $strategy1->expects($this->once())
             ->method('getName')
             ->willReturn('Static');
-        /** @var $strategy2 \PHPUnit_Framework_MockObject_MockObject|StrategyInterface */
+        /** @var $strategy2 MockObject|StrategyInterface */
         $strategy2 = $this->createMock(StrategyInterface::class);
         $strategy2->expects($this->once())
             ->method('getName')
@@ -57,12 +58,12 @@ class StrategyManagerUnitTest extends TestCase
      */
     public function getStrategyInstancesSuccessfully()
     {
-        /** @var $strategy1 \PHPUnit_Framework_MockObject_MockObject|StrategyInterface */
+        /** @var $strategy1 MockObject|StrategyInterface */
         $strategy1 = $this->createMock(StrategyInterface::class);
         $strategy1->expects($this->once())
             ->method('getName')
             ->willReturn('Static');
-        /** @var $strategy2 \PHPUnit_Framework_MockObject_MockObject|StrategyInterface */
+        /** @var $strategy2 MockObject|StrategyInterface */
         $strategy2 = $this->createMock(StrategyInterface::class);
         $strategy2->expects($this->once())
             ->method('getName')
@@ -87,12 +88,12 @@ class StrategyManagerUnitTest extends TestCase
      */
     public function getStrategyInstanceSuccessfully()
     {
-        /** @var $strategy1 \PHPUnit_Framework_MockObject_MockObject|StrategyInterface */
+        /** @var $strategy1 MockObject|StrategyInterface */
         $strategy1 = $this->createMock(StrategyInterface::class);
         $strategy1->expects($this->once())
             ->method('getName')
             ->willReturn('Static');
-        /** @var $strategy2 StrategyInterface|\PHPUnit_Framework_MockObject_MockObject */
+        /** @var $strategy2 StrategyInterface|MockObject */
         $strategy2 = $this->createMock('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
         $strategy2->expects($this->once())
             ->method('getName')
@@ -113,12 +114,12 @@ class StrategyManagerUnitTest extends TestCase
      */
     public function getDefaultStrategyInstanceSuccessfully()
     {
-        /** @var $strategy1 \PHPUnit_Framework_MockObject_MockObject|StrategyInterface */
+        /** @var $strategy1 MockObject|StrategyInterface */
         $strategy1 = $this->createMock(StrategyInterface::class);
         $strategy1->expects($this->once())
             ->method('getName')
             ->willReturn('Static');
-        /** @var $strategy2 \PHPUnit_Framework_MockObject_MockObject|StrategyInterface */
+        /** @var $strategy2 MockObject|StrategyInterface */
         $strategy2 = $this->createMock(StrategyInterface::class);
         $strategy2->expects($this->once())
             ->method('getName')

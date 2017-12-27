@@ -24,12 +24,14 @@ use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Request\Http as RequestHttp;
+use Magento\Framework\App\Request\Http;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\Response\Http as ResponseHttp;
 use Magento\Framework\App\Response\RedirectInterface;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\UrlInterface;
 use Magento\Store\Model\ScopeInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -70,7 +72,7 @@ class LoginCheckUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Context
+     * @return MockObject|Context
      */
     private function getContext()
     {
@@ -80,7 +82,7 @@ class LoginCheckUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Customer\Model\Session
+     * @return MockObject|\Magento\Customer\Model\Session
      */
     private function getCustomerSession()
     {
@@ -90,7 +92,7 @@ class LoginCheckUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Model\Session
+     * @return MockObject|\BitExpert\ForceCustomerLogin\Model\Session
      */
     private function getSession()
     {
@@ -103,7 +105,7 @@ class LoginCheckUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|ScopeConfigInterface
+     * @return MockObject|ScopeConfigInterface
      */
     private function getScopeConfig()
     {
@@ -113,7 +115,7 @@ class LoginCheckUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|WhitelistRepositoryInterface
+     * @return MockObject|WhitelistRepositoryInterface
      */
     private function getWhitelistRepository()
     {
@@ -121,7 +123,7 @@ class LoginCheckUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|StrategyManager
+     * @return MockObject|StrategyManager
      */
     private function getStrategyManager()
     {
@@ -131,7 +133,7 @@ class LoginCheckUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|ModuleCheck
+     * @return MockObject|ModuleCheck
      */
     private function getModuleCheck()
     {
@@ -141,7 +143,7 @@ class LoginCheckUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Response\Http
+     * @return MockObject|\Magento\Framework\App\Response\Http
      */
     private function getResponseHttp()
     {
@@ -197,7 +199,7 @@ class LoginCheckUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|UrlInterface
+     * @return MockObject|UrlInterface
      */
     private function getUrl()
     {
@@ -205,7 +207,7 @@ class LoginCheckUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|ResponseInterface
+     * @return MockObject|ResponseInterface
      */
     private function getResponse()
     {
@@ -213,7 +215,7 @@ class LoginCheckUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|RedirectInterface
+     * @return MockObject|RedirectInterface
      */
     private function getRedirect()
     {
@@ -553,7 +555,7 @@ class LoginCheckUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|RequestInterface
+     * @return MockObject|RequestInterface
      */
     private function getRequest()
     {
@@ -790,7 +792,7 @@ class LoginCheckUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Request\Http
+     * @return MockObject|Http
      */
     private function getRequestObject()
     {

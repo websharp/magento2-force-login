@@ -15,7 +15,6 @@ use BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
 use BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\RedirectFactory;
-use Magento\Framework\Message\ManagerInterface;
 
 /**
  * Class Save
@@ -37,10 +36,6 @@ class Save extends \Magento\Backend\App\Action
      * @var RedirectFactory
      */
     private $redirectFactory;
-    /**
-     * @var Context
-     */
-    private $context;
 
     /**
      * Save constructor.

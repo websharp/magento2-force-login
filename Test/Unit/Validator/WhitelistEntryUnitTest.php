@@ -12,13 +12,15 @@
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Validator;
 
 use BitExpert\ForceCustomerLogin\Validator\WhitelistEntry;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class WhitelistEntryUnitTest
  *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Validator
  */
-class WhitelistEntryUnitTest extends \PHPUnit\Framework\TestCase
+class WhitelistEntryUnitTest extends TestCase
 {
     /**
      * @test
@@ -34,16 +36,6 @@ class WhitelistEntryUnitTest extends \PHPUnit\Framework\TestCase
 
         $validator = new WhitelistEntry();
         $validator->validate($entity);
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Model\WhitelistEntry
-     */
-    private function getWhitelistEntry()
-    {
-        return $this->getMockBuilder(\BitExpert\ForceCustomerLogin\Model\WhitelistEntry::class)
-            ->disableOriginalConstructor()
-            ->getMock();
     }
 
     /**
@@ -235,5 +227,15 @@ class WhitelistEntryUnitTest extends \PHPUnit\Framework\TestCase
 
         $validator = new WhitelistEntry();
         $this->assertTrue($validator->validate($entity));
+    }
+
+    /**
+     * @return MockObject|\BitExpert\ForceCustomerLogin\Model\WhitelistEntry
+     */
+    private function getWhitelistEntry()
+    {
+        return $this->getMockBuilder(\BitExpert\ForceCustomerLogin\Model\WhitelistEntry::class)
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 }
