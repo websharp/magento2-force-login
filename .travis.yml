@@ -21,7 +21,7 @@ before_install:
   - if [[ $encrypted_98dcc32c9b33_key != '' ]]; then openssl aes-256-cbc -K $encrypted_98dcc32c9b33_key -iv $encrypted_98dcc32c9b33_iv -in auth.json.enc -out auth.json -d ; fi
 
 install:
-  - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry composer require --dev satooshi/php-coveralls ; fi
+  - if [[ $encrypted_98dcc32c9b33_key != '' && $TEST_COVERAGE == 'true' ]]; then travis_retry composer require --dev satooshi/php-coveralls ; fi
 
 before_script:
   - composer self-update
