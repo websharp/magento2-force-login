@@ -3,7 +3,6 @@
 
     <target name="unit"
             description="Runs application unit tests">
-
         <exec executable="./vendor/bin/phpunit"
               passthru="true"
               checkreturn="true">
@@ -11,6 +10,20 @@
             <arg path="--verbose" />
             <arg value="--configuration" />
             <arg value="phpunit.xml" />
+        </exec>
+    </target>
+
+    <target name="unit-with-coverage"
+            description="Runs application unit tests with code coverage">
+        <exec executable="./vendor/bin/phpunit"
+              passthru="true"
+              checkreturn="true">
+            <arg path="--testsuite=unit" />
+            <arg path="--verbose" />
+            <arg value="--configuration" />
+            <arg value="phpunit.xml" />
+            <arg value="--coverage-clover" />
+            <arg value="clover.xml"/>
         </exec>
     </target>
 
