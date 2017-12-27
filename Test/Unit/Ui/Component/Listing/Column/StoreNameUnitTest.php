@@ -23,6 +23,7 @@ use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\StoreManager;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -109,7 +110,7 @@ class StoreNameUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Store\Model\StoreManager
+     * @return MockObject|StoreManager
      */
     private function getStoreManager()
     {
@@ -117,7 +118,7 @@ class StoreNameUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\View\Element\UiComponent\ContextInterface
+     * @return MockObject|ContextInterface
      */
     private function getContext()
     {
@@ -125,7 +126,7 @@ class StoreNameUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\View\Element\UiComponentFactory
+     * @return MockObject|UiComponentFactory
      */
     private function getUiComponentFactory()
     {

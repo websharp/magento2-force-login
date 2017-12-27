@@ -13,6 +13,7 @@ namespace BitExpert\ForceCustomerLogin\Test\Unit\Model\Resource;
 
 use BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry;
 use Magento\Framework\Model\ResourceModel\Db\Context;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -32,7 +33,7 @@ class WhitelistEntryUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\Model\ResourceModel\Db\Context
+     * @return MockObject|\Magento\Framework\Model\ResourceModel\Db\Context
      */
     private function getDatabaseContext()
     {

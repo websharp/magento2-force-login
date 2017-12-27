@@ -32,7 +32,6 @@ class AfterLoginPlugin
      * Configuration
      */
     const REDIRECT_DASHBOARD_CONFIG = 'customer/startup/redirect_dashboard';
-
     /**
      * @var Session
      */

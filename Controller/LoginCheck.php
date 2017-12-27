@@ -20,7 +20,6 @@ use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Response\Http as ResponseHttp;
-use Magento\Framework\UrlInterface;
 use Magento\Store\Model\ScopeInterface;
 
 /**
@@ -30,10 +29,6 @@ use Magento\Store\Model\ScopeInterface;
  */
 class LoginCheck extends Action implements LoginCheckInterface
 {
-    /**
-     * @var UrlInterface
-     */
-    private $url;
     /**
      * @var CustomerSession
      */

@@ -14,6 +14,7 @@ namespace BitExpert\ForceCustomerLogin\Test\Unit\Controller\Adminhtml\Manage;
 use BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage\Create;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\ViewInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -46,7 +47,7 @@ class CreateUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Context
+     * @return MockObject|Context
      */
     private function getContext()
     {

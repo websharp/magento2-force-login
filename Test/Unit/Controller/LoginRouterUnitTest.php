@@ -11,9 +11,11 @@
 
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Controller;
 
+use BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
 use BitExpert\ForceCustomerLogin\Controller\LoginRouter;
 use Magento\Framework\App\ActionFactory;
 use Magento\Framework\App\RequestInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -116,7 +118,7 @@ class LoginRouterUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|ActionFactory
+     * @return MockObject|ActionFactory
      */
     private function getActionFactory()
     {
@@ -126,10 +128,10 @@ class LoginRouterUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface
+     * @return MockObject|LoginCheckInterface
      */
     private function getLoginCheck()
     {
-        return $this->createMock(\BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface::class);
+        return $this->createMock(LoginCheckInterface::class);
     }
 }

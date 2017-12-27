@@ -14,6 +14,7 @@ namespace BitExpert\ForceCustomerLogin\Test\Unit\Controller;
 use BitExpert\ForceCustomerLogin\Controller\ModuleCheck;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -62,7 +63,7 @@ class ModuleCheckUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|ScopeConfigInterface
+     * @return MockObject|ScopeConfigInterface
      */
     private function getScopeConfig()
     {

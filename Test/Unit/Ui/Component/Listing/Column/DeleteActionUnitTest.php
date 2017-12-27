@@ -15,6 +15,7 @@ use BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\DeleteAction;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -104,7 +105,7 @@ class DeleteActionUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\UrlInterface
+     * @return MockObject|UrlInterface
      */
     private function getUrl()
     {
@@ -112,7 +113,7 @@ class DeleteActionUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\View\Element\UiComponent\ContextInterface
+     * @return MockObject|ContextInterface
      */
     private function getContext()
     {
@@ -120,7 +121,7 @@ class DeleteActionUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\View\Element\UiComponentFactory
+     * @return MockObject|UiComponentFactory
      */
     private function getUiComponentFactory()
     {

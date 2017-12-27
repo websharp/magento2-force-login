@@ -13,6 +13,7 @@ namespace BitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy;
 
 use BitExpert\ForceCustomerLogin\Helper\Strategy\StaticMatcher;
 use BitExpert\ForceCustomerLogin\Model\WhitelistEntry;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -31,7 +32,7 @@ class StaticMatcherUnitTest extends TestCase
 
         $this->assertEquals('foobar', $matcher->getName());
 
-        /** @var $rule \PHPUnit_Framework_MockObject_MockObject|WhitelistEntry */
+        /** @var $rule MockObject|WhitelistEntry */
         $rule = $this->getMockBuilder(WhitelistEntry::class)
             ->disableOriginalConstructor()
             ->getMock();

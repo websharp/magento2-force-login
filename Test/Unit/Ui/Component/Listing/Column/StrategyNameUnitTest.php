@@ -16,6 +16,7 @@ use BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
 use BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\StrategyName;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -98,7 +99,7 @@ class StrategyNameUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager
+     * @return MockObject|StrategyManager
      */
     private function getStrategyManager()
     {
@@ -108,7 +109,7 @@ class StrategyNameUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\View\Element\UiComponent\ContextInterface
+     * @return MockObject|ContextInterface
      */
     private function getContext()
     {
@@ -116,7 +117,7 @@ class StrategyNameUnitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\View\Element\UiComponentFactory
+     * @return MockObject|UiComponentFactory
      */
     private function getUiComponentFactory()
     {

@@ -13,6 +13,7 @@ namespace BitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy;
 
 use BitExpert\ForceCustomerLogin\Helper\Strategy\RegExAllMatcher;
 use BitExpert\ForceCustomerLogin\Model\WhitelistEntry;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -31,7 +32,7 @@ class RegExAllMatcherUnitTest extends TestCase
 
         $this->assertEquals('foobar', $matcher->getName());
 
-        /** @var $rule \PHPUnit_Framework_MockObject_MockObject|WhitelistEntry */
+        /** @var $rule MockObject|WhitelistEntry */
         $rule = $this->getMockBuilder(WhitelistEntry::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -65,7 +66,7 @@ class RegExAllMatcherUnitTest extends TestCase
     {
         $matcher = new RegExAllMatcher('foobar');
 
-        /** @var $rule \PHPUnit_Framework_MockObject_MockObject|WhitelistEntry */
+        /** @var $rule MockObject|WhitelistEntry */
         $rule = $this->getMockBuilder(WhitelistEntry::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -91,7 +92,7 @@ class RegExAllMatcherUnitTest extends TestCase
     {
         $matcher = new RegExAllMatcher('foobar');
 
-        /** @var $rule \PHPUnit_Framework_MockObject_MockObject|WhitelistEntry */
+        /** @var $rule MockObject|WhitelistEntry */
         $rule = $this->getMockBuilder(WhitelistEntry::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -117,7 +118,7 @@ class RegExAllMatcherUnitTest extends TestCase
     {
         $matcher = new RegExAllMatcher('foobar');
 
-        /** @var $rule \PHPUnit_Framework_MockObject_MockObject|WhitelistEntry */
+        /** @var $rule MockObject|WhitelistEntry */
         $rule = $this->getMockBuilder(WhitelistEntry::class)
             ->disableOriginalConstructor()
             ->getMock();
