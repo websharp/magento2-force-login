@@ -12,20 +12,23 @@
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Controller\Adminhtml\Manage;
 
 use BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage\Create;
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\App\ViewInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class ModuleCheckUnitTest
  *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Controller
  */
-class CreateUnitTest extends \PHPUnit\Framework\TestCase
+class CreateUnitTest extends TestCase
 {
     /**
      * @test
      */
     public function executeSuccessfully()
     {
-        $view = $this->createMock('\Magento\Framework\App\ViewInterface');
+        $view = $this->createMock(ViewInterface::class);
         $view->expects($this->once())
             ->method('loadLayout');
         $view->expects($this->once())
@@ -43,11 +46,11 @@ class CreateUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Backend\App\Action\Context
+     * @return \PHPUnit_Framework_MockObject_MockObject|Context
      */
-    protected function getContext()
+    private function getContext()
     {
-        return $this->getMockBuilder('\Magento\Backend\App\Action\Context')
+        return $this->getMockBuilder(Context::class)
             ->disableOriginalConstructor()
             ->getMock();
     }

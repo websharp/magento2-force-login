@@ -19,13 +19,18 @@ function __($value)
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Ui\Component\Listing\Column;
 
 use BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\StoreName;
+use Magento\Framework\View\Element\UiComponent\ContextInterface;
+use Magento\Framework\View\Element\UiComponentFactory;
+use Magento\Store\Api\Data\StoreInterface;
+use Magento\Store\Model\StoreManager;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class StoreNameUnitTest
  *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Ui\Component\Listing\Column
  */
-class StoreNameUnitTest extends \PHPUnit\Framework\TestCase
+class StoreNameUnitTest extends TestCase
 {
     /**
      * @test
@@ -34,8 +39,8 @@ class StoreNameUnitTest extends \PHPUnit\Framework\TestCase
     {
         $storeId = 42;
 
-        $globalStore = $this->createMock('\Magento\Store\Api\Data\StoreInterface');
-        $store = $this->createMock('\Magento\Store\Api\Data\StoreInterface');
+        $globalStore = $this->createMock(StoreInterface::class);
+        $store = $this->createMock(StoreInterface::class);
         $store->expects($this->once())
             ->method('getId')
             ->willReturn($storeId);
@@ -106,25 +111,25 @@ class StoreNameUnitTest extends \PHPUnit\Framework\TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Store\Model\StoreManager
      */
-    protected function getStoreManager()
+    private function getStoreManager()
     {
-        return $this->createMock('\Magento\Store\Model\StoreManager');
+        return $this->createMock(StoreManager::class);
     }
 
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\View\Element\UiComponent\ContextInterface
      */
-    protected function getContext()
+    private function getContext()
     {
-        return $this->createMock('\Magento\Framework\View\Element\UiComponent\ContextInterface');
+        return $this->createMock(ContextInterface::class);
     }
 
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\View\Element\UiComponentFactory
      */
-    protected function getUiComponentFactory()
+    private function getUiComponentFactory()
     {
-        return $this->getMockBuilder('\Magento\Framework\View\Element\UiComponentFactory')
+        return $this->getMockBuilder(UiComponentFactory::class)
             ->disableOriginalConstructor()
             ->getMock();
     }

@@ -11,21 +11,26 @@
 
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Ui\Component\Listing\Column;
 
+use BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface;
+use BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
 use BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\StrategyName;
+use Magento\Framework\View\Element\UiComponent\ContextInterface;
+use Magento\Framework\View\Element\UiComponentFactory;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class StrategyNameUnitTest
  *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Ui\Component\Listing\Column
  */
-class StrategyNameUnitTest extends \PHPUnit\Framework\TestCase
+class StrategyNameUnitTest extends TestCase
 {
     /**
      * @test
      */
     public function prepareDataSourceSuccessfully()
     {
-        $strategy = $this->createMock('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy = $this->createMock(StrategyInterface::class);
         $strategy->expects($this->once())
             ->method('getName')
             ->willReturn('FooBar');
@@ -52,8 +57,7 @@ class StrategyNameUnitTest extends \PHPUnit\Framework\TestCase
 
         $action->setData([
             'name' => 'strategy'
-        ]
-        );
+        ]);
 
         $dataSource = ['foo' => 'bar'];
         $this->assertEquals($dataSource, $action->prepareDataSource($dataSource));
@@ -96,9 +100,9 @@ class StrategyNameUnitTest extends \PHPUnit\Framework\TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager
      */
-    protected function getStrategyManager()
+    private function getStrategyManager()
     {
-        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager')
+        return $this->getMockBuilder(StrategyManager::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -106,17 +110,17 @@ class StrategyNameUnitTest extends \PHPUnit\Framework\TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\View\Element\UiComponent\ContextInterface
      */
-    protected function getContext()
+    private function getContext()
     {
-        return $this->createMock('\Magento\Framework\View\Element\UiComponent\ContextInterface');
+        return $this->createMock(ContextInterface::class);
     }
 
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\View\Element\UiComponentFactory
      */
-    protected function getUiComponentFactory()
+    private function getUiComponentFactory()
     {
-        return $this->getMockBuilder('\Magento\Framework\View\Element\UiComponentFactory')
+        return $this->getMockBuilder(UiComponentFactory::class)
             ->disableOriginalConstructor()
             ->getMock();
     }

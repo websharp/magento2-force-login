@@ -11,26 +11,32 @@
 
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Model\Resource\WhitelistEntry;
 
+use BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection;
 use BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\CollectionFactory;
+use Magento\Framework\ObjectManagerInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class CollectionFactoryUnitTest
  *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Model\Resource\WhitelistEntry
  */
-class CollectionFactoryUnitTest extends \PHPUnit\Framework\TestCase
+class CollectionFactoryUnitTest extends TestCase
 {
     /**
      * @test
      */
     public function createEntitySuccessfully()
     {
-        $expectedEntity = $this->createMock('\BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection');
+        $expectedEntity = $this->createMock(Collection::class);
 
         $om = $this->getObjectManager();
         $om->expects($this->once())
             ->method('create')
-            ->with('\\BitExpert\\ForceCustomerLogin\\Model\\ResourceModel\\WhitelistEntry\\Collection', ['foo' => 'bar'])
+            ->with(
+                '\\BitExpert\\ForceCustomerLogin\\Model\\ResourceModel\\WhitelistEntry\\Collection',
+                ['foo' => 'bar']
+            )
             ->willReturn($expectedEntity);
 
         $factory = new CollectionFactory($om);
@@ -41,8 +47,8 @@ class CollectionFactoryUnitTest extends \PHPUnit\Framework\TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\ObjectManagerInterface
      */
-    protected function getObjectManager()
+    private function getObjectManager()
     {
-        return $this->createMock('\Magento\Framework\ObjectManagerInterface');
+        return $this->createMock(ObjectManagerInterface::class);
     }
 }

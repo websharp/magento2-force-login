@@ -12,13 +12,17 @@
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Ui\Component\Listing\Column;
 
 use BitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\DeleteAction;
+use Magento\Framework\UrlInterface;
+use Magento\Framework\View\Element\UiComponent\ContextInterface;
+use Magento\Framework\View\Element\UiComponentFactory;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class DeleteActionUnitTest
  *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Ui\Component\Listing\Column
  */
-class DeleteActionUnitTest extends \PHPUnit\Framework\TestCase
+class DeleteActionUnitTest extends TestCase
 {
     /**
      * @test
@@ -28,9 +32,11 @@ class DeleteActionUnitTest extends \PHPUnit\Framework\TestCase
         $url = $this->getUrl();
         $url->expects($this->once())
             ->method('getUrl')
-            ->with('viewurlpath', [
-                'id' => '1'
-            ]
+            ->with(
+                'viewurlpath',
+                [
+                    'id' => '1'
+                ]
             )
             ->willReturn('some-url');
 
@@ -47,8 +53,7 @@ class DeleteActionUnitTest extends \PHPUnit\Framework\TestCase
                 'label' => 'some-label'
             ],
             'name' => 'delete'
-        ]
-        );
+        ]);
 
         $dataSource = ['foo' => 'bar'];
         $this->assertEquals($dataSource, $action->prepareDataSource($dataSource));
@@ -101,25 +106,25 @@ class DeleteActionUnitTest extends \PHPUnit\Framework\TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\UrlInterface
      */
-    protected function getUrl()
+    private function getUrl()
     {
-        return $this->createMock('\Magento\Framework\UrlInterface');
+        return $this->createMock(UrlInterface::class);
     }
 
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\View\Element\UiComponent\ContextInterface
      */
-    protected function getContext()
+    private function getContext()
     {
-        return $this->createMock('\Magento\Framework\View\Element\UiComponent\ContextInterface');
+        return $this->createMock(ContextInterface::class);
     }
 
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\View\Element\UiComponentFactory
      */
-    protected function getUiComponentFactory()
+    private function getUiComponentFactory()
     {
-        return $this->getMockBuilder('\Magento\Framework\View\Element\UiComponentFactory')
+        return $this->getMockBuilder(UiComponentFactory::class)
             ->disableOriginalConstructor()
             ->getMock();
     }

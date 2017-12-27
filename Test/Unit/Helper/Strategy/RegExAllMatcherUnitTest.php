@@ -12,13 +12,15 @@
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy;
 
 use BitExpert\ForceCustomerLogin\Helper\Strategy\RegExAllMatcher;
+use BitExpert\ForceCustomerLogin\Model\WhitelistEntry;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class RegExAllMatcherUnitTest
  *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy
  */
-class RegExAllMatcherUnitTest extends \PHPUnit\Framework\TestCase
+class RegExAllMatcherUnitTest extends TestCase
 {
     /**
      * @test
@@ -29,15 +31,15 @@ class RegExAllMatcherUnitTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals('foobar', $matcher->getName());
 
-        /* @var $rule \BitExpert\ForceCustomerLogin\Model\WhitelistEntry */
-        $rule = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+        /** @var $rule \PHPUnit_Framework_MockObject_MockObject|WhitelistEntry */
+        $rule = $this->getMockBuilder(WhitelistEntry::class)
             ->disableOriginalConstructor()
             ->getMock();
         $rule->expects($this->any())
             ->method('getUrlRule')
             ->willReturn('/foobar');
 
-        /*
+        /**
          * Rule: /foobar
          */
         // simple
@@ -63,15 +65,15 @@ class RegExAllMatcherUnitTest extends \PHPUnit\Framework\TestCase
     {
         $matcher = new RegExAllMatcher('foobar');
 
-        /* @var $rule \BitExpert\ForceCustomerLogin\Model\WhitelistEntry */
-        $rule = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+        /** @var $rule \PHPUnit_Framework_MockObject_MockObject|WhitelistEntry */
+        $rule = $this->getMockBuilder(WhitelistEntry::class)
             ->disableOriginalConstructor()
             ->getMock();
         $rule->expects($this->any())
             ->method('getUrlRule')
             ->willReturn('/?');
 
-        /*
+        /**
          * Rule: /?
          */
         // simple
@@ -89,15 +91,15 @@ class RegExAllMatcherUnitTest extends \PHPUnit\Framework\TestCase
     {
         $matcher = new RegExAllMatcher('foobar');
 
-        /* @var $rule \BitExpert\ForceCustomerLogin\Model\WhitelistEntry */
-        $rule = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+        /** @var $rule \PHPUnit_Framework_MockObject_MockObject|WhitelistEntry */
+        $rule = $this->getMockBuilder(WhitelistEntry::class)
             ->disableOriginalConstructor()
             ->getMock();
         $rule->expects($this->any())
             ->method('getUrlRule')
             ->willReturn('/?$');
 
-        /*
+        /**
          * Rule: /?$
          */
         // simple
@@ -115,15 +117,15 @@ class RegExAllMatcherUnitTest extends \PHPUnit\Framework\TestCase
     {
         $matcher = new RegExAllMatcher('foobar');
 
-        /* @var $rule \BitExpert\ForceCustomerLogin\Model\WhitelistEntry */
-        $rule = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+        /** @var $rule \PHPUnit_Framework_MockObject_MockObject|WhitelistEntry */
+        $rule = $this->getMockBuilder(WhitelistEntry::class)
             ->disableOriginalConstructor()
             ->getMock();
         $rule->expects($this->any())
             ->method('getUrlRule')
             ->willReturn('^/?$');
 
-        /*
+        /**
          * Rule: ^/?$
          */
         // simple
