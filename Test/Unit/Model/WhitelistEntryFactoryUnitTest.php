@@ -11,21 +11,24 @@
 
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Model;
 
+use BitExpert\ForceCustomerLogin\Model\WhitelistEntry;
 use BitExpert\ForceCustomerLogin\Model\WhitelistEntryFactory;
+use Magento\Framework\ObjectManagerInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class WhitelistEntryFactoryUnitTest
  *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Model
  */
-class WhitelistEntryFactoryUnitTest extends \PHPUnit\Framework\TestCase
+class WhitelistEntryFactoryUnitTest extends TestCase
 {
     /**
      * @test
      */
     public function createEntitySuccessfully()
     {
-        $expectedEntity = $this->createMock('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry');
+        $expectedEntity = $this->createMock(WhitelistEntry::class);
 
         $om = $this->getObjectManager();
         $om->expects($this->once())
@@ -41,8 +44,8 @@ class WhitelistEntryFactoryUnitTest extends \PHPUnit\Framework\TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\ObjectManagerInterface
      */
-    protected function getObjectManager()
+    private function getObjectManager()
     {
-        return $this->createMock('\Magento\Framework\ObjectManagerInterface');
+        return $this->createMock(ObjectManagerInterface::class);
     }
 }

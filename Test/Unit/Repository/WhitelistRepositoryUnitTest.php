@@ -11,22 +11,34 @@
 
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Repository;
 
+use BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface;
+use BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntrySearchResultInterface;
+use BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
 use BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
+use BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection;
+use BitExpert\ForceCustomerLogin\Model\WhitelistEntry;
+use BitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory;
 use BitExpert\ForceCustomerLogin\Repository\WhitelistRepository;
+use Magento\Framework\Api\Filter;
+use Magento\Framework\Api\Search\FilterGroup;
+use Magento\Framework\Api\SearchCriteria;
+use Magento\Store\Api\Data\StoreInterface;
+use Magento\Store\Model\StoreManager;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class WhitelistRepositoryUnitTest
  *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Repository
  */
-class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
+class WhitelistRepositoryUnitTest extends TestCase
 {
     /**
      * @test
      */
     public function testClassExists()
     {
-        $this->assertTrue(class_exists('\BitExpert\ForceCustomerLogin\Repository\WhitelistRepository'));
+        $this->assertTrue(class_exists(WhitelistRepository::class));
     }
 
     /**
@@ -44,36 +56,31 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
 
         // check if mandatory interfaces are implemented
         $classInterfaces = class_implements($whitelistRepository);
-        $this->assertContains(
-            'BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface',
-            $classInterfaces
-        );
+        $this->assertContains(WhitelistRepositoryInterface::class, $classInterfaces);
     }
 
     /**
      * @return \BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface
      */
-    protected function getWhitelistEntryFactory()
+    private function getWhitelistEntryFactory()
     {
-        return $this->createMock('\BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface');
+        return $this->createMock(WhitelistEntryFactoryInterface::class);
     }
 
     /**
      * @return \BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface
      */
-    protected function getWhitelistEntryCollectionFactory()
+    private function getWhitelistEntryCollectionFactory()
     {
-        return $this->createMock(
-            '\BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface'
-        );
+        return $this->createMock(WhitelistEntryCollectionFactoryInterface::class);
     }
 
     /**
      * @return \Magento\Store\Model\StoreManager
      */
-    protected function getStoreManager()
+    private function getStoreManager()
     {
-        return $this->getMockBuilder('\Magento\Store\Model\StoreManager')
+        return $this->getMockBuilder(StoreManager::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -81,9 +88,9 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
     /**
      * @return \BitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory
      */
-    protected function getWhitelistEntrySearchResultInterfaceFactory()
+    private function getWhitelistEntrySearchResultInterfaceFactory()
     {
-        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory')
+        return $this->getMockBuilder(WhitelistEntrySearchResultInterfaceFactory::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -102,7 +109,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
         $storeId = 0;
         $strategy = 'default';
 
-        $expectedWhitelistEntry = $this->createMock('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry');
+        $expectedWhitelistEntry = $this->createMock(WhitelistEntry::class);
         $expectedWhitelistEntry->expects($this->at(0))
             ->method('getId')
             ->will($this->returnValue($entityId));
@@ -186,7 +193,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
         $storeId = 0;
         $strategy = 'default';
 
-        $expectedWhitelistEntry = $this->createMock('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry');
+        $expectedWhitelistEntry = $this->createMock(WhitelistEntry::class);
         $expectedWhitelistEntry->expects($this->at(0))
             ->method('load')
             ->with($entityId)
@@ -273,7 +280,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
         $storeId = 0;
         $strategy = 'default';
 
-        $expectedWhitelistEntry = $this->createMock('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry');
+        $expectedWhitelistEntry = $this->createMock(WhitelistEntry::class);
         $expectedWhitelistEntry->expects($this->at(0))
             ->method('load')
             ->with($entityId)
@@ -311,7 +318,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
     {
         $entityId = 42;
 
-        $expectedWhitelistEntry = $this->createMock('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry');
+        $expectedWhitelistEntry = $this->createMock(WhitelistEntry::class);
         $expectedWhitelistEntry->expects($this->once())
             ->method('load')
             ->willReturnSelf();
@@ -345,7 +352,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
     {
         $entityId = 42;
 
-        $expectedWhitelistEntry = $this->createMock('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry');
+        $expectedWhitelistEntry = $this->createMock(WhitelistEntry::class);
         $expectedWhitelistEntry->expects($this->once())
             ->method('load')
             ->willReturnSelf();
@@ -380,7 +387,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
     public function getCollectionSuccessfully()
     {
         $storeId = 222;
-        $store = $this->createMock('\Magento\Store\Api\Data\StoreInterface');
+        $store = $this->createMock(StoreInterface::class);
         $store->expects($this->once())
             ->method('getId')
             ->willReturn($storeId);
@@ -390,12 +397,13 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
             ->method('getStore')
             ->willReturn($store);
 
-        $expectedCollection = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')
+        $expectedCollection = $this->getMockBuilder(Collection::class)
             ->disableOriginalConstructor()
             ->getMock();
         $expectedCollection->expects($this->once())
             ->method('addFieldToFilter')
-            ->with('store_id',
+            ->with(
+                'store_id',
                 [
                     'in' => [
                         WhitelistRepositoryInterface::ROOT_STORE_ID,
@@ -428,7 +436,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function getListSuccessfully()
     {
-        $filter = $this->getMockBuilder('\Magento\Framework\Api\Filter')
+        $filter = $this->getMockBuilder(Filter::class)
             ->disableOriginalConstructor()
             ->getMock();
         $filter->expects($this->exactly(2))
@@ -441,14 +449,14 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
             ->method('getValue')
             ->willReturn('baz');
 
-        $filterGroup = $this->getMockBuilder('\Magento\Framework\Api\Search\FilterGroup')
+        $filterGroup = $this->getMockBuilder(FilterGroup::class)
             ->disableOriginalConstructor()
             ->getMock();
         $filterGroup->expects($this->once())
             ->method('getFilters')
             ->willReturn([$filter]);
 
-        $searchCriteria = $this->getMockBuilder('\Magento\Framework\Api\SearchCriteria')
+        $searchCriteria = $this->getMockBuilder(SearchCriteria::class)
             ->disableOriginalConstructor()
             ->getMock();
         $searchCriteria->expects($this->once())
@@ -461,9 +469,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
             ->method('getPageSize')
             ->willReturn(42);
 
-        $expectedSearchResult = $this->getMockBuilder(
-            '\BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntrySearchResultInterface'
-        )
+        $expectedSearchResult = $this->getMockBuilder(WhitelistEntrySearchResultInterface::class)
             ->setMethods([
                 'getItems',
                 'setItems',
@@ -474,8 +480,7 @@ class WhitelistRepositoryUnitTest extends \PHPUnit\Framework\TestCase
                 'addFieldToFilter',
                 'setCurPage',
                 'setPageSize'
-            ]
-            )
+            ])
             ->getMock();
         $expectedSearchResult->expects($this->once())
             ->method('addFieldToFilter')

@@ -12,13 +12,15 @@
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy;
 
 use BitExpert\ForceCustomerLogin\Helper\Strategy\StaticMatcher;
+use BitExpert\ForceCustomerLogin\Model\WhitelistEntry;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class StaticMatcherUnitTest
  *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Helper\Strategy
  */
-class StaticMatcherUnitTest extends \PHPUnit\Framework\TestCase
+class StaticMatcherUnitTest extends TestCase
 {
     /**
      * @test
@@ -29,15 +31,15 @@ class StaticMatcherUnitTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals('foobar', $matcher->getName());
 
-        /* @var $rule \BitExpert\ForceCustomerLogin\Model\WhitelistEntry */
-        $rule = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+        /** @var $rule \PHPUnit_Framework_MockObject_MockObject|WhitelistEntry */
+        $rule = $this->getMockBuilder(WhitelistEntry::class)
             ->disableOriginalConstructor()
             ->getMock();
         $rule->expects($this->any())
             ->method('getUrlRule')
             ->willReturn('/foobar');
 
-        /*
+        /**
          * Rule: /foobar
          */
         // simple

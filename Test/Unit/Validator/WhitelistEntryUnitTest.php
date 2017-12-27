@@ -41,7 +41,7 @@ class WhitelistEntryUnitTest extends \PHPUnit\Framework\TestCase
      */
     private function getWhitelistEntry()
     {
-        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+        return $this->getMockBuilder(\BitExpert\ForceCustomerLogin\Model\WhitelistEntry::class)
             ->disableOriginalConstructor()
             ->getMock();
     }

@@ -11,19 +11,40 @@
 
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Controller;
 
+use BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
+use BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
+use BitExpert\ForceCustomerLogin\Controller\LoginCheck;
+use BitExpert\ForceCustomerLogin\Controller\ModuleCheck;
+use BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface;
+use BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
+use BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection;
+use BitExpert\ForceCustomerLogin\Model\Session;
+use BitExpert\ForceCustomerLogin\Model\WhitelistEntry;
+use Magento\Customer\Model\Session as CustomerSession;
+use Magento\Framework\App\Action\Context;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\App\Request\Http as RequestHttp;
+use Magento\Framework\App\RequestInterface;
+use Magento\Framework\App\Response\Http as ResponseHttp;
+use Magento\Framework\App\Response\RedirectInterface;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\UrlInterface;
+use Magento\Store\Model\ScopeInterface;
+use PHPUnit\Framework\TestCase;
+
 /**
  * Class LoginCheckUnitTest
  *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Controller
  */
-class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
+class LoginCheckUnitTest extends TestCase
 {
     /**
      * @test
      */
     public function testClassExists()
     {
-        $this->assertTrue(class_exists('\BitExpert\ForceCustomerLogin\Controller\LoginCheck'));
+        $this->assertTrue(class_exists(LoginCheck::class));
     }
 
     /**
@@ -32,7 +53,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function testConstructor()
     {
-        $loginCheck = new \BitExpert\ForceCustomerLogin\Controller\LoginCheck(
+        $loginCheck = new LoginCheck(
             $this->getContext(),
             $this->getCustomerSession(),
             $this->getSession(),
@@ -45,15 +66,15 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
 
         // check if mandatory interfaces are implemented
         $classInterfaces = class_implements($loginCheck);
-        $this->assertContains('BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface', $classInterfaces);
+        $this->assertContains(LoginCheckInterface::class, $classInterfaces);
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Action\Context
+     * @return \PHPUnit_Framework_MockObject_MockObject|Context
      */
-    protected function getContext()
+    private function getContext()
     {
-        return $this->getMockBuilder('\Magento\Framework\App\Action\Context')
+        return $this->getMockBuilder(Context::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -61,9 +82,9 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Customer\Model\Session
      */
-    protected function getCustomerSession()
+    private function getCustomerSession()
     {
-        return $this->getMockBuilder('\Magento\Customer\Model\Session')
+        return $this->getMockBuilder(CustomerSession::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -71,51 +92,50 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Model\Session
      */
-    protected function getSession()
+    private function getSession()
     {
-        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\Session')
+        return $this->getMockBuilder(Session::class)
             ->disableOriginalConstructor()
             ->setMethods([
-                    'setAfterLoginReferer'
-                ]
-            )
+                'setAfterLoginReferer'
+            ])
             ->getMock();
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Config\ScopeConfigInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|ScopeConfigInterface
      */
-    protected function getScopeConfig()
+    private function getScopeConfig()
     {
-        return $this->getMockBuilder('\Magento\Framework\App\Config\ScopeConfigInterface')
+        return $this->getMockBuilder(ScopeConfigInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|WhitelistRepositoryInterface
      */
-    protected function getWhitelistRepository()
+    private function getWhitelistRepository()
     {
-        return $this->createMock('\BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface');
+        return $this->createMock(WhitelistRepositoryInterface::class);
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager
+     * @return \PHPUnit_Framework_MockObject_MockObject|StrategyManager
      */
-    protected function getStrategyManager()
+    private function getStrategyManager()
     {
-        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager')
+        return $this->getMockBuilder(StrategyManager::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\BitExpert\ForceCustomerLogin\Controller\ModuleCheck
+     * @return \PHPUnit_Framework_MockObject_MockObject|ModuleCheck
      */
-    protected function getModuleCheck()
+    private function getModuleCheck()
     {
-        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Controller\ModuleCheck')
+        return $this->getMockBuilder(ModuleCheck::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -123,9 +143,9 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Response\Http
      */
-    protected function getResponseHttp()
+    private function getResponseHttp()
     {
-        return $this->getMockBuilder('\Magento\Framework\App\Response\Http')
+        return $this->getMockBuilder(ResponseHttp::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -162,7 +182,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->method('getRedirect')
             ->will($this->returnValue($redirect));
 
-        $loginCheck = new \BitExpert\ForceCustomerLogin\Controller\LoginCheck(
+        $loginCheck = new LoginCheck(
             $context,
             $this->getCustomerSession(),
             $this->getSession(),
@@ -177,43 +197,27 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\UrlInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|UrlInterface
      */
-    protected function getUrl()
+    private function getUrl()
     {
-        return $this->createMock('\Magento\Framework\UrlInterface');
+        return $this->createMock(UrlInterface::class);
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\ResponseInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|ResponseInterface
      */
-    protected function getResponse()
+    private function getResponse()
     {
-        return $this->createMock('\Magento\Framework\App\ResponseInterface');
+        return $this->createMock(ResponseInterface::class);
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\RequestInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|RedirectInterface
      */
-    protected function getRequest()
+    private function getRedirect()
     {
-        return $this->createMock('\Magento\Framework\App\RequestInterface');
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Request\Http
-     */
-    protected function getRequestObject()
-    {
-        return $this->createMock('\Magento\Framework\App\Request\Http');
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Response\RedirectInterface
-     */
-    protected function getRedirect()
-    {
-        return $this->createMock('\Magento\Framework\App\Response\RedirectInterface');
+        return $this->createMock(RedirectInterface::class);
     }
 
     /**
@@ -253,7 +257,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->method('getRedirect')
             ->will($this->returnValue($redirect));
 
-        $loginCheck = new \BitExpert\ForceCustomerLogin\Controller\LoginCheck(
+        $loginCheck = new LoginCheck(
             $context,
             $customerSession,
             $this->getSession(),
@@ -283,8 +287,8 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $scopeConfig->expects($this->once())
             ->method('getValue')
             ->with(
-                \BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface::MODULE_CONFIG_TARGET,
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                LoginCheckInterface::MODULE_CONFIG_TARGET,
+                ScopeInterface::SCOPE_STORE
             )
             ->will($this->returnValue($targetUrl));
 
@@ -327,7 +331,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $strategyManager->expects($this->never())
             ->method('get');
 
-        $loginCheck = new \BitExpert\ForceCustomerLogin\Controller\LoginCheck(
+        $loginCheck = new LoginCheck(
             $context,
             $this->getCustomerSession(),
             $this->getSession(),
@@ -357,8 +361,8 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $scopeConfig->expects($this->once())
             ->method('getValue')
             ->with(
-                \BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface::MODULE_CONFIG_TARGET,
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                LoginCheckInterface::MODULE_CONFIG_TARGET,
+                ScopeInterface::SCOPE_STORE
             )
             ->will($this->returnValue($targetUrl));
 
@@ -392,14 +396,14 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->method('sendResponse');
 
         // --- Whitelist Entries
-        $whitelistEntityOne = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+        $whitelistEntityOne = $this->getMockBuilder(WhitelistEntry::class)
             ->disableOriginalConstructor()
             ->getMock();
         $whitelistEntityOne->expects($this->once())
             ->method('getStrategy')
             ->will($this->returnValue('default'));
         $whitelistCollection = $this
-            ->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')
+            ->getMockBuilder(Collection::class)
             ->disableOriginalConstructor()
             ->getMock();
         $whitelistCollection->expects($this->once())
@@ -411,7 +415,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->will($this->returnValue($whitelistCollection));
 
         // --- Strategy
-        $strategy = $this->createMock('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy = $this->createMock(StrategyInterface::class);
         $strategy->expects($this->once())
             ->method('isMatch')
             ->with('/foo/bar', $whitelistEntityOne)
@@ -423,7 +427,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->with('default')
             ->willReturn($strategy);
 
-        $loginCheck = new \BitExpert\ForceCustomerLogin\Controller\LoginCheck(
+        $loginCheck = new LoginCheck(
             $context,
             $this->getCustomerSession(),
             $this->getSession(),
@@ -453,8 +457,8 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $scopeConfig->expects($this->once())
             ->method('getValue')
             ->with(
-                \BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface::MODULE_CONFIG_TARGET,
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                LoginCheckInterface::MODULE_CONFIG_TARGET,
+                ScopeInterface::SCOPE_STORE
             )
             ->will($this->returnValue($targetUrl));
 
@@ -497,14 +501,14 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->method('getParam');
 
         // --- Whitelist Entries
-        $whitelistEntityOne = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+        $whitelistEntityOne = $this->getMockBuilder(WhitelistEntry::class)
             ->disableOriginalConstructor()
             ->getMock();
         $whitelistEntityOne->expects($this->once())
             ->method('getStrategy')
             ->will($this->returnValue('default'));
         $whitelistCollection = $this
-            ->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')
+            ->getMockBuilder(Collection::class)
             ->disableOriginalConstructor()
             ->getMock();
         $whitelistCollection->expects($this->once())
@@ -516,7 +520,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->will($this->returnValue($whitelistCollection));
 
         // --- Strategy
-        $strategy = $this->createMock('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy = $this->createMock(StrategyInterface::class);
         $strategy->expects($this->once())
             ->method('isMatch')
             ->with('/foo/bar', $whitelistEntityOne)
@@ -534,7 +538,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->method('setAfterLoginReferer')
             ->with('/foo/bar');
 
-        $loginCheck = new \BitExpert\ForceCustomerLogin\Controller\LoginCheck(
+        $loginCheck = new LoginCheck(
             $context,
             $this->getCustomerSession(),
             $session,
@@ -546,6 +550,14 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         );
 
         $loginCheck->execute();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|RequestInterface
+     */
+    private function getRequest()
+    {
+        return $this->createMock(RequestInterface::class);
     }
 
     /**
@@ -564,8 +576,8 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $scopeConfig->expects($this->once())
             ->method('getValue')
             ->with(
-                \BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface::MODULE_CONFIG_TARGET,
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                LoginCheckInterface::MODULE_CONFIG_TARGET,
+                ScopeInterface::SCOPE_STORE
             )
             ->will($this->returnValue($targetUrl));
 
@@ -606,22 +618,22 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         // --- Request
         $request->expects($this->exactly(2))
             ->method('getParam')
-            ->will($this->returnValueMap(
-                [
+            ->will(
+                $this->returnValueMap([
                     ['ajax', null, null],
                     ['isAjax', null, '1']
-                ]
-            ));
+                ])
+            );
 
         // --- Whitelist Entries
-        $whitelistEntityOne = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+        $whitelistEntityOne = $this->getMockBuilder(WhitelistEntry::class)
             ->disableOriginalConstructor()
             ->getMock();
         $whitelistEntityOne->expects($this->once())
             ->method('getStrategy')
             ->will($this->returnValue('default'));
         $whitelistCollection = $this
-            ->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')
+            ->getMockBuilder(Collection::class)
             ->disableOriginalConstructor()
             ->getMock();
         $whitelistCollection->expects($this->once())
@@ -633,7 +645,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->will($this->returnValue($whitelistCollection));
 
         // --- Strategy
-        $strategy = $this->createMock('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy = $this->createMock(StrategyInterface::class);
         $strategy->expects($this->once())
             ->method('isMatch')
             ->with('/company-module/api/endpoint', $whitelistEntityOne)
@@ -650,7 +662,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $session->expects($this->never())
             ->method('setAfterLoginReferer');
 
-        $loginCheck = new \BitExpert\ForceCustomerLogin\Controller\LoginCheck(
+        $loginCheck = new LoginCheck(
             $context,
             $this->getCustomerSession(),
             $session,
@@ -665,7 +677,8 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Run test with default request object and with data not listed on the whitelist, so redirecting is forced and "isAjax" method is hit.
+     * Run test with default request object and with data not listed on the whitelist, so redirecting is forced and
+     * "isAjax" method is hit.
      *
      * @test
      * @depends testConstructor
@@ -680,8 +693,8 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         $scopeConfig->expects($this->once())
             ->method('getValue')
             ->with(
-                \BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface::MODULE_CONFIG_TARGET,
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                LoginCheckInterface::MODULE_CONFIG_TARGET,
+                ScopeInterface::SCOPE_STORE
             )
             ->will($this->returnValue($targetUrl));
 
@@ -725,14 +738,14 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->willReturn(false);
 
         // --- Whitelist Entries
-        $whitelistEntityOne = $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\WhitelistEntry')
+        $whitelistEntityOne = $this->getMockBuilder(WhitelistEntry::class)
             ->disableOriginalConstructor()
             ->getMock();
         $whitelistEntityOne->expects($this->once())
             ->method('getStrategy')
             ->will($this->returnValue('default'));
         $whitelistCollection = $this
-            ->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection')
+            ->getMockBuilder(Collection::class)
             ->disableOriginalConstructor()
             ->getMock();
         $whitelistCollection->expects($this->once())
@@ -744,7 +757,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->will($this->returnValue($whitelistCollection));
 
         // --- Strategy
-        $strategy = $this->createMock('\BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface');
+        $strategy = $this->createMock(StrategyInterface::class);
         $strategy->expects($this->once())
             ->method('isMatch')
             ->with('/foo/bar', $whitelistEntityOne)
@@ -762,7 +775,7 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
             ->method('setAfterLoginReferer')
             ->with('/foo/bar');
 
-        $loginCheck = new \BitExpert\ForceCustomerLogin\Controller\LoginCheck(
+        $loginCheck = new LoginCheck(
             $context,
             $this->getCustomerSession(),
             $session,
@@ -774,5 +787,13 @@ class LoginCheckUnitTest extends \PHPUnit\Framework\TestCase
         );
 
         $loginCheck->execute();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\App\Request\Http
+     */
+    private function getRequestObject()
+    {
+        return $this->createMock(RequestHttp::class);
     }
 }

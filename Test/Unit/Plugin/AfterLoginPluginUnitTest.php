@@ -11,14 +11,19 @@
 
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Plugin;
 
+use BitExpert\ForceCustomerLogin\Model\Session;
 use BitExpert\ForceCustomerLogin\Plugin\AfterLoginPlugin;
+use Magento\Customer\Controller\Account\LoginPost;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Controller\Result\Redirect;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class AfterLoginPluginUnitTest
  *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Plugin
  */
-class AfterLoginPluginUnitTest extends \PHPUnit\Framework\TestCase
+class AfterLoginPluginUnitTest extends TestCase
 {
     /**
      * @test
@@ -54,12 +59,11 @@ class AfterLoginPluginUnitTest extends \PHPUnit\Framework\TestCase
      */
     private function getSession()
     {
-        return $this->getMockBuilder('\BitExpert\ForceCustomerLogin\Model\Session')
+        return $this->getMockBuilder(Session::class)
             ->disableOriginalConstructor()
             ->setMethods([
                 'getAfterLoginReferer'
-            ]
-            )
+            ])
             ->getMock();
     }
 
@@ -68,7 +72,7 @@ class AfterLoginPluginUnitTest extends \PHPUnit\Framework\TestCase
      */
     private function getScopeConfig()
     {
-        return $this->getMockBuilder('\Magento\Framework\App\Config\ScopeConfigInterface')
+        return $this->getMockBuilder(ScopeConfigInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -78,7 +82,7 @@ class AfterLoginPluginUnitTest extends \PHPUnit\Framework\TestCase
      */
     private function getLoginPost()
     {
-        return $this->getMockBuilder('\Magento\Customer\Controller\Account\LoginPost')
+        return $this->getMockBuilder(LoginPost::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -88,7 +92,7 @@ class AfterLoginPluginUnitTest extends \PHPUnit\Framework\TestCase
      */
     private function getRedirect()
     {
-        return $this->getMockBuilder('\Magento\Framework\Controller\Result\Redirect')
+        return $this->getMockBuilder(Redirect::class)
             ->disableOriginalConstructor()
             ->getMock();
     }

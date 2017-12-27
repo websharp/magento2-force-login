@@ -12,13 +12,18 @@
 namespace BitExpert\ForceCustomerLogin\Test\Unit\Model;
 
 use BitExpert\ForceCustomerLogin\Model\WhitelistEntry;
+use Magento\Framework\Data\Collection\AbstractDb;
+use Magento\Framework\Model\Context;
+use Magento\Framework\Model\ResourceModel\AbstractResource;
+use Magento\Framework\Registry;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class WhitelistEntryUnitTest
  *
  * @package BitExpert\ForceCustomerLogin\Test\Unit\Model
  */
-class WhitelistEntryUnitTest extends \PHPUnit\Framework\TestCase
+class WhitelistEntryUnitTest extends TestCase
 {
     /**
      * @test
@@ -53,25 +58,24 @@ class WhitelistEntryUnitTest extends \PHPUnit\Framework\TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\Model\ResourceModel\AbstractResource
      */
-    protected function getResourceModel()
+    private function getResourceModel()
     {
-        return $this->getMockBuilder('\Magento\Framework\Model\ResourceModel\AbstractResource')
+        return $this->getMockBuilder(AbstractResource::class)
             ->disableOriginalConstructor()
             ->setMethods([
                 '_construct',
                 'getConnection',
                 'getIdFieldName'
-            ]
-            )
+            ])
             ->getMock();
     }
 
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\Model\Context
      */
-    protected function getContext()
+    private function getContext()
     {
-        return $this->getMockBuilder('\Magento\Framework\Model\Context')
+        return $this->getMockBuilder(Context::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -79,9 +83,9 @@ class WhitelistEntryUnitTest extends \PHPUnit\Framework\TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\Registry
      */
-    protected function getRegistry()
+    private function getRegistry()
     {
-        return $this->getMockBuilder('\Magento\Framework\Registry')
+        return $this->getMockBuilder(Registry::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -89,9 +93,9 @@ class WhitelistEntryUnitTest extends \PHPUnit\Framework\TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\Data\Collection\AbstractDb
      */
-    protected function getDatabase()
+    private function getDatabase()
     {
-        return $this->getMockBuilder('\Magento\Framework\Data\Collection\AbstractDb')
+        return $this->getMockBuilder(AbstractDb::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
