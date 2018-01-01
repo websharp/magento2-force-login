@@ -37,11 +37,22 @@
     </target>
 
     <target name="sniff">
+        <!-- enable eqp sniff standard -->
         <exec executable="./vendor/bin/phpcs"
               passthru="true"
               checkreturn="true">
-            <arg value="--standard=PSR2"/>
-            <arg value="--ignore=**/*.js,vendor,build,logs,Test,var"/>
+            <arg value="--config-set"/>
+            <arg value="installed_paths"/>
+            <arg value="vendor/magento/marketplace-eqp"/>
+        </exec>
+
+        <exec executable="./vendor/bin/phpcs"
+              passthru="true"
+              checkreturn="true">
+            <arg value="--standard=MEQP2"/>
+            <arg value="--severity=10"/>
+            <arg value="--extensions=php,phtml"/>
+            <arg value="--ignore=**/*.js,build,var,vendor,validate_m2_package.php"/>
             <arg path="${phing.dir}"/>
         </exec>
     </target>

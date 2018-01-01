@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace BitExpert\ForceCustomerLogin\Test\Unit\Model\Resource\WhitelistEntry;
+namespace BitExpert\ForceCustomerLogin\Test\Unit\Model\ResourceModel\WhitelistEntry;
 
 use BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection;
 use BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\CollectionFactory;

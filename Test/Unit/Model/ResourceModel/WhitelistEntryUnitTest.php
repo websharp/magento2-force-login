@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace BitExpert\ForceCustomerLogin\Test\Unit\Model\Resource;
+namespace BitExpert\ForceCustomerLogin\Test\Unit\Model\ResourceModel;
 
 use BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry;
 use Magento\Framework\Model\ResourceModel\Db\Context;
