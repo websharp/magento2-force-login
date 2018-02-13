@@ -25,7 +25,7 @@ composer.phar require bitexpert/magento2-force-customer-login
 ```
 
 Optional you can download the latest version [here](https://github.com/bitExpert/magento2-force-login/releases) and install the
-decompressed code in your projects directory under *app/code/bitExpert/ForceCustomerLogin*.  
+decompressed code in your projects directory under *app/code/BitExpert/ForceCustomerLogin*.  
 
 ## Post-Install
 
