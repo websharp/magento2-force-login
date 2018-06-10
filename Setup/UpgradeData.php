@@ -72,6 +72,10 @@ class UpgradeData implements UpgradeDataInterface
             $this->runUpgrade221($setup);
         }
 
+        if (version_compare($context->getVersion(), '3.0.2', '<')) {
+            $this->runUpgrade302($setup);
+        }
+
         $setup->endSetup();
     }
 
@@ -208,6 +212,25 @@ class UpgradeData implements UpgradeDataInterface
             [
                 'editable' => true
             ]
+        );
+    }
+
+    /**
+     * @param ModuleDataSetupInterface $setup
+     */
+    private function runUpgrade302(ModuleDataSetupInterface $setup)
+    {
+        $whitelistEntries = [
+            $this->getWhitelistEntryAsArray(
+                0,
+                'Customer Account Reset Password Post',
+                '/customer/account/resetpasswordpost'
+            ),
+        ];
+
+        $setup->getConnection()->insertMultiple(
+            $setup->getTable('bitexpert_forcelogin_whitelist'),
+            $whitelistEntries
         );
     }
 }
