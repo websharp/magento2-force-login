@@ -25,6 +25,7 @@
                 <item name="/customer/account/logoutSuccess" xsi:type="string">Customer Account Logout Success</item>
                 <item name="/customer/account/create" xsi:type="string">Customer Account Create</item>
                 <item name="/customer/account/createPassword" xsi:type="string">Customer Account Create Password</item>
+                <item name="/customer/account/resetpasswordpost" xsi:type="string">Customer Account Reset Password Post</item>
                 <item name="/customer/account/forgotpassword" xsi:type="string">Customer Account Forgot Password</item>
                 <item name="/customer/account/forgotpasswordpost" xsi:type="string">Customer Account Forgot Password Post</item>
                 <item name="/customer/section/load" xsi:type="string">Customer Section Load</item>
