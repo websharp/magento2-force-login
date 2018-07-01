@@ -30,7 +30,9 @@ use Magento\Framework\App\Response\Http as ResponseHttp;
 use Magento\Framework\App\Response\RedirectInterface;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\UrlInterface;
+use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\ScopeInterface;
+use Magento\Store\Model\StoreManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -59,6 +61,7 @@ class LoginCheckUnitTest extends TestCase
             $this->getContext(),
             $this->getCustomerSession(),
             $this->getSession(),
+            $this->getStoreManager(),
             $this->getScopeConfig(),
             $this->getWhitelistRepository(),
             $this->getStrategyManager(),
@@ -101,6 +104,16 @@ class LoginCheckUnitTest extends TestCase
             ->setMethods([
                 'setAfterLoginReferer'
             ])
+            ->getMock();
+    }
+
+    /**
+     * @return MockObject|StoreManagerInterface
+     */
+    private function getStoreManager()
+    {
+        return $this->getMockBuilder(StoreManagerInterface::class)
+            ->disableOriginalConstructor()
             ->getMock();
     }
 
@@ -153,6 +166,22 @@ class LoginCheckUnitTest extends TestCase
     }
 
     /**
+     * @return MockObject|RequestInterface
+     */
+    private function getRequest()
+    {
+        return $this->createMock(RequestInterface::class);
+    }
+
+    /**
+     * @return MockObject|Http
+     */
+    private function getRequestObject()
+    {
+        return $this->createMock(RequestHttp::class);
+    }
+
+    /**
      * Run test with url equals target, so no redirecting is happening.
      *
      * @test
@@ -188,6 +217,7 @@ class LoginCheckUnitTest extends TestCase
             $context,
             $this->getCustomerSession(),
             $this->getSession(),
+            $this->getStoreManager(),
             $this->getScopeConfig(),
             $this->getWhitelistRepository(),
             $this->getStrategyManager(),
@@ -263,6 +293,7 @@ class LoginCheckUnitTest extends TestCase
             $context,
             $customerSession,
             $this->getSession(),
+            $this->getStoreManager(),
             $this->getScopeConfig(),
             $this->getWhitelistRepository(),
             $this->getStrategyManager(),
@@ -293,6 +324,11 @@ class LoginCheckUnitTest extends TestCase
                 ScopeInterface::SCOPE_STORE
             )
             ->will($this->returnValue($targetUrl));
+
+        // --- StoreManager
+        $storeManager = $this->getStoreManager();
+        $storeManager->expects($this->never())
+            ->method('getStore');
 
         // --- Context
         $url = $this->getUrl();
@@ -337,6 +373,7 @@ class LoginCheckUnitTest extends TestCase
             $context,
             $this->getCustomerSession(),
             $this->getSession(),
+            $storeManager,
             $scopeConfig,
             $whitelistRepository,
             $strategyManager,
@@ -367,6 +404,11 @@ class LoginCheckUnitTest extends TestCase
                 ScopeInterface::SCOPE_STORE
             )
             ->will($this->returnValue($targetUrl));
+
+        // --- StoreManager
+        $storeManager = $this->getStoreManager();
+        $storeManager->expects($this->never())
+            ->method('getStore');
 
         // --- Context
         $url = $this->getUrl();
@@ -433,6 +475,7 @@ class LoginCheckUnitTest extends TestCase
             $context,
             $this->getCustomerSession(),
             $this->getSession(),
+            $storeManager,
             $scopeConfig,
             $whitelistRepository,
             $strategyManager,
@@ -453,6 +496,7 @@ class LoginCheckUnitTest extends TestCase
     {
         $urlString = 'http://example.tld/foo/bar';
         $targetUrl = '/customer/account/login';
+        $expectedTargetUrl = 'http://example.tld/foo/bar/customer/account/login';
 
         // --- Scope Config
         $scopeConfig = $this->getScopeConfig();
@@ -463,6 +507,33 @@ class LoginCheckUnitTest extends TestCase
                 ScopeInterface::SCOPE_STORE
             )
             ->will($this->returnValue($targetUrl));
+
+        // --- StoreManager
+        $store = $this->getMockBuilder(StoreInterface::class)
+            ->setMethods([
+                'getBaseUrl',
+                'getId',
+                'setId',
+                'getCode',
+                'setCode',
+                'getName',
+                'setName',
+                'getWebsiteId',
+                'setWebsiteId',
+                'getStoreGroupId',
+                'setStoreGroupId',
+                'getExtensionAttributes',
+                'setExtensionAttributes'
+            ])
+            ->getMock();
+        $store->expects($this->once())
+            ->method('getBaseUrl')
+            ->with(\Magento\Framework\UrlInterface::URL_TYPE_WEB, true)
+            ->will($this->returnValue($urlString));
+        $storeManager = $this->getStoreManager();
+        $storeManager->expects($this->once())
+            ->method('getStore')
+            ->will($this->returnValue($store));
 
         // --- Context
         $url = $this->getUrl();
@@ -494,7 +565,7 @@ class LoginCheckUnitTest extends TestCase
             ->method('setNoCacheHeaders');
         $responseHttp->expects($this->once())
             ->method('setRedirect')
-            ->with($targetUrl);
+            ->with($expectedTargetUrl);
         $responseHttp->expects($this->once())
             ->method('sendResponse');
 
@@ -544,6 +615,7 @@ class LoginCheckUnitTest extends TestCase
             $context,
             $this->getCustomerSession(),
             $session,
+            $storeManager,
             $scopeConfig,
             $whitelistRepository,
             $strategyManager,
@@ -552,14 +624,6 @@ class LoginCheckUnitTest extends TestCase
         );
 
         $loginCheck->execute();
-    }
-
-    /**
-     * @return MockObject|RequestInterface
-     */
-    private function getRequest()
-    {
-        return $this->createMock(RequestInterface::class);
     }
 
     /**
@@ -572,6 +636,7 @@ class LoginCheckUnitTest extends TestCase
     {
         $urlString = 'http://example.tld/company-module/api/endpoint';
         $targetUrl = '/customer/account/login';
+        $expectedTargetUrl = 'http://example.tld/company-module/api/endpoint/customer/account/login';
 
         // --- Scope Config
         $scopeConfig = $this->getScopeConfig();
@@ -582,6 +647,33 @@ class LoginCheckUnitTest extends TestCase
                 ScopeInterface::SCOPE_STORE
             )
             ->will($this->returnValue($targetUrl));
+
+        // --- StoreManager
+        $store = $this->getMockBuilder(StoreInterface::class)
+            ->setMethods([
+                'getBaseUrl',
+                'getId',
+                'setId',
+                'getCode',
+                'setCode',
+                'getName',
+                'setName',
+                'getWebsiteId',
+                'setWebsiteId',
+                'getStoreGroupId',
+                'setStoreGroupId',
+                'getExtensionAttributes',
+                'setExtensionAttributes'
+            ])
+            ->getMock();
+        $store->expects($this->once())
+            ->method('getBaseUrl')
+            ->with(\Magento\Framework\UrlInterface::URL_TYPE_WEB, true)
+            ->will($this->returnValue($urlString));
+        $storeManager = $this->getStoreManager();
+        $storeManager->expects($this->once())
+            ->method('getStore')
+            ->will($this->returnValue($store));
 
         // --- Context
         $url = $this->getUrl();
@@ -613,7 +705,7 @@ class LoginCheckUnitTest extends TestCase
             ->method('setNoCacheHeaders');
         $responseHttp->expects($this->once())
             ->method('setRedirect')
-            ->with($targetUrl);
+            ->with($expectedTargetUrl);
         $responseHttp->expects($this->once())
             ->method('sendResponse');
 
@@ -668,6 +760,7 @@ class LoginCheckUnitTest extends TestCase
             $context,
             $this->getCustomerSession(),
             $session,
+            $storeManager,
             $scopeConfig,
             $whitelistRepository,
             $strategyManager,
@@ -689,6 +782,7 @@ class LoginCheckUnitTest extends TestCase
     {
         $urlString = 'http://example.tld/foo/bar';
         $targetUrl = '/customer/account/login';
+        $expectedTargetUrl = 'http://example.tld/foo/bar/customer/account/login';
 
         // --- Scope Config
         $scopeConfig = $this->getScopeConfig();
@@ -699,6 +793,33 @@ class LoginCheckUnitTest extends TestCase
                 ScopeInterface::SCOPE_STORE
             )
             ->will($this->returnValue($targetUrl));
+
+        // --- StoreManager
+        $store = $this->getMockBuilder(StoreInterface::class)
+            ->setMethods([
+                'getBaseUrl',
+                'getId',
+                'setId',
+                'getCode',
+                'setCode',
+                'getName',
+                'setName',
+                'getWebsiteId',
+                'setWebsiteId',
+                'getStoreGroupId',
+                'setStoreGroupId',
+                'getExtensionAttributes',
+                'setExtensionAttributes'
+            ])
+            ->getMock();
+        $store->expects($this->once())
+            ->method('getBaseUrl')
+            ->with(\Magento\Framework\UrlInterface::URL_TYPE_WEB, true)
+            ->will($this->returnValue($urlString));
+        $storeManager = $this->getStoreManager();
+        $storeManager->expects($this->once())
+            ->method('getStore')
+            ->will($this->returnValue($store));
 
         // --- Context
         $url = $this->getUrl();
@@ -730,7 +851,7 @@ class LoginCheckUnitTest extends TestCase
             ->method('setNoCacheHeaders');
         $responseHttp->expects($this->once())
             ->method('setRedirect')
-            ->with($targetUrl);
+            ->with($expectedTargetUrl);
         $responseHttp->expects($this->once())
             ->method('sendResponse');
 
@@ -781,6 +902,7 @@ class LoginCheckUnitTest extends TestCase
             $context,
             $this->getCustomerSession(),
             $session,
+            $storeManager,
             $scopeConfig,
             $whitelistRepository,
             $strategyManager,
@@ -789,13 +911,5 @@ class LoginCheckUnitTest extends TestCase
         );
 
         $loginCheck->execute();
-    }
-
-    /**
-     * @return MockObject|Http
-     */
-    private function getRequestObject()
-    {
-        return $this->createMock(RequestHttp::class);
     }
 }

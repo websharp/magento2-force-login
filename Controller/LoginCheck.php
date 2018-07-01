@@ -21,6 +21,7 @@ use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Response\Http as ResponseHttp;
 use Magento\Store\Model\ScopeInterface;
+use Magento\Store\Model\StoreManagerInterface;
 
 /**
  * Class LoginCheck
@@ -37,6 +38,10 @@ class LoginCheck extends Action implements LoginCheckInterface
      * @var Session
      */
     private $session;
+    /**
+     * @var StoreManagerInterface
+     */
+    private $storeManager;
     /**
      * @var ScopeConfigInterface
      */
@@ -64,6 +69,7 @@ class LoginCheck extends Action implements LoginCheckInterface
      * @param Context $context
      * @param CustomerSession $customerSession
      * @param Session $session
+     * @param StoreManagerInterface $storeManager
      * @param ScopeConfigInterface $scopeConfig
      * @param WhitelistRepositoryInterface $whitelistRepository
      * @param StrategyManager $strategyManager
@@ -74,6 +80,7 @@ class LoginCheck extends Action implements LoginCheckInterface
         Context $context,
         CustomerSession $customerSession,
         Session $session,
+        StoreManagerInterface $storeManager,
         ScopeConfigInterface $scopeConfig,
         WhitelistRepositoryInterface $whitelistRepository,
         StrategyManager $strategyManager,
@@ -82,6 +89,7 @@ class LoginCheck extends Action implements LoginCheckInterface
     ) {
         $this->customerSession = $customerSession;
         $this->session = $session;
+        $this->storeManager = $storeManager;
         $this->scopeConfig = $scopeConfig;
         $this->whitelistRepository = $whitelistRepository;
         $this->strategyManager = $strategyManager;
@@ -147,6 +155,15 @@ class LoginCheck extends Action implements LoginCheckInterface
     }
 
     /**
+     * @return string
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    private function getBaseUrl()
+    {
+        return $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB, true);
+    }
+
+    /**
      * Check if a request is AJAX request
      *
      * @return bool
@@ -170,7 +187,7 @@ class LoginCheck extends Action implements LoginCheckInterface
     {
         return \sprintf(
             '%s%s',
-            $this->_url->getBaseUrl(),
+            $this->getBaseUrl(),
             $targetUrl
         );
     }
