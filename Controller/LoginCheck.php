@@ -116,7 +116,8 @@ class LoginCheck extends Action implements LoginCheckInterface
         }
 
         $url = $this->_url->getCurrentUrl();
-        $path = \parse_url($url, PHP_URL_PATH);
+        $urlParts = \parse_url($url);
+        $path = $urlParts['path'];
         $targetUrl = $this->getTargetUrl();
 
         // current path is already pointing to target url, no redirect needed
@@ -131,6 +132,11 @@ class LoginCheck extends Action implements LoginCheckInterface
             if ($strategy->isMatch($path, $rule)) {
                 return false;
             }
+        }
+
+        // Add any GET query parameters back to the path after making our url checks.
+        if(isset($urlParts['query']) && !empty($urlParts['query'])) {
+            $path .= '?' . $urlParts['query'];
         }
 
         if (!$this->isAjaxRequest()) {
