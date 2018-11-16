@@ -2,6 +2,46 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.1.0
+
+### Added
+
+- [#134](https://github.com/bitExpert/magento2-force-login/pull/134) Fixed an issue where GET query parameters get stripped
+- [#123](https://github.com/bitExpert/magento2-force-login/pull/123) Fixes for multiple stores with store name in path
+- [#118](https://github.com/bitExpert/magento2-force-login/pull/118) Add path /customer/account/resetpasswordpost to the default setup
+- [#108](https://github.com/bitExpert/magento2-force-login/pull/108) Add Magento EQP tool in Travis build 
+- [#105](https://github.com/bitExpert/magento2-force-login/pull/105) Add coveralls.io support in Travis build
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
+## 3.0.1
+
+### Added
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#104](https://github.com/bitExpert/magento2-force-login/pull/104) Fix to make sure the module will work with Magento 2.1 and 2.2 
+
 ## 3.0.0
 
 ### Added
@@ -18,19 +58,19 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- #98 Convert "bitExpert" namespace to "BitExpert" to fix the Magento 2.2 XSD issue
-- #99 Don't store AJAX requests as after login url
-- #100 Apply fixes sugested by the EQP tool
-- #101 Update docs to fix typos and reflect latest changes
-- #102 Rename button "delete"
+- [#98](https://github.com/bitExpert/magento2-force-login/pull/98) Convert "bitExpert" namespace to "BitExpert" to fix the Magento 2.2 XSD issue
+- [#99](https://github.com/bitExpert/magento2-force-login/pull/99) Don't store AJAX requests as after login url
+- [#100](https://github.com/bitExpert/magento2-force-login/pull/100) Apply fixes sugested by the EQP tool
+- [#101](https://github.com/bitExpert/magento2-force-login/pull/101) Update docs to fix typos and reflect latest changes
+- [#102](https://github.com/bitExpert/magento2-force-login/pull/102) Rename button "delete"
 
 ## 2.3.0
 
 ### Added
 
-- #88 Migrated from using observers to hook into router chain
-- #89 Enabled edition of default whitelist routes
-- #92 Fixed syntax issue in layout xml, invalid block definition
+- [#88](https://github.com/bitExpert/magento2-force-login/pull/88) Migrated from using observers to hook into router chain
+- [#89](https://github.com/bitExpert/magento2-force-login/pull/89) Enabled edition of default whitelist routes
+- [#92](https://github.com/bitExpert/magento2-force-login/pull/92) Fixed syntax issue in layout xml, invalid block definition
 
 ### Deprecated
 
@@ -38,13 +78,13 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- #88 Usage of observers (LoginRequiredOnCustomerSessionInitObserver, LoginRequiredOnVisitorInitObserver) and event hooks (customer_session_init, visitor_init) have been removed
+- [#88](https://github.com/bitExpert/magento2-force-login/pull/88) Usage of observers (LoginRequiredOnCustomerSessionInitObserver, LoginRequiredOnVisitorInitObserver) and event hooks (customer_session_init, visitor_init) have been removed
 
 ### Fixed
 
-- #83 404 pages do not show when logged out
-- #84 Disable registration isn't possible
-- #91 Whitelist is Not works for Magento 2.2.0
+- [#83](https://github.com/bitExpert/magento2-force-login/pull/83) 404 pages do not show when logged out
+- [#84](https://github.com/bitExpert/magento2-force-login/pull/84) Disable registration isn't possible
+- [#91](https://github.com/bitExpert/magento2-force-login/pull/91) Whitelist is Not works for Magento 2.2.0
 
 ## 2.2.0
 
@@ -62,17 +102,17 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- #85 Incompatible with Magento 2.2
+- [#85](https://github.com/bitExpert/magento2-force-login/pull/85) Incompatible with Magento 2.2
 
 ## 2.1.0
 
 ### Added
 
-- #82 Fixed invalid position of tag resource in system.xml
-- #78 Move backend configuration to customer > customer configuration section
-- #77 Provides backwards compatibility by set strategy for existing rules to regex matcher instead of static
-- #76 Static matcher now canonicalizes url and rule to omit differences of trailing slashes
-- #60 Behavior Setting for Matcher
+- [#82](https://github.com/bitExpert/magento2-force-login/pull/82) Fixed invalid position of tag resource in system.xml
+- [#78](https://github.com/bitExpert/magento2-force-login/pull/78) Move backend configuration to customer > customer configuration section
+- [#77](https://github.com/bitExpert/magento2-force-login/pull/77) Provides backwards compatibility by set strategy for existing rules to regex matcher instead of static
+- [#76](https://github.com/bitExpert/magento2-force-login/pull/76) Static matcher now canonicalizes url and rule to omit differences of trailing slashes
+- [#60](https://github.com/bitExpert/magento2-force-login/pull/60) Behavior Setting for Matcher
 
 ### Deprecated
 
@@ -84,18 +124,18 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- #81 Error in admin pages due to invalid XML
-- #79 Invalid system.xml file
-- #75 Static matching strategy could ignore ending slash
-- #74 Upgrade to 2.1 RC2 from 2 breaks backward compatibility of rules
-- #73 Force login top level system config tab is overkill
-- #72 Fixes on class resolution
+- [#81](https://github.com/bitExpert/magento2-force-login/pull/81) Error in admin pages due to invalid XML
+- [#79](https://github.com/bitExpert/magento2-force-login/pull/79) Invalid system.xml file
+- [#75](https://github.com/bitExpert/magento2-force-login/pull/75) Static matching strategy could ignore ending slash
+- [#74](https://github.com/bitExpert/magento2-force-login/pull/74) Upgrade to 2.1 RC2 from 2 breaks backward compatibility of rules
+- [#73](https://github.com/bitExpert/magento2-force-login/pull/73) Force login top level system config tab is overkill
+- [#72](https://github.com/bitExpert/magento2-force-login/pull/72) Fixes on class resolution
 
 ## 2.0.2
 
 ### Added
 
-- #71 Moved events.xml to frontend/events.xml
+- [#71](https://github.com/bitExpert/magento2-force-login/pull/71) Moved events.xml to frontend/events.xml
 
 ### Deprecated
 
@@ -107,13 +147,13 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- #68 Activating the module also blocks the backend
+- [#68](https://github.com/bitExpert/magento2-force-login/pull/68) Activating the module also blocks the backend
 
 ## 2.0.1
 
 ### Added
 
-- #67 Resolve redirect loop from login to customer dashboard
+- [#67](https://github.com/bitExpert/magento2-force-login/pull/67) Resolve redirect loop from login to customer dashboard
 
 ### Deprecated
 
@@ -125,7 +165,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- #66 Redirect loop
+- [#66](https://github.com/bitExpert/magento2-force-login/pull/66) Redirect loop
 
 ## 2.0.0
 
@@ -134,12 +174,12 @@ All notable changes to this project will be documented in this file, in reverse 
 - Changed type namings in DI to match best practice.
 - Respect configured login option behavior.
 - Added own session handler.
-- #63 Updated resource ACL
-- #62 Move UpgradeSchema to InstallSchema
-- #54 Added configuration to enabled or disabled the module
-- #43 Added additional default rules for sitemap.xml and robots.txt
-- #26 Added cache control to redirecting
-- #24 Added configuration to set target url
+- [#63](https://github.com/bitExpert/magento2-force-login/pull/63) Updated resource ACL
+- [#62](https://github.com/bitExpert/magento2-force-login/pull/62) Move UpgradeSchema to InstallSchema
+- [#54](https://github.com/bitExpert/magento2-force-login/pull/54) Added configuration to enabled or disabled the module
+- [#43](https://github.com/bitExpert/magento2-force-login/pull/43) Added additional default rules for sitemap.xml and robots.txt
+- [#26](https://github.com/bitExpert/magento2-force-login/pull/26) Added cache control to redirecting
+- [#24](https://github.com/bitExpert/magento2-force-login/pull/24) Added configuration to set target url
 
 ### Deprecated
 
@@ -152,9 +192,9 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Fixed
 
 - Refactored code structure.
-- #64 ACL error when accessing Store Configuration
-- #61 Setup install then upgrade fails
-- #35 Redirection after logging in
+- [#64](https://github.com/bitExpert/magento2-force-login/pull/64) ACL error when accessing Store Configuration
+- [#61](https://github.com/bitExpert/magento2-force-login/pull/61) Setup install then upgrade fails
+- [#35](https://github.com/bitExpert/magento2-force-login/pull/35) Redirection after logging in
 
 ## 1.3.1
 
