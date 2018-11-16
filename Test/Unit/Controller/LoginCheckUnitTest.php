@@ -912,4 +912,148 @@ class LoginCheckUnitTest extends TestCase
 
         $loginCheck->execute();
     }
+
+    /**
+     * Run test with default request object and with data not listed on the whitelist, so redirecting is forced and
+     * "isAjax" method is hit.
+     *
+     * @test
+     * @depends testConstructor
+     */
+    public function redirectMatchesReferrerUrlWithQueryParameters()
+    {
+        $baseUrl = 'http://example.tld';
+        $referrerUrl = 'http://example.tld/foo/bar?q=apples';
+        $targetUrl = '/customer/account/login';
+        $expectedTargetUrl = 'http://example.tld/customer/account/login';
+        $expectedAfterLoginRedirect = '/foo/bar?q=apples';
+
+        // --- Scope Config
+        $scopeConfig = $this->getScopeConfig();
+        $scopeConfig->expects($this->once())
+            ->method('getValue')
+            ->with(
+                LoginCheckInterface::MODULE_CONFIG_TARGET,
+                ScopeInterface::SCOPE_STORE
+            )
+            ->will($this->returnValue($targetUrl));
+
+        // --- StoreManager
+        $store = $this->getMockBuilder(StoreInterface::class)
+            ->setMethods([
+                'getBaseUrl',
+                'getId',
+                'setId',
+                'getCode',
+                'setCode',
+                'getName',
+                'setName',
+                'getWebsiteId',
+                'setWebsiteId',
+                'getStoreGroupId',
+                'setStoreGroupId',
+                'getExtensionAttributes',
+                'setExtensionAttributes'
+            ])
+            ->getMock();
+        $store->expects($this->once())
+            ->method('getBaseUrl')
+            ->with(\Magento\Framework\UrlInterface::URL_TYPE_WEB, true)
+            ->will($this->returnValue($baseUrl));
+        $storeManager = $this->getStoreManager();
+        $storeManager->expects($this->once())
+            ->method('getStore')
+            ->will($this->returnValue($store));
+
+        // --- Context
+        $url = $this->getUrl();
+        $url->expects($this->once())
+            ->method('getCurrentUrl')
+            ->will($this->returnValue($referrerUrl));
+
+        $request = $this->getRequestObject();
+        $response = $this->getResponse();
+        $redirect = $this->getRedirect();
+
+        $context = $this->getContext();
+        $context->expects($this->exactly(1))
+            ->method('getUrl')
+            ->will($this->returnValue($url));
+        $context->expects($this->once())
+            ->method('getRequest')
+            ->will($this->returnValue($request));
+        $context->expects($this->once())
+            ->method('getResponse')
+            ->will($this->returnValue($response));
+        $context->expects($this->once())
+            ->method('getRedirect')
+            ->will($this->returnValue($redirect));
+
+        // --- Response
+        $responseHttp = $this->getResponseHttp();
+        $responseHttp->expects($this->once())
+            ->method('setNoCacheHeaders');
+        $responseHttp->expects($this->once())
+            ->method('setRedirect')
+            ->with($expectedTargetUrl);
+        $responseHttp->expects($this->once())
+            ->method('sendResponse');
+
+        // --- Request
+        $request->expects($this->once())
+            ->method('isAjax')
+            ->willReturn(false);
+
+        // --- Whitelist Entries
+        $whitelistEntityOne = $this->getMockBuilder(WhitelistEntry::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $whitelistEntityOne->expects($this->once())
+            ->method('getStrategy')
+            ->will($this->returnValue('default'));
+        $whitelistCollection = $this
+            ->getMockBuilder(Collection::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $whitelistCollection->expects($this->once())
+            ->method('getItems')
+            ->will($this->returnValue([$whitelistEntityOne]));
+        $whitelistRepository = $this->getWhitelistRepository();
+        $whitelistRepository->expects($this->once())
+            ->method('getCollection')
+            ->will($this->returnValue($whitelistCollection));
+
+        // --- Strategy
+        $strategy = $this->createMock(StrategyInterface::class);
+        $strategy->expects($this->once())
+            ->method('isMatch')
+            ->with('/foo/bar', $whitelistEntityOne)
+            ->willReturn(false);
+
+        $strategyManager = $this->getStrategyManager();
+        $strategyManager->expects($this->once())
+            ->method('get')
+            ->with('default')
+            ->will($this->returnValue($strategy));
+
+        // -- Session
+        $session = $this->getSession();
+        $session->expects($this->once())
+            ->method('setAfterLoginReferer')
+            ->with($expectedAfterLoginRedirect);
+
+        $loginCheck = new LoginCheck(
+            $context,
+            $this->getCustomerSession(),
+            $session,
+            $storeManager,
+            $scopeConfig,
+            $whitelistRepository,
+            $strategyManager,
+            $this->getModuleCheck(),
+            $responseHttp
+        );
+
+        $loginCheck->execute();
+    }
 }
