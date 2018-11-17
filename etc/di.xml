@@ -72,11 +72,17 @@
             <argument name="name" xsi:type="string">RegEx (All)</argument>
         </arguments>
     </type>
+    <type name="BitExpert\ForceCustomerLogin\Helper\Strategy\RegExAllNegationMatcher">
+        <arguments>
+            <argument name="name" xsi:type="string">RegEx (All) Negation</argument>
+        </arguments>
+    </type>
     <type name="BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager">
         <arguments>
             <argument name="strategies" xsi:type="array">
                 <item name="default" xsi:type="object">\BitExpert\ForceCustomerLogin\Helper\Strategy\StaticMatcher</item>
                 <item name="regex-all" xsi:type="object">\BitExpert\ForceCustomerLogin\Helper\Strategy\RegExAllMatcher</item>
+                <item name="regex-all-negation" xsi:type="object">\BitExpert\ForceCustomerLogin\Helper\Strategy\RegExAllNegationMatcher</item>
             </argument>
         </arguments>
     </type>
