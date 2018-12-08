@@ -128,6 +128,9 @@ Rule is used as a literal value and will be added onto the base url for matching
 #### RegEx-All 
 Rule is based on [regular expression](https://en.wikipedia.org/wiki/Regular_expression), and will be used for looking up matching anywhere in the current Url.
 
+#### RegEx-All Negation
+Based on the *RegEx-All* strategy, but negates the result. Helpful if only a few pages should be restricted.
+
 ## Tests
 
 You can run the unit tests with the following command (requires dependency installation):
