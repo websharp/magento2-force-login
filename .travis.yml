@@ -10,11 +10,19 @@ matrix:
     env:
       - MAGE_21=true
       - MAGE_22=true
+      - MAGE_23=false
       - TEST_COVERAGE=false
   - php: 7.1
     env:
       - MAGE_21=false
       - MAGE_22=true
+      - MAGE_23=false
+      - TEST_COVERAGE=true
+  - php: 7.2
+    env:
+      - MAGE_21=false
+      - MAGE_22=false
+      - MAGE_23=true
       - TEST_COVERAGE=true
 
 before_install:
@@ -34,6 +42,8 @@ script:
   - if [[ $encrypted_98dcc32c9b33_key != '' && MAGE_21 == true ]]; then composer remove magento/module-customer && composer update magento/module-customer:~100.1 ; fi
   - if [[ $encrypted_98dcc32c9b33_key != '' && MAGE_21 == true ]]; then ./vendor/bin/phing unit ; fi
   - if [[ $encrypted_98dcc32c9b33_key != '' && MAGE_22 == true ]]; then composer remove magento/module-customer && composer update magento/module-customer:~101.0 ; fi
+  - if [[ $encrypted_98dcc32c9b33_key != '' && MAGE_22 == true ]]; then ./vendor/bin/phing unit ; fi
+  - if [[ $encrypted_98dcc32c9b33_key != '' && MAGE_23 == true ]]; then composer remove magento/module-customer && composer update magento/module-customer:~102.0 ; fi
   - if [[ $encrypted_98dcc32c9b33_key != '' && MAGE_22 == true ]]; then ./vendor/bin/phing unit ; fi
   - if [[ $encrypted_98dcc32c9b33_key != '' && $TEST_COVERAGE == 'true' ]]; then ./vendor/bin/phing unit-with-coverage ; fi
 
