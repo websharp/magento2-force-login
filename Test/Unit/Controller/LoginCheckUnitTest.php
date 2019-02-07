@@ -523,7 +523,9 @@ class LoginCheckUnitTest extends TestCase
                 'getStoreGroupId',
                 'setStoreGroupId',
                 'getExtensionAttributes',
-                'setExtensionAttributes'
+                'setExtensionAttributes',
+                'setIsActive',
+                'getIsActive'
             ])
             ->getMock();
         $store->expects($this->once())
@@ -663,7 +665,9 @@ class LoginCheckUnitTest extends TestCase
                 'getStoreGroupId',
                 'setStoreGroupId',
                 'getExtensionAttributes',
-                'setExtensionAttributes'
+                'setExtensionAttributes',
+                'setIsActive',
+                'getIsActive'
             ])
             ->getMock();
         $store->expects($this->once())
@@ -809,7 +813,9 @@ class LoginCheckUnitTest extends TestCase
                 'getStoreGroupId',
                 'setStoreGroupId',
                 'getExtensionAttributes',
-                'setExtensionAttributes'
+                'setExtensionAttributes',
+                'setIsActive',
+                'getIsActive'
             ])
             ->getMock();
         $store->expects($this->once())
@@ -953,7 +959,9 @@ class LoginCheckUnitTest extends TestCase
                 'getStoreGroupId',
                 'setStoreGroupId',
                 'getExtensionAttributes',
-                'setExtensionAttributes'
+                'setExtensionAttributes',
+                'setIsActive',
+                'getIsActive'
             ])
             ->getMock();
         $store->expects($this->once())
