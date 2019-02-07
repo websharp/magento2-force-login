@@ -6,6 +6,24 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
+- [#140](https://github.com/bitExpert/magento2-force-login/pull/140) Magento 2.3 compatibility
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
+## 3.1.0
+
+### Added
+
 - [#134](https://github.com/bitExpert/magento2-force-login/pull/134) Fixed an issue where GET query parameters get stripped
 - [#123](https://github.com/bitExpert/magento2-force-login/pull/123) Fixes for multiple stores with store name in path
 - [#118](https://github.com/bitExpert/magento2-force-login/pull/118) Add path /customer/account/resetpasswordpost to the default setup
