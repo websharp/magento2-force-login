@@ -29,7 +29,7 @@ before_install:
   - if [[ $encrypted_98dcc32c9b33_key != '' ]]; then openssl aes-256-cbc -K $encrypted_98dcc32c9b33_key -iv $encrypted_98dcc32c9b33_iv -in auth.json.enc -out auth.json -d ; fi
 
 install:
-  - if [[ $encrypted_98dcc32c9b33_key != '' && $TEST_COVERAGE == 'true' ]]; then travis_retry composer require --dev satooshi/php-coveralls ; fi
+  - if [[ $encrypted_98dcc32c9b33_key != '' && $TEST_COVERAGE == 'true' ]]; then travis_retry composer require --dev php-coveralls/php-coveralls ; fi
 
 before_script:
   - composer self-update
@@ -48,4 +48,4 @@ script:
   - if [[ $encrypted_98dcc32c9b33_key != '' && $TEST_COVERAGE == 'true' ]]; then ./vendor/bin/phing unit-with-coverage ; fi
 
 after_script:
-  - if [[ $encrypted_98dcc32c9b33_key != '' && $TEST_COVERAGE == 'true' ]]; then ./vendor/bin/coveralls -v ; fi
+  - if [[ $encrypted_98dcc32c9b33_key != '' && $TEST_COVERAGE == 'true' ]]; then ./vendor/bin/php-coveralls -v ; fi
