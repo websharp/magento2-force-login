@@ -15,29 +15,8 @@ services:
     volumes: &appvolumes
       - ~/.composer:/var/www/.composer
       - ~/.composer/auth.json:/var/www/html/auth.json
-      - ./Api:/var/www/html/app/code/BitExpert/ForceCustomerLogin/Api
-      - ./Block:/var/www/html/app/code/BitExpert/ForceCustomerLogin/Block
-      - ./Controller:/var/www/html/app/code/BitExpert/ForceCustomerLogin/Controller
-      - ./etc:/var/www/html/app/code/BitExpert/ForceCustomerLogin/etc
-      - ./Helper:/var/www/html/app/code/BitExpert/ForceCustomerLogin/Helper
-      - ./Model:/var/www/html/app/code/BitExpert/ForceCustomerLogin/Model
-      - ./Plugin:/var/www/html/app/code/BitExpert/ForceCustomerLogin/Plugin
-      - ./Repository:/var/www/html/app/code/BitExpert/ForceCustomerLogin/Repository
-      - ./Setup:/var/www/html/app/code/BitExpert/ForceCustomerLogin/Setup
-      - ./Ui:/var/www/html/app/code/BitExpert/ForceCustomerLogin/Ui
-      - ./Validator:/var/www/html/app/code/BitExpert/ForceCustomerLogin/Validator
-      - ./view:/var/www/html/app/code/BitExpert/ForceCustomerLogin/view
-      - ./Changelog.md:/var/www/html/app/code/BitExpert/ForceCustomerLogin/Changelog.md
-      - ./composer.json:/var/www/html/app/code/BitExpert/ForceCustomerLogin/composer.json
-      - ./composer.lock:/var/www/html/app/code/BitExpert/ForceCustomerLogin/composer.lock
-      - ./CONTRIBUTING.md:/var/www/html/app/code/BitExpert/ForceCustomerLogin/CONTRIBUTING.md
-      - ./LICENSE:/var/www/html/app/code/BitExpert/ForceCustomerLogin/LICENSE
-      - ./phpunit.xml:/var/www/html/app/code/BitExpert/ForceCustomerLogin/phpunit.xml
-      - ./README.md:/var/www/html/app/code/BitExpert/ForceCustomerLogin/README.md
-      - ./registration.php:/var/www/html/app/code/BitExpert/ForceCustomerLogin/registration.php
+      - ./:/var/www/BitExpert/ForceCustomerLogin/
       - ./dist:/dist
-      - ./validate_m2_package.php:/usr/local/bin/validate_m2_package.php
-      - ./vendor:/var/www/html/vendor
       - appdata:/var/www/html
       - sockdata:/sock
 
