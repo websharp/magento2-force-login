@@ -24,7 +24,9 @@
   "require-dev": {
     "magento/marketplace-eqp": "~1.0.5",
     "phing/phing": "~2.0",
-    "phpunit/phpunit": "~6.0"
+    "phpunit/phpunit": "~6.0",
+    "captainhook/captainhook": "^4.0",
+    "captainhook/plugin-composer": "^4.0"
   },
   "autoload": {
     "files": [
