@@ -52,7 +52,7 @@
             <arg value="--standard=MEQP2"/>
             <arg value="--severity=10"/>
             <arg value="--extensions=php,phtml"/>
-            <arg value="--ignore=**/*.js,build,var,vendor,validate_m2_package.php"/>
+            <arg value="--ignore=**/*.js,.git,bin,dist,docs,env,vendor,validate_m2_package.php"/>
             <arg path="${phing.dir}"/>
         </exec>
     </target>
