@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7873d77a7cc4cdd8a15fd82b2668aefa",
+    "content-hash": "5d782c486b030a6b37a47088eaa03d42",
     "packages": [
         {
             "name": "colinmollenhour/credis",
@@ -4432,6 +4432,55 @@
     ],
     "packages-dev": [
         {
+            "name": "bitexpert/phing-securitychecker",
+            "version": "v0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bitExpert/phing-securitychecker.git",
+                "reference": "6f4c15ab4fa2b3c22f9b8b83d33ac1a739f11a81"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bitExpert/phing-securitychecker/zipball/6f4c15ab4fa2b3c22f9b8b83d33ac1a739f11a81",
+                "reference": "6f4c15ab4fa2b3c22f9b8b83d33ac1a739f11a81",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "phing/phing": "^2.8.0",
+                "php": "^7.1",
+                "sensiolabs/security-checker": "^5.0"
+            },
+            "require-dev": {
+                "phpdocumentor/phpdocumentor": "^2.8",
+                "phpunit/phpunit": "7.5",
+                "squizlabs/php_codesniffer": "^2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "bitExpert\\Phing\\SecurityChecker\\": "src/bitExpert/Phing/SecurityChecker"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Stephan Hochdörfer",
+                    "email": "S.Hochdoerfer@bitExpert.de",
+                    "homepage": "http://www.bitExpert.de"
+                }
+            ],
+            "description": "Security Checker Phing Task",
+            "keywords": [
+                "Security Checker",
+                "phing"
+            ],
+            "time": "2019-03-04T20:49:54+00:00"
+        },
+        {
             "name": "captainhook/captainhook",
             "version": "4.0.4",
             "source": {
@@ -6134,6 +6183,52 @@
                 "git"
             ],
             "time": "2019-01-04T09:47:28+00:00"
+        },
+        {
+            "name": "sensiolabs/security-checker",
+            "version": "v5.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sensiolabs/security-checker.git",
+                "reference": "46be3f58adac13084497961e10eed9a7fb4d44d1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/46be3f58adac13084497961e10eed9a7fb4d44d1",
+                "reference": "46be3f58adac13084497961e10eed9a7fb4d44d1",
+                "shasum": ""
+            },
+            "require": {
+                "composer/ca-bundle": "^1.0",
+                "php": ">=5.5.9",
+                "symfony/console": "~2.7|~3.0|~4.0"
+            },
+            "bin": [
+                "security-checker"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SensioLabs\\Security\\": "SensioLabs/Security"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien.potencier@gmail.com"
+                }
+            ],
+            "description": "A security checker for your composer.lock",
+            "time": "2018-12-19T17:14:59+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",

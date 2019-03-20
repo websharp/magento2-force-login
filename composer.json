@@ -26,7 +26,8 @@
     "phing/phing": "~2.0",
     "phpunit/phpunit": "~6.0",
     "captainhook/captainhook": "^4.0",
-    "captainhook/plugin-composer": "^4.0"
+    "captainhook/plugin-composer": "^4.0",
+    "bitexpert/phing-securitychecker": "^0.4.0"
   },
   "autoload": {
     "files": [
