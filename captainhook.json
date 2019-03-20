@@ -17,6 +17,10 @@
             {
                 "action": "./vendor/bin/phing sniff",
                 "options": []
+            },
+            {
+                "action": "./vendor/bin/phing security:check",
+                "options": []
             }
         ]
     },
