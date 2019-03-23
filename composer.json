@@ -3,7 +3,7 @@
   "description": "The Force Login module for Magento2 redirects a storefront visitor to the Magento2 Frontend login page, if the visitor is not logged in. It is possible to configure the whitelisted urls to add custom definitions.",
   "type": "magento2-module",
   "version": "3.1.0",
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "license": "Apache-2.0",
   "authors": [
     {
@@ -27,8 +27,10 @@
     "phpunit/phpunit": "~6.0",
     "captainhook/captainhook": "^4.0",
     "captainhook/plugin-composer": "^4.0",
-    "bitexpert/phing-securitychecker": "^0.4.0"
-  },
+    "bitexpert/phing-securitychecker": "^0.4.0",
+    "phpstan/phpstan": "^0.11.4",
+    "bitexpert/phpstan-magento": "dev-master"
+    },
   "autoload": {
     "files": [
       "registration.php"
@@ -37,12 +39,12 @@
       "BitExpert\\ForceCustomerLogin\\": ""
     }
   },
-  "repositories": [
-    {
+  "repositories": {
+    "magento": {
       "type": "composer",
       "url": "https://repo.magento.com"
     }
-  ],
+  },
   "scripts": {
     "check": [
       "@cs-check",
