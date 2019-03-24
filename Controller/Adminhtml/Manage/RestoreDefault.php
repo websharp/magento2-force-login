@@ -15,8 +15,7 @@ use BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
 use BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
 use BitExpert\ForceCustomerLogin\Model\WhitelistEntry;
 use Magento\Backend\Model\View\Result\RedirectFactory;
-use Magento\Framework\App\Action\Context;
-use Magento\Framework\Message\ManagerInterface;
+use Magento\Backend\App\Action\Context;
 
 /**
  * Class RestoreDefault
@@ -24,7 +23,7 @@ use Magento\Framework\Message\ManagerInterface;
  * @package BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage
  * @codingStandardsIgnoreFile
  */
-class RestoreDefault extends \Magento\Framework\App\Action\Action
+class RestoreDefault extends \Magento\Backend\App\Action
 {
     /**
      * @var WhitelistEntryFactoryInterface
