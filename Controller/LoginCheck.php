@@ -102,6 +102,7 @@ class LoginCheck extends Action implements LoginCheckInterface
      * Manages redirect
      *
      * @return bool TRUE if redirection is applied, else FALSE
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function execute()
     {
@@ -127,7 +128,7 @@ class LoginCheck extends Action implements LoginCheckInterface
 
         // check if current url is a match with one of the ignored urls
         foreach ($this->whitelistRepository->getCollection()->getItems() as $rule) {
-            /** @var $rule \BitExpert\ForceCustomerLogin\Model\WhitelistEntry */
+            /** @var \BitExpert\ForceCustomerLogin\Model\WhitelistEntry $rule */
             $strategy = $this->strategyManager->get($rule->getStrategy());
             if ($strategy->isMatch($path, $rule)) {
                 return false;
@@ -188,6 +189,7 @@ class LoginCheck extends Action implements LoginCheckInterface
     /**
      * @param string $targetUrl
      * @return string
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     private function getRedirectUrl($targetUrl)
     {

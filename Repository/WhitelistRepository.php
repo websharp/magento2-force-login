@@ -140,7 +140,7 @@ class WhitelistRepository implements \BitExpert\ForceCustomerLogin\Api\Repositor
      */
     public function getList(\Magento\Framework\Api\SearchCriteria $searchCriteria)
     {
-        /** @var \BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntrySearchResultInterface $searchResult */
+        /** @var \BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntrySearchResultInterface|\Magento\Framework\Data\Collection\AbstractDb $searchResult */
         $searchResult = $this->searchResultFactory->create();
         foreach ($searchCriteria->getFilterGroups() as $filterGroup) {
             foreach ($filterGroup->getFilters() as $filter) {

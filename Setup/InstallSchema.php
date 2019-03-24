@@ -91,8 +91,7 @@ class InstallSchema implements InstallSchemaInterface
             )
             ->addIndex(
                 $installer->getIdxName('bitexpert_forcelogin_whitelist', ['url_rule', 'store_id']),
-                ['url_rule'],
-                ['store_id'],
+                ['url_rule', 'store_id'],
                 ['unique' => true]
             )
             ->addForeignKey(

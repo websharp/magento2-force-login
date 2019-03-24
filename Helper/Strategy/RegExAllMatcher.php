@@ -77,7 +77,7 @@ class RegExAllMatcher implements StrategyInterface
     }
 
     /**
-     * @param $url
+     * @param string $url
      * @return string
      */
     private function getCleanUrl($url)
