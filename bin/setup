@@ -52,10 +52,10 @@ echo "Clearing the cache for good measure..."
 bin/clinotty bin/magento cache:flush
 
 echo "Installing Force Login Composer module..."
-bin/rootnotty chmod +x bin/magento /var/www/BitExpert/ForceCustomerLogin/validate_m2_package.php
+bin/rootnotty chmod +x bin/magento /var/www/html/BitExpert/ForceCustomerLogin/validate_m2_package.php
 bin/rootnotty chown -R app.app /dist
 bin/clinotty composer config minimum-stability dev
-bin/clinotty composer config "repositories.bitexpert/magento2-force-customer-login" '{"type": "path", "url": "/var/www/BitExpert/ForceCustomerLogin/", "options": {"symlink": true}}'
+bin/clinotty composer config "repositories.bitexpert/magento2-force-customer-login" '{"type": "path", "url": "/var/www/html/BitExpert/ForceCustomerLogin/", "options": {"symlink": true}}'
 bin/clinotty composer require bitexpert/magento2-force-customer-login:*
 
 echo "Enabling Force Login module..."
