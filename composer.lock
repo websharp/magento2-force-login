@@ -4486,12 +4486,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bitExpert/phpstan-magento.git",
-                "reference": "87be812de9ae8eb959ea6fbce665c2b418662386"
+                "reference": "903f8cb316e75ddc0935bca495fd548ef92ee91d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bitExpert/phpstan-magento/zipball/87be812de9ae8eb959ea6fbce665c2b418662386",
-                "reference": "87be812de9ae8eb959ea6fbce665c2b418662386",
+                "url": "https://api.github.com/repos/bitExpert/phpstan-magento/zipball/903f8cb316e75ddc0935bca495fd548ef92ee91d",
+                "reference": "903f8cb316e75ddc0935bca495fd548ef92ee91d",
                 "shasum": ""
             },
             "require": {
@@ -4517,7 +4517,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Apache-2.0"
+                "MIT"
             ],
             "authors": [
                 {
@@ -4527,7 +4527,7 @@
                 }
             ],
             "description": "PHPStan Magento Extension",
-            "time": "2019-03-23T17:34:55+00:00"
+            "time": "2019-03-29T20:17:28+00:00"
         },
         {
             "name": "captainhook/captainhook",
