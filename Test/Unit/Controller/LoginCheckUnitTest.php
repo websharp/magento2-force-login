@@ -376,9 +376,6 @@ class LoginCheckUnitTest extends TestCase
             ->method('getCurrentUrl')
             ->will($this->returnValue($urlString));
 
-        $response = $this->getResponse();
-        $redirect = $this->getRedirect();
-
         $context = $this->getContext();
         $context->expects($this->exactly(1))
             ->method('getUrl')
@@ -498,8 +495,6 @@ class LoginCheckUnitTest extends TestCase
             ->will($this->returnValue($urlString));
 
         $request = $this->getRequest();
-        $response = $this->getResponse();
-        $redirect = $this->getRedirect();
 
         $context = $this->getContext();
         $context->expects($this->exactly(1))
@@ -634,8 +629,6 @@ class LoginCheckUnitTest extends TestCase
             ->will($this->returnValue($urlString));
 
         $request = $this->getRequest();
-        $response = $this->getResponse();
-        $redirect = $this->getRedirect();
 
         $context = $this->getContext();
         $context->expects($this->exactly(1))
@@ -776,8 +769,6 @@ class LoginCheckUnitTest extends TestCase
             ->will($this->returnValue($urlString));
 
         $request = $this->getRequestObject();
-        $response = $this->getResponse();
-        $redirect = $this->getRedirect();
 
         $context = $this->getContext();
         $context->expects($this->exactly(1))
@@ -916,8 +907,6 @@ class LoginCheckUnitTest extends TestCase
             ->will($this->returnValue($referrerUrl));
 
         $request = $this->getRequestObject();
-        $response = $this->getResponse();
-        $redirect = $this->getRedirect();
 
         $context = $this->getContext();
         $context->expects($this->exactly(1))
