@@ -19,6 +19,10 @@
                 "options": []
             },
             {
+                "action": "./vendor/bin/phing analyze",
+                "options": []
+            },
+            {
                 "action": "./vendor/bin/phing security:check",
                 "options": []
             }
