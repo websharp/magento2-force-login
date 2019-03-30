@@ -11,6 +11,9 @@
 
 namespace BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\ResultInterface;
+
 /**
  * Class Index
  *
@@ -20,18 +23,18 @@ namespace BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 class Index extends \Magento\Backend\App\Action
 {
     /**
-     * Index Action*
+     * Index Action
      *
-     * @return void
+     * @return ResultInterface|ResponseInterface
      */
     public function execute()
     {
         $this->_view->loadLayout();
-        $this->_view->renderLayout();
+        return $this->_view->renderLayout();
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      * @codeCoverageIgnore
      */
     protected function _isAllowed()

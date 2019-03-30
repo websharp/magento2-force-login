@@ -48,7 +48,7 @@ class WhitelistEntryFactory implements \BitExpert\ForceCustomerLogin\Api\Data\Wh
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function create(array $data = array())
     {

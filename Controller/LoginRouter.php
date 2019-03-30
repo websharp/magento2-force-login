@@ -27,7 +27,7 @@ class LoginRouter implements RouterInterface
      */
     private $actionFactory;
     /**
-     * @var LoginCheck
+     * @var LoginCheckInterface
      */
     private $loginCheck;
 
@@ -47,7 +47,7 @@ class LoginRouter implements RouterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function match(\Magento\Framework\App\RequestInterface $request)
     {

@@ -61,7 +61,7 @@ class WhitelistRepository implements \BitExpert\ForceCustomerLogin\Api\Repositor
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function createEntry($entityId, $label, $urlRule, $strategy = self::DEFAULT_STRATEGY, $storeId = 0)
     {
@@ -98,7 +98,7 @@ class WhitelistRepository implements \BitExpert\ForceCustomerLogin\Api\Repositor
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function deleteEntry($id)
     {
@@ -114,7 +114,7 @@ class WhitelistRepository implements \BitExpert\ForceCustomerLogin\Api\Repositor
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getCollection()
     {
@@ -136,7 +136,7 @@ class WhitelistRepository implements \BitExpert\ForceCustomerLogin\Api\Repositor
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getList(\Magento\Framework\Api\SearchCriteria $searchCriteria)
     {

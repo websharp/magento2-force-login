@@ -48,7 +48,7 @@ class CollectionFactory implements \BitExpert\ForceCustomerLogin\Api\Data\Collec
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function create(array $data = array())
     {

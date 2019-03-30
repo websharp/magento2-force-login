@@ -13,8 +13,10 @@ namespace BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 
 use BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
 use BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
+use Magento\Framework\Controller\Result\RedirectFactory;
 use Magento\Backend\App\Action\Context;
-use Magento\Backend\Model\View\Result\RedirectFactory;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\ResultInterface;
 
 /**
  * Class Save
@@ -58,7 +60,7 @@ class Save extends \Magento\Backend\App\Action
     /**
      * Save action.
      *
-     * @return \Magento\Backend\Model\View\Result\Redirect
+     * @return ResultInterface|ResponseInterface
      */
     public function execute()
     {
@@ -109,7 +111,7 @@ class Save extends \Magento\Backend\App\Action
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      * @codeCoverageIgnore
      */
     protected function _isAllowed()

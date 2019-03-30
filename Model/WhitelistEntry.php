@@ -21,7 +21,7 @@ class WhitelistEntry extends \Magento\Framework\Model\AbstractModel implements
     \BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryInterface
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getStoreId()
     {
@@ -29,7 +29,7 @@ class WhitelistEntry extends \Magento\Framework\Model\AbstractModel implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function setStoreId($storeId)
     {
@@ -37,7 +37,7 @@ class WhitelistEntry extends \Magento\Framework\Model\AbstractModel implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getLabel()
     {
@@ -45,7 +45,7 @@ class WhitelistEntry extends \Magento\Framework\Model\AbstractModel implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function setLabel($label)
     {
@@ -53,7 +53,7 @@ class WhitelistEntry extends \Magento\Framework\Model\AbstractModel implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getUrlRule()
     {
@@ -61,7 +61,7 @@ class WhitelistEntry extends \Magento\Framework\Model\AbstractModel implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function setUrlRule($urlRule)
     {
@@ -69,7 +69,7 @@ class WhitelistEntry extends \Magento\Framework\Model\AbstractModel implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getEditable()
     {
@@ -77,7 +77,7 @@ class WhitelistEntry extends \Magento\Framework\Model\AbstractModel implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function setEditable($editable)
     {
@@ -85,7 +85,7 @@ class WhitelistEntry extends \Magento\Framework\Model\AbstractModel implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getStrategy()
     {
@@ -93,7 +93,7 @@ class WhitelistEntry extends \Magento\Framework\Model\AbstractModel implements
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function setStrategy($strategy)
     {
