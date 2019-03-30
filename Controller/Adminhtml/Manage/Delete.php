@@ -13,7 +13,9 @@ namespace BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 
 use BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
 use Magento\Backend\App\Action\Context;
-use Magento\Backend\Model\View\Result\RedirectFactory;
+use Magento\Framework\Controller\Result\RedirectFactory;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\ResultInterface;
 
 /**
  * Class Delete
@@ -50,7 +52,7 @@ class Delete extends \Magento\Backend\App\Action
     /**
      * Delete action.
      *
-     * @return \Magento\Backend\Model\View\Result\Redirect
+     * @return ResultInterface|ResponseInterface
      */
     public function execute()
     {
@@ -88,7 +90,7 @@ class Delete extends \Magento\Backend\App\Action
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      * @codeCoverageIgnore
      */
     protected function _isAllowed()

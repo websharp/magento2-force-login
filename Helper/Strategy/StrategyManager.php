@@ -55,7 +55,7 @@ class StrategyManager
     }
 
     /**
-     * @param $identifier
+     * @param string $identifier
      * @return StrategyInterface
      */
     public function get($identifier)

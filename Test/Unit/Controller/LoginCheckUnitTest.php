@@ -194,24 +194,7 @@ class LoginCheckUnitTest extends TestCase
             ->method('isModuleEnabled')
             ->willReturn(false);
 
-        // --- Context
-        $url = $this->getUrl();
-        $url->expects($this->never())
-            ->method('getCurrentUrl');
-
-        $response = $this->getResponse();
-        $redirect = $this->getRedirect();
-
         $context = $this->getContext();
-        $context->expects($this->exactly(1))
-            ->method('getUrl')
-            ->will($this->returnValue($url));
-        $context->expects($this->once())
-            ->method('getResponse')
-            ->will($this->returnValue($response));
-        $context->expects($this->once())
-            ->method('getRedirect')
-            ->will($this->returnValue($redirect));
 
         $loginCheck = new LoginCheck(
             $context,
@@ -270,24 +253,7 @@ class LoginCheckUnitTest extends TestCase
             ->method('isLoggedIn')
             ->willReturn(true);
 
-        // --- Context
-        $url = $this->getUrl();
-        $url->expects($this->never())
-            ->method('getCurrentUrl');
-
-        $response = $this->getResponse();
-        $redirect = $this->getRedirect();
-
         $context = $this->getContext();
-        $context->expects($this->exactly(1))
-            ->method('getUrl')
-            ->will($this->returnValue($url));
-        $context->expects($this->once())
-            ->method('getResponse')
-            ->will($this->returnValue($response));
-        $context->expects($this->once())
-            ->method('getRedirect')
-            ->will($this->returnValue($redirect));
 
         $loginCheck = new LoginCheck(
             $context,
@@ -343,12 +309,6 @@ class LoginCheckUnitTest extends TestCase
         $context->expects($this->exactly(1))
             ->method('getUrl')
             ->will($this->returnValue($url));
-        $context->expects($this->once())
-            ->method('getResponse')
-            ->will($this->returnValue($response));
-        $context->expects($this->once())
-            ->method('getRedirect')
-            ->will($this->returnValue($redirect));
 
         // --- Response
         $responseHttp = $this->getResponseHttp();
@@ -423,12 +383,6 @@ class LoginCheckUnitTest extends TestCase
         $context->expects($this->exactly(1))
             ->method('getUrl')
             ->will($this->returnValue($url));
-        $context->expects($this->once())
-            ->method('getResponse')
-            ->will($this->returnValue($response));
-        $context->expects($this->once())
-            ->method('getRedirect')
-            ->will($this->returnValue($redirect));
 
         // --- Response
         $responseHttp = $this->getResponseHttp();
@@ -554,12 +508,6 @@ class LoginCheckUnitTest extends TestCase
         $context->expects($this->once())
             ->method('getRequest')
             ->will($this->returnValue($request));
-        $context->expects($this->once())
-            ->method('getResponse')
-            ->will($this->returnValue($response));
-        $context->expects($this->once())
-            ->method('getRedirect')
-            ->will($this->returnValue($redirect));
 
         // --- Response
         $responseHttp = $this->getResponseHttp();
@@ -696,12 +644,6 @@ class LoginCheckUnitTest extends TestCase
         $context->expects($this->once())
             ->method('getRequest')
             ->will($this->returnValue($request));
-        $context->expects($this->once())
-            ->method('getResponse')
-            ->will($this->returnValue($response));
-        $context->expects($this->once())
-            ->method('getRedirect')
-            ->will($this->returnValue($redirect));
 
         // --- Response
         $responseHttp = $this->getResponseHttp();
@@ -844,12 +786,6 @@ class LoginCheckUnitTest extends TestCase
         $context->expects($this->once())
             ->method('getRequest')
             ->will($this->returnValue($request));
-        $context->expects($this->once())
-            ->method('getResponse')
-            ->will($this->returnValue($response));
-        $context->expects($this->once())
-            ->method('getRedirect')
-            ->will($this->returnValue($redirect));
 
         // --- Response
         $responseHttp = $this->getResponseHttp();
@@ -990,12 +926,6 @@ class LoginCheckUnitTest extends TestCase
         $context->expects($this->once())
             ->method('getRequest')
             ->will($this->returnValue($request));
-        $context->expects($this->once())
-            ->method('getResponse')
-            ->will($this->returnValue($response));
-        $context->expects($this->once())
-            ->method('getRedirect')
-            ->will($this->returnValue($redirect));
 
         // --- Response
         $responseHttp = $this->getResponseHttp();

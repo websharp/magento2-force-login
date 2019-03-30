@@ -20,7 +20,7 @@ namespace BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 class Create extends \Magento\Backend\App\Action
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function execute()
     {
@@ -29,7 +29,7 @@ class Create extends \Magento\Backend\App\Action
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      * @codeCoverageIgnore
      */
     protected function _isAllowed()

@@ -42,7 +42,7 @@ class Create extends \Magento\Backend\Block\Widget\Form\Container
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getSaveUrl()
     {
@@ -55,7 +55,7 @@ class Create extends \Magento\Backend\Block\Widget\Form\Container
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getBackUrl()
     {

@@ -21,7 +21,7 @@ use BitExpert\ForceCustomerLogin\Model\WhitelistEntry;
 class RegExAllNegationMatcher extends RegExAllMatcher implements StrategyInterface
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function isMatch($url, WhitelistEntry $rule)
     {

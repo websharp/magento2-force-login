@@ -41,7 +41,7 @@ class RegExAllMatcher implements StrategyInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getName()
     {
@@ -49,7 +49,7 @@ class RegExAllMatcher implements StrategyInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function isMatch($url, WhitelistEntry $rule)
     {
@@ -77,7 +77,7 @@ class RegExAllMatcher implements StrategyInterface
     }
 
     /**
-     * @param $url
+     * @param string $url
      * @return string
      */
     private function getCleanUrl($url)

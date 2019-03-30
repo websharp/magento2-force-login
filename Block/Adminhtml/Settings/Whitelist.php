@@ -20,7 +20,7 @@ namespace BitExpert\ForceCustomerLogin\Block\Adminhtml\Settings;
 class Whitelist extends \Magento\Backend\Block\Widget\Container
 {
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     protected function _prepareLayout()
     {

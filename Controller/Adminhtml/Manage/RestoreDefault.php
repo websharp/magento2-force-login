@@ -14,9 +14,10 @@ namespace BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage;
 use BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface;
 use BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
 use BitExpert\ForceCustomerLogin\Model\WhitelistEntry;
-use Magento\Backend\Model\View\Result\RedirectFactory;
-use Magento\Framework\App\Action\Context;
-use Magento\Framework\Message\ManagerInterface;
+use Magento\Framework\Controller\Result\RedirectFactory;
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\ResultInterface;
 
 /**
  * Class RestoreDefault
@@ -24,7 +25,7 @@ use Magento\Framework\Message\ManagerInterface;
  * @package BitExpert\ForceCustomerLogin\Controller\Adminhtml\Manage
  * @codingStandardsIgnoreFile
  */
-class RestoreDefault extends \Magento\Framework\App\Action\Action
+class RestoreDefault extends \Magento\Backend\App\Action
 {
     /**
      * @var WhitelistEntryFactoryInterface
@@ -72,7 +73,7 @@ class RestoreDefault extends \Magento\Framework\App\Action\Action
     /**
      * Restore whitelist defaults action.
      *
-     * @return \Magento\Backend\Model\View\Result\Redirect
+     * @return ResultInterface|ResponseInterface
      */
     public function execute()
     {
@@ -124,7 +125,7 @@ class RestoreDefault extends \Magento\Framework\App\Action\Action
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      * @codeCoverageIgnore
      */
     protected function _isAllowed()

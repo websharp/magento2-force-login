@@ -41,7 +41,7 @@ class StaticMatcher implements StrategyInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getName()
     {
@@ -49,7 +49,7 @@ class StaticMatcher implements StrategyInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function isMatch($url, WhitelistEntry $rule)
     {

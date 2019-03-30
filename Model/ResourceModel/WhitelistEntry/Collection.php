@@ -25,7 +25,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected $_idFieldName = 'whitelist_entry_id';
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     protected function _construct()
     {
