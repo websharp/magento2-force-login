@@ -19,7 +19,9 @@ use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\Response\Http as ResponseHttp;
+use Magento\Framework\App\ResponseInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
@@ -28,7 +30,7 @@ use Magento\Store\Model\StoreManagerInterface;
  *
  * @package BitExpert\ForceCustomerLogin\Controller
  */
-class LoginCheck extends Action implements LoginCheckInterface
+class LoginCheck implements LoginCheckInterface
 {
     /**
      * @var CustomerSession
@@ -58,6 +60,14 @@ class LoginCheck extends Action implements LoginCheckInterface
      * @var ModuleCheck
      */
     private $moduleCheck;
+    /**
+     * @var \Magento\Framework\UrlInterface
+     */
+    private $url;
+    /**
+     * @var RequestInterface
+     */
+    private $request;
     /**
      * @var ResponseHttp
      */
@@ -95,7 +105,8 @@ class LoginCheck extends Action implements LoginCheckInterface
         $this->strategyManager = $strategyManager;
         $this->moduleCheck = $moduleCheck;
         $this->response = $response;
-        parent::__construct($context);
+        $this->request = $context->getRequest();
+        $this->url = $context->getUrl();
     }
 
     /**
@@ -116,7 +127,7 @@ class LoginCheck extends Action implements LoginCheckInterface
             return false;
         }
 
-        $url = $this->_url->getCurrentUrl();
+        $url = $this->url->getCurrentUrl();
         $urlParts = \parse_url($url);
         $path = $urlParts['path'];
         $targetUrl = $this->getTargetUrl();
@@ -177,10 +188,10 @@ class LoginCheck extends Action implements LoginCheckInterface
      */
     private function isAjaxRequest()
     {
-        if ($this->_request instanceof \Magento\Framework\App\Request\Http) {
-            return $this->_request->isAjax();
+        if ($this->request instanceof \Magento\Framework\App\Request\Http) {
+            return $this->request->isAjax();
         }
-        if ($this->_request->getParam('ajax') || $this->_request->getParam('isAjax')) {
+        if ($this->request->getParam('ajax') || $this->request->getParam('isAjax')) {
             return true;
         }
         return false;

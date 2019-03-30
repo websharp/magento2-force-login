@@ -12,16 +12,25 @@
 namespace BitExpert\ForceCustomerLogin\Api\Controller;
 
 use Magento\Framework\App\ActionInterface;
+use Magento\Framework\App\ResponseInterface;
 
 /**
  * Interface LoginCheckInterface
  *
  * @package BitExpert\ForceCustomerLogin\Api\Controller
  */
-interface LoginCheckInterface extends ActionInterface
+interface LoginCheckInterface
 {
     /*
      * Configuration
      */
     const MODULE_CONFIG_TARGET = 'customer/BitExpert_ForceCustomerLogin/url';
+
+    /**
+     * Manages redirect
+     *
+     * @return bool TRUE if redirection is applied, else FALSE
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function execute();
 }
