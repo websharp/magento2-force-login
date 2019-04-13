@@ -289,7 +289,7 @@ class LoginCheckUnitTest extends TestCase
                 LoginCheckInterface::MODULE_CONFIG_TARGET,
                 ScopeInterface::SCOPE_STORE
             )
-            ->will($this->returnValue($targetUrl));
+            ->willReturn($targetUrl);
 
         // --- StoreManager
         $storeManager = $this->getStoreManager();
@@ -300,15 +300,15 @@ class LoginCheckUnitTest extends TestCase
         $url = $this->getUrl();
         $url->expects($this->once())
             ->method('getCurrentUrl')
-            ->will($this->returnValue($urlString));
+            ->willReturn($urlString);
 
         $response = $this->getResponse();
         $redirect = $this->getRedirect();
 
         $context = $this->getContext();
-        $context->expects($this->exactly(1))
+        $context->expects($this->once())
             ->method('getUrl')
-            ->will($this->returnValue($url));
+            ->willReturn($url);
 
         // --- Response
         $responseHttp = $this->getResponseHttp();
@@ -363,7 +363,7 @@ class LoginCheckUnitTest extends TestCase
                 LoginCheckInterface::MODULE_CONFIG_TARGET,
                 ScopeInterface::SCOPE_STORE
             )
-            ->will($this->returnValue($targetUrl));
+            ->willReturn($targetUrl);
 
         // --- StoreManager
         $storeManager = $this->getStoreManager();
@@ -374,12 +374,12 @@ class LoginCheckUnitTest extends TestCase
         $url = $this->getUrl();
         $url->expects($this->once())
             ->method('getCurrentUrl')
-            ->will($this->returnValue($urlString));
+            ->willReturn($urlString);
 
         $context = $this->getContext();
-        $context->expects($this->exactly(1))
+        $context->expects($this->once())
             ->method('getUrl')
-            ->will($this->returnValue($url));
+            ->willReturn($url);
 
         // --- Response
         $responseHttp = $this->getResponseHttp();
@@ -396,18 +396,18 @@ class LoginCheckUnitTest extends TestCase
             ->getMock();
         $whitelistEntityOne->expects($this->once())
             ->method('getStrategy')
-            ->will($this->returnValue('default'));
+            ->willReturn('default');
         $whitelistCollection = $this
             ->getMockBuilder(Collection::class)
             ->disableOriginalConstructor()
             ->getMock();
         $whitelistCollection->expects($this->once())
             ->method('getItems')
-            ->will($this->returnValue([$whitelistEntityOne]));
+            ->willReturn([$whitelistEntityOne]);
         $whitelistRepository = $this->getWhitelistRepository();
         $whitelistRepository->expects($this->once())
             ->method('getCollection')
-            ->will($this->returnValue($whitelistCollection));
+            ->willReturn($whitelistCollection);
 
         // --- Strategy
         $strategy = $this->createMock(StrategyInterface::class);
@@ -480,28 +480,28 @@ class LoginCheckUnitTest extends TestCase
             ->getMock();
         $store->expects($this->once())
             ->method('getBaseUrl')
-            ->with(\Magento\Framework\UrlInterface::URL_TYPE_WEB, null)
-            ->will($this->returnValue($urlString));
+            ->with(UrlInterface::URL_TYPE_WEB, null)
+            ->willReturn($urlString);
         $storeManager = $this->getStoreManager();
         $storeManager->expects($this->once())
             ->method('getStore')
-            ->will($this->returnValue($store));
+            ->willReturn($store);
 
         // --- Context
         $url = $this->getUrl();
         $url->expects($this->once())
             ->method('getCurrentUrl')
-            ->will($this->returnValue($urlString));
+            ->willReturn($urlString);
 
         $request = $this->getRequest();
 
         $context = $this->getContext();
         $context->expects($this->exactly(1))
             ->method('getUrl')
-            ->will($this->returnValue($url));
+            ->willReturn($url);
         $context->expects($this->once())
             ->method('getRequest')
-            ->will($this->returnValue($request));
+            ->willReturn($request);
 
         // --- Response
         $responseHttp = $this->getResponseHttp();
@@ -523,18 +523,18 @@ class LoginCheckUnitTest extends TestCase
             ->getMock();
         $whitelistEntityOne->expects($this->once())
             ->method('getStrategy')
-            ->will($this->returnValue('default'));
+            ->willReturn('default');
         $whitelistCollection = $this
             ->getMockBuilder(Collection::class)
             ->disableOriginalConstructor()
             ->getMock();
         $whitelistCollection->expects($this->once())
             ->method('getItems')
-            ->will($this->returnValue([$whitelistEntityOne]));
+            ->willReturn([$whitelistEntityOne]);
         $whitelistRepository = $this->getWhitelistRepository();
         $whitelistRepository->expects($this->once())
             ->method('getCollection')
-            ->will($this->returnValue($whitelistCollection));
+            ->willReturn($whitelistCollection);
 
         // --- Strategy
         $strategy = $this->createMock(StrategyInterface::class);
@@ -547,7 +547,7 @@ class LoginCheckUnitTest extends TestCase
         $strategyManager->expects($this->once())
             ->method('get')
             ->with('default')
-            ->will($this->returnValue($strategy));
+            ->willReturn($strategy);
 
         // -- Session
         $session = $this->getSession();
@@ -613,28 +613,28 @@ class LoginCheckUnitTest extends TestCase
             ->getMock();
         $store->expects($this->once())
             ->method('getBaseUrl')
-            ->with(\Magento\Framework\UrlInterface::URL_TYPE_WEB, true)
-            ->will($this->returnValue($urlString));
+            ->with(UrlInterface::URL_TYPE_WEB, true)
+            ->willReturn($urlString);
         $storeManager = $this->getStoreManager();
         $storeManager->expects($this->once())
             ->method('getStore')
-            ->will($this->returnValue($store));
+            ->willReturn($store);
 
         // --- Context
         $url = $this->getUrl();
         $url->expects($this->once())
             ->method('getCurrentUrl')
-            ->will($this->returnValue($urlString));
+            ->willReturn($urlString);
 
         $request = $this->getRequest();
 
         $context = $this->getContext();
-        $context->expects($this->exactly(1))
+        $context->expects($this->once())
             ->method('getUrl')
-            ->will($this->returnValue($url));
+            ->willReturn($url);
         $context->expects($this->once())
             ->method('getRequest')
-            ->will($this->returnValue($request));
+            ->willReturn($request);
 
         // --- Response
         $responseHttp = $this->getResponseHttp();
@@ -656,18 +656,18 @@ class LoginCheckUnitTest extends TestCase
             ->getMock();
         $whitelistEntityOne->expects($this->once())
             ->method('getStrategy')
-            ->will($this->returnValue('default'));
+            ->willReturn('default');
         $whitelistCollection = $this
             ->getMockBuilder(Collection::class)
             ->disableOriginalConstructor()
             ->getMock();
         $whitelistCollection->expects($this->once())
             ->method('getItems')
-            ->will($this->returnValue([$whitelistEntityOne]));
+            ->willReturn([$whitelistEntityOne]);
         $whitelistRepository = $this->getWhitelistRepository();
         $whitelistRepository->expects($this->once())
             ->method('getCollection')
-            ->will($this->returnValue($whitelistCollection));
+            ->willReturn($whitelistCollection);
 
         // --- Strategy
         $strategy = $this->createMock(StrategyInterface::class);
@@ -680,7 +680,7 @@ class LoginCheckUnitTest extends TestCase
         $strategyManager->expects($this->once())
             ->method('get')
             ->with('default')
-            ->will($this->returnValue($strategy));
+            ->willReturn($strategy);
 
         // -- Session
         $session = $this->getSession();
@@ -746,28 +746,28 @@ class LoginCheckUnitTest extends TestCase
             ->getMock();
         $store->expects($this->once())
             ->method('getBaseUrl')
-            ->with(\Magento\Framework\UrlInterface::URL_TYPE_WEB, null)
-            ->will($this->returnValue($urlString));
+            ->with(UrlInterface::URL_TYPE_WEB, null)
+            ->willReturn($urlString);
         $storeManager = $this->getStoreManager();
         $storeManager->expects($this->once())
             ->method('getStore')
-            ->will($this->returnValue($store));
+            ->willReturn($store);
 
         // --- Context
         $url = $this->getUrl();
         $url->expects($this->once())
             ->method('getCurrentUrl')
-            ->will($this->returnValue($urlString));
+            ->willReturn($urlString);
 
         $request = $this->getRequest();
 
         $context = $this->getContext();
-        $context->expects($this->exactly(1))
+        $context->expects($this->once())
             ->method('getUrl')
-            ->will($this->returnValue($url));
+            ->willReturn($url);
         $context->expects($this->once())
             ->method('getRequest')
-            ->will($this->returnValue($request));
+            ->willReturn($request);
 
         // --- Response
         $responseHttp = $this->getResponseHttp();
@@ -782,12 +782,10 @@ class LoginCheckUnitTest extends TestCase
         // --- Request
         $request->expects($this->exactly(2))
             ->method('getParam')
-            ->will(
-                $this->returnValueMap([
-                    ['ajax', null, null],
-                    ['isAjax', null, '1']
-                ])
-            );
+            ->willReturnMap([
+                ['ajax', null, null],
+                ['isAjax', null, '1']
+            ]);
 
         // --- Whitelist Entries
         $whitelistEntityOne = $this->getMockBuilder(WhitelistEntry::class)
@@ -795,18 +793,18 @@ class LoginCheckUnitTest extends TestCase
             ->getMock();
         $whitelistEntityOne->expects($this->once())
             ->method('getStrategy')
-            ->will($this->returnValue('default'));
+            ->willReturn('default');
         $whitelistCollection = $this
             ->getMockBuilder(Collection::class)
             ->disableOriginalConstructor()
             ->getMock();
         $whitelistCollection->expects($this->once())
             ->method('getItems')
-            ->will($this->returnValue([$whitelistEntityOne]));
+            ->willReturn([$whitelistEntityOne]);
         $whitelistRepository = $this->getWhitelistRepository();
         $whitelistRepository->expects($this->once())
             ->method('getCollection')
-            ->will($this->returnValue($whitelistCollection));
+            ->willReturn($whitelistCollection);
 
         // --- Strategy
         $strategy = $this->createMock(StrategyInterface::class);
@@ -819,7 +817,7 @@ class LoginCheckUnitTest extends TestCase
         $strategyManager->expects($this->once())
             ->method('get')
             ->with('default')
-            ->will($this->returnValue($strategy));
+            ->willReturn($strategy);
 
         // -- Session
         $session = $this->getSession();
@@ -885,28 +883,28 @@ class LoginCheckUnitTest extends TestCase
             ->getMock();
         $store->expects($this->once())
             ->method('getBaseUrl')
-            ->with(\Magento\Framework\UrlInterface::URL_TYPE_WEB, null)
-            ->will($this->returnValue($urlString));
+            ->with(UrlInterface::URL_TYPE_WEB, null)
+            ->willReturn($urlString);
         $storeManager = $this->getStoreManager();
         $storeManager->expects($this->once())
             ->method('getStore')
-            ->will($this->returnValue($store));
+            ->willReturn($store);
 
         // --- Context
         $url = $this->getUrl();
         $url->expects($this->once())
             ->method('getCurrentUrl')
-            ->will($this->returnValue($urlString));
+            ->willReturn($urlString);
 
         $request = $this->getRequestObject();
 
         $context = $this->getContext();
-        $context->expects($this->exactly(1))
+        $context->expects($this->once())
             ->method('getUrl')
-            ->will($this->returnValue($url));
+            ->willReturn($url);
         $context->expects($this->once())
             ->method('getRequest')
-            ->will($this->returnValue($request));
+            ->willReturn($request);
 
         // --- Response
         $responseHttp = $this->getResponseHttp();
@@ -929,18 +927,18 @@ class LoginCheckUnitTest extends TestCase
             ->getMock();
         $whitelistEntityOne->expects($this->once())
             ->method('getStrategy')
-            ->will($this->returnValue('default'));
+            ->willReturn('default');
         $whitelistCollection = $this
             ->getMockBuilder(Collection::class)
             ->disableOriginalConstructor()
             ->getMock();
         $whitelistCollection->expects($this->once())
             ->method('getItems')
-            ->will($this->returnValue([$whitelistEntityOne]));
+            ->willReturn([$whitelistEntityOne]);
         $whitelistRepository = $this->getWhitelistRepository();
         $whitelistRepository->expects($this->once())
             ->method('getCollection')
-            ->will($this->returnValue($whitelistCollection));
+            ->willReturn($whitelistCollection);
 
         // --- Strategy
         $strategy = $this->createMock(StrategyInterface::class);
@@ -953,7 +951,7 @@ class LoginCheckUnitTest extends TestCase
         $strategyManager->expects($this->once())
             ->method('get')
             ->with('default')
-            ->will($this->returnValue($strategy));
+            ->willReturn($strategy);
 
         // -- Session
         $session = $this->getSession();
@@ -1022,28 +1020,28 @@ class LoginCheckUnitTest extends TestCase
             ->getMock();
         $store->expects($this->once())
             ->method('getBaseUrl')
-            ->with(\Magento\Framework\UrlInterface::URL_TYPE_WEB, null)
-            ->will($this->returnValue($baseUrl));
+            ->with(UrlInterface::URL_TYPE_WEB, null)
+            ->willReturn($baseUrl);
         $storeManager = $this->getStoreManager();
         $storeManager->expects($this->once())
             ->method('getStore')
-            ->will($this->returnValue($store));
+            ->willReturn($store);
 
         // --- Context
         $url = $this->getUrl();
         $url->expects($this->once())
             ->method('getCurrentUrl')
-            ->will($this->returnValue($referrerUrl));
+            ->willReturn($referrerUrl);
 
         $request = $this->getRequestObject();
 
         $context = $this->getContext();
-        $context->expects($this->exactly(1))
+        $context->expects($this->once())
             ->method('getUrl')
-            ->will($this->returnValue($url));
+            ->willReturn($url);
         $context->expects($this->once())
             ->method('getRequest')
-            ->will($this->returnValue($request));
+            ->willReturn($request);
 
         // --- Response
         $responseHttp = $this->getResponseHttp();
@@ -1066,18 +1064,18 @@ class LoginCheckUnitTest extends TestCase
             ->getMock();
         $whitelistEntityOne->expects($this->once())
             ->method('getStrategy')
-            ->will($this->returnValue('default'));
+            ->willReturn('default');
         $whitelistCollection = $this
             ->getMockBuilder(Collection::class)
             ->disableOriginalConstructor()
             ->getMock();
         $whitelistCollection->expects($this->once())
             ->method('getItems')
-            ->will($this->returnValue([$whitelistEntityOne]));
+            ->willReturn([$whitelistEntityOne]);
         $whitelistRepository = $this->getWhitelistRepository();
         $whitelistRepository->expects($this->once())
             ->method('getCollection')
-            ->will($this->returnValue($whitelistCollection));
+            ->willReturn($whitelistCollection);
 
         // --- Strategy
         $strategy = $this->createMock(StrategyInterface::class);
@@ -1090,7 +1088,7 @@ class LoginCheckUnitTest extends TestCase
         $strategyManager->expects($this->once())
             ->method('get')
             ->with('default')
-            ->will($this->returnValue($strategy));
+            ->willReturn($strategy);
 
         // -- Session
         $session = $this->getSession();
