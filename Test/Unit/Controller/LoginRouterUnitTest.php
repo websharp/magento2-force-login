@@ -13,6 +13,7 @@ namespace BitExpert\ForceCustomerLogin\Test\Unit\Controller;
 
 use BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
 use BitExpert\ForceCustomerLogin\Controller\LoginRouter;
+use Magento\Framework\App\Action\Redirect;
 use Magento\Framework\App\ActionFactory;
 use Magento\Framework\App\RequestInterface;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -42,7 +43,7 @@ class LoginRouterUnitTest extends TestCase
         $actionFactory = $this->getActionFactory();
         $actionFactory->expects($this->once())
             ->method('create')
-            ->willReturn(\Magento\Framework\App\Action\Redirect::class);
+            ->willReturn(Redirect::class);
 
         $loginCheck = $this->getLoginCheck();
         $loginCheck->expects($this->once())
@@ -84,7 +85,7 @@ class LoginRouterUnitTest extends TestCase
         $actionFactory = $this->getActionFactory();
         $actionFactory->expects($this->never())
             ->method('create')
-            ->willReturn(\Magento\Framework\App\Action\Redirect::class);
+            ->willReturn(Redirect::class);
 
         $loginCheck = $this->getLoginCheck();
         $loginCheck->expects($this->once())

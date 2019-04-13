@@ -60,7 +60,7 @@ class WhitelistRepositoryUnitTest extends TestCase
     }
 
     /**
-     * @return \BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface
+     * @return WhitelistEntryFactoryInterface
      */
     private function getWhitelistEntryFactory()
     {
@@ -68,7 +68,7 @@ class WhitelistRepositoryUnitTest extends TestCase
     }
 
     /**
-     * @return \BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface
+     * @return WhitelistEntryCollectionFactoryInterface
      */
     private function getWhitelistEntryCollectionFactory()
     {
@@ -76,7 +76,7 @@ class WhitelistRepositoryUnitTest extends TestCase
     }
 
     /**
-     * @return \Magento\Store\Model\StoreManager
+     * @return StoreManager
      */
     private function getStoreManager()
     {
@@ -86,7 +86,7 @@ class WhitelistRepositoryUnitTest extends TestCase
     }
 
     /**
-     * @return \BitExpert\ForceCustomerLogin\Model\WhitelistEntrySearchResultInterfaceFactory
+     * @return WhitelistEntrySearchResultInterfaceFactory
      */
     private function getWhitelistEntrySearchResultInterfaceFactory()
     {
@@ -112,14 +112,14 @@ class WhitelistRepositoryUnitTest extends TestCase
         $expectedWhitelistEntry = $this->createMock(WhitelistEntry::class);
         $expectedWhitelistEntry->expects($this->at(0))
             ->method('getId')
-            ->will($this->returnValue($entityId));
+            ->willReturn($entityId);
         $expectedWhitelistEntry->expects($this->at(1))
             ->method('load')
             ->with($label, 'label')
             ->willReturnSelf();
         $expectedWhitelistEntry->expects($this->at(2))
             ->method('getId')
-            ->will($this->returnValue($entityId));
+            ->willReturn($entityId);
         $expectedWhitelistEntry->expects($this->at(3))
             ->method('setLabel')
             ->with($label);
@@ -137,35 +137,35 @@ class WhitelistRepositoryUnitTest extends TestCase
             ->with(true);
         $expectedWhitelistEntry->expects($this->at(8))
             ->method('getLabel')
-            ->will($this->returnValue($label));
+            ->willReturn($label);
         $expectedWhitelistEntry->expects($this->at(9))
             ->method('getLabel')
-            ->will($this->returnValue($label));
+            ->willReturn($label);
         $expectedWhitelistEntry->expects($this->at(10))
             ->method('getUrlRule')
-            ->will($this->returnValue($urlRule));
+            ->willReturn($urlRule);
         $expectedWhitelistEntry->expects($this->at(11))
             ->method('getUrlRule')
-            ->will($this->returnValue($urlRule));
+            ->willReturn($urlRule);
         $expectedWhitelistEntry->expects($this->at(12))
             ->method('getStrategy')
-            ->will($this->returnValue($strategy));
+            ->willReturn($strategy);
         $expectedWhitelistEntry->expects($this->at(13))
             ->method('getStrategy')
-            ->will($this->returnValue($strategy));
+            ->willReturn($strategy);
         $expectedWhitelistEntry->expects($this->at(14))
             ->method('getEditable')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
         $expectedWhitelistEntry->expects($this->at(15))
             ->method('save');
 
         $whitelistEntryFactory = $this->getWhitelistEntryFactory();
         $whitelistEntryFactory->expects($this->at(0))
             ->method('create')
-            ->will($this->returnValue($expectedWhitelistEntry));
+            ->willReturn($expectedWhitelistEntry);
         $whitelistEntryFactory->expects($this->at(1))
             ->method('create')
-            ->will($this->returnValue($expectedWhitelistEntry));
+            ->willReturn($expectedWhitelistEntry);
 
         $whitelistRepository = new WhitelistRepository(
             $whitelistEntryFactory,
@@ -200,10 +200,10 @@ class WhitelistRepositoryUnitTest extends TestCase
             ->willReturnSelf();
         $expectedWhitelistEntry->expects($this->at(1))
             ->method('getId')
-            ->will($this->returnValue($entityId));
+            ->willReturn($entityId);
         $expectedWhitelistEntry->expects($this->at(2))
             ->method('getId')
-            ->will($this->returnValue($entityId));
+            ->willReturn($entityId);
         $expectedWhitelistEntry->expects($this->at(3))
             ->method('getEditable')
             ->willReturn(true);
@@ -225,32 +225,32 @@ class WhitelistRepositoryUnitTest extends TestCase
         // validation
         $expectedWhitelistEntry->expects($this->at(9))
             ->method('getLabel')
-            ->will($this->returnValue($label));
+            ->willReturn($label);
         $expectedWhitelistEntry->expects($this->at(10))
             ->method('getLabel')
-            ->will($this->returnValue($label));
+            ->willReturn($label);
         $expectedWhitelistEntry->expects($this->at(11))
             ->method('getUrlRule')
-            ->will($this->returnValue($urlRule));
+            ->willReturn($urlRule);
         $expectedWhitelistEntry->expects($this->at(12))
             ->method('getUrlRule')
-            ->will($this->returnValue($urlRule));
+            ->willReturn($urlRule);
         $expectedWhitelistEntry->expects($this->at(13))
             ->method('getStrategy')
-            ->will($this->returnValue($strategy));
+            ->willReturn($strategy);
         $expectedWhitelistEntry->expects($this->at(14))
             ->method('getStrategy')
-            ->will($this->returnValue($strategy));
+            ->willReturn($strategy);
         $expectedWhitelistEntry->expects($this->at(15))
             ->method('getEditable')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
         $expectedWhitelistEntry->expects($this->at(16))
             ->method('save');
 
         $whitelistEntryFactory = $this->getWhitelistEntryFactory();
         $whitelistEntryFactory->expects($this->at(0))
             ->method('create')
-            ->will($this->returnValue($expectedWhitelistEntry));
+            ->willReturn($expectedWhitelistEntry);
 
         $whitelistRepository = new WhitelistRepository(
             $whitelistEntryFactory,
@@ -287,10 +287,10 @@ class WhitelistRepositoryUnitTest extends TestCase
             ->willReturnSelf();
         $expectedWhitelistEntry->expects($this->at(1))
             ->method('getId')
-            ->will($this->returnValue($entityId));
+            ->willReturn($entityId);
         $expectedWhitelistEntry->expects($this->at(2))
             ->method('getId')
-            ->will($this->returnValue($entityId));
+            ->willReturn($entityId);
         $expectedWhitelistEntry->expects($this->at(3))
             ->method('getEditable')
             ->willReturn(false);
@@ -298,7 +298,7 @@ class WhitelistRepositoryUnitTest extends TestCase
         $whitelistEntryFactory = $this->getWhitelistEntryFactory();
         $whitelistEntryFactory->expects($this->at(0))
             ->method('create')
-            ->will($this->returnValue($expectedWhitelistEntry));
+            ->willReturn($expectedWhitelistEntry);
 
         $whitelistRepository = new WhitelistRepository(
             $whitelistEntryFactory,
@@ -332,7 +332,7 @@ class WhitelistRepositoryUnitTest extends TestCase
         $whitelistEntryFactory = $this->getWhitelistEntryFactory();
         $whitelistEntryFactory->expects($this->once())
             ->method('create')
-            ->will($this->returnValue($expectedWhitelistEntry));
+            ->willReturn($expectedWhitelistEntry);
 
         $whitelistRepository = new WhitelistRepository(
             $whitelistEntryFactory,
@@ -368,7 +368,7 @@ class WhitelistRepositoryUnitTest extends TestCase
         $whitelistEntryFactory = $this->getWhitelistEntryFactory();
         $whitelistEntryFactory->expects($this->once())
             ->method('create')
-            ->will($this->returnValue($expectedWhitelistEntry));
+            ->willReturn($expectedWhitelistEntry);
 
         $whitelistRepository = new WhitelistRepository(
             $whitelistEntryFactory,
