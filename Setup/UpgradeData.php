@@ -76,6 +76,10 @@ class UpgradeData implements UpgradeDataInterface
             $this->runUpgrade302($setup);
         }
 
+        if (version_compare($context->getVersion(), '3.0.4', '<')) {
+            $this->runUpgrade304($setup);
+        }
+
         $setup->endSetup();
     }
 
@@ -225,6 +229,25 @@ class UpgradeData implements UpgradeDataInterface
                 0,
                 'Customer Account Reset Password Post',
                 '/customer/account/resetpasswordpost'
+            ),
+        ];
+
+        $setup->getConnection()->insertMultiple(
+            $setup->getTable('bitexpert_forcelogin_whitelist'),
+            $whitelistEntries
+        );
+    }
+
+    /**
+     * @param ModuleDataSetupInterface $setup
+     */
+    private function runUpgrade304(ModuleDataSetupInterface $setup)
+    {
+        $whitelistEntries = [
+            $this->getWhitelistEntryAsArray(
+                0,
+                'Varnish ESI url',
+                '/page_cache/block/esi/blocks'
             ),
         ];
 
