@@ -25,6 +25,10 @@ interface LoginCheckInterface
      * Configuration
      */
     const MODULE_CONFIG_TARGET = 'customer/BitExpert_ForceCustomerLogin/url';
+    /*
+     * Configuration
+     */
+    const MODULE_CONFIG_FORCE_SECURE_REDIRECT = 'customer/BitExpert_ForceCustomerLogin/force_secure_redirect';
 
     /**
      * Manages redirect
