@@ -129,7 +129,7 @@ class LoginCheck implements LoginCheckInterface
 
         $url = $this->url->getCurrentUrl();
         $urlParts = \parse_url($url);
-        $path = $urlParts['path'];
+        $path = is_array($urlParts) && isset($urlParts['path']) ? $urlParts['path'] : '';
         $targetUrl = $this->getTargetUrl();
 
         // current path is already pointing to target url, no redirect needed
@@ -147,7 +147,7 @@ class LoginCheck implements LoginCheckInterface
         }
 
         // Add any GET query parameters back to the path after making our url checks.
-        if(isset($urlParts['query']) && !empty($urlParts['query'])) {
+        if(is_array($urlParts) && isset($urlParts['query']) && !empty($urlParts['query'])) {
             $path .= '?' . $urlParts['query'];
         }
 

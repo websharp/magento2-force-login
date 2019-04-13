@@ -140,16 +140,19 @@ class WhitelistRepository implements \BitExpert\ForceCustomerLogin\Api\Repositor
      */
     public function getList(\Magento\Framework\Api\SearchCriteria $searchCriteria)
     {
-        /** @var \BitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntrySearchResultInterface|\Magento\Framework\Data\Collection\AbstractDb $searchResult */
+        /** @var \Magento\Framework\Data\Collection\AbstractDb $searchResult */
         $searchResult = $this->searchResultFactory->create();
         foreach ($searchCriteria->getFilterGroups() as $filterGroup) {
-            foreach ($filterGroup->getFilters() as $filter) {
-                $condition = $filter->getConditionType() ? $filter->getConditionType() : 'eq';
-                $searchResult->addFieldToFilter($filter->getField(), [$condition => $filter->getValue()]);
+            $filters = $filterGroup->getFilters();
+            if(is_array($filters)) {
+                foreach ($filters as $filter) {
+                    $condition = $filter->getConditionType() ? $filter->getConditionType() : 'eq';
+                    $searchResult->addFieldToFilter($filter->getField(), [$condition => $filter->getValue()]);
+                }
             }
         }
-        $searchResult->setCurPage($searchCriteria->getCurrentPage());
-        $searchResult->setPageSize($searchCriteria->getPageSize());
+        $searchResult->setCurPage((int)$searchCriteria->getCurrentPage());
+        $searchResult->setPageSize((int)$searchCriteria->getPageSize());
 
         return $searchResult;
     }
