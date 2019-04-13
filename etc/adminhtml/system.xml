@@ -14,6 +14,11 @@
                     <label>Target URL</label>
                     <comment>Configures the target for redirecting, if whitelist rules do not match</comment>
                 </field>
+                <field id="force_secure_redirect" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Force Secure Redirect</label>
+                    <comment>Forces the redirect to use a secure connection</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
             </group>
         </section>
     </system>

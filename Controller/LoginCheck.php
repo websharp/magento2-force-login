@@ -173,12 +173,25 @@ class LoginCheck implements LoginCheckInterface
     }
 
     /**
+     * @return bool
+     */
+    private function getForceSecureRedirectOption()
+    {
+        return (bool) $this->scopeConfig->getValue(
+            self::MODULE_CONFIG_FORCE_SECURE_REDIRECT,
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
      * @return string
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     private function getBaseUrl()
     {
-        return $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB, true);
+        $secure = $this->getForceSecureRedirectOption();
+        $secure = ($secure === true) ? true : null;
+        return $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB, $secure);
     }
 
     /**
