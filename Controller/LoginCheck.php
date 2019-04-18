@@ -133,7 +133,7 @@ class LoginCheck implements LoginCheckInterface
         $targetUrl = $this->getTargetUrl();
 
         // current path is already pointing to target url, no redirect needed
-        if (strpos($path, $targetUrl)) {
+        if (strpos($path, $targetUrl)!== false) {
             return false;
         }
         
