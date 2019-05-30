@@ -269,6 +269,41 @@ class LoginCheckUnitTest extends TestCase
 
         $loginCheck->execute();
     }
+    
+    /**
+     * Run test with existing customer session, so set BeforeAuthUrl for further use.
+     *
+     * @test
+     * @depends testConstructor
+     */
+    public function getRefererUrlAfterLoginByStandardMethod()
+    {
+        $moduleCheck = $this->getModuleCheck();
+        $moduleCheck->expects($this->once())
+            ->method('isModuleEnabled')
+            ->willReturn(true);
+
+        $customerSession = $this->getCustomerSession();
+        $customerSession->expects($this->once())
+            ->method('setBeforeAuthUrl')
+            ->willReturn(true);
+
+        $context = $this->getContext();
+
+        $loginCheck = new LoginCheck(
+            $context,
+            $customerSession,
+            $this->getSession(),
+            $this->getStoreManager(),
+            $this->getScopeConfig(),
+            $this->getWhitelistRepository(),
+            $this->getStrategyManager(),
+            $moduleCheck,
+            $this->getResponseHttp()
+        );
+
+        $loginCheck->execute();
+    }
 
     /**
      * Run test with url equals target, so no redirecting is happening.

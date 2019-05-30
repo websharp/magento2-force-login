@@ -133,9 +133,12 @@ class LoginCheck implements LoginCheckInterface
         $targetUrl = $this->getTargetUrl();
 
         // current path is already pointing to target url, no redirect needed
-        if ($targetUrl === $path) {
+        if (strpos($path, $targetUrl)!== false) {
             return false;
         }
+        
+        // Set Url To redrect ,using standard method of magento
+        $this->customerSession->setBeforeAuthUrl($url);     
 
         // check if current url is a match with one of the ignored urls
         /** @var \BitExpert\ForceCustomerLogin\Model\WhitelistEntry $rule */
