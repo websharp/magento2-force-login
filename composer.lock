@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "65799a8c631ddc60e76b05aa7633e520",
+    "content-hash": "b9f1a06c44a9c672ba789538df95f3a5",
     "packages": [
         {
             "name": "colinmollenhour/credis",
@@ -4486,17 +4486,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bitExpert/phpstan-magento.git",
-                "reference": "be2822fcbcd363c1a2299f3877e19b007c16e724"
+                "reference": "75381f5377eba0b6c05028305dbef268faaa4341"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bitExpert/phpstan-magento/zipball/be2822fcbcd363c1a2299f3877e19b007c16e724",
-                "reference": "be2822fcbcd363c1a2299f3877e19b007c16e724",
+                "url": "https://api.github.com/repos/bitExpert/phpstan-magento/zipball/75381f5377eba0b6c05028305dbef268faaa4341",
+                "reference": "75381f5377eba0b6c05028305dbef268faaa4341",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1.0",
-                "phpstan/phpstan": "^0.11.4"
+                "phpstan/phpstan": "^0.11.6"
             },
             "require-dev": {
                 "bitexpert/phing-securitychecker": "^0.4.0",
@@ -4506,7 +4506,14 @@
                 "phpunit/phpunit": "^7.5",
                 "squizlabs/php_codesniffer": "^3.4"
             },
-            "type": "library",
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                }
+            },
             "autoload": {
                 "files": [
                     "registration.php"
@@ -4527,7 +4534,7 @@
                 }
             ],
             "description": "PHPStan Magento Extension",
-            "time": "2019-03-30T17:35:02+00:00"
+            "time": "2019-05-30T22:29:19+00:00"
         },
         {
             "name": "captainhook/captainhook",
@@ -5818,6 +5825,50 @@
             "time": "2018-08-05T17:53:17+00:00"
         },
         {
+            "name": "phpstan/extension-installer",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/extension-installer.git",
+                "reference": "9dcaf22162affff49f8f166a18d4ed8bfd71da98"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/extension-installer/zipball/9dcaf22162affff49f8f166a18d4ed8bfd71da98",
+                "reference": "9dcaf22162affff49f8f166a18d4ed8bfd71da98",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.1",
+                "php": "^7.1",
+                "phpstan/phpstan": ">=0.11.6"
+            },
+            "require-dev": {
+                "composer/composer": "^1.8",
+                "consistence/coding-standard": "^3.8",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
+                "jakub-onderka/php-parallel-lint": "^1.0",
+                "phing/phing": "^2.16",
+                "phpstan/phpstan-strict-rules": "^0.11",
+                "slevomat/coding-standard": "^5.0.4"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "PHPStan\\ExtensionInstaller\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "PHPStan\\ExtensionInstaller\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Composer plugin for automatic installation of PHPStan extensions",
+            "time": "2019-05-20T12:22:00+00:00"
+        },
+        {
             "name": "phpstan/phpdoc-parser",
             "version": "0.3.1",
             "source": {
@@ -5865,16 +5916,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.11.4",
+            "version": "0.11.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "ccc4f854748664cc61d1f3d4ecb26810df1f0cd4"
+                "reference": "7af8b9d02b3ab36444dbf4e1b9ca1c1bd5044d81"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ccc4f854748664cc61d1f3d4ecb26810df1f0cd4",
-                "reference": "ccc4f854748664cc61d1f3d4ecb26810df1f0cd4",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7af8b9d02b3ab36444dbf4e1b9ca1c1bd5044d81",
+                "reference": "7af8b9d02b3ab36444dbf4e1b9ca1c1bd5044d81",
                 "shasum": ""
             },
             "require": {
@@ -5934,7 +5985,7 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2019-03-14T14:46:15+00:00"
+            "time": "2019-05-08T16:33:56+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -7232,6 +7283,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "phpstan/phpstan": 20,
         "bitexpert/phpstan-magento": 20
     },
     "prefer-stable": false,
