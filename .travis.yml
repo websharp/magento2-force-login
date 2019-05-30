@@ -8,13 +8,20 @@ matrix:
   include:
     - php: 7.1
       env:
-        - MAGE_22=true
+        - MAGE_23=true
+        - MAGE_231=false
+    - php: 7.1
+      env:
         - MAGE_23=false
-        - TEST_COVERAGE=false
+        - MAGE_231=true
     - php: 7.2
       env:
-        - MAGE_22=false
         - MAGE_23=true
+        - MAGE_231=false
+    - php: 7.2
+      env:
+        - MAGE_23=false
+        - MAGE_231=true
         - TEST_COVERAGE=true
 
 before_install:
@@ -29,8 +36,8 @@ before_script:
 
 script:
   - if [[ $encrypted_98dcc32c9b33_key != '' ]]; then composer install --prefer-source ; fi
-  - if [[ $encrypted_98dcc32c9b33_key != '' && MAGE_22 == true ]]; then composer remove magento/module-customer && composer update magento/module-customer:~101.0 ; fi
-  - if [[ $encrypted_98dcc32c9b33_key != '' && MAGE_23 == true ]]; then composer remove magento/module-customer && composer update magento/module-customer:~102.0 ; fi
+  - if [[ $encrypted_98dcc32c9b33_key != '' && MAGE_23 == true ]]; then composer remove magento/module-customer && composer update magento/module-customer:102.0 ; fi
+  - if [[ $encrypted_98dcc32c9b33_key != '' && MAGE_231 == true ]]; then composer remove magento/module-customer && composer update magento/module-customer:102.0.1 ; fi
   - if [[ $encrypted_98dcc32c9b33_key != '' ]]; then ./vendor/bin/phing lint ; fi
   - if [[ $encrypted_98dcc32c9b33_key != '' ]]; then ./vendor/bin/phing sniff ; fi
   - if [[ $encrypted_98dcc32c9b33_key != '' ]]; then ./vendor/bin/phing analyze ; fi
