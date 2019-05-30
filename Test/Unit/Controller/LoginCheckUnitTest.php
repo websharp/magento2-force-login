@@ -269,41 +269,6 @@ class LoginCheckUnitTest extends TestCase
 
         $loginCheck->execute();
     }
-    
-    /**
-     * Run test with existing customer session, so set BeforeAuthUrl for further use.
-     *
-     * @test
-     * @depends testConstructor
-     */
-    public function getRefererUrlAfterLoginByStandardMethod()
-    {
-        $moduleCheck = $this->getModuleCheck();
-        $moduleCheck->expects($this->once())
-            ->method('isModuleEnabled')
-            ->willReturn(true);
-
-        $customerSession = $this->getCustomerSession();
-        $customerSession->expects($this->once())
-            ->method('setBeforeAuthUrl')
-            ->willReturn(true);
-
-        $context = $this->getContext();
-
-        $loginCheck = new LoginCheck(
-            $context,
-            $customerSession,
-            $this->getSession(),
-            $this->getStoreManager(),
-            $this->getScopeConfig(),
-            $this->getWhitelistRepository(),
-            $this->getStrategyManager(),
-            $moduleCheck,
-            $this->getResponseHttp()
-        );
-
-        $loginCheck->execute();
-    }
 
     /**
      * Run test with url equals target, so no redirecting is happening.
@@ -593,6 +558,145 @@ class LoginCheckUnitTest extends TestCase
         $loginCheck = new LoginCheck(
             $context,
             $this->getCustomerSession(),
+            $session,
+            $storeManager,
+            $scopeConfig,
+            $whitelistRepository,
+            $strategyManager,
+            $this->getModuleCheck(),
+            $responseHttp
+        );
+
+        $loginCheck->execute();
+    }
+
+    /**
+     * In case of a redirect set BeforeAuthUrl for further use.
+     *
+     * @test
+     * @depends testConstructor
+     */
+    public function ensureSetBeforeAuthUrlBeforeRedirect()
+    {
+        $urlString = 'http://example.tld/foo/bar';
+        $targetUrl = '/customer/account/login';
+        $expectedTargetUrl = 'http://example.tld/foo/bar/customer/account/login';
+
+        // --- Scope Config
+        $scopeConfig = $this->getScopeConfig();
+        $scopeConfig->expects($this->any())
+            ->method('getValue')
+            ->withConsecutive(
+                [LoginCheckInterface::MODULE_CONFIG_TARGET, ScopeInterface::SCOPE_STORE],
+                [LoginCheckInterface::MODULE_CONFIG_FORCE_SECURE_REDIRECT, ScopeInterface::SCOPE_STORE])
+            ->willReturnOnConsecutiveCalls($targetUrl, true);
+
+        // --- StoreManager
+        $store = $this->getMockBuilder(StoreInterface::class)
+            ->setMethods([
+                'getBaseUrl',
+                'getId',
+                'setId',
+                'getCode',
+                'setCode',
+                'getName',
+                'setName',
+                'getWebsiteId',
+                'setWebsiteId',
+                'getStoreGroupId',
+                'setStoreGroupId',
+                'getExtensionAttributes',
+                'setExtensionAttributes',
+                'setIsActive',
+                'getIsActive'
+            ])
+            ->getMock();
+        $store->expects($this->once())
+            ->method('getBaseUrl')
+            ->with(UrlInterface::URL_TYPE_WEB, true)
+            ->willReturn($urlString);
+        $storeManager = $this->getStoreManager();
+        $storeManager->expects($this->once())
+            ->method('getStore')
+            ->willReturn($store);
+
+        // --- CustomerSession
+        $customerSession = $this->getCustomerSession();
+        $customerSession->expects($this->once())
+            ->method('setBeforeAuthUrl')
+            ->willReturn(true);
+
+        // --- Context
+        $url = $this->getUrl();
+        $url->expects($this->once())
+            ->method('getCurrentUrl')
+            ->willReturn($urlString);
+
+        $request = $this->getRequest();
+
+        $context = $this->getContext();
+        $context->expects($this->once())
+            ->method('getUrl')
+            ->willReturn($url);
+        $context->expects($this->once())
+            ->method('getRequest')
+            ->willReturn($request);
+
+        // --- Response
+        $responseHttp = $this->getResponseHttp();
+        $responseHttp->expects($this->once())
+            ->method('setNoCacheHeaders');
+        $responseHttp->expects($this->once())
+            ->method('setRedirect')
+            ->with($expectedTargetUrl);
+        $responseHttp->expects($this->once())
+            ->method('sendResponse');
+
+        // --- Request
+        $request->expects($this->exactly(2))
+            ->method('getParam');
+
+        // --- Whitelist Entries
+        $whitelistEntityOne = $this->getMockBuilder(WhitelistEntry::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $whitelistEntityOne->expects($this->once())
+            ->method('getStrategy')
+            ->willReturn('default');
+        $whitelistCollection = $this
+            ->getMockBuilder(Collection::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $whitelistCollection->expects($this->once())
+            ->method('getItems')
+            ->willReturn([$whitelistEntityOne]);
+        $whitelistRepository = $this->getWhitelistRepository();
+        $whitelistRepository->expects($this->once())
+            ->method('getCollection')
+            ->willReturn($whitelistCollection);
+
+        // --- Strategy
+        $strategy = $this->createMock(StrategyInterface::class);
+        $strategy->expects($this->once())
+            ->method('isMatch')
+            ->with('/foo/bar', $whitelistEntityOne)
+            ->willReturn(false);
+
+        $strategyManager = $this->getStrategyManager();
+        $strategyManager->expects($this->once())
+            ->method('get')
+            ->with('default')
+            ->willReturn($strategy);
+
+        // -- Session
+        $session = $this->getSession();
+        $session->expects($this->once())
+            ->method('setAfterLoginReferer')
+            ->with('/foo/bar');
+
+        $loginCheck = new LoginCheck(
+            $context,
+            $customerSession,
             $session,
             $storeManager,
             $scopeConfig,
