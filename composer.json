@@ -19,7 +19,11 @@
   ],
   "require": {
     "php": "~7.1.3|~7.2",
-    "magento/module-customer": "~102.0|~102.0.1"
+    "magento/framework": "~102.0.0|~102.0.1",
+    "magento/module-backend": "~101.0.0|~101.0.1",
+    "magento/module-customer": "~102.0|~102.0.1",
+    "magento/module-store": "~101.0.0|~101.0.1",
+    "magento/module-ui": "~101.1.0|~101.1.1"
   },
   "require-dev": {
     "magento/marketplace-eqp": "^2.0",

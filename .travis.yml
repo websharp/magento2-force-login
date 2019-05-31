@@ -36,8 +36,9 @@ before_script:
 
 script:
   - if [[ $encrypted_98dcc32c9b33_key != '' ]]; then composer install --prefer-source ; fi
-  - if [[ $encrypted_98dcc32c9b33_key != '' && MAGE_23 == true ]]; then composer remove magento/module-customer && composer update magento/module-customer:102.0 ; fi
-  - if [[ $encrypted_98dcc32c9b33_key != '' && MAGE_231 == true ]]; then composer remove magento/module-customer && composer update magento/module-customer:102.0.1 ; fi
+  - if [[ $encrypted_98dcc32c9b33_key != '' ]]; then composer remove magento/framework magento/module-backend magento/module-customer magento/module-store magento/module-ui ; fi
+  - if [[ $encrypted_98dcc32c9b33_key != '' && MAGE_23 == true ]]; then composer update magento/framework:102.0.0 magento/module-backend:101.0.0 magento/module-customer:102.0 magento/module-store:101.0.0 magento/module-ui:101.1.0 ; fi
+  - if [[ $encrypted_98dcc32c9b33_key != '' && MAGE_231 == true ]]; then magento/framework:102.0.1 magento/backend:101.0.1 magento/module-customer:102.0.1 magento/module-store:101.0.1 magento/module-ui:101.1.1 ; fi
   - if [[ $encrypted_98dcc32c9b33_key != '' ]]; then ./vendor/bin/phing lint ; fi
   - if [[ $encrypted_98dcc32c9b33_key != '' ]]; then ./vendor/bin/phing sniff ; fi
   - if [[ $encrypted_98dcc32c9b33_key != '' ]]; then ./vendor/bin/phing analyze ; fi
