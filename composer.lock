@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9c36d6a852ce720b91c7672e953d1a2b",
+    "content-hash": "7eda3ab8048535306d858cdb98aff895",
     "packages": [
         {
             "name": "colinmollenhour/credis",
@@ -485,11 +485,11 @@
         },
         {
             "name": "magento/framework",
-            "version": "102.0.0",
+            "version": "102.0.1",
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/framework/magento-framework-102.0.0.0.zip",
-                "shasum": "10c74cd4f1b99013830f6284ddd675c01091db95"
+                "url": "https://repo.magento.com/archives/magento/framework/magento-framework-102.0.1.0.zip",
+                "shasum": "399d85904a005db76ce518a265cfdaff68d02984"
             },
             "require": {
                 "colinmollenhour/php-redis-session-abstract": "~1.4.0",
@@ -568,11 +568,11 @@
         },
         {
             "name": "magento/module-backend",
-            "version": "101.0.0",
+            "version": "101.0.1",
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/module-backend/magento-module-backend-101.0.0.0.zip",
-                "shasum": "2ce645dc55d7330e71befd22b494606162c08923"
+                "url": "https://repo.magento.com/archives/magento/module-backend/magento-module-backend-101.0.1.0.zip",
+                "shasum": "3670764e864583abb604107c13490e239ba094d8"
             },
             "require": {
                 "magento/framework": "102.0.*",
@@ -2154,11 +2154,11 @@
         },
         {
             "name": "magento/module-store",
-            "version": "101.0.0",
+            "version": "101.0.1",
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/module-store/magento-module-store-101.0.0.0.zip",
-                "shasum": "9982aeca192d54d0035638c03f7c782d441f5810"
+                "url": "https://repo.magento.com/archives/magento/module-store/magento-module-store-101.0.1.0.zip",
+                "shasum": "aa4a2db8d42094f5978782138eb16e3adcf6798c"
             },
             "require": {
                 "magento/framework": "102.0.*",
@@ -2308,11 +2308,11 @@
         },
         {
             "name": "magento/module-ui",
-            "version": "101.1.0",
+            "version": "101.1.1",
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/module-ui/magento-module-ui-101.1.0.0.zip",
-                "shasum": "360daedf2136a602dff383c3f75359c017a83787"
+                "url": "https://repo.magento.com/archives/magento/module-ui/magento-module-ui-101.1.1.0.zip",
+                "shasum": "fc1e9663747d2f40f9a3278983598d9098ffca1a"
             },
             "require": {
                 "magento/framework": "102.0.*",
