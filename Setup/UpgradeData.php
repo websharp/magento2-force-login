@@ -80,6 +80,10 @@ class UpgradeData implements UpgradeDataInterface
             $this->runUpgrade304($setup);
         }
 
+        if (version_compare($context->getVersion(), '3.0.5', '<')) {
+            $this->runUpgrade305($setup);
+        }
+
         $setup->endSetup();
     }
 
@@ -248,6 +252,30 @@ class UpgradeData implements UpgradeDataInterface
                 0,
                 'Varnish ESI url',
                 '/page_cache/block/esi/blocks'
+            ),
+        ];
+
+        $setup->getConnection()->insertMultiple(
+            $setup->getTable('bitexpert_forcelogin_whitelist'),
+            $whitelistEntries
+        );
+    }
+
+    /**
+     * @param ModuleDataSetupInterface $setup
+     */
+    private function runUpgrade305(ModuleDataSetupInterface $setup)
+    {
+        $whitelistEntries = [
+            $this->getWhitelistEntryAsArray(
+                0,
+                'Store-Switcher Redirect',
+                '/stores/store/redirect'
+            ),
+            $this->getWhitelistEntryAsArray(
+                0,
+                'Store-Switcher Switch',
+                '/stores/store/switch'
             ),
         ];
 
