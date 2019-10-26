@@ -10,19 +10,28 @@ matrix:
       env:
         - MAGE_23=true
         - MAGE_231=false
+        - MAGE_233=false
     - php: 7.1
       env:
         - MAGE_23=false
         - MAGE_231=true
+        - MAGE_233=false
     - php: 7.2
       env:
         - MAGE_23=true
         - MAGE_231=false
+        - MAGE_233=false
     - php: 7.2
       env:
         - MAGE_23=false
         - MAGE_231=true
+        - MAGE_233=false
         - TEST_COVERAGE=true
+    - php: 7.3
+      env:
+        - MAGE_23=false
+        - MAGE_231=false
+        - MAGE_233=true
 
 before_install:
   - if [[ $encrypted_98dcc32c9b33_key != '' ]]; then openssl aes-256-cbc -K $encrypted_98dcc32c9b33_key -iv $encrypted_98dcc32c9b33_iv -in auth.json.enc -out auth.json -d ; fi
@@ -38,6 +47,7 @@ script:
   - if [[ $encrypted_98dcc32c9b33_key != '' ]]; then composer install --prefer-source ; fi
   - if [[ $encrypted_98dcc32c9b33_key != '' && MAGE_23 == true ]]; then composer require magento/framework:102.0.0 magento/module-backend:101.0.0 magento/module-customer:102.0 magento/module-store:101.0.0 magento/module-ui:101.1.0 ; fi
   - if [[ $encrypted_98dcc32c9b33_key != '' && MAGE_231 == true ]]; then composer require magento/framework:102.0.1 magento/module-backend:101.0.1 magento/module-customer:102.0.1 magento/module-store:101.0.1 magento/module-ui:101.1.1 ; fi
+  - if [[ $encrypted_98dcc32c9b33_key != '' && MAGE_233 == true ]]; then composer require magento/framework:102.0.3 magento/module-backend:101.0.3 magento/module-customer:102.0.3 magento/module-store:101.0.3 magento/module-ui:101.1.3 ; fi
   - if [[ $encrypted_98dcc32c9b33_key != '' ]]; then ./vendor/bin/phing lint ; fi
   - if [[ $encrypted_98dcc32c9b33_key != '' ]]; then ./vendor/bin/phing sniff ; fi
   - if [[ $encrypted_98dcc32c9b33_key != '' ]]; then ./vendor/bin/phing analyze ; fi
