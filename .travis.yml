@@ -6,30 +6,6 @@ cache:
 
 matrix:
   include:
-    - php: 7.1
-      env:
-        - MAGE_230=true
-        - MAGE_231=false
-        - MAGE_232=false
-        - MAGE_233=false
-    - php: 7.1
-      env:
-        - MAGE_230=false
-        - MAGE_231=true
-        - MAGE_232=false
-        - MAGE_233=false
-    - php: 7.1
-      env:
-        - MAGE_230=false
-        - MAGE_231=false
-        - MAGE_232=true
-        - MAGE_233=false
-    - php: 7.1
-      env:
-        - MAGE_230=false
-        - MAGE_231=false
-        - MAGE_232=false
-        - MAGE_233=true
     - php: 7.2
       env:
         - MAGE_230=true
