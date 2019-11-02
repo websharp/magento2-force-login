@@ -1,6 +1,6 @@
 #!/bin/bash
 BASE_URL=${1:-m2.localhost}
-MAGE_VERSION=${2:-2.3.0}
+MAGE_VERSION=${2:-2.3.3}
 
 # load the DB env information
 DIR="${BASH_SOURCE%/*}"
