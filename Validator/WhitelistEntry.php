@@ -28,24 +28,27 @@ class WhitelistEntry
     public function validate(
         WhitelistEntryModel $whitelistEntry
     ) {
-        if (0 === \strlen(\trim($whitelistEntry->getLabel()))) {
+        $label = \strlen(\trim((string)$whitelistEntry->getLabel()));
+        if (0 === $label) {
             throw new \InvalidArgumentException('Label value is too short.');
         }
-        if (255 < \strlen(\trim($whitelistEntry->getLabel()))) {
+        if (255 < $label) {
             throw new \InvalidArgumentException('Label value is too long.');
         }
 
-        if (0 === \strlen(\trim($whitelistEntry->getUrlRule()))) {
+        $urlRule = \strlen(\trim((string)$whitelistEntry->getUrlRule()));
+        if (0 === $urlRule) {
             throw new \InvalidArgumentException('Url Rule value is too short.');
         }
-        if (255 < \strlen(\trim($whitelistEntry->getUrlRule()))) {
+        if (255 < $urlRule) {
             throw new \InvalidArgumentException('Url Rule value is too long.');
         }
 
-        if (0 === \strlen(\trim($whitelistEntry->getStrategy()))) {
+        $strategy = \strlen(\trim((string)$whitelistEntry->getStrategy()));
+        if (0 === $strategy) {
             throw new \InvalidArgumentException('Strategy value is too short.');
         }
-        if (255 < \strlen(\trim($whitelistEntry->getStrategy()))) {
+        if (255 < $strategy) {
             throw new \InvalidArgumentException('Strategy value is too long.');
         }
 

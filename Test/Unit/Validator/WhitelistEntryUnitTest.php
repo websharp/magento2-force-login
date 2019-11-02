@@ -48,9 +48,6 @@ class WhitelistEntryUnitTest extends TestCase
         $entity = $this->getWhitelistEntry();
         $entity->expects($this->at(0))
             ->method('getLabel')
-            ->willReturn('foo');
-        $entity->expects($this->at(1))
-            ->method('getLabel')
             ->willReturn(str_repeat('.', 256));
 
         $validator = new WhitelistEntry();
@@ -69,9 +66,6 @@ class WhitelistEntryUnitTest extends TestCase
             ->method('getLabel')
             ->willReturn('foo');
         $entity->expects($this->at(1))
-            ->method('getLabel')
-            ->willReturn(str_repeat('.', 255));
-        $entity->expects($this->at(2))
             ->method('getUrlRule')
             ->willReturn('');
 
@@ -91,12 +85,6 @@ class WhitelistEntryUnitTest extends TestCase
             ->method('getLabel')
             ->willReturn('foo');
         $entity->expects($this->at(1))
-            ->method('getLabel')
-            ->willReturn(str_repeat('.', 255));
-        $entity->expects($this->at(2))
-            ->method('getUrlRule')
-            ->willReturn('foo');
-        $entity->expects($this->at(3))
             ->method('getUrlRule')
             ->willReturn(str_repeat('.', 256));
 
@@ -116,15 +104,9 @@ class WhitelistEntryUnitTest extends TestCase
             ->method('getLabel')
             ->willReturn('foo');
         $entity->expects($this->at(1))
-            ->method('getLabel')
-            ->willReturn(str_repeat('.', 255));
-        $entity->expects($this->at(2))
             ->method('getUrlRule')
             ->willReturn('foo');
-        $entity->expects($this->at(3))
-            ->method('getUrlRule')
-            ->willReturn(str_repeat('.', 255));
-        $entity->expects($this->at(4))
+        $entity->expects($this->at(2))
             ->method('getStrategy')
             ->willReturn('');
 
@@ -144,18 +126,9 @@ class WhitelistEntryUnitTest extends TestCase
             ->method('getLabel')
             ->willReturn('foo');
         $entity->expects($this->at(1))
-            ->method('getLabel')
-            ->willReturn(str_repeat('.', 255));
+            ->method('getUrlRule')
+            ->willReturn('foo');
         $entity->expects($this->at(2))
-            ->method('getUrlRule')
-            ->willReturn('foo');
-        $entity->expects($this->at(3))
-            ->method('getUrlRule')
-            ->willReturn(str_repeat('.', 255));
-        $entity->expects($this->at(4))
-            ->method('getStrategy')
-            ->willReturn('foo');
-        $entity->expects($this->at(5))
             ->method('getStrategy')
             ->willReturn(str_repeat('.', 256));
 
@@ -175,21 +148,12 @@ class WhitelistEntryUnitTest extends TestCase
             ->method('getLabel')
             ->willReturn('foo');
         $entity->expects($this->at(1))
-            ->method('getLabel')
-            ->willReturn(str_repeat('.', 255));
-        $entity->expects($this->at(2))
             ->method('getUrlRule')
+            ->willReturn('foo');
+        $entity->expects($this->at(2))
+            ->method('getStrategy')
             ->willReturn('foo');
         $entity->expects($this->at(3))
-            ->method('getUrlRule')
-            ->willReturn(str_repeat('.', 255));
-        $entity->expects($this->at(4))
-            ->method('getStrategy')
-            ->willReturn('foo');
-        $entity->expects($this->at(5))
-            ->method('getStrategy')
-            ->willReturn(str_repeat('.', 255));
-        $entity->expects($this->at(6))
             ->method('getEditable')
             ->willReturn('foo');
 
@@ -207,21 +171,12 @@ class WhitelistEntryUnitTest extends TestCase
             ->method('getLabel')
             ->willReturn('foo');
         $entity->expects($this->at(1))
-            ->method('getLabel')
-            ->willReturn(str_repeat('.', 255));
-        $entity->expects($this->at(2))
             ->method('getUrlRule')
+            ->willReturn('foo');
+        $entity->expects($this->at(2))
+            ->method('getStrategy')
             ->willReturn('foo');
         $entity->expects($this->at(3))
-            ->method('getUrlRule')
-            ->willReturn(str_repeat('.', 255));
-        $entity->expects($this->at(4))
-            ->method('getStrategy')
-            ->willReturn('foo');
-        $entity->expects($this->at(5))
-            ->method('getStrategy')
-            ->willReturn(str_repeat('.', 255));
-        $entity->expects($this->at(6))
             ->method('getEditable')
             ->willReturn(false);
 

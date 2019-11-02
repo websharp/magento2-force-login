@@ -32,7 +32,7 @@
     "captainhook/plugin-composer": "^4.0",
     "bitexpert/phing-securitychecker": "^0.4.0",
     "phpstan/extension-installer": "^1.0.1",
-    "phpstan/phpstan": "0.11.6",
+    "phpstan/phpstan": "0.11.19",
     "bitexpert/phpstan-magento": "dev-master",
     "magento/magento-coding-standard": "dev-master"
     },

@@ -57,7 +57,7 @@ class RegExAllMatcher implements StrategyInterface
             preg_match(
                 sprintf(
                     '#^.*%s/?.*$#i',
-                    $this->quoteRule($rule->getUrlRule())
+                    $this->quoteRule((string)$rule->getUrlRule())
                 ),
                 $this->getCleanUrl($url)
             ) === 1

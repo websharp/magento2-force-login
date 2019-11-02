@@ -143,9 +143,12 @@ class LoginCheck implements LoginCheckInterface
         // check if current url is a match with one of the ignored urls
         /** @var \BitExpert\ForceCustomerLogin\Model\WhitelistEntry $rule */
         foreach ($this->whitelistRepository->getCollection()->getItems() as $rule) {
-            $strategy = $this->strategyManager->get($rule->getStrategy());
-            if ($strategy->isMatch($path, $rule)) {
-                return false;
+            $strategy = $rule->getStrategy();
+            if($strategy) {
+                $strategy = $this->strategyManager->get($strategy);
+                if ($strategy->isMatch($path, $rule)) {
+                    return false;
+                }
             }
         }
 
