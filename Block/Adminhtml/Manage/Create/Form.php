@@ -58,16 +58,29 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
      * Prepare form
      *
      * @return $this
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     protected function _prepareForm()
     {
         // Try to fetch entity if id is provided
         $whitelistEntry = $this->entityFactory->create()->load($this->_request->getParam('id', 0));
         if (!$whitelistEntry->getId()) {
-            $whitelistEntry->setLabel(\base64_decode($this->_request->getParam('label')));
-            $whitelistEntry->setUrlRule(\base64_decode($this->_request->getParam('url_rule')));
-            $whitelistEntry->setStrategy(\base64_decode($this->_request->getParam('strategy')));
-            $whitelistEntry->setStoreId(\base64_decode($this->_request->getParam('store_id')));
+            $label = \base64_decode($this->_request->getParam('label'));
+            if ($label) {
+                $whitelistEntry->setLabel($label);
+            }
+            $urlRule = \base64_decode($this->_request->getParam('url_rule'));
+            if ($urlRule) {
+                $whitelistEntry->setUrlRule($urlRule);
+            }
+            $strategy = \base64_decode($this->_request->getParam('strategy'));
+            if ($strategy) {
+                $whitelistEntry->setStrategy($strategy);
+            }
+            $storeId = \base64_decode($this->_request->getParam('store_id'));
+            if ($storeId) {
+                $whitelistEntry->setStoreId((int)$storeId);
+            }
         }
 
         /** @var \Magento\Framework\Data\Form $form */
@@ -77,23 +90,18 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 'action' => $this->getUrl('ForceCustomerLogin/Manage/Save'),
                 'method' => 'post'
             ]
-        ]
-        );
+        ]);
         $form->setHtmlIdPrefix('');
 
-        $fieldsetBase = $form->addFieldset(
-            'base_fieldset',
-            [
-                'class' => 'fieldset-wide'
-            ]
-        );
+        $fieldsetBase = $form->addFieldset('base_fieldset', [
+            'class' => 'fieldset-wide'
+        ]);
 
         if ($whitelistEntry->getId()) {
             $fieldsetBase->addField('whitelist_entry_id', 'hidden', [
                 'name' => 'whitelist_entry_id',
                 'value' => $whitelistEntry->getId()
-            ]
-            );
+            ]);
         }
 
         $fieldsetBase->addField('label', 'text', [
@@ -102,8 +110,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             'title' => __('Label'),
             'value' => $whitelistEntry->getLabel(),
             'required' => true
-        ]
-        );
+        ]);
 
         $fieldsetBase->addField('url_rule', 'text', [
             'name' => 'url_rule',
@@ -111,8 +118,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             'title' => __('Url Rule'),
             'value' => $whitelistEntry->getUrlRule(),
             'required' => true
-        ]
-        );
+        ]);
 
         $fieldsetBase->addField('strategy', 'select', [
             'name' => 'strategy',
@@ -121,8 +127,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             'value' => $whitelistEntry->getStrategy(),
             'options' => $this->strategyManager->getStrategyNames(),
             'required' => true
-        ]
-        );
+        ]);
 
         $fieldsetBase->addField('store_id', 'select', [
             'name' => 'store_id',
@@ -131,8 +136,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             'value' => $whitelistEntry->getStoreId(),
             'options' => $this->getStoresAsArray(),
             'required' => true
-        ]
-        );
+        ]);
         $form->setData('store_id', $whitelistEntry->getStoreId());
 
 

@@ -53,7 +53,7 @@ class StaticMatcher implements StrategyInterface
      */
     public function isMatch($url, WhitelistEntry $rule)
     {
-        return ($this->getCanonicalUrl($url) === $this->getCanonicalRule($rule->getUrlRule()));
+        return ($this->getCanonicalUrl($url) === $this->getCanonicalRule((string)$rule->getUrlRule()));
     }
 
     /**

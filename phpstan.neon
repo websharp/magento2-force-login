@@ -1,5 +1,6 @@
 parameters:
     level: 7
+    inferPrivatePropertyTypeFromConstructor: true
     fileExtensions:
         - php
         - phtml
@@ -15,3 +16,10 @@ parameters:
         - Ui
         - Validator
         - view
+    ignoreErrors:
+        -
+            message: '~Parameter #1 \$modelId of method Magento\\Framework\\Model\\AbstractModel::load\(\) expects int, string given~'
+            path: Repository/WhitelistRepository.php
+        -
+            message: '~Method BitExpert\\ForceCustomerLogin\\Repository\\WhitelistRepository::getList\(\) should return~'
+            path: Repository/WhitelistRepository.php
