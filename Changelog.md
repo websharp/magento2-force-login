@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 4.0.0
+
+### Added
+
+- [#172](https://github.com/bitExpert/magento2-force-login/pull/172) Add PHP7.3 and Magento 2.3.3 version requirements
+- [#165](https://github.com/bitExpert/magento2-force-login/pull/165) Added /stores/store/switch and /stores/store/redirect to the whitelist 
+- [#155](https://github.com/bitExpert/magento2-force-login/pull/155) Add varnish ESI url to whitelist
+- [#154](https://github.com/bitExpert/magento2-force-login/pull/154) Add option to configure to force https redirect
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- [#160](https://github.com/bitExpert/magento2-force-login/pull/160) Drop Magento 2.1 & 2.2 compatibility
+
+### Fixed
+
+- Nothing.
+
 ## 3.2.0
 
 ### Added
