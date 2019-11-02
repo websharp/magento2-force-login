@@ -38,19 +38,10 @@
     </target>
 
     <target name="sniff">
-        <!-- enable eqp sniff standard -->
         <exec executable="./vendor/bin/phpcs"
               passthru="true"
               checkreturn="true">
-            <arg value="--config-set"/>
-            <arg value="installed_paths"/>
-            <arg value="vendor/magento/marketplace-eqp"/>
-        </exec>
-
-        <exec executable="./vendor/bin/phpcs"
-              passthru="true"
-              checkreturn="true">
-            <arg value="--standard=MEQP2"/>
+            <arg value="--standard=Magento2"/>
             <arg value="--severity=10"/>
             <arg value="--extensions=php,phtml"/>
             <arg value="--ignore=**/*.js,.git,bin,dist,docs,env,vendor,validate_m2_package.php"/>

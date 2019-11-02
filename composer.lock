@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f530d64526bcd548b7004ae83a0eabf7",
+    "content-hash": "8f618e95e1406242d10d4549e732d96b",
     "packages": [
         {
             "name": "colinmollenhour/credis",
@@ -5407,32 +5407,34 @@
             "time": "2019-07-23T07:07:48+00:00"
         },
         {
-            "name": "magento/marketplace-eqp",
-            "version": "2.0.1",
+            "name": "magento/magento-coding-standard",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/magento/magento-coding-standard.git",
+                "reference": "d24e0230a532e19941ed264f57db38fad5b1008a"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/marketplace-eqp/magento-marketplace-eqp-2.0.1.0.zip",
-                "shasum": "712a45aa2bc7447aad5c11bbee25079684c899bd"
+                "url": "https://api.github.com/repos/magento/magento-coding-standard/zipball/d24e0230a532e19941ed264f57db38fad5b1008a",
+                "reference": "d24e0230a532e19941ed264f57db38fad5b1008a",
+                "shasum": ""
             },
             "require": {
-                "php": ">=5.5.0",
-                "squizlabs/php_codesniffer": "3.*"
+                "php": ">=5.6.0",
+                "squizlabs/php_codesniffer": "^3.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.1.0"
+                "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
             },
             "type": "phpcodesniffer-standard",
-            "autoload": {
-                "psr-4": {
-                    "MEQP\\": "MEQP/",
-                    "MEQP1\\": "MEQP1/",
-                    "MEQP2\\": "MEQP2/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT"
+                "OSL-3.0",
+                "AFL-3.0"
             ],
-            "description": "A set of PHP_CodeSniffer rules and sniffs."
+            "description": "A set of Magento specific PHP CodeSniffer rules.",
+            "time": "2019-08-06T15:58:37+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -7972,7 +7974,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "bitexpert/phpstan-magento": 20
+        "bitexpert/phpstan-magento": 20,
+        "magento/magento-coding-standard": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
