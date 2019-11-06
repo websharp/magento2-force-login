@@ -34,7 +34,7 @@
     "phpstan/extension-installer": "^1.0.1",
     "phpstan/phpstan": "0.11.19",
     "bitexpert/phpstan-magento": "dev-master",
-    "magento/magento-coding-standard": "dev-master"
+    "magento/magento-coding-standard": "^5"
     },
   "autoload": {
     "files": [
