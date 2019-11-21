@@ -72,6 +72,10 @@ class LoginCheck implements LoginCheckInterface
      * @var ResponseHttp
      */
     private $response;
+    /**
+     * @var PasswordResetHelper
+     */
+    private $passwordResetHelper;
 
     /**
      * Creates a new {@link \BitExpert\ForceCustomerLogin\Controller\LoginCheck}.
@@ -85,6 +89,7 @@ class LoginCheck implements LoginCheckInterface
      * @param StrategyManager $strategyManager
      * @param ModuleCheck $moduleCheck
      * @param ResponseHttp $response
+     * @param PasswordResetHelper $passwordResetHelper
      */
     public function __construct(
         Context $context,
@@ -95,7 +100,8 @@ class LoginCheck implements LoginCheckInterface
         WhitelistRepositoryInterface $whitelistRepository,
         StrategyManager $strategyManager,
         ModuleCheck $moduleCheck,
-        ResponseHttp $response
+        ResponseHttp $response,
+        PasswordResetHelper $passwordResetHelper
     ) {
         $this->customerSession = $customerSession;
         $this->session = $session;
@@ -105,6 +111,7 @@ class LoginCheck implements LoginCheckInterface
         $this->strategyManager = $strategyManager;
         $this->moduleCheck = $moduleCheck;
         $this->response = $response;
+        $this->passwordResetHelper = $passwordResetHelper;
         $this->request = $context->getRequest();
         $this->url = $context->getUrl();
     }
@@ -136,19 +143,25 @@ class LoginCheck implements LoginCheckInterface
         if (strpos($path, $targetUrl)!== false) {
             return false;
         }
+
+        // Explicit behaviour for password reset creation
+        if ($this->passwordResetHelper->processDirectCreatePasswordRequest($this->url, $this->request)) {
+            return false;
+        }
         
-        // Set Url To redrect ,using standard method of magento
-        $this->customerSession->setBeforeAuthUrl($url);     
+        // Set Url To redirect ,using standard method of magento
+        $this->customerSession->setBeforeAuthUrl($url);
 
         // check if current url is a match with one of the ignored urls
         /** @var \BitExpert\ForceCustomerLogin\Model\WhitelistEntry $rule */
         foreach ($this->whitelistRepository->getCollection()->getItems() as $rule) {
             $strategy = $rule->getStrategy();
-            if($strategy) {
-                $strategy = $this->strategyManager->get($strategy);
-                if ($strategy->isMatch($path, $rule)) {
-                    return false;
-                }
+            if(!$strategy) {
+                return false;
+            }
+            $strategy = $this->strategyManager->get($strategy);
+            if ($strategy->isMatch($path, $rule)) {
+                return false;
             }
         }
 

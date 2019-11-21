@@ -15,6 +15,7 @@ use BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
 use BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
 use BitExpert\ForceCustomerLogin\Controller\LoginCheck;
 use BitExpert\ForceCustomerLogin\Controller\ModuleCheck;
+use BitExpert\ForceCustomerLogin\Controller\PasswordResetHelper;
 use BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyInterface;
 use BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
 use BitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection;
@@ -66,7 +67,8 @@ class LoginCheckUnitTest extends TestCase
             $this->getWhitelistRepository(),
             $this->getStrategyManager(),
             $this->getModuleCheck(),
-            $this->getResponseHttp()
+            $this->getResponseHttp(),
+            $this->getPasswordResetHelper()
         );
 
         // check if mandatory interfaces are implemented
@@ -205,7 +207,8 @@ class LoginCheckUnitTest extends TestCase
             $this->getWhitelistRepository(),
             $this->getStrategyManager(),
             $moduleCheck,
-            $this->getResponseHttp()
+            $this->getResponseHttp(),
+            $this->getPasswordResetHelper()
         );
 
         $loginCheck->execute();
@@ -233,6 +236,16 @@ class LoginCheckUnitTest extends TestCase
     private function getRedirect()
     {
         return $this->createMock(RedirectInterface::class);
+    }
+
+    /**
+     * @return MockObject|PasswordResetHelper
+     */
+    private function getPasswordResetHelper()
+    {
+        return $this->getMockBuilder(PasswordResetHelper::class)
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 
     /**
@@ -264,7 +277,8 @@ class LoginCheckUnitTest extends TestCase
             $this->getWhitelistRepository(),
             $this->getStrategyManager(),
             $moduleCheck,
-            $this->getResponseHttp()
+            $this->getResponseHttp(),
+            $this->getPasswordResetHelper()
         );
 
         $loginCheck->execute();
@@ -338,7 +352,8 @@ class LoginCheckUnitTest extends TestCase
             $whitelistRepository,
             $strategyManager,
             $this->getModuleCheck(),
-            $responseHttp
+            $responseHttp,
+            $this->getPasswordResetHelper()
         );
 
         $loginCheck->execute();
@@ -376,10 +391,15 @@ class LoginCheckUnitTest extends TestCase
             ->method('getCurrentUrl')
             ->willReturn($urlString);
 
+        $request = $this->getRequest();
+
         $context = $this->getContext();
         $context->expects($this->once())
             ->method('getUrl')
             ->willReturn($url);
+        $context->expects($this->once())
+            ->method('getRequest')
+            ->willReturn($request);
 
         // --- Response
         $responseHttp = $this->getResponseHttp();
@@ -431,7 +451,8 @@ class LoginCheckUnitTest extends TestCase
             $whitelistRepository,
             $strategyManager,
             $this->getModuleCheck(),
-            $responseHttp
+            $responseHttp,
+            $this->getPasswordResetHelper()
         );
 
         $loginCheck->execute();
@@ -564,7 +585,8 @@ class LoginCheckUnitTest extends TestCase
             $whitelistRepository,
             $strategyManager,
             $this->getModuleCheck(),
-            $responseHttp
+            $responseHttp,
+            $this->getPasswordResetHelper()
         );
 
         $loginCheck->execute();
@@ -703,7 +725,8 @@ class LoginCheckUnitTest extends TestCase
             $whitelistRepository,
             $strategyManager,
             $this->getModuleCheck(),
-            $responseHttp
+            $responseHttp,
+            $this->getPasswordResetHelper()
         );
 
         $loginCheck->execute();
@@ -836,7 +859,8 @@ class LoginCheckUnitTest extends TestCase
             $whitelistRepository,
             $strategyManager,
             $this->getModuleCheck(),
-            $responseHttp
+            $responseHttp,
+            $this->getPasswordResetHelper()
         );
 
         $loginCheck->execute();
@@ -972,7 +996,8 @@ class LoginCheckUnitTest extends TestCase
             $whitelistRepository,
             $strategyManager,
             $this->getModuleCheck(),
-            $responseHttp
+            $responseHttp,
+            $this->getPasswordResetHelper()
         );
 
         $loginCheck->execute();
@@ -1107,7 +1132,8 @@ class LoginCheckUnitTest extends TestCase
             $whitelistRepository,
             $strategyManager,
             $this->getModuleCheck(),
-            $responseHttp
+            $responseHttp,
+            $this->getPasswordResetHelper()
         );
 
         $loginCheck->execute();
@@ -1244,7 +1270,8 @@ class LoginCheckUnitTest extends TestCase
             $whitelistRepository,
             $strategyManager,
             $this->getModuleCheck(),
-            $responseHttp
+            $responseHttp,
+            $this->getPasswordResetHelper()
         );
 
         $loginCheck->execute();
