@@ -20,7 +20,7 @@ use Magento\Framework\UrlInterface;
  */
 class PasswordResetHelper
 {
-    const CREATE_PASSWORD_DIRECT_URL_SCHEME = '/customer/account/createpassword/\?token=';
+    const CREATE_PASSWORD_DIRECT_URL_SCHEME = '/customer/account/createpassword/\?.*token=';
 
     /**
      * @param UrlInterface $url
