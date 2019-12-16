@@ -136,4 +136,36 @@ class RegExAllMatcherUnitTest extends TestCase
         $this->assertFalse($matcher->isMatch('/foobar/baz', $rule));
         $this->assertFalse($matcher->isMatch('/foobar/baz/', $rule));
     }
+
+    /**
+     * @test
+     */
+    public function matchPartialPathCorrectly()
+    {
+        $matcher = new RegExAllMatcher('foobarPost');
+
+        /** @var $rule MockObject|WhitelistEntry */
+        $rule = $this->getMockBuilder(WhitelistEntry::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $rule->expects($this->any())
+            ->method('getUrlRule')
+            ->willReturn('/foobarPost');
+
+        /**
+         * Rule: ^/?$
+         */
+        // simple
+        $this->assertFalse($matcher->isMatch('', $rule));
+        $this->assertFalse($matcher->isMatch('/', $rule));
+        // subpage
+        $this->assertFalse($matcher->isMatch('/foobar', $rule));
+        $this->assertFalse($matcher->isMatch('/foobar/', $rule));
+        $this->assertTrue($matcher->isMatch('/foobarPost', $rule));
+        $this->assertTrue($matcher->isMatch('/foobarPost/', $rule));
+        $this->assertTrue($matcher->isMatch('/foobarpost', $rule));
+        $this->assertTrue($matcher->isMatch('/foobarpost/', $rule));
+        $this->assertFalse($matcher->isMatch('/foobar/baz', $rule));
+        $this->assertFalse($matcher->isMatch('/foobar/baz/', $rule));
+    }
 }

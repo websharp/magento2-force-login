@@ -84,6 +84,10 @@ class UpgradeData implements UpgradeDataInterface
             $this->runUpgrade305($setup);
         }
 
+        if (version_compare($context->getVersion(), '4.0.0', '<')) {
+            $this->runUpgrade400($setup);
+        }
+
         $setup->endSetup();
     }
 
@@ -276,6 +280,25 @@ class UpgradeData implements UpgradeDataInterface
                 0,
                 'Store-Switcher Switch',
                 '/stores/store/switch'
+            ),
+        ];
+
+        $setup->getConnection()->insertMultiple(
+            $setup->getTable('bitexpert_forcelogin_whitelist'),
+            $whitelistEntries
+        );
+    }
+
+    /**
+     * @param ModuleDataSetupInterface $setup
+     */
+    private function runUpgrade400(ModuleDataSetupInterface $setup)
+    {
+        $whitelistEntries = [
+            $this->getWhitelistEntryAsArray(
+                0,
+                'Customer Create (Post)',
+                '/customer/account/createpost'
             ),
         ];
 
