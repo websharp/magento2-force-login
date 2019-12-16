@@ -23,7 +23,7 @@ class PasswordResetHelper
     const CREATE_PASSWORD_DIRECT_URL_SCHEME = '/customer/account/createpassword/\?.*token=';
 
     /**
-     * @param UrlInterface $url
+     * @param UrlInterface $urlInstance
      * @param RequestInterface $request
      * @return bool
      */
