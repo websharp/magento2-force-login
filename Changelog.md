@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 4.0.1
+
+### Added
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#167](https://github.com/bitExpert/magento2-force-login/pull/167) Password Reset not working
+
 ## 4.0.0
 
 ### Added
