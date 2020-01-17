@@ -12,14 +12,14 @@
              title="Whitelist"
              module="BitExpert_ForceCustomerLogin"
              parent="BitExpert_ForceCustomerLogin::bitexpert_force_login_whitelist"
-             sortOrder="55"
+             sortOrder="10"
              action="ForceCustomerLogin/Manage"
              resource="BitExpert_ForceCustomerLogin::bitexpert_force_customer_login_manage"/>
 
         <add id="BitExpert_ForceCustomerLogin::bitexpert_force_login_whitelist"
              title="Force Customer Login"
-             module="Magento_Backend"
-             sortOrder="50"
+             module="BitExpert_ForceCustomerLogin"
+             sortOrder="100"
              parent="Magento_Customer::customer"
              resource="BitExpert_ForceCustomerLogin::bitexpert_force_customer_login_manage"/>
     </menu>
