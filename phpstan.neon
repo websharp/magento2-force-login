@@ -23,3 +23,6 @@ parameters:
         -
             message: '~Method BitExpert\\ForceCustomerLogin\\Repository\\WhitelistRepository::getList\(\) should return~'
             path: Repository/WhitelistRepository.php
+        -
+            message: '~Call to an undefined method Magento\\Framework\\App\\RequestInterface::isPost\(\)~'
+            path: Controller/LoginCheck.php
