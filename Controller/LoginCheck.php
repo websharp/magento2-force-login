@@ -139,6 +139,13 @@ class LoginCheck implements LoginCheckInterface
         $path = is_array($urlParts) && isset($urlParts['path']) ? $urlParts['path'] : '';
         $targetUrl = $this->getTargetUrl();
 
+        // skip dynamic asset files
+        $assetPathParts = explode('/', rtrim($path, '/'));
+        $assetPart = array_pop($assetPathParts);
+        if ($assetPart && preg_match('#\.(css|js|png|jpe?g|gif|svg)#imsU', $assetPart)) {
+            return false;
+        }
+
         // current path is already pointing to target url, no redirect needed
         if (strpos($path, $targetUrl)!== false) {
             return false;
