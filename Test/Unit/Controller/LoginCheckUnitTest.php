@@ -172,7 +172,21 @@ class LoginCheckUnitTest extends TestCase
      */
     private function getRequest()
     {
-        return $this->createMock(RequestInterface::class);
+        return $this->getMockBuilder(RequestInterface::class)
+            ->disableOriginalConstructor()
+            ->setMethods([
+                'getModuleName',
+                'setModuleName',
+                'getActionName',
+                'setActionName',
+                'getParam',
+                'setParams',
+                'getParams',
+                'getCookie',
+                'isSecure',
+                'isPost'
+            ])
+            ->getMock();
     }
 
     /**
@@ -392,6 +406,9 @@ class LoginCheckUnitTest extends TestCase
             ->willReturn($urlString);
 
         $request = $this->getRequest();
+        $request->expects($this->once())
+            ->method('isPost')
+            ->willReturn(false);
 
         $context = $this->getContext();
         $context->expects($this->once())
@@ -515,6 +532,9 @@ class LoginCheckUnitTest extends TestCase
             ->willReturn($urlString);
 
         $request = $this->getRequest();
+        $request->expects($this->once())
+            ->method('isPost')
+            ->willReturn(false);
 
         $context = $this->getContext();
         $context->expects($this->exactly(1))
@@ -655,6 +675,9 @@ class LoginCheckUnitTest extends TestCase
             ->willReturn($urlString);
 
         $request = $this->getRequest();
+        $request->expects($this->once())
+            ->method('isPost')
+            ->willReturn(false);
 
         $context = $this->getContext();
         $context->expects($this->once())
@@ -789,6 +812,9 @@ class LoginCheckUnitTest extends TestCase
             ->willReturn($urlString);
 
         $request = $this->getRequest();
+        $request->expects($this->once())
+            ->method('isPost')
+            ->willReturn(false);
 
         $context = $this->getContext();
         $context->expects($this->once())
@@ -923,6 +949,9 @@ class LoginCheckUnitTest extends TestCase
             ->willReturn($urlString);
 
         $request = $this->getRequest();
+        $request->expects($this->once())
+            ->method('isPost')
+            ->willReturn(false);
 
         $context = $this->getContext();
         $context->expects($this->once())
@@ -1061,6 +1090,9 @@ class LoginCheckUnitTest extends TestCase
             ->willReturn($urlString);
 
         $request = $this->getRequestObject();
+        $request->expects($this->once())
+            ->method('isPost')
+            ->willReturn(false);
 
         $context = $this->getContext();
         $context->expects($this->once())
@@ -1199,6 +1231,9 @@ class LoginCheckUnitTest extends TestCase
             ->willReturn($referrerUrl);
 
         $request = $this->getRequestObject();
+        $request->expects($this->once())
+            ->method('isPost')
+            ->willReturn(false);
 
         $context = $this->getContext();
         $context->expects($this->once())

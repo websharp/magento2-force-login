@@ -16,13 +16,13 @@ use BitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
 use BitExpert\ForceCustomerLogin\Helper\Strategy\StrategyManager;
 use BitExpert\ForceCustomerLogin\Model\Session;
 use Magento\Customer\Model\Session as CustomerSession;
-use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\App\Request\Http;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\Response\Http as ResponseHttp;
-use Magento\Framework\App\ResponseInterface;
 use Magento\Store\Model\ScopeInterface;
+use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
 
 /**
@@ -65,7 +65,7 @@ class LoginCheck implements LoginCheckInterface
      */
     private $url;
     /**
-     * @var RequestInterface
+     * @var Http|RequestInterface
      */
     private $request;
     /**
@@ -147,7 +147,7 @@ class LoginCheck implements LoginCheckInterface
         }
 
         // current path is already pointing to target url, no redirect needed
-        if (strpos($path, $targetUrl)!== false) {
+        if (strpos($path, $targetUrl) !== false) {
             return false;
         }
 
@@ -155,7 +155,16 @@ class LoginCheck implements LoginCheckInterface
         if ($this->passwordResetHelper->processDirectCreatePasswordRequest($this->url, $this->request)) {
             return false;
         }
-        
+
+        if (!$this->request->isPost() && strpos($url, 'customer/account/createpost') !== false) {
+            /** @var Store $store */
+            $store = $this->storeManager->getStore();
+            $this->response->setNoCacheHeaders();
+            $this->response->setRedirect($store->getUrl('customer/account'));
+            $this->response->sendResponse();
+            return true;
+        }
+
         // Set Url To redirect ,using standard method of magento
         $this->customerSession->setBeforeAuthUrl($url);
 
@@ -163,7 +172,7 @@ class LoginCheck implements LoginCheckInterface
         /** @var \BitExpert\ForceCustomerLogin\Model\WhitelistEntry $rule */
         foreach ($this->whitelistRepository->getCollection()->getItems() as $rule) {
             $strategy = $rule->getStrategy();
-            if(!$strategy) {
+            if (!$strategy) {
                 return false;
             }
             $strategy = $this->strategyManager->get($strategy);
@@ -173,7 +182,7 @@ class LoginCheck implements LoginCheckInterface
         }
 
         // Add any GET query parameters back to the path after making our url checks.
-        if(is_array($urlParts) && isset($urlParts['query']) && !empty($urlParts['query'])) {
+        if (is_array($urlParts) && isset($urlParts['query']) && !empty($urlParts['query'])) {
             $path .= '?' . $urlParts['query'];
         }
 
@@ -184,6 +193,7 @@ class LoginCheck implements LoginCheckInterface
         $this->response->setNoCacheHeaders();
         $this->response->setRedirect($this->getRedirectUrl($targetUrl));
         $this->response->sendResponse();
+
         return true;
     }
 
@@ -203,7 +213,7 @@ class LoginCheck implements LoginCheckInterface
      */
     private function getForceSecureRedirectOption()
     {
-        return (bool) $this->scopeConfig->getValue(
+        return (bool)$this->scopeConfig->getValue(
             self::MODULE_CONFIG_FORCE_SECURE_REDIRECT,
             ScopeInterface::SCOPE_STORE
         );
