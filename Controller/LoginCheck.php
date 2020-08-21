@@ -227,7 +227,7 @@ class LoginCheck implements LoginCheckInterface
     {
         $secure = $this->getForceSecureRedirectOption();
         $secure = ($secure === true) ? true : null;
-        return $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB, $secure);
+        return $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_LINK, $secure);
     }
 
     /**
