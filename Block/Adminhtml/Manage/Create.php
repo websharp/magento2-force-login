@@ -63,6 +63,7 @@ class Create extends \Magento\Backend\Block\Widget\Form\Container
     }
 
     /**
+     * @return void
      */
     protected function updateButtonControls()
     {

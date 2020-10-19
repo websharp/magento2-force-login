@@ -21,11 +21,13 @@ class Create extends \Magento\Backend\App\Action
 {
     /**
      * @inheritDoc
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
      */
     public function execute()
     {
         $this->_view->loadLayout();
         $this->_view->renderLayout();
+        return $this->_response;
     }
 
     /**

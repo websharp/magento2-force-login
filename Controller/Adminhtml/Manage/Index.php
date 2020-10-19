@@ -31,6 +31,7 @@ class Index extends \Magento\Backend\App\Action
     {
         $this->_view->loadLayout();
         $this->_view->renderLayout();
+        return $this->_response;
     }
 
     /**

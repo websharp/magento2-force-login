@@ -61,6 +61,7 @@
       "@cs-check",
       "@test"
     ],
+    "analyze": "vendor/bin/phing analyze",
     "cs-check": "vendor/bin/phing sniff",
     "cs-fix": "vendor/bin/phing cs-fix",
     "test": "vendor/bin/phing unit"

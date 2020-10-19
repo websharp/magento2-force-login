@@ -39,6 +39,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
     /**
      * @param SchemaSetupInterface $setup
+     * @return void
      */
     private function runUpgrade210(SchemaSetupInterface $setup)
     {

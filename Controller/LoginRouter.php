@@ -13,6 +13,7 @@ namespace BitExpert\ForceCustomerLogin\Controller;
 
 use BitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
 use Magento\Framework\App\ActionFactory;
+use Magento\Framework\App\ActionInterface;
 use Magento\Framework\App\RouterInterface;
 
 /**
@@ -48,10 +49,12 @@ class LoginRouter implements RouterInterface
 
     /**
      * @inheritDoc
+     * @return ActionInterface|void
      */
     public function match(\Magento\Framework\App\RequestInterface $request)
     {
         if ($this->loginCheck->execute()) {
+            /** @var \Magento\Framework\App\Request\Http $request */
             $request->setDispatched(true);
             return $this->actionFactory->create(\Magento\Framework\App\Action\Redirect::class);
         }
