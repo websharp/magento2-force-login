@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 4.1.0
+
+### Added
+
+- [#191](https://github.com/bitExpert/magento2-force-login/pull/191) Added support for Magento 2.4
+- [#187](https://github.com/bitExpert/magento2-force-login/pull/187) Skip dynamic asset request
+- [#186](https://github.com/bitExpert/magento2-force-login/pull/186) Fixed registration redirect
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#192](https://github.com/bitExpert/magento2-force-login/issues/192) force login in store redirects to default login
+- [#180](https://github.com/bitExpert/magento2-force-login/issues/180) Customers get whoops.... after registering
+- [#179](https://github.com/bitExpert/magento2-force-login/issues/179) Improve menu placement: fix compatibility with B2B
+- [#161](https://github.com/bitExpert/magento2-force-login/issues/161) After login in shows css page
+
 ## 4.0.1
 
 ### Added

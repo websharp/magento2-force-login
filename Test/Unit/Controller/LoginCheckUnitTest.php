@@ -518,7 +518,7 @@ class LoginCheckUnitTest extends TestCase
             ->getMock();
         $store->expects($this->once())
             ->method('getBaseUrl')
-            ->with(UrlInterface::URL_TYPE_WEB, null)
+            ->with(UrlInterface::URL_TYPE_LINK, null)
             ->willReturn($urlString);
         $storeManager = $this->getStoreManager();
         $storeManager->expects($this->once())
@@ -655,7 +655,7 @@ class LoginCheckUnitTest extends TestCase
             ->getMock();
         $store->expects($this->once())
             ->method('getBaseUrl')
-            ->with(UrlInterface::URL_TYPE_WEB, true)
+            ->with(UrlInterface::URL_TYPE_LINK, true)
             ->willReturn($urlString);
         $storeManager = $this->getStoreManager();
         $storeManager->expects($this->once())
@@ -798,7 +798,7 @@ class LoginCheckUnitTest extends TestCase
             ->getMock();
         $store->expects($this->once())
             ->method('getBaseUrl')
-            ->with(UrlInterface::URL_TYPE_WEB, true)
+            ->with(UrlInterface::URL_TYPE_LINK, true)
             ->willReturn($urlString);
         $storeManager = $this->getStoreManager();
         $storeManager->expects($this->once())
@@ -935,7 +935,7 @@ class LoginCheckUnitTest extends TestCase
             ->getMock();
         $store->expects($this->once())
             ->method('getBaseUrl')
-            ->with(UrlInterface::URL_TYPE_WEB, null)
+            ->with(UrlInterface::URL_TYPE_LINK, null)
             ->willReturn($urlString);
         $storeManager = $this->getStoreManager();
         $storeManager->expects($this->once())
@@ -1076,7 +1076,7 @@ class LoginCheckUnitTest extends TestCase
             ->getMock();
         $store->expects($this->once())
             ->method('getBaseUrl')
-            ->with(UrlInterface::URL_TYPE_WEB, null)
+            ->with(UrlInterface::URL_TYPE_LINK, null)
             ->willReturn($urlString);
         $storeManager = $this->getStoreManager();
         $storeManager->expects($this->once())
@@ -1217,7 +1217,7 @@ class LoginCheckUnitTest extends TestCase
             ->getMock();
         $store->expects($this->once())
             ->method('getBaseUrl')
-            ->with(UrlInterface::URL_TYPE_WEB, null)
+            ->with(UrlInterface::URL_TYPE_LINK, null)
             ->willReturn($baseUrl);
         $storeManager = $this->getStoreManager();
         $storeManager->expects($this->once())
